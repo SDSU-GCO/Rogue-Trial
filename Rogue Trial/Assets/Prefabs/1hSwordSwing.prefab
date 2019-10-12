@@ -12,10 +12,11 @@ GameObject:
   - component: {fileID: 4911446966870907603}
   - component: {fileID: 4911446966870907600}
   - component: {fileID: 4911446966870907613}
-  - component: {fileID: 4545543216330534502}
-  m_Layer: 0
+  - component: {fileID: 4690014820701084619}
+  - component: {fileID: 7413480452148019571}
+  m_Layer: 14
   m_Name: 1hSwordSwing
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -134,7 +135,7 @@ PolygonCollider2D:
       - {x: -0.25, y: 0.0625}
       - {x: -0.0625, y: 0.3125}
       - {x: -0.0625, y: 0.5}
---- !u!114 &4545543216330534502
+--- !u!114 &4690014820701084619
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -143,8 +144,34 @@ MonoBehaviour:
   m_GameObject: {fileID: 4911446966870907601}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bfe702d5a9823f94198043b3c36e2a83, type: 3}
+  m_Script: {fileID: 11500000, guid: 2f610aa75f7374445b1d1e3903d873fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 2555460331908308057, guid: bf2bb4ff69d39d548ae798f3a73aaf72, type: 3}
-  child: {fileID: 4911446966870907601}
+  timeToLive: 0.5
+  LiveForever: 0
+  AttackDelay: 0.75
+  damage: 1
+  speed: 0
+  targetLayer: 0b000000
+  onDestroySpawnPrefab: {fileID: 0}
+--- !u!50 &7413480452148019571
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4911446966870907601}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

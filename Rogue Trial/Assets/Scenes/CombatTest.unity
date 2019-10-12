@@ -321,6 +321,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2555460331908308057, guid: bf2bb4ff69d39d548ae798f3a73aaf72,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 2555460331908308057, guid: bf2bb4ff69d39d548ae798f3a73aaf72,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2555460331908308053, guid: bf2bb4ff69d39d548ae798f3a73aaf72,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -461,6 +471,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1113980932 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2555460331908308057, guid: bf2bb4ff69d39d548ae798f3a73aaf72,
+    type: 3}
+  m_PrefabInstance: {fileID: 370916419}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1113980933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1113980932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9676c98ec373f0040860f46bf8a4dc98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rangedAttack: {fileID: 4690014820701084619, guid: ecbe6e436bdfd084fad79478e8cfc637,
+    type: 3}
+  rangedCoolDownInSeconds: 0
+  rangedCoolDownInSecondsDefault: 0
+  damage: 0
+  spriteRenderer: {fileID: 0}
+  rigidbody2D: {fileID: 0}
+  offset: 1.5
 --- !u!1001 &1617918258
 PrefabInstance:
   m_ObjectHideFlags: 0
