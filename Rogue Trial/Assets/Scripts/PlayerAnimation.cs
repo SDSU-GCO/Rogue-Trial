@@ -4,7 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(SpriteRenderer))]
-[RequireComponent(typeof(Movement))]
+[RequireComponent(typeof(PlayerMovement))]
 public class PlayerAnimation : MonoBehaviour
 {
     [SerializeField, HideInInspector]
@@ -14,7 +14,7 @@ public class PlayerAnimation : MonoBehaviour
     public Animator animator;
 
     [SerializeField, HideInInspector]
-    public Movement movement;
+    public PlayerMovement movement;
 
     [SerializeField, HideInInspector]
     private new Rigidbody2D rigidbody2D;
@@ -31,13 +31,13 @@ public class PlayerAnimation : MonoBehaviour
             animator = GetComponent<Animator>();
         }
     }
-    //public void SetToAttack() => SetAnimationState(AnimationState.ATTACKING);
+    public void SetToAttack() => SetAnimationState(AnimationState.ATTACKING);
 
     public void SetToJump() => SetAnimationState(AnimationState.START_JUMP);
 
     public enum AnimationState
     {
-        IDLE_FLOAT = 0, START_JUMP = 1, JUMPING = 2, FALLING = 3, DEFAULT = 4//, ATTACKING = 5
+        IDLE_FLOAT = 0, START_JUMP = 1, JUMPING = 2, FALLING = 3, DEFAULT = 4, DASHING = 5, ATTACKING = 6
     }
 
     private void SetAnimationState(AnimationState animationState)
@@ -63,18 +63,39 @@ public class PlayerAnimation : MonoBehaviour
     {
         switch(animationState)
         {
-            case AnimationState.DEFAULT:
-                return AnimationState.IDLE_FLOAT;
+            case AnimationState.IDLE_FLOAT:
+                if (movement.IsDashing == true)
+                    return AnimationState.DASHING;
+                break;
             case AnimationState.START_JUMP:
-                return AnimationState.JUMPING;
+                if(movement.IsDashing == true)
+                    return AnimationState.DASHING;
+                else if (movement.IsGrounded == true)
+                    return AnimationState.IDLE_FLOAT;
+                else if (rigidbody2D.velocity.y > 0)
+                    return AnimationState.START_JUMP;
+                else
+                    return AnimationState.JUMPING;
             case AnimationState.JUMPING:
-                if (movement.isGrounded)
+                if (movement.IsDashing == true)
+                    return AnimationState.DASHING;
+                else if (movement.IsGrounded == true)
                     return AnimationState.IDLE_FLOAT;
                 else if (rigidbody2D.velocity.y < 0)
                     return AnimationState.FALLING;
                 break;
             case AnimationState.FALLING:
-                if (movement.isGrounded)
+                if (movement.IsDashing == true)
+                    return AnimationState.DASHING;
+                if (movement.IsGrounded == true)
+                    return AnimationState.IDLE_FLOAT;
+                break;
+            case AnimationState.DASHING:
+                if (movement.IsDashing == true)
+                    return AnimationState.DASHING;
+                else if (movement.IsGrounded == true)
+                    return AnimationState.IDLE_FLOAT;
+                else if (movement.IsGrounded != true)
                     return AnimationState.IDLE_FLOAT;
                 break;
             default:
@@ -99,6 +120,10 @@ public class PlayerAnimation : MonoBehaviour
 
             case AnimationState.JUMPING:
                 SetAnimationState(AnimationState.JUMPING);
+                break;
+
+            case AnimationState.DASHING:
+                SetAnimationState(AnimationState.DASHING);
                 break;
             default:
                 Debug.LogError(animationState + " not implemented in Set switch in " + this);
