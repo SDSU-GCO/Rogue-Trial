@@ -85,6 +85,16 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         groundLayers = (1<<LayerMask.NameToLayer("Ground")) | (1 << LayerMask.NameToLayer("Platform"));
+        if(enableDebugging)
+        {
+            circleCastEdge.GetComponent<SpriteRenderer>().enabled = true;
+            circleCastOrigin.GetComponent<SpriteRenderer>().enabled = true;
+        }
+        else
+        {
+            circleCastEdge.GetComponent<SpriteRenderer>().enabled = false;
+            circleCastOrigin.GetComponent<SpriteRenderer>().enabled = false;
+        }
     }
 
     //update loop
@@ -170,9 +180,9 @@ public class PlayerMovement : MonoBehaviour
         Vector2 circleOffset = capsuleCollider2D.size.y > capsuleCollider2D.size.x ?  capsuleCollider2D.offset + Vector2.down * ((capsuleCollider2D.size.y - capsuleCollider2D.size.x)/2.0f) : capsuleCollider2D.offset;
         Vector2 circleOrigin = (Vector2)transform.position + circleOffset;
         Vector2 circleRadius = (circleOrigin + Vector2.down * capsuleCollider2D.size.x * 0.5f);
-        if (circleCastOrigin != null)
+        if (circleCastOrigin != null && enableDebugging==true)
             circleCastOrigin.position = new Vector3(circleOrigin.x, circleOrigin.y, circleCastOrigin.position.z);
-        if (circleCastEdge != null)
+        if (circleCastEdge != null && enableDebugging==true)
             circleCastEdge.position = new Vector3(circleRadius.x, circleRadius.y, circleCastOrigin.position.z);
         raycastHit2D = Physics2D.CircleCast(circleOrigin, capsuleCollider2D.size.x*0.5f, Vector2.down, Mathf.Infinity, layerMask);
 
