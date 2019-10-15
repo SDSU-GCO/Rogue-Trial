@@ -184,7 +184,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &858478983
 GameObject:
@@ -216,15 +216,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTransformController: {fileID: 1461687850}
-  controlMode: 2
+  controlMode: 1
   operateLocal: 0
-  myPoint: {x: 0, y: 0}
+  myPoint: {x: 0.5, y: 0.5}
   botleftCornerPoint: {x: 0, y: 0}
-  topRightCornerPoint: {x: 0, y: 0}
-  top: 0
-  botom: 0
+  topRightCornerPoint: {x: 1, y: 1}
   left: 0
+  bottom: 0
   right: 0
+  top: 0
 --- !u!4 &858478985
 Transform:
   m_ObjectHideFlags: 0
@@ -237,7 +237,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1250363200
 GameObject:
@@ -490,7 +490,7 @@ RectTransform:
   m_Children:
   - {fileID: 1250363201}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

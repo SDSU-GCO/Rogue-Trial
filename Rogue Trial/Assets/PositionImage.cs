@@ -14,6 +14,7 @@ public class PositionImage : MonoBehaviour
         TwoCorners,
         FourSides
     }
+#pragma warning disable CS0649 // varriable is never assigned to and will always have it's default value
     [SerializeField, BoxGroup("Settings")]
     private ControlMode controlMode;
 
@@ -27,26 +28,21 @@ public class PositionImage : MonoBehaviour
     [SerializeField, BoxGroup("Points"), ShowIf("Corners")]
     Vector2 topRightCornerPoint;
     [SerializeField, BoxGroup("Edges"), ShowIf("Edges")]
-    float top;
-    [SerializeField, BoxGroup("Edges"), ShowIf("Edges")]
-    float botom;
-    [SerializeField, BoxGroup("Edges"), ShowIf("Edges")]
     float left;
     [SerializeField, BoxGroup("Edges"), ShowIf("Edges")]
+    float bottom;
+    [SerializeField, BoxGroup("Edges"), ShowIf("Edges")]
     float right;
+    [SerializeField, BoxGroup("Edges"), ShowIf("Edges")]
+    float top;
+#pragma warning restore CS0649 // varriable is never assigned to and will always have it's default value
 
-    bool Edges() 
-    { 
-        return controlMode == ControlMode.FourSides; 
-    }
-    bool Corners()
-    {
-        return controlMode == ControlMode.TwoCorners; 
-    }
-    bool UsePoint()
-    {
-        return controlMode == ControlMode.SinglePoint;
-    }
+
+#pragma warning disable IDE0051 // Remove unused private members
+    bool Edges() => controlMode == ControlMode.FourSides;
+    bool Corners() => controlMode == ControlMode.TwoCorners;
+    bool UsePoint() => controlMode == ControlMode.SinglePoint;
+#pragma warning restore IDE0051 // Remove unused private members
 
     // Update is called once per frame
     void Update()
@@ -54,26 +50,26 @@ public class PositionImage : MonoBehaviour
         if (controlMode == ControlMode.SinglePoint)
         {
             if (operateLocal)
-                rectTransformController.setLocalPos(myPoint);
+                rectTransformController.SetLocalPos(myPoint);
             else
-                rectTransformController.setPos(myPoint);
+                rectTransformController.SetPos(myPoint);
         }
         else if (controlMode == ControlMode.TwoCorners)
         {
             if (operateLocal)
-                rectTransformController.setLocalPos(botleftCornerPoint, topRightCornerPoint);
+                rectTransformController.SetLocalPos(botleftCornerPoint, topRightCornerPoint);
             else
-                rectTransformController.setPos(botleftCornerPoint, topRightCornerPoint);
+                rectTransformController.SetPos(botleftCornerPoint, topRightCornerPoint);
         }
         else if (controlMode == ControlMode.FourSides)
         {
             if (operateLocal)
             {
-
+                rectTransformController.SetLocalPos(left, bottom, right, top);
             }
             else
             {
-
+                rectTransformController.SetPos(left, bottom, right, top);
             }
         }
 
