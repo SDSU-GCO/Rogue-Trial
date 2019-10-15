@@ -16,25 +16,25 @@ public class PositionImage : MonoBehaviour
     }
 #pragma warning disable CS0649 // varriable is never assigned to and will always have it's default value
     [SerializeField, BoxGroup("Settings")]
-    private ControlMode controlMode;
+    private ControlMode controlMode=ControlMode.SinglePoint;
 
     [SerializeField, BoxGroup("Settings")]
-    private bool operateLocal;
+    private bool operateLocal=false;
 
     [SerializeField, BoxGroup("Points"), ShowIf("UsePoint")]
-    Vector2 myPoint;
+    Vector2 myPoint = new Vector2(0.25f, 0.25f);
     [SerializeField, BoxGroup("Points"), ShowIf("Corners")]
-    Vector2 botleftCornerPoint;
+    Vector2 botleftCornerPoint = new Vector2(0.25f,0.25f);
     [SerializeField, BoxGroup("Points"), ShowIf("Corners")]
-    Vector2 topRightCornerPoint;
+    Vector2 topRightCornerPoint = new Vector2(0.75f, 0.75f);
     [SerializeField, BoxGroup("Edges"), ShowIf("Edges")]
-    float left;
+    float left = 0.25f;
     [SerializeField, BoxGroup("Edges"), ShowIf("Edges")]
-    float bottom;
+    float bottom = 0.25f;
     [SerializeField, BoxGroup("Edges"), ShowIf("Edges")]
-    float right;
+    float right = 0.75f;
     [SerializeField, BoxGroup("Edges"), ShowIf("Edges")]
-    float top;
+    float top = 0.75f;
 #pragma warning restore CS0649 // varriable is never assigned to and will always have it's default value
 
 
