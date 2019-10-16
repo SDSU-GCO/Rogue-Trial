@@ -217,7 +217,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rectTransformController: {fileID: 1461687850}
   controlMode: 0
-  operateLocal: 0
+  localScalingFallback: 1
+  operateLocal: 1
   myPoint: {x: 0.25, y: 0.25}
   botleftCornerPoint: {x: 0.25, y: 0.25}
   topRightCornerPoint: {x: 0.75, y: 0.75}

@@ -16,7 +16,10 @@ public class PositionImage : MonoBehaviour
     }
 #pragma warning disable CS0649 // varriable is never assigned to and will always have it's default value
     [SerializeField, BoxGroup("Settings")]
-    private ControlMode controlMode=ControlMode.SinglePoint;
+    private ControlMode controlMode = ControlMode.SinglePoint;
+
+    [SerializeField, BoxGroup("Settings"), ShowIf("NeedFallback")]
+    private RectTransformController.LocalScalingFallback localScalingFallback = RectTransformController.LocalScalingFallback.Parent;
 
     [SerializeField, BoxGroup("Settings")]
     private bool operateLocal=false;
@@ -42,6 +45,7 @@ public class PositionImage : MonoBehaviour
     bool Edges() => controlMode == ControlMode.FourSides;
     bool Corners() => controlMode == ControlMode.TwoCorners;
     bool UsePoint() => controlMode == ControlMode.SinglePoint;
+    bool NeedFallback() => controlMode == ControlMode.TwoCorners || controlMode == ControlMode.FourSides;
 #pragma warning restore IDE0051 // Remove unused private members
 
     // Update is called once per frame
@@ -57,7 +61,7 @@ public class PositionImage : MonoBehaviour
         else if (controlMode == ControlMode.TwoCorners)
         {
             if (operateLocal)
-                rectTransformController.SetLocalPos(botleftCornerPoint, topRightCornerPoint);
+                rectTransformController.SetLocalPos(botleftCornerPoint, topRightCornerPoint, localScalingFallback);
             else
                 rectTransformController.SetPos(botleftCornerPoint, topRightCornerPoint);
         }
