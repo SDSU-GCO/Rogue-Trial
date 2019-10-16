@@ -18,7 +18,7 @@ public class PositionImage : MonoBehaviour
     [SerializeField, BoxGroup("Settings")]
     private ControlMode controlMode = ControlMode.SinglePoint;
 
-    [SerializeField, BoxGroup("Settings"), ShowIf("NeedFallback")]
+    [SerializeField, BoxGroup("Settings")]
     private RectTransformController.LocalScalingFallback localScalingFallback = RectTransformController.LocalScalingFallback.Parent;
 
     [SerializeField, BoxGroup("Settings")]

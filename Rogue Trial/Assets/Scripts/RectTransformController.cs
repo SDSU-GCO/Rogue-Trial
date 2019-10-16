@@ -282,7 +282,7 @@ public class RectTransformController : MonoBehaviour
         SetPos(BotLeftCorn, topRightCorn);
     }
 
-    public void SetLocalPos(Vector2 center)
+    public void SetLocalPos(Vector2 center, LocalScalingFallback localScalingFallback = LocalScalingFallback.Parent)
     {
         //cache old values
         Vector2 oldAnchMin = rectTransform.anchorMin;
@@ -300,39 +300,81 @@ public class RectTransformController : MonoBehaviour
         Vector2 parentSize = rectTransform.parent.GetComponent<RectTransform>().rect.size;
 
         Vector2 tmp;
-        if(anchorSize.x==0 && anchorSize.y!=0)
+        if(localScalingFallback==LocalScalingFallback.Parent)
         {
-            rectTransform.offsetMin = (center * anchorSize * parentSize - ((anchorSize * parentSize) / 2));
-            tmp.x = center.x * canvasScaler.referenceResolution.x;
-            tmp.y = rectTransform.offsetMin.y;
-            rectTransform.offsetMin = tmp;
 
-            rectTransform.offsetMax = (center * anchorSize * parentSize - ((anchorSize * parentSize) / 2));
-            tmp.x = center.x * canvasScaler.referenceResolution.x;
-            tmp.y = rectTransform.offsetMax.y;
-            rectTransform.offsetMax = tmp;
-        }
-        else if (anchorSize.x != 0 && anchorSize.y == 0)
-        {
-            rectTransform.offsetMin = (center * anchorSize * parentSize - ((anchorSize * parentSize) / 2));
-            tmp.x = rectTransform.offsetMin.x;
-            tmp.y = center.y * canvasScaler.referenceResolution.y;
-            rectTransform.offsetMin = tmp;
+            if (anchorSize.x == 0 && anchorSize.y != 0)
+            {
+                rectTransform.offsetMin = (center * anchorSize * parentSize - ((anchorSize * parentSize) / 2));
+                tmp.x = center.x * parentSize.x;
+                tmp.y = rectTransform.offsetMin.y;
+                rectTransform.offsetMin = tmp;
 
-            rectTransform.offsetMax = (center * anchorSize * parentSize - ((anchorSize * parentSize) / 2));
-            tmp.x = rectTransform.offsetMax.x;
-            tmp.y = center.y * canvasScaler.referenceResolution.y;
-            rectTransform.offsetMax = tmp;
-        }
-        else if(anchorSize.x == 0 && anchorSize.y == 0)
-        {
-            rectTransform.offsetMin = center * canvasScaler.referenceResolution;
-            rectTransform.offsetMax = center * canvasScaler.referenceResolution;
+                rectTransform.offsetMax = (center * anchorSize * parentSize - ((anchorSize * parentSize) / 2));
+                tmp.x = center.x * parentSize.x;
+                tmp.y = rectTransform.offsetMax.y;
+                rectTransform.offsetMax = tmp;
+            }
+            else if (anchorSize.x != 0 && anchorSize.y == 0)
+            {
+                rectTransform.offsetMin = (center * anchorSize * parentSize - ((anchorSize * parentSize) / 2));
+                tmp.x = rectTransform.offsetMin.x;
+                tmp.y = center.y * parentSize.y;
+                rectTransform.offsetMin = tmp;
+
+                rectTransform.offsetMax = (center * anchorSize * parentSize - ((anchorSize * parentSize) / 2));
+                tmp.x = rectTransform.offsetMax.x;
+                tmp.y = center.y * parentSize.y;
+                rectTransform.offsetMax = tmp;
+            }
+            else if (anchorSize.x == 0 && anchorSize.y == 0)
+            {
+                rectTransform.offsetMin = center * parentSize;
+                rectTransform.offsetMax = center * parentSize;
+            }
+            else
+            {
+                rectTransform.offsetMin = (center * anchorSize * parentSize - ((anchorSize * parentSize) / 2));
+                rectTransform.offsetMax = center * anchorSize * parentSize - ((anchorSize * parentSize) / 2);
+            }
         }
         else
         {
-            rectTransform.offsetMin = (center * anchorSize * parentSize - ((anchorSize * parentSize) / 2));
-            rectTransform.offsetMax = center * anchorSize * parentSize - ((anchorSize * parentSize) / 2);
+
+            if (anchorSize.x == 0 && anchorSize.y != 0)
+            {
+                rectTransform.offsetMin = (center * anchorSize * parentSize - ((anchorSize * parentSize) / 2));
+                tmp.x = center.x * canvasScaler.referenceResolution.x;
+                tmp.y = rectTransform.offsetMin.y;
+                rectTransform.offsetMin = tmp;
+
+                rectTransform.offsetMax = (center * anchorSize * parentSize - ((anchorSize * parentSize) / 2));
+                tmp.x = center.x * canvasScaler.referenceResolution.x;
+                tmp.y = rectTransform.offsetMax.y;
+                rectTransform.offsetMax = tmp;
+            }
+            else if (anchorSize.x != 0 && anchorSize.y == 0)
+            {
+                rectTransform.offsetMin = (center * anchorSize * parentSize - ((anchorSize * parentSize) / 2));
+                tmp.x = rectTransform.offsetMin.x;
+                tmp.y = center.y * canvasScaler.referenceResolution.y;
+                rectTransform.offsetMin = tmp;
+
+                rectTransform.offsetMax = (center * anchorSize * parentSize - ((anchorSize * parentSize) / 2));
+                tmp.x = rectTransform.offsetMax.x;
+                tmp.y = center.y * canvasScaler.referenceResolution.y;
+                rectTransform.offsetMax = tmp;
+            }
+            else if (anchorSize.x == 0 && anchorSize.y == 0)
+            {
+                rectTransform.offsetMin = center * canvasScaler.referenceResolution;
+                rectTransform.offsetMax = center * canvasScaler.referenceResolution;
+            }
+            else
+            {
+                rectTransform.offsetMin = (center * anchorSize * parentSize - ((anchorSize * parentSize) / 2));
+                rectTransform.offsetMax = center * anchorSize * parentSize - ((anchorSize * parentSize) / 2);
+            }
         }
 
         //Debug.Log("after adj: " + ((center * anchorWidth * parentSize) - ((anchorWidth * parentSize) / 2)));
