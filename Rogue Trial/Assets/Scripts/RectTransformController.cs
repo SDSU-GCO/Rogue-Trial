@@ -110,19 +110,15 @@ public class RectTransformController : MonoBehaviour
     }
     public void SetLocalPos(Vector2 botLeftCorner, Vector2 topRightCorner, LocalScalingFallback localScalingFallback = LocalScalingFallback.Parent)
     {
-        //cache old values
-        Vector2 oldAnchMin = rectTransform.anchorMin;
-        Vector2 oldAnchMax = rectTransform.anchorMax;
+        //cache values
         Vector2 oldPivot = rectTransform.pivot;
         Vector2 anchorSize = (rectTransform.anchorMax - rectTransform.anchorMin);
 
         //normalize to prefered interaction mode
-        rectTransform.anchorMin = Vector2.zero;
-        rectTransform.anchorMax = Vector2.one;
         rectTransform.pivot = Vector2.one * 0.5f;
 
         //perform movements
-        RectTransform rectTransformParent = rectTransform.parent.GetComponent<RectTransform>();
+        RectTransform rectTransformParent = (RectTransform)rectTransform.parent;
         Vector2 parentSize = rectTransformParent.rect.size;
 
         Vector2 targetSize = (topRightCorner - botLeftCorner);
@@ -139,7 +135,54 @@ public class RectTransformController : MonoBehaviour
             Vector2 lpScale;
             lpScale.x = anchorSize.x == 0 ? 1 : anchorSize.x;
             lpScale.y = anchorSize.y == 0 ? 1 : anchorSize.y;
-            rectTransform.localPosition = (center * (lpScale * parentSize));
+
+            //Vector2 AnchorMidpoint=(anchorSize / 2f) +rectTransform.anchorMin;
+            //Vector2 AnchorOffset = AnchorMidpoint - (Vector2.one * 0.5f);
+            //Vector2 anchoredCenter = (center - (Vector2.one * 0.5f))* lpScale + AnchorOffset;
+
+            //rectTransform.localPosition = ((anchoredCenter * parentSize));
+
+            //rectTransform.sizeDelta = parentSize*lpScale*(targetSize-Vector2.one);
+            //Vector2 newSize = rectTransform.sizeDelta;
+            //newSize.x = anchorSize.x == 0 ? parentSize.x*lpScale.x*targetSize.x : rectTransform.sizeDelta.x;
+            //newSize.y = anchorSize.y == 0 ? parentSize.y * lpScale.y*targetSize.y : rectTransform.sizeDelta.y;
+            //rectTransform.sizeDelta = newSize;
+            //Debug.Log(rectTransform.sizeDelta);
+
+            if (anchorSize.x == 0 && anchorSize.y != 0)
+            {
+                rectTransform.offsetMin = botLeftCorner * anchorSize * parentSize;
+                tmp.x = center.x * parentSize.x;
+                tmp.y = rectTransform.offsetMin.y;
+                rectTransform.offsetMin = tmp;
+
+                rectTransform.offsetMax = (topRightCorner - Vector2.one) * anchorSize * parentSize;
+                tmp.x = center.x * parentSize.x;
+                tmp.y = rectTransform.offsetMax.y;
+                rectTransform.offsetMax = tmp;
+            }
+            else if (anchorSize.x != 0 && anchorSize.y == 0)
+            {
+                rectTransform.offsetMin = botLeftCorner * anchorSize * parentSize;
+                tmp.x = rectTransform.offsetMin.x;
+                tmp.y = center.y * parentSize.y;
+                rectTransform.offsetMin = tmp;
+
+                rectTransform.offsetMax = (topRightCorner - Vector2.one) * anchorSize * parentSize;
+                tmp.x = rectTransform.offsetMax.x;
+                tmp.y = center.y * parentSize.y;
+                rectTransform.offsetMax = tmp;
+            }
+            else if (anchorSize.x == 0 && anchorSize.y == 0)
+            {
+                rectTransform.offsetMin = center * parentSize;
+                rectTransform.offsetMax = center * parentSize;
+            }
+            else
+            {
+                rectTransform.offsetMin = botLeftCorner * anchorSize * parentSize;
+                rectTransform.offsetMax = (topRightCorner - Vector2.one) * anchorSize * parentSize;
+            }
         }
         else
         {
@@ -179,17 +222,7 @@ public class RectTransformController : MonoBehaviour
             }
         }
 
-        rectTransform.anchorMin = Vector2.zero;
-        rectTransform.anchorMax = Vector2.one;
-
-        //Debug.Log("Current Resolution: " + canvasScaler.referenceResolution);
-
-        //restore old interaction mode
-        rectTransform.anchorMin = oldAnchMin;
-        rectTransform.anchorMax = oldAnchMax;
-        rectTransform.pivot = oldPivot;
-
-        if (anchorSize.y == 0 || anchorSize.x == 0 && localScalingFallback == LocalScalingFallback.Screen)
+        if ((anchorSize.y == 0 || anchorSize.x == 0) && localScalingFallback == LocalScalingFallback.Screen)
         {
             Vector2 newSizeDelta = rectTransform.sizeDelta;
             if (anchorSize.x == 0)
@@ -204,15 +237,23 @@ public class RectTransformController : MonoBehaviour
         }
         else if (localScalingFallback == LocalScalingFallback.Parent)
         {
-            Vector2 lpScale;
-            lpScale.x = anchorSize.x == 0 ? 1 : anchorSize.x;
-            lpScale.y = anchorSize.y == 0 ? 1 : anchorSize.y;
-
             Vector2 newSizeDelta = rectTransform.sizeDelta;
-            newSizeDelta = (targetSize-Vector2.one) * parentSize*lpScale;
-
+            if (anchorSize.x == 0)
+            {
+                newSizeDelta.x = targetSize.x * parentSize.x;
+            }
+            if (anchorSize.y == 0)
+            {
+                newSizeDelta.y = targetSize.y * parentSize.y;
+            }
             rectTransform.sizeDelta = newSizeDelta;
         }
+
+        //Debug.Log("Current Resolution: " + canvasScaler.referenceResolution);
+
+        //restore old interactions:
+        rectTransform.pivot = oldPivot;
+
     }
     public void SetLocalPos(float left, float bottom, float right, float top, LocalScalingFallback localScalingFallback = LocalScalingFallback.Parent)
     {
