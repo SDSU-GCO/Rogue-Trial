@@ -522,7 +522,8 @@ MonoBehaviour:
       PublicKeyToken=null
   disableColliderOnDeath: 1
   health: 3
-  onDeathReplaceWith: {fileID: 0}
+  onDeathReplaceWith: {fileID: 3217357049256741924, guid: aeb67d0938d32664dba0d6605bff5c3f,
+    type: 3}
   spriteRenderer: {fileID: 1113980936}
   invincibilityTime: 0.5
   timeToFlashOnHit: 0.5
@@ -595,5 +596,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6318486361044167572, guid: 683de6f0eea6c764a8bbe364caf785ed,
+        type: 3}
+      propertyPath: onDeathReplaceWith
+      value: 
+      objectReference: {fileID: 3217357049256741924, guid: aeb67d0938d32664dba0d6605bff5c3f,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 683de6f0eea6c764a8bbe364caf785ed, type: 3}
