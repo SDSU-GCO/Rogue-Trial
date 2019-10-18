@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 2555460331908308052}
   - component: {fileID: 2555460331908308059}
   - component: {fileID: 2555460331908308058}
+  - component: {fileID: 8495441502953035529}
+  - component: {fileID: 6840381759697060028}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -119,3 +121,49 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &8495441502953035529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2555460331908308057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9676c98ec373f0040860f46bf8a4dc98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rangedAttack: {fileID: 4690014820701084619, guid: ecbe6e436bdfd084fad79478e8cfc637,
+    type: 3}
+  rangedCoolDownInSeconds: 0
+  rangedCoolDownInSecondsDefault: 0
+  damage: 0
+  spriteRenderer: {fileID: 0}
+  rigidbody2D: {fileID: 0}
+  offset: 1.5
+--- !u!114 &6840381759697060028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2555460331908308057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67082c5bca6fbb0459c96a900235872d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hpUpdated:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: Event_One_Float, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  disableColliderOnDeath: 1
+  health: 3
+  onDeathReplaceWith: {fileID: 3217357049256741924, guid: aeb67d0938d32664dba0d6605bff5c3f,
+    type: 3}
+  spriteRenderer: {fileID: 2555460331908308052}
+  invincibilityTime: 0.5
+  timeToFlashOnHit: 0.5
+  flashSpeed: 20
+  flashCustomColor: 0
