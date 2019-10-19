@@ -63,14 +63,14 @@ public class Entity_Logic : MonoBehaviour
 
     public void CommitSuduku()
     {
-        Enemy_Logic tmp = GetComponent<Enemy_Logic>();
-        if (tmp != null)
-        {
-            tmp.enabled = false;
-        }
-
         if (gameObject.layer == 11 && onDeathReplaceWith == null)
         {
+            Enemy_Logic tmp = GetComponent<Enemy_Logic>();
+            if (tmp != null)
+            {
+                tmp.enabled = false;
+            }
+
             gameObject.layer = 12;
             Animator tempAnimator = GetComponent<Animator>();
             if (tempAnimator != null)

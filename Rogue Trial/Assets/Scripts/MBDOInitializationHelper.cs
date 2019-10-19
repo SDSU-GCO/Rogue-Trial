@@ -30,12 +30,12 @@ internal struct MBDOInitializationHelper
             mbDatabaseObjectReferences = cardinalSubsystem.GetComponent<MBDataObjectReferences>();
             if (mbDatabaseObjectReferences == null)
             {
-                //Debug.Log("mbDatabaseObjectReferences not found in " + cardinalSubsystem);
+                Debug.Log("mbDatabaseObjectReferences not found in " + cardinalSubsystem);
             }
         }
         else
         {
-            //Debug.Log("Cardinal Subsystem not found in " + this);
+            Debug.Log("Cardinal Subsystem not found in " + this);
         }
     }
 
@@ -43,7 +43,7 @@ internal struct MBDOInitializationHelper
     {
         if (isSetup == false)
         {
-            //Debug.LogWarning("MBDOInitializationHelper: " + mbdo + "is not set up in::: " + caller);
+            Debug.LogWarning("MBDOInitializationHelper: " + mbdo + "is not set up in::: " + caller);
         }
         else if (cardinalSubsystem != null && mbDatabaseObjectReferences != null)
         {

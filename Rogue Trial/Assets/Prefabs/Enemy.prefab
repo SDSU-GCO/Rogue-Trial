@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6318486361044167576}
   - component: {fileID: 6318486361044167573}
   - component: {fileID: 6318486361044167572}
+  - component: {fileID: 3891534012402402601}
   m_Layer: 11
   m_Name: Enemy
   m_TagString: Untagged
@@ -193,3 +194,42 @@ MonoBehaviour:
   timeToFlashOnHit: 0.5
   flashSpeed: 20
   flashCustomColor: 0
+--- !u!114 &3891534012402402601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6318486361044167583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c67d6b0894429b8428261bb3f20668f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interpolationRate: 0.5
+  animationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  path: []
+  spriteRenederer: {fileID: 6318486361044167578}
