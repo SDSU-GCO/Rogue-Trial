@@ -24,6 +24,7 @@ internal struct MBDOInitializationHelper
         mbDatabaseObjectReferences = null;
         caller = callerAkaThis;
 
+
         cardinalSubsystem = GameObject.Find("Cardinal Subsystem");
         if (cardinalSubsystem != null)
         {
@@ -35,7 +36,7 @@ internal struct MBDOInitializationHelper
         }
         else
         {
-            Debug.Log("Cardinal Subsystem not found in " + this);
+            Debug.Log("Cardinal Subsystem not found in " + caller + "'s scene");
         }
     }
 

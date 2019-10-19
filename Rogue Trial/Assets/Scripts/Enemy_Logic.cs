@@ -52,8 +52,10 @@ public class Enemy_Logic : MonoBehaviour
 
         if (enemyListMBDO == null || playerRefMBDO == null)
         {
-            //idk if this creates a lot of garbage for the gc...
-            MBDOInitializationHelper mBDOInitializationHelper = new MBDOInitializationHelper(this);
+            MBDOInitializationHelper mBDOInitializationHelper = default;
+
+            //IMPORTNANT STEP!!!
+            mBDOInitializationHelper.Setup(this);
 
             mBDOInitializationHelper.SetupMBDO(ref playerRefMBDO);
             mBDOInitializationHelper.SetupMBDO(ref enemyListMBDO);
@@ -68,7 +70,13 @@ public class Enemy_Logic : MonoBehaviour
 #pragma warning disable IDE0022 // Use expression body for methods
     private void Start()
     {
-        target = playerRefMBDO.player;
+        if (playerRefMBDO == null)
+        {
+            Debug.Log(gameObject.ToString() + " " + this + gameObject.name + " has no playerRefMBDO");
+            target = null;
+        }
+        else
+            target = playerRefMBDO.player;
     }
 #pragma warning restore IDE0022 // Use expression body for methods
 
@@ -76,18 +84,37 @@ public class Enemy_Logic : MonoBehaviour
     {
         if (enemyListMBDO == null)
         {
-            Debug.Log(gameObject.ToString() + " " + this + gameObject.name);
+            Debug.Log(gameObject.ToString() + " " + this + gameObject.name + " has no enemyListMBDO");
+        }
+        else
+        {
+            enemyListMBDO.enemies.Add(this);
+            enemyListMBDO.update.Invoke();
         }
 
-        enemyListMBDO.enemies.Add(this);
-        enemyListMBDO.update.Invoke();
-        target = playerRefMBDO.player;
+
+        if (playerRefMBDO == null)
+        {
+            Debug.Log(gameObject.ToString() + " " + this + gameObject.name + " has no playerRefMBDO");
+            target = null;
+        }
+        else
+            target = playerRefMBDO.player;
+
+
     }
 
     private void OnDisable()
     {
-        enemyListMBDO.enemies.Remove(this);
-        enemyListMBDO.update.Invoke();
+        if (enemyListMBDO == null)
+        {
+            Debug.Log(gameObject.ToString() + " " + this + gameObject.name + " has no enemyListMBDO");
+        }
+        else
+        {
+            enemyListMBDO.enemies.Remove(this);
+            enemyListMBDO.update.Invoke();
+        }
     }
 
     private void Awake()

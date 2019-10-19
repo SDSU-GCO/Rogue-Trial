@@ -42,7 +42,12 @@ public class Enemy_Sideways : MonoBehaviour
     {
         pathIndex = 0;
         nextPathIndex = 1;
-        Debug.Assert(path.Count >= 2, "Error: path must contain at least two points!");
+        if(path.Count < 2)
+        {
+            Debug.LogWarning("Warning: path must contain at least two points!  Disabling Enemy_Sideways!");
+            enabled = false;
+        }
+
     }
     private void Update()
     {
