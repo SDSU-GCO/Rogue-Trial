@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
-public class Enemy_Sideways : MonoBehaviour
+public class FollowPath : MonoBehaviour
 {
     public float interpolationRate = 0.5f;
     public AnimationCurve animationCurve = new AnimationCurve();

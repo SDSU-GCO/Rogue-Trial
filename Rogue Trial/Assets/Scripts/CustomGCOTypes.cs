@@ -8,8 +8,8 @@ public class CustomGCOTypes : MonoBehaviour
     public CollisionLayerKey collisionLayerKey;
     public enum CollisionLayerKey
     {
-        platforms = 8,
-        solidGround = 9,
+        Platform = 8,
+        Ground = 9,
         ally = 10,
         enemy = 11,
         npc = 12,

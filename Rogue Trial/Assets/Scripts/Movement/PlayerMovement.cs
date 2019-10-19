@@ -81,10 +81,8 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector2 velocity = new Vector2();
 
-    int groundLayers;
     private void Awake()
     {
-        groundLayers = (1<<LayerMask.NameToLayer("Ground")) | (1 << LayerMask.NameToLayer("Platform"));
         if(enableDebugging)
         {
             circleCastEdge.GetComponent<SpriteRenderer>().enabled = true;
@@ -103,14 +101,14 @@ public class PlayerMovement : MonoBehaviour
         jumpButtonPressed = Input.GetAxis("Vertical") > float.Epsilon;
         isGrounded = CheckGrounded();
 
-        //if (isGrounded)
-        //{
-        //    spriteRenderer.color = Color.green;
-        //}
-        //else
-        //{
-        //    spriteRenderer.color = Color.white;
-        //}
+        if (isGrounded)
+        {
+            spriteRenderer.color = Color.green;
+        }
+        else
+        {
+            spriteRenderer.color = Color.white;
+        }
 
         if (isGrounded)
         {
@@ -165,6 +163,7 @@ public class PlayerMovement : MonoBehaviour
         dashUsed = isGrounded ? false : dashUsed;
     }
 
+    int groundLayers = (1 << (int)CustomGCOTypes.CollisionLayerKey.Ground) | (1 << (int)CustomGCOTypes.CollisionLayerKey.Platform);
     private bool CheckGrounded()
     {
         bool result = false;

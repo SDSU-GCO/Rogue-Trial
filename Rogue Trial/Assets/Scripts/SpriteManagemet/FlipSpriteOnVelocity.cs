@@ -1,13 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using NaughtyAttributes;
 
-public class FaceLR : MonoBehaviour
+public class FlipSpriteOnVelocity : MonoBehaviour
 {
-    [SerializeField, HideInInspector]
+    [SerializeField, Required, BoxGroup("Component Refs")]
     new Rigidbody2D rigidbody2D = null;
 
-    [SerializeField, HideInInspector]
+    [SerializeField, Required, BoxGroup("Component Refs")]
     SpriteRenderer spriteRenderer = null;
 
     private void OnValidate()
