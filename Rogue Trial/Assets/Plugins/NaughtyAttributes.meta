@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: ad5c81065b57bff4aa8a4c38cd8c1430
+=======
+guid: 5fd23c9a43a70054eb74e8a2e3985a7a
+>>>>>>> Enemy-Movement
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
