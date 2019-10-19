@@ -58,10 +58,10 @@ public class Attack_Controller : MonoBehaviour
                 temp.TakeDamage(damage);
             }
         }
-        if ((CustomGCOTypes.CollisionLayerKey)collision.gameObject.layer != CustomGCOTypes.CollisionLayerKey.platforms)
+        /*if ((CustomGCOTypes.CollisionLayerKey)collision.gameObject.layer != CustomGCOTypes.CollisionLayerKey.platforms)
         {
             PoofObject();
-        }
+        }*/
     }
 
     private void PoofObject()

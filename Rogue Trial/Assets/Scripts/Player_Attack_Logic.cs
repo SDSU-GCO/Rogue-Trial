@@ -94,4 +94,20 @@ public class Player_Attack_Logic : MonoBehaviour
             spriteRenderer.flipX = true;
         }
     }
+
+    public void FlipWithoutVelocity(string lastButtonPressed)
+    {
+        switch (lastButtonPressed)
+        {
+        case "a":
+            spriteRenderer.flipX = false;
+            break;
+        case "d":
+            spriteRenderer.flipX = true;
+            break;
+        default:
+            break;
+                
+        }
+    }
 }
