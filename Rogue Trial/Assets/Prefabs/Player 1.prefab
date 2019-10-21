@@ -419,7 +419,7 @@ MonoBehaviour:
       Culture=neutral, PublicKeyToken=null
   isGrounded: 0
   isDashing: 0
-  enableDebugging: 1
+  enableDebugging: 0
   circleCastOrigin: {fileID: 1749159719007511993}
   circleCastEdge: {fileID: 7758839802554142439}
 --- !u!114 &5589749906151201696

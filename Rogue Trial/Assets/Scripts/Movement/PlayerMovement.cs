@@ -77,6 +77,16 @@ public class PlayerMovement : MonoBehaviour
         {
             spriteRenderer = GetComponent<SpriteRenderer>();
         }
+
+
+        MBDOInitializationHelper mBDOInitializationHelper = default;
+
+        //IMPORTNANT STEP!!!
+        mBDOInitializationHelper.Setup(this);
+        PlayerRefMBDO playerRefMBDO=null;
+        mBDOInitializationHelper.SetupMBDO(ref playerRefMBDO);
+        if (playerRefMBDO != null)
+            playerRefMBDO.player = transform;
     }
 
     private Vector2 velocity = new Vector2();
@@ -101,13 +111,16 @@ public class PlayerMovement : MonoBehaviour
         jumpButtonPressed = Input.GetAxis("Vertical") > float.Epsilon;
         isGrounded = CheckGrounded();
 
-        if (isGrounded)
+        if(enableDebugging==true)
         {
-            spriteRenderer.color = Color.green;
-        }
-        else
-        {
-            spriteRenderer.color = Color.white;
+            if (isGrounded)
+            {
+                spriteRenderer.color = Color.green;
+            }
+            else
+            {
+                spriteRenderer.color = Color.white;
+            }
         }
 
         if (isGrounded)

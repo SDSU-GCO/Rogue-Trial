@@ -35,7 +35,6 @@ internal struct MBDOInitializationHelper
                 if (go.scene == caller.gameObject.scene && go.scene != new UnityEngine.SceneManagement.Scene())
                 {
                     cardinalSubsystem = go;
-                    Debug.Log("GOs: " + go.scene.name);
                 }
             }
             //cardinalSubsystem = GameObject.Find("Cardinal Subsystem");

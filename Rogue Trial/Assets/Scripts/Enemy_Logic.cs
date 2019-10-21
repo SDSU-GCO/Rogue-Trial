@@ -31,7 +31,7 @@ public class Enemy_Logic : MonoBehaviour
 
     private RaycastHit2D result;
 
-    [SerializeField, HideInInspector]
+    [SerializeField]
     private EnemyListMBDO enemyListMBDO = null;
     [SerializeField, HideInInspector]
     private PlayerRefMBDO playerRefMBDO = null;
