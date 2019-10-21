@@ -1950,7 +1950,7 @@ PlatformEffector2D:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RotationalOffset: 0
-  m_UseOneWay: 1
+  m_UseOneWay: 0
   m_UseOneWayGrouping: 0
   m_SurfaceArc: 90
   m_UseSideFriction: 0
@@ -2758,7 +2758,7 @@ PrefabInstance:
     - target: {fileID: 1617818260266076294, guid: fd01eef741626eb4aa914622492d129d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1617818260266076294, guid: fd01eef741626eb4aa914622492d129d,
         type: 3}
@@ -2809,6 +2809,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1617818260266076288, guid: fd01eef741626eb4aa914622492d129d,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1617818259274187886, guid: fd01eef741626eb4aa914622492d129d,
         type: 3}

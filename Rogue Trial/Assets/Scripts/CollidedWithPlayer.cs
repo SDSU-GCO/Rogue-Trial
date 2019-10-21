@@ -22,7 +22,8 @@ public class CollidedWithPlayer : ConditionalComponent
 
     private void OnTriggerStay2D(Collider2D otherCollider)
     {
-        if(otherCollider.gameObject == player)
+        Debug.Log(otherCollider.gameObject);
+        if (otherCollider.gameObject == player)
         Debug.Log(otherCollider.gameObject);
     }
 }
