@@ -224,6 +224,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55453f7e0d9e1c947ae37d64fadf0f91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  crossSceneDataSO: {fileID: 11400000, guid: 51358d0b747fa9c439d67d28806f66f6, type: 2}
   cardinalSceneName: Cardinal Scene
 --- !u!1001 &1218792338
 PrefabInstance:

@@ -9,6 +9,8 @@ public class Entity_Logic : MonoBehaviour
     public Event_One_Float hpUpdated = new Event_One_Float();
     [SerializeField]
     CrossSceneEvent DamagedEvent;
+    [SerializeField]
+    CrossSceneEvent DiedEvent;
 
     //entity parameters
     public bool disableColliderOnDeath = true;
@@ -67,6 +69,9 @@ public class Entity_Logic : MonoBehaviour
 
     public void CommitSuduku()
     {
+        if (DiedEvent != null)
+            DiedEvent.SomeEvent.Invoke();
+
         if (gameObject.layer == 11 && onDeathReplaceWith == null)
         {
             Enemy_Logic tmp = GetComponent<Enemy_Logic>();

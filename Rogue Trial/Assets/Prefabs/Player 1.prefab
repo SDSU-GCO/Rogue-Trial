@@ -425,6 +425,7 @@ GameObject:
   - component: {fileID: 7758839803176447444}
   - component: {fileID: 5589749906151201696}
   - component: {fileID: 2549030327463446236}
+  - component: {fileID: 6070498220698471068}
   m_Layer: 10
   m_Name: Player 1
   m_TagString: Untagged
@@ -613,12 +614,31 @@ MonoBehaviour:
     m_TypeName: Event_One_Float, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   DamagedEvent: {fileID: 11400000, guid: dd0b4526bd0c80f42ac4d00c5401c3ce, type: 2}
+  DiedEvent: {fileID: 11400000, guid: 986b91227ee7d254382585ce3ff7deff, type: 2}
   disableColliderOnDeath: 1
   health: 3
-  onDeathReplaceWith: {fileID: 3217357049256741924, guid: aeb67d0938d32664dba0d6605bff5c3f,
-    type: 3}
+  onDeathReplaceWith: {fileID: 0}
   spriteRenderer: {fileID: 7758839803176447446}
   invincibilityTime: 0.5
   timeToFlashOnHit: 0.5
   flashSpeed: 20
   flashCustomColor: 0
+--- !u!114 &6070498220698471068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7758839803176447451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 842d066f79fb0c84dac6134d3a055a79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entity_Logic: {fileID: 2549030327463446236}
+  thingsToDisable:
+  - {fileID: 2549030327463446236}
+  - {fileID: 5589749906151201696}
+  - {fileID: 7758839803176447444}
+  Died: {fileID: 11400000, guid: 986b91227ee7d254382585ce3ff7deff, type: 2}
+  Revived: {fileID: 11400000, guid: 7729765a9246e2049a1aed9961c804a0, type: 2}

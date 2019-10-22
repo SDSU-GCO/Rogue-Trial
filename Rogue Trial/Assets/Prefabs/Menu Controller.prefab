@@ -915,6 +915,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2879caa98d983ac418051b24184c858d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerRevived: {fileID: 11400000, guid: 7729765a9246e2049a1aed9961c804a0, type: 2}
+  crossSceneDataSO: {fileID: 11400000, guid: 51358d0b747fa9c439d67d28806f66f6, type: 2}
+  defaultScene:
+    m_Handle: 0
 --- !u!1 &158226047062453063
 GameObject:
   m_ObjectHideFlags: 0

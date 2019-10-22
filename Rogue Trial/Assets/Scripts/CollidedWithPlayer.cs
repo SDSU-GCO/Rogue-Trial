@@ -11,12 +11,17 @@ public class CollidedWithPlayer : ConditionalComponent
 #pragma warning restore CS0649 // varriable is never assigned to and will always have it's default value
     public override bool Result(Collider2D otherCollider)
     {
-        return otherCollider.gameObject == crossSceneDataSO.playerTransform.gameObject;
+        if (crossSceneDataSO.playerTransform != null)
+            return otherCollider.gameObject == crossSceneDataSO.playerTransform.gameObject;
+        else
+            return false;
     }
 
     public override bool Result(Collision2D collision)
     {
-        Debug.Log(collision.otherCollider.gameObject);
-        return collision.otherCollider.gameObject == crossSceneDataSO.playerTransform.gameObject;
+        if (crossSceneDataSO.playerTransform != null)
+            return collision.otherCollider.gameObject == crossSceneDataSO.playerTransform.gameObject;
+        else
+            return false;
     }
 }
