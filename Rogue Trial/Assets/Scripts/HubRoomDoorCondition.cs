@@ -5,10 +5,9 @@ using NaughtyAttributes;
 
 public class HubRoomDoorCondition : ConditionalComponent
 {
-#pragma warning disable CS0649 // varriable is never assigned to and will always have it's default value
     [SerializeField, Required]
     CrossSceneDataSO crossSceneDataSO;
-#pragma warning restore CS0649 // varriable is never assigned to and will always have it's default value
+
     enum RoomClearCheck{ combat, platformer, keysRoom }
     [SerializeField]
     List<RoomClearCheck> roomClearChecks = new List<RoomClearCheck>();

@@ -14,20 +14,23 @@ public class LoadScene : MonoBehaviour
     string promptMessage = "proceed to... ";
     [SerializeField]
     TextMeshProUGUI text = null;
+    [SerializeField, Required]
+    CrossSceneEvent crossSceneEvent;
 #pragma warning restore CS0649 // varriable is never assigned to and will always have it's default value
 
     bool loadStarted = false;
-    public void loadSceneAndUnloadThisOne()
+    public void LoadSceneAndUnloadThisOne()
     {
         if(loadStarted!=true)
         {
             loadStarted = true;
-            SceneManager.LoadSceneAsync(sceneName);
+            SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
+            crossSceneEvent.SomeEvent.Invoke();
             SceneManager.UnloadSceneAsync(gameObject.scene);
         }
     }
     bool doPrompt = false;
-    public void loadPromptSceneAndUnloadThisOne()
+    public void LoadPromptSceneAndUnloadThisOne()
     {
         doPrompt = true;
         if(loadPromptTracker!=true)
@@ -42,7 +45,7 @@ public class LoadScene : MonoBehaviour
 
         if (loadPromptTracker != true)
         {
-            StartCoroutine("LoadPrompt");
+            StartCoroutine(LoadPrompt());
             loadPromptTracker = true;
         }
     }
@@ -78,7 +81,7 @@ public class LoadScene : MonoBehaviour
 
                 if(Input.GetKey(KeyCode.W)==true)
                 {
-                    loadSceneAndUnloadThisOne();
+                    LoadSceneAndUnloadThisOne();
                 }
 
                 doPrompt = false;

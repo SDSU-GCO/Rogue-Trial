@@ -8,4 +8,5 @@ public class CrossSceneDataSO : ScriptableObject
     public bool combat = false;
     public bool platformer = false;
     public bool keysRoom = false;
+    public Transform playerTransform = null;
 }

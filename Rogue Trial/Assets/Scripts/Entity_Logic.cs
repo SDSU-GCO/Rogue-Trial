@@ -7,6 +7,8 @@ using UnityEngine.Events;
 public class Entity_Logic : MonoBehaviour
 {
     public Event_One_Float hpUpdated = new Event_One_Float();
+    [SerializeField]
+    CrossSceneEvent DamagedEvent;
 
     //entity parameters
     public bool disableColliderOnDeath = true;
@@ -46,6 +48,8 @@ public class Entity_Logic : MonoBehaviour
     {
         if (invincibility >= invincibilityTime)
         {
+            if(DamagedEvent!=null)
+                DamagedEvent.SomeEvent.Invoke();
             health -= amount;
             invincibility = 0;
 

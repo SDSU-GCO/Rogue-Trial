@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1617818259274187884}
   - component: {fileID: 1617818259274187885}
   - component: {fileID: 1617818259274187875}
+  - component: {fileID: 8801559228322586560}
   m_Layer: 16
   m_Name: Door
   m_TagString: Untagged
@@ -121,14 +122,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9602c0a991b969b4781d15f7f3d81087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  triggerCondition: 2
   conditionalMixing: 1
-  conditionalComponentNames: []
   conditionalComponents: []
   triggered:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1617818259274187875}
-        m_MethodName: loadSceneAndUnloadThisOne
+        m_MethodName: LoadPromptSceneAndUnloadThisOne
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -136,6 +137,17 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_MethodName: PlayFile
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: door creak
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
@@ -158,6 +170,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: Combat Room
+  promptMessage: 'proceed to... '
+  text: {fileID: 0}
+  crossSceneEvent: {fileID: 11400000, guid: 1fa95578dc05579418bb40707e5b6248, type: 2}
+--- !u!114 &8801559228322586560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1617818259274187881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f441dc07791425841a194cf15c7ecc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crossSceneDataSO: {fileID: 11400000, guid: 51358d0b747fa9c439d67d28806f66f6, type: 2}
 --- !u!1 &1617818260266076291
 GameObject:
   m_ObjectHideFlags: 0
@@ -235,6 +263,6 @@ Rigidbody2D:
   m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
-  m_SleepingMode: 1
+  m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 5

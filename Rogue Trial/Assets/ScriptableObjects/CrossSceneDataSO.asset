@@ -15,3 +15,4 @@ MonoBehaviour:
   combat: 0
   platformer: 0
   keysRoom: 0
+  playerTransform: {fileID: 0}

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 771853442641193304}
   - component: {fileID: 771853442641193306}
   - component: {fileID: 771853442641193305}
-  - component: {fileID: 771853442641193307}
+  - component: {fileID: 614941562654599463}
   m_Layer: 0
   m_Name: Cardinal Subsystem
   m_TagString: Cardinal Subsystem
@@ -47,7 +47,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mbDataObjects:
   - {fileID: 771853442641193305}
-  - {fileID: 771853442641193307}
 --- !u!114 &771853442641193305
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66,7 +65,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &771853442641193307
+--- !u!114 &614941562654599463
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -75,12 +74,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 771853442641193311}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d93f55deb02d7e34da1ada0fcc2dbbeb, type: 3}
+  m_Script: {fileID: 11500000, guid: 55453f7e0d9e1c947ae37d64fadf0f91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  update:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
+  cardinalSceneName: Cardinal Scene

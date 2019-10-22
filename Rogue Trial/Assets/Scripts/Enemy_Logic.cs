@@ -33,8 +33,8 @@ public class Enemy_Logic : MonoBehaviour
 
     [SerializeField]
     private EnemyListMBDO enemyListMBDO = null;
-    [SerializeField, HideInInspector]
-    private PlayerRefMBDO playerRefMBDO = null;
+    [SerializeField, Required]
+    private CrossSceneDataSO crossSceneDataSO = null;
 
     [SerializeField, HideInInspector]
     private Transform target;
@@ -50,14 +50,12 @@ public class Enemy_Logic : MonoBehaviour
     {
         InitializeFromRangedAttack();
 
-        if (enemyListMBDO == null || playerRefMBDO == null)
+        if (enemyListMBDO == null)
         {
             MBDOInitializationHelper mBDOInitializationHelper = default;
 
             //IMPORTNANT STEP!!!
-            mBDOInitializationHelper.Setup(this);
-
-            mBDOInitializationHelper.SetupMBDO(ref playerRefMBDO);
+            mBDOInitializationHelper.SetupCardinalSubSystem(this);
             mBDOInitializationHelper.SetupMBDO(ref enemyListMBDO);
         }
 
@@ -70,13 +68,13 @@ public class Enemy_Logic : MonoBehaviour
 #pragma warning disable IDE0022 // Use expression body for methods
     private void Start()
     {
-        if (playerRefMBDO == null)
+        if (crossSceneDataSO == null)
         {
-            Debug.Log(gameObject.ToString() + " " + this + gameObject.name + " has no playerRefMBDO");
+            Debug.Log(gameObject.ToString() + " " + this + gameObject.name + " has no crossSceneDataSO");
             target = null;
         }
         else
-            target = playerRefMBDO.player;
+            target = crossSceneDataSO.playerTransform;
     }
 #pragma warning restore IDE0022 // Use expression body for methods
 
@@ -92,14 +90,13 @@ public class Enemy_Logic : MonoBehaviour
             enemyListMBDO.update.Invoke();
         }
 
-
-        if (playerRefMBDO == null)
+        if (crossSceneDataSO == null)
         {
             Debug.Log(gameObject.ToString() + " " + this + gameObject.name + " has no playerRefMBDO");
             target = null;
         }
         else
-            target = playerRefMBDO.player;
+            target = crossSceneDataSO.playerTransform;
 
 
     }
