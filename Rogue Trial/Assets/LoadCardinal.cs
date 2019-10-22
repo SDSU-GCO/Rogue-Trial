@@ -9,27 +9,21 @@ using NaughtyAttributes;
 public class LoadCardinal : MonoBehaviour
 {
     bool loadStarted = false;
+#pragma warning disable CS0649 // varriable is never assigned to and will always have it's default value
     [SerializeField, Required]
-    CrossSceneDataSO crossSceneDataSO;
+    CrossSceneSceneDataSO crossSceneSceneData;
     [SerializeField] 
     string cardinalSceneName = "Cardinal Scene";
+#pragma warning restore CS0649 // varriable is never assigned to and will always have it's default value
     private void Awake()
     {
-        loadCardinal();
+        crossSceneSceneData.activeScene = gameObject.scene;
+        LoadCardinalScene();
     }
-    private void OnEnable()
-    {
-        loadCardinal();
-    }
+    private void OnEnable() => LoadCardinalScene();
 
-    private void Start()
-    {
-        if (gameObject == null)
-            Debug.LogError("I'm null: "+this);
-        crossSceneDataSO.activeScene = gameObject.scene;
-    }
 
-    void loadCardinal()
+    void LoadCardinalScene()
     {
         if(loadStarted!= true && SceneManager.GetSceneByName(cardinalSceneName) == new Scene())
         {

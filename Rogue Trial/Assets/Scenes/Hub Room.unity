@@ -120,6 +120,36 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &134027773
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 134027774}
+  m_Layer: 0
+  m_Name: Combat Room
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &134027774
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 134027773}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 9.21, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1395814122}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &185527820
 GameObject:
   m_ObjectHideFlags: 0
@@ -2105,7 +2135,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1110289534
 PrefabInstance:
@@ -2176,8 +2206,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1617818259274187885, guid: fd01eef741626eb4aa914622492d129d,
         type: 3}
+      propertyPath: conditionalComponents.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1617818259274187885, guid: fd01eef741626eb4aa914622492d129d,
+        type: 3}
       propertyPath: triggered.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: LoadPromptSceneAndUnloadThisOne
+      value: DispPrompt
+      objectReference: {fileID: 0}
+    - target: {fileID: 1617818259274187885, guid: fd01eef741626eb4aa914622492d129d,
+        type: 3}
+      propertyPath: conditionalComponents.Array.data[1]
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1617818259274187875, guid: fd01eef741626eb4aa914622492d129d,
         type: 3}
@@ -2194,6 +2234,21 @@ PrefabInstance:
       propertyPath: sceneName
       value: Keys Room
       objectReference: {fileID: 0}
+    - target: {fileID: 1617818259274187875, guid: fd01eef741626eb4aa914622492d129d,
+        type: 3}
+      propertyPath: activated.inspectorListHeight
+      value: 63
+      objectReference: {fileID: 0}
+    - target: {fileID: 1617818259274187875, guid: fd01eef741626eb4aa914622492d129d,
+        type: 3}
+      propertyPath: sceneToLoad
+      value: Keys Room
+      objectReference: {fileID: 0}
+    - target: {fileID: 1617818259274187875, guid: fd01eef741626eb4aa914622492d129d,
+        type: 3}
+      propertyPath: textMeshProReference
+      value: 
+      objectReference: {fileID: 1347286711}
     - target: {fileID: 1617818260266076288, guid: fd01eef741626eb4aa914622492d129d,
         type: 3}
       propertyPath: m_Constraints
@@ -2211,26 +2266,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fd01eef741626eb4aa914622492d129d, type: 3}
---- !u!1 &1110289535 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1617818259274187881, guid: fd01eef741626eb4aa914622492d129d,
-    type: 3}
-  m_PrefabInstance: {fileID: 1110289534}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1110289536
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1110289535}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72ab9b622599ff24f8dca9c8c357d752, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  crossSceneDataSO: {fileID: 11400000, guid: 51358d0b747fa9c439d67d28806f66f6, type: 2}
-  roomClearChecks: 
 --- !u!1 &1173506822
 GameObject:
   m_ObjectHideFlags: 0
@@ -2460,7 +2495,7 @@ PrefabInstance:
     - target: {fileID: 7327546161167069818, guid: 0bef1fbe898d79547acda88d8b9623d1,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7327546161167069818, guid: 0bef1fbe898d79547acda88d8b9623d1,
         type: 3}
@@ -2479,6 +2514,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0bef1fbe898d79547acda88d8b9623d1, type: 3}
+--- !u!4 &1395814122 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7327546161167069818, guid: 0bef1fbe898d79547acda88d8b9623d1,
+    type: 3}
+  m_PrefabInstance: {fileID: 1395814121}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1436879330
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2702,7 +2743,7 @@ RectTransform:
   - {fileID: 1436879331}
   - {fileID: 1347286710}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2778,9 +2819,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1617818259274187885, guid: fd01eef741626eb4aa914622492d129d,
         type: 3}
+      propertyPath: conditionalComponents.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1617818259274187885, guid: fd01eef741626eb4aa914622492d129d,
+        type: 3}
       propertyPath: triggered.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: LoadPromptSceneAndUnloadThisOne
       objectReference: {fileID: 0}
+    - target: {fileID: 1617818259274187885, guid: fd01eef741626eb4aa914622492d129d,
+        type: 3}
+      propertyPath: conditionalComponents.Array.data[1]
+      value: 
+      objectReference: {fileID: 1617355671}
     - target: {fileID: 1617818259274187875, guid: fd01eef741626eb4aa914622492d129d,
         type: 3}
       propertyPath: text
@@ -2789,13 +2840,28 @@ PrefabInstance:
     - target: {fileID: 1617818259274187875, guid: fd01eef741626eb4aa914622492d129d,
         type: 3}
       propertyPath: promptMessage
-      value: Press 'w' to proceed to Keys Room
+      value: Press 'f' to enter "Boss Room"
       objectReference: {fileID: 0}
     - target: {fileID: 1617818259274187875, guid: fd01eef741626eb4aa914622492d129d,
         type: 3}
       propertyPath: sceneName
       value: Boss Room
       objectReference: {fileID: 0}
+    - target: {fileID: 1617818259274187875, guid: fd01eef741626eb4aa914622492d129d,
+        type: 3}
+      propertyPath: activated.inspectorListHeight
+      value: 63
+      objectReference: {fileID: 0}
+    - target: {fileID: 1617818259274187875, guid: fd01eef741626eb4aa914622492d129d,
+        type: 3}
+      propertyPath: sceneToLoad
+      value: Boss Room
+      objectReference: {fileID: 0}
+    - target: {fileID: 1617818259274187875, guid: fd01eef741626eb4aa914622492d129d,
+        type: 3}
+      propertyPath: textMeshProReference
+      value: 
+      objectReference: {fileID: 1347286711}
     - target: {fileID: 1617818260266076288, guid: fd01eef741626eb4aa914622492d129d,
         type: 3}
       propertyPath: m_Constraints
@@ -2831,8 +2897,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72ab9b622599ff24f8dca9c8c357d752, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crossSceneDataSO: {fileID: 11400000, guid: 51358d0b747fa9c439d67d28806f66f6, type: 2}
-  roomClearChecks: 0200000000000000
+  roomClearData:
+  - {fileID: 11400000, guid: 65a144b3840d5c248b2d1dc2deba619d, type: 2}
 --- !u!1001 &1780439534
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2883,7 +2949,7 @@ PrefabInstance:
     - target: {fileID: 771853442641193304, guid: 5158ff79fb6a9ed45838d86ad6459e2d,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 771853442641193304, guid: 5158ff79fb6a9ed45838d86ad6459e2d,
         type: 3}
@@ -2952,7 +3018,7 @@ PrefabInstance:
     - target: {fileID: 1617818260266076294, guid: fd01eef741626eb4aa914622492d129d,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1617818260266076294, guid: fd01eef741626eb4aa914622492d129d,
         type: 3}
@@ -2984,6 +3050,11 @@ PrefabInstance:
       propertyPath: promptMessage
       value: Press 'w' to proceed to Combat Room
       objectReference: {fileID: 0}
+    - target: {fileID: 1617818259274187875, guid: fd01eef741626eb4aa914622492d129d,
+        type: 3}
+      propertyPath: textMeshProReference
+      value: 
+      objectReference: {fileID: 1347286711}
     - target: {fileID: 1617818260266076288, guid: fd01eef741626eb4aa914622492d129d,
         type: 3}
       propertyPath: m_Constraints
@@ -3001,23 +3072,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fd01eef741626eb4aa914622492d129d, type: 3}
---- !u!1 &1617818259361193451 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1617818259274187881, guid: fd01eef741626eb4aa914622492d129d,
-    type: 3}
-  m_PrefabInstance: {fileID: 1617818259361193450}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1617818259361193452
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1617818259361193451}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72ab9b622599ff24f8dca9c8c357d752, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  crossSceneDataSO: {fileID: 11400000, guid: 51358d0b747fa9c439d67d28806f66f6, type: 2}
-  roomClearChecks: 

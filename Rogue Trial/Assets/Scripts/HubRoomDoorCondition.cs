@@ -5,23 +5,20 @@ using NaughtyAttributes;
 
 public class HubRoomDoorCondition : ConditionalComponent
 {
-    [SerializeField, Required]
-    CrossSceneDataSO crossSceneDataSO;
-
-    enum RoomClearCheck{ combat, platformer, keysRoom }
+#pragma warning disable CS0649 // varriable is never assigned to and will always have it's default value
     [SerializeField]
-    List<RoomClearCheck> roomClearChecks = new List<RoomClearCheck>();
-    public override bool Result(Collision2D c) => Result();
-    public override bool Result(Collider2D c) => Result();
-    bool Result()
+    CrossSceneBoolSO[] roomClearData;
+#pragma warning restore CS0649 // varriable is never assigned to and will always have it's default value
+
+    public override bool Result(Collider2D c)
     {
         bool rtnVal=true;
-        if (roomClearChecks.Contains(RoomClearCheck.combat))
-            rtnVal = rtnVal && crossSceneDataSO.combat;
-        if (roomClearChecks.Contains(RoomClearCheck.platformer))
-            rtnVal = rtnVal && crossSceneDataSO.platformer;
-        if (roomClearChecks.Contains(RoomClearCheck.keysRoom))
-            rtnVal = rtnVal && crossSceneDataSO.keysRoom;
+
+        foreach(CrossSceneBoolSO csb in roomClearData)
+        {
+            rtnVal = rtnVal && csb.value;
+        }
+
         return rtnVal;
     }
 

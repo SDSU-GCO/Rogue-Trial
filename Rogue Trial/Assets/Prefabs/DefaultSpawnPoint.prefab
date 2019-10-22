@@ -44,7 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1bc5ad7f6b6661438e47e959b3b0f96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crossSceneDataSO: {fileID: 11400000, guid: 51358d0b747fa9c439d67d28806f66f6, type: 2}
+  crossSceneSceneDataSO: {fileID: 11400000, guid: 7a03934cafd96ff469522aa883a1d3aa,
+    type: 2}
+  playerTransformSO: {fileID: 11400000, guid: d539cd8740f2ba3479c6697c9afd74d1, type: 2}
   spriteRenderer: {fileID: 7327546161167069817}
 --- !u!212 &7327546161167069817
 SpriteRenderer:

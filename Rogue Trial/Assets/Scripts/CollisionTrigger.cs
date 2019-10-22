@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using ByteSheep.Events;
 
 public class CollisionTrigger : MonoBehaviour
 {
@@ -14,8 +15,10 @@ public class CollisionTrigger : MonoBehaviour
     ConditionalMixing conditionalMixing = ConditionalMixing.AND;
     public List<ConditionalComponent> conditionalComponents = new List<ConditionalComponent>();
 
-    public UnityEvent triggered = new UnityEvent();
-    public UnityEvent collided = new UnityEvent();
+    public class OneCollider2D : QuickEvent<Collider2D> { };
+
+    public QuickEvent triggered;
+    public OneCollider2D collided;
 
 
     private void OnTriggerEnter2D(Collider2D otherCollider)
@@ -26,13 +29,13 @@ public class CollisionTrigger : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(triggerCondition == TriggerCondition.Enter && checkCondition(collision) ==true)
-            collided.Invoke();
+        if(triggerCondition == TriggerCondition.Enter && checkCondition(collision.collider) ==true)
+            collided.Invoke(collision.collider);
     }
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (triggerCondition == TriggerCondition.Exit && checkCondition(collision) == true)
-            collided.Invoke();
+        if (triggerCondition == TriggerCondition.Exit && checkCondition(collision.collider) == true)
+            collided.Invoke(collision.collider);
     }
 
     private void OnTriggerExit2D(Collider2D otherCollider)
@@ -42,8 +45,8 @@ public class CollisionTrigger : MonoBehaviour
     }
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (triggerCondition == TriggerCondition.Stay && checkCondition(collision) == true)
-            collided.Invoke();
+        if (triggerCondition == TriggerCondition.Stay && checkCondition(collision.collider) == true)
+            collided.Invoke(collision.collider);
     }
     private void OnTriggerStay2D(Collider2D otherCollider)
     {
@@ -54,33 +57,6 @@ public class CollisionTrigger : MonoBehaviour
     }
 
     bool checkCondition(Collider2D collision)
-    {
-        bool rtnVal = default;
-        if (conditionalMixing == ConditionalMixing.AND)
-        {
-            rtnVal = true;
-        }
-        else if (conditionalMixing == ConditionalMixing.OR)
-        {
-            rtnVal = false;
-        }
-        foreach (ConditionalComponent conditionalComponent in conditionalComponents)
-        {
-            if (conditionalMixing == ConditionalMixing.AND)
-            {
-                rtnVal = rtnVal && conditionalComponent.Result(collision);
-            }
-            else if (conditionalMixing == ConditionalMixing.OR)
-            {
-                rtnVal = rtnVal || conditionalComponent.Result(collision);
-            }
-        }
-        if (conditionalComponents.Count == 0)
-            rtnVal = true;
-        return rtnVal;
-    }
-
-    bool checkCondition(Collision2D collision)
     {
         bool rtnVal = default;
         if (conditionalMixing == ConditionalMixing.AND)

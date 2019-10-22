@@ -2,15 +2,18 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
+using ByteSheep.Events;
 
 [RequireComponent(typeof(SpriteRenderer))]
 public class Entity_Logic : MonoBehaviour
 {
     public Event_One_Float hpUpdated = new Event_One_Float();
+#pragma warning disable CS0649 // varriable is never assigned to and will always have it's default value
     [SerializeField]
-    CrossSceneEvent DamagedEvent;
+    CrossSceneEventSO DamagedEvent;
     [SerializeField]
-    CrossSceneEvent DiedEvent;
+    CrossSceneEventSO DiedEvent;
+#pragma warning restore CS0649 // varriable is never assigned to and will always have it's default value
 
     //entity parameters
     public bool disableColliderOnDeath = true;
@@ -51,7 +54,7 @@ public class Entity_Logic : MonoBehaviour
         if (invincibility >= invincibilityTime)
         {
             if(DamagedEvent!=null)
-                DamagedEvent.SomeEvent.Invoke();
+                DamagedEvent.Event.Invoke();
             health -= amount;
             invincibility = 0;
 
@@ -70,7 +73,7 @@ public class Entity_Logic : MonoBehaviour
     public void CommitSuduku()
     {
         if (DiedEvent != null)
-            DiedEvent.SomeEvent.Invoke();
+            DiedEvent.Event.Invoke();
 
         if (gameObject.layer == 11 && onDeathReplaceWith == null)
         {
@@ -172,6 +175,6 @@ public class Entity_Logic : MonoBehaviour
 }
 
 [System.Serializable]
-public class Event_One_Float : UnityEvent<float>
+public class Event_One_Float : QuickEvent<float>
 {
 }

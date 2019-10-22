@@ -124,39 +124,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   triggerCondition: 2
   conditionalMixing: 1
-  conditionalComponents: []
+  conditionalComponents:
+  - {fileID: 8801559228322586560}
   triggered:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1617818259274187875}
-        m_MethodName: LoadPromptSceneAndUnloadThisOne
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_MethodName: PlayFile
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: door creak
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
+    inspectorListHeight: 63
+    persistentCalls:
+      calls:
+      - genericMenuData:
+          selectedComponent: 5
+          selectedMember: 8
+          isDynamic: 0
+        target: {fileID: 1617818259274187875}
+        memberName: DispPrompt
+        memberType: 8
+        argument:
+          supportedType: 0
+          stringArgument: 
+          intArgument: 0
+          floatArgument: 0
+          boolArgument: 0
+          colorArgument: {r: 0, g: 0, b: 0, a: 0}
+          vector2Argument: {x: 0, y: 0}
+          vector3Argument: {x: 0, y: 0, z: 0}
+          objectArgument: {fileID: 0}
+          gameObjectArgument: {fileID: 0}
+          transformArgument: {fileID: 0}
+        isDynamic: 0
+        isCallEnabled: 1
   collided:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
+    inspectorListHeight: 63
+    persistentCalls:
+      calls: []
 --- !u!114 &1617818259274187875
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,10 +167,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14a76fa6ad80bfb4595bac34850c8c0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: Combat Room
+  CrossSceneEventsToFire:
+  - {fileID: 11400000, guid: aefcafe959fbc4c40b390191c2dd58d4, type: 2}
+  activated:
+    inspectorListHeight: 63
+    persistentCalls:
+      calls: []
+  textMeshProReference: {fileID: 0}
   promptMessage: 'proceed to... '
-  text: {fileID: 0}
-  crossSceneEvent: {fileID: 11400000, guid: 1fa95578dc05579418bb40707e5b6248, type: 2}
+  triggerKey: 119
+  sceneToLoad: Title Screen
+  crossSceneSceneDataSO: {fileID: 11400000, guid: 7a03934cafd96ff469522aa883a1d3aa,
+    type: 2}
 --- !u!114 &8801559228322586560
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,7 +191,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f441dc07791425841a194cf15c7ecc18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crossSceneDataSO: {fileID: 11400000, guid: 51358d0b747fa9c439d67d28806f66f6, type: 2}
+  playerTransformSO: {fileID: 11400000, guid: d539cd8740f2ba3479c6697c9afd74d1, type: 2}
 --- !u!1 &1617818260266076291
 GameObject:
   m_ObjectHideFlags: 0

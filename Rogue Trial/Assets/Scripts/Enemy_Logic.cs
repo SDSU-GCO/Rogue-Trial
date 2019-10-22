@@ -27,14 +27,18 @@ public class Enemy_Logic : MonoBehaviour
     [ShowIf("CheckRangedAttackNotNull")]
     public float offset = 1.5f;
 
+#pragma warning disable IDE0051 // Add readonly modifier
     private bool CheckRangedAttackNotNull() => rangedAttack != null;
+#pragma warning restore IDE0051 // Add readonly modifier
 
     private RaycastHit2D result;
 
+#pragma warning disable CS0649 // varriable is never assigned to and will always have it's default value
     [SerializeField]
     private EnemyListMBDO enemyListMBDO = null;
     [SerializeField, Required]
-    private CrossSceneDataSO crossSceneDataSO = null;
+    CrossSceneTransformSO crossSceneTarget;
+    //private CrossSceneDataSO crossSceneDataSO = null;
 
     [SerializeField, HideInInspector]
     private Transform target;
@@ -45,6 +49,7 @@ public class Enemy_Logic : MonoBehaviour
     private float rangedCoolDownInSeconds;
     [SerializeField, HideInInspector]
     private float rangedCoolDownInSecondsDefault;
+#pragma warning restore CS0649 // varriable is never assigned to and will always have it's default value
 
     private void OnValidate()
     {
@@ -68,13 +73,13 @@ public class Enemy_Logic : MonoBehaviour
 #pragma warning disable IDE0022 // Use expression body for methods
     private void Start()
     {
-        if (crossSceneDataSO == null)
+        if (crossSceneTarget == null)
         {
-            Debug.Log(gameObject.ToString() + " " + this + gameObject.name + " has no crossSceneDataSO");
+            Debug.Log(gameObject.ToString() + " " + this + gameObject.name + " has no playerTransformSO");
             target = null;
         }
         else
-            target = crossSceneDataSO.playerTransform;
+            target = crossSceneTarget.value;
     }
 #pragma warning restore IDE0022 // Use expression body for methods
 
@@ -90,15 +95,7 @@ public class Enemy_Logic : MonoBehaviour
             enemyListMBDO.update.Invoke();
         }
 
-        if (crossSceneDataSO == null)
-        {
-            Debug.Log(gameObject.ToString() + " " + this + gameObject.name + " has no playerRefMBDO");
-            target = null;
-        }
-        else
-            target = crossSceneDataSO.playerTransform;
-
-
+        target = crossSceneTarget == null ? null : crossSceneTarget.value;
     }
 
     private void OnDisable()
@@ -142,6 +139,7 @@ public class Enemy_Logic : MonoBehaviour
         }
     }
 
+#pragma warning disable IDE0051 // Add readonly modifier
     private bool HasLineOfSight()
     {
         LayerMask layerMask = 1 << 11;
@@ -149,6 +147,7 @@ public class Enemy_Logic : MonoBehaviour
         result = Physics2D.Raycast(transform.position, target.position - transform.position, Mathf.Infinity, layerMask);
         return result.collider.gameObject.layer == 10;
     }
+#pragma warning restore IDE0051 // Add readonly modifier
 
     private bool InRange() => (target == null) ? false : (Vector2.Distance(transform.position, target.position) < range);
 
@@ -157,8 +156,7 @@ public class Enemy_Logic : MonoBehaviour
     {
         if (rangedCoolDownInSeconds == 0)
         {
-            Vector2 direction = Vector2.zero;
-            direction = ((Vector2)target.position - (Vector2)transform.position).normalized * offset;
+            Vector2 direction = ((Vector2)target.position - (Vector2)transform.position).normalized * offset;
 
             float rotation = Mathf.Rad2Deg * (Mathf.Atan(direction.y / direction.x));
             rotation += -90;

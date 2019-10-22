@@ -356,7 +356,7 @@ MonoBehaviour:
     type: 2}
   loop: 0
   defaultFile: {fileID: 8300000, guid: 81d711eeeca1d204caddb899262afc68, type: 3}
-  crossSceneEvent: {fileID: 11400000, guid: dd0b4526bd0c80f42ac4d00c5401c3ce, type: 2}
+  crossSceneEvent: {fileID: 0}
 --- !u!114 &512198240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -373,7 +373,7 @@ MonoBehaviour:
     type: 2}
   loop: 0
   defaultFile: {fileID: 8300000, guid: a42689b25f6f5b842818c2c4138bf601, type: 3}
-  crossSceneEvent: {fileID: 11400000, guid: 1fa95578dc05579418bb40707e5b6248, type: 2}
+  crossSceneEvent: {fileID: 0}
 --- !u!1001 &680600542
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -516,6 +516,11 @@ PrefabInstance:
       propertyPath: Jumped.persistentCalls.calls.Array.data[0].genericMenuData.selectedMember
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 2549030327463446236, guid: 8da49b9ee162a544891c5c2cd25d565c,
+        type: 3}
+      propertyPath: hpUpdated.inspectorListHeight
+      value: 63
+      objectReference: {fileID: 0}
     - target: {fileID: 8980279948597124434, guid: 8da49b9ee162a544891c5c2cd25d565c,
         type: 3}
       propertyPath: crossSceneEvent
@@ -564,7 +569,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b812a91546c8cd4b8146562ad106abd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crossSceneDataSO: {fileID: 11400000, guid: 51358d0b747fa9c439d67d28806f66f6, type: 2}
+  roomClearData: []
+  player: {fileID: 0}
   playerTransform: {fileID: 680600543}
 --- !u!4 &1315798856
 Transform:

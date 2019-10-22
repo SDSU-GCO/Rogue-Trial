@@ -8,17 +8,21 @@ public class PlaySound : MonoBehaviour
 {
     List<AudioSource> audioSources = new List<AudioSource>();
 
+#pragma warning disable CS0649 // varriable is never assigned to and will always have it's default value
     [SerializeField, Required]
     AudioMixerGroup audioMixerGroup;
+#pragma warning restore CS0649 // varriable is never assigned to and will always have it's default value
 
     public bool loop;
     public AudioClip defaultFile;
+#pragma warning disable CS0649 // varriable is never assigned to and will always have it's default value
     [SerializeField]
-    CrossSceneEvent crossSceneEvent;
+    CrossSceneEventSO crossSceneEvent;
+#pragma warning restore CS0649 // varriable is never assigned to and will always have it's default value
 
     private void Start()
     {
-        crossSceneEvent.SomeEvent.AddListener(playClip);
+        crossSceneEvent.Event.AddListener(playClip);
     }
     public void playClip()
     {

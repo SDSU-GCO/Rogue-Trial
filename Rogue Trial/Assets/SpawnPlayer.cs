@@ -2,14 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
+using System.Linq;
 
 public class SpawnPlayer : MonoBehaviour
 {
+#pragma warning disable CS0649 // varriable is never assigned to and will always have it's default value
     [SerializeField, Required]
-    CrossSceneDataSO crossSceneDataSO = null;
+    CrossSceneSceneDataSO crossSceneSceneDataSO;
+    [SerializeField, Required]
+    CrossSceneTransformSO playerTransformSO;
+    Transform[] childTransforms;
 
     [SerializeField, BoxGroup("Component Refs")]
     SpriteRenderer spriteRenderer = null;
+#pragma warning restore CS0649 // varriable is never assigned to and will always have it's default value
+    Transform target = null;
     private void OnValidate()
     {
         if (spriteRenderer == null)
@@ -17,13 +24,24 @@ public class SpawnPlayer : MonoBehaviour
     }
     private void Awake()
     {
+        childTransforms = GetComponentsInChildren<Transform>();
+        bool loop=true;
+        foreach(Transform t in childTransforms.TakeWhile( t => { return loop; }))
+        {
+            if (crossSceneSceneDataSO.previousScene.name == t.name)
+            {
+                loop = false;
+                target = t;
+            }
+        }
+
         if (spriteRenderer != null)
             spriteRenderer.enabled = false;
     }
     private void Start()
     {
-        if (crossSceneDataSO == null)
+        if (playerTransformSO == null)
             Debug.LogError("crossSceneDataSO null in: "+this);
-        crossSceneDataSO.playerTransform.position = transform.position;
+        playerTransformSO.value.position = target == null ? transform.position : target.position;
     }
 }

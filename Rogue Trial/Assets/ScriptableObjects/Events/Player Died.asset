@@ -7,12 +7,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6cdc862a8b06263489fe0eaec5ba1683, type: 3}
-  m_Name: PlayerResed
+  m_Script: {fileID: 11500000, guid: b619e0bf836d1284198b943e39087530, type: 3}
+  m_Name: Player Died
   m_EditorClassIdentifier: 
-  SomeEvent:
+  Event:
     inspectorListHeight: 63
     persistentCalls:
       calls: []

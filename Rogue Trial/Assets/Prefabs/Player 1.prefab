@@ -609,12 +609,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hpUpdated:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: Event_One_Float, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-  DamagedEvent: {fileID: 11400000, guid: dd0b4526bd0c80f42ac4d00c5401c3ce, type: 2}
-  DiedEvent: {fileID: 11400000, guid: 986b91227ee7d254382585ce3ff7deff, type: 2}
+    inspectorListHeight: 63
+    persistentCalls:
+      calls: []
+  DamagedEvent: {fileID: 11400000, guid: 3174651360015db40a55616ddef72737, type: 2}
+  DiedEvent: {fileID: 11400000, guid: 5e027eba6205b804199e1b0db7969067, type: 2}
   disableColliderOnDeath: 1
   health: 3
   onDeathReplaceWith: {fileID: 0}
@@ -640,5 +639,5 @@ MonoBehaviour:
   - {fileID: 2549030327463446236}
   - {fileID: 5589749906151201696}
   - {fileID: 7758839803176447444}
-  Died: {fileID: 11400000, guid: 986b91227ee7d254382585ce3ff7deff, type: 2}
-  Revived: {fileID: 11400000, guid: 7729765a9246e2049a1aed9961c804a0, type: 2}
+  Died: {fileID: 11400000, guid: 5e027eba6205b804199e1b0db7969067, type: 2}
+  Revived: {fileID: 11400000, guid: d4e997a5cfabfd841af546bbffc22037, type: 2}

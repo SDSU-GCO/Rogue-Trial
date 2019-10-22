@@ -4,20 +4,22 @@ using NaughtyAttributes;
 
 public class Restart : MonoBehaviour
 {
+#pragma warning disable CS0649 // varriable is never assigned to and will always have it's default value
     [SerializeField, Required]
-    CrossSceneEvent playerRevived;
+    CrossSceneEventSO playerRevived;
     [SerializeField, Required]
-    CrossSceneDataSO crossSceneDataSO;
-    public Scene defaultScene;
+    CrossSceneSceneDataSO crossSceneSceneDataSO;
+#pragma warning restore CS0649 // varriable is never assigned to and will always have it's default value
+    public Scene defaultScene; 
     public void RestartLevel()
     {
         Time.timeScale = 1;
         Time.fixedDeltaTime = 0.02f;
-        playerRevived.SomeEvent.Invoke();
-        if(crossSceneDataSO.activeScene!=new Scene())
+        playerRevived.Event.Invoke();
+        if(crossSceneSceneDataSO.activeScene!=new Scene())
         {
-            SceneManager.LoadSceneAsync(crossSceneDataSO.activeScene.name, LoadSceneMode.Additive);
-            SceneManager.UnloadSceneAsync(crossSceneDataSO.activeScene.name);
+            SceneManager.LoadSceneAsync(crossSceneSceneDataSO.activeScene.name, LoadSceneMode.Additive);
+            SceneManager.UnloadSceneAsync(crossSceneSceneDataSO.activeScene.name);
         }
         else
         {

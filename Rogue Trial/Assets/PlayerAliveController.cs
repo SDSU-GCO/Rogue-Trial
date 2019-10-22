@@ -5,14 +5,16 @@ using NaughtyAttributes;
 
 public class PlayerAliveController : MonoBehaviour
 {
+#pragma warning disable CS0649 // varriable is never assigned to and will always have it's default value
     [SerializeField, HideInInspector]
     Entity_Logic entity_Logic;
     [SerializeField]
     MonoBehaviour[] thingsToDisable;
     [SerializeField, Required]
-    CrossSceneEvent Died;
+    CrossSceneEventSO Died;
     [SerializeField, Required]
-    CrossSceneEvent Revived;
+    CrossSceneEventSO Revived;
+#pragma warning restore CS0649 // varriable is never assigned to and will always have it's default value
     float oldHP;
     private void OnValidate()
     {
@@ -21,8 +23,8 @@ public class PlayerAliveController : MonoBehaviour
     }
     private void Awake()
     {
-        Died.SomeEvent.AddListener(die);
-        Revived.SomeEvent.AddListener(res);
+        Died.Event.AddListener(die);
+        Revived.Event.AddListener(res);
         oldHP = entity_Logic.health;
     }
     public void die()
