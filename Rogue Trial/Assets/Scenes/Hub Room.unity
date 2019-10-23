@@ -3048,13 +3048,18 @@ PrefabInstance:
     - target: {fileID: 1617818259274187875, guid: fd01eef741626eb4aa914622492d129d,
         type: 3}
       propertyPath: promptMessage
-      value: Press 'w' to proceed to Combat Room
+      value: Press 'f' to enter "Combat Room"
       objectReference: {fileID: 0}
     - target: {fileID: 1617818259274187875, guid: fd01eef741626eb4aa914622492d129d,
         type: 3}
       propertyPath: textMeshProReference
       value: 
       objectReference: {fileID: 1347286711}
+    - target: {fileID: 1617818259274187875, guid: fd01eef741626eb4aa914622492d129d,
+        type: 3}
+      propertyPath: sceneToLoad
+      value: Combat Room
+      objectReference: {fileID: 0}
     - target: {fileID: 1617818260266076288, guid: fd01eef741626eb4aa914622492d129d,
         type: 3}
       propertyPath: m_Constraints

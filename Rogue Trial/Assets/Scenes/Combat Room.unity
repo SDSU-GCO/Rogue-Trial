@@ -455,13 +455,23 @@ PrefabInstance:
     - target: {fileID: 1617818259274187875, guid: fd01eef741626eb4aa914622492d129d,
         type: 3}
       propertyPath: promptMessage
-      value: Press 'w' to return to the Hub
+      value: Press 'f' to enter "Hub Room"
       objectReference: {fileID: 0}
     - target: {fileID: 1617818259274187875, guid: fd01eef741626eb4aa914622492d129d,
         type: 3}
       propertyPath: text
       value: 
       objectReference: {fileID: 527807289}
+    - target: {fileID: 1617818259274187875, guid: fd01eef741626eb4aa914622492d129d,
+        type: 3}
+      propertyPath: textMeshProReference
+      value: 
+      objectReference: {fileID: 527807289}
+    - target: {fileID: 1617818259274187875, guid: fd01eef741626eb4aa914622492d129d,
+        type: 3}
+      propertyPath: sceneToLoad
+      value: Hub Room
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1617818259274187874, guid: fd01eef741626eb4aa914622492d129d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: fd01eef741626eb4aa914622492d129d, type: 3}

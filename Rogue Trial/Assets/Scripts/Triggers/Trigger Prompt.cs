@@ -72,7 +72,7 @@ public class TriggerPrompt : MonoBehaviour
                     promptUp = true;
                 }
 
-                if (Input.GetKey(KeyCode.W) == true)
+                if (Input.GetKey(triggerKey) == true)
                 {
                     foreach(CrossSceneEventSO crossSceneEvent in CrossSceneEventsToFire)
                     {

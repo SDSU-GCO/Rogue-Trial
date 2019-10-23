@@ -151,10 +151,6 @@ MonoBehaviour:
           transformArgument: {fileID: 0}
         isDynamic: 0
         isCallEnabled: 1
-  collided:
-    inspectorListHeight: 63
-    persistentCalls:
-      calls: []
 --- !u!114 &1617818259274187875
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,8 +170,8 @@ MonoBehaviour:
     persistentCalls:
       calls: []
   textMeshProReference: {fileID: 0}
-  promptMessage: 'proceed to... '
-  triggerKey: 119
+  promptMessage: Press 'f' to enter "Title Screen"
+  triggerKey: 102
   sceneToLoad: Title Screen
   crossSceneSceneDataSO: {fileID: 11400000, guid: 7a03934cafd96ff469522aa883a1d3aa,
     type: 2}

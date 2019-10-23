@@ -18,9 +18,25 @@ public class LoadCardinal : MonoBehaviour
     private void Awake()
     {
         crossSceneSceneData.activeScene = gameObject.scene;
-        LoadCardinalScene();
+        LoadCardinalScene();        
     }
-    private void OnEnable() => LoadCardinalScene();
+    private void OnEnable()
+    {
+        LoadCardinalScene();
+        SceneManager.activeSceneChanged+= OnSceneChanged;
+    }
+
+    bool enforcingScene = false;
+    void OnSceneChanged(Scene oldS, Scene newS)
+    {
+        bool old = enforcingScene;
+        enforcingScene = true;
+        if(old!=true)
+        {
+            SceneManager.SetActiveScene(crossSceneSceneData.activeScene);
+        }
+        enforcingScene = false;
+    }
 
 
     void LoadCardinalScene()

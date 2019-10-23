@@ -14,10 +14,6 @@ public class TraverseLevelDoor : TriggerPrompt
     CrossSceneSceneDataSO crossSceneSceneDataSO;
 #pragma warning restore CS0649 // varriable is never assigned to and will always have it's default value
 
-    void Reset()
-    {
-        triggerKey = KeyCode.F;
-    }
     private void OnValidate()
     {
         promptMessage = "Press 'f' to enter \""+sceneToLoad+"\"";
