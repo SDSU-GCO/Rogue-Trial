@@ -7,12 +7,15 @@ using System.Collections;
 
 [RequireComponent(typeof(Image))]
 [RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(SpriteRenderer))]
 public class GameOver : MonoBehaviour
 {
     [SerializeField, HideInInspector]
     Image image;
     [SerializeField, HideInInspector]
     Animator animator;
+    [SerializeField, HideInInspector]
+    SpriteRenderer spriteRenderer;
     [SerializeField, Required, BoxGroup("SO refs")]
     CrossSceneEventSO gameoverCrossSceneEvent;
     [SerializeField, Required, BoxGroup("SO refs")]
@@ -34,6 +37,11 @@ public class GameOver : MonoBehaviour
         if (image == null)
         {
             image = GetComponent<Image>();
+        }
+
+        if (spriteRenderer == null)
+        {
+            spriteRenderer = GetComponent<SpriteRenderer>();
         }
     }
     private void OnEnable()
@@ -62,6 +70,7 @@ public class GameOver : MonoBehaviour
     bool running = false;
     private void Update()
     {
+        image.sprite = spriteRenderer.sprite;
         if (Input.anyKeyDown && !Input.GetKeyDown(KeyCode.Escape) && running == true)
         {
             Time.timeScale = 1;
