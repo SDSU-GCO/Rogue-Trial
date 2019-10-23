@@ -1285,7 +1285,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3161843903668711549}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -1298,8 +1298,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: -6604837272411136926, guid: 8b450fa1e0886854e96127ef0b385cc7,
-    type: 3}
+  m_Sprite: {fileID: 21300000, guid: 59358619d81d0364ca7a5f9194c9bef8, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1342,7 +1341,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 8667757729840236930}
   animator: {fileID: 6901255856222861558}
-  spriteRenderer: {fileID: 0}
+  spriteRenderer: {fileID: 2559316870205969876}
   gameoverCrossSceneEvent: {fileID: 11400000, guid: 5e027eba6205b804199e1b0db7969067,
     type: 2}
   PlayerRevivedSO: {fileID: 11400000, guid: d4e997a5cfabfd841af546bbffc22037, type: 2}
@@ -1356,7 +1355,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3161843903668711549}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
