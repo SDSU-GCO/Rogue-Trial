@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.dbrizov.naughtyattributes": "https://github.com/JimmyCushnie/NaughtyAttributes.git",
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.2d.tilemap": "1.0.0",
     "com.unity.cinemachine": "2.3.4",
@@ -47,12 +48,16 @@
     "com.unity.modules.xr": "1.0.0"
   },
   "lock": {
-    "st.rect-ex": {
-      "hash": "20895c017bf74d2e0650fbe771dbfceed42ff640",
-      "revision": "master"
+    "com.dbrizov.naughtyattributes": {
+      "hash": "abf48092d8e608fb7340d6a447686ce0b4800709",
+      "revision": "HEAD"
     },
     "st.one-line": {
       "hash": "c7e88cdd50f3662dc2632b3951afbd8c987e1f11",
+      "revision": "master"
+    },
+    "st.rect-ex": {
+      "hash": "20895c017bf74d2e0650fbe771dbfceed42ff640",
       "revision": "master"
     }
   }

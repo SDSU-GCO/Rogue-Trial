@@ -22,7 +22,15 @@ public class PlaySound : MonoBehaviour
 
     private void Start()
     {
-        crossSceneEvent.Event.AddListener(playClip);
+        if (crossSceneEvent != null)
+            crossSceneEvent.Event.AddListener(playClip);
+        else
+            playClip();
+    }
+    private void OnDisable()
+    {
+        if (crossSceneEvent != null)
+            crossSceneEvent.Event.RemoveListener(playClip);
     }
     public void playClip()
     {
