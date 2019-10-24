@@ -100,11 +100,7 @@ public class Enemy_Logic : MonoBehaviour
 
     private void OnDisable()
     {
-        if (enemyListMBDO == null)
-        {
-            Debug.Log(gameObject.ToString() + " " + this + gameObject.name + " has no enemyListMBDO");
-        }
-        else
+        if (enemyListMBDO != null)
         {
             enemyListMBDO.enemies.Remove(this);
             enemyListMBDO.update.Invoke();

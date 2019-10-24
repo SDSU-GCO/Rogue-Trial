@@ -22,6 +22,8 @@ public class GameOver : MonoBehaviour
     CrossSceneEventSO PlayerRevivedSO;
     [SerializeField, Required, BoxGroup("SO refs")]
     CrossSceneSceneDataSO crossSceneSceneDataSO;
+    [SerializeField, Required, BoxGroup("MB refs")]
+    ScrollCredits scrollCredits = null;
 #pragma warning disable IDE0044 // Add readonly modifier
     [SerializeField]
     private float secondsToFadeIn = 3;
@@ -67,15 +69,14 @@ public class GameOver : MonoBehaviour
 
     private float currentTime = 0;
     // Update is called once per frame
-    bool running = false;
+    bool isOpaque = false;
     private void Update()
     {
         image.sprite = spriteRenderer.sprite;
-        if (Input.anyKeyDown && !Input.GetKeyDown(KeyCode.Escape) && running == true)
+        if (Input.anyKeyDown && !Input.GetKeyDown(KeyCode.Escape) && isOpaque == true)
         {
             Time.timeScale = 1;
             Time.fixedDeltaTime = 0.02f;
-            Debug.Log("GameOver: Reloading scene...");
             if (crossSceneSceneDataSO.activeScene != new Scene())
             {
                 PlayerRevivedSO.Event.Invoke();
@@ -100,6 +101,7 @@ public class GameOver : MonoBehaviour
             image.color = temp;
             yield return null;
         }
-        running = true;
+        isOpaque = true;
+        scrollCredits.enabled = true;
     }
 }
