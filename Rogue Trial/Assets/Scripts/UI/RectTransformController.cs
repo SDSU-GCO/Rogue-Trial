@@ -10,7 +10,7 @@ public class RectTransformController : MonoBehaviour
     [SerializeField, HideInInspector]
     CanvasScaler canvasScaler = null;
 
-    public enum LocalScalingFallback
+    public enum ScalingMethod
     {
         Screen,
         Parent
@@ -29,8 +29,91 @@ public class RectTransformController : MonoBehaviour
 
     private void Reset() => OnValidate();
 
+    public Vector2 GetPos(ScalingMethod localScalingFallback = ScalingMethod.Parent, bool operateLocal = true)
+    {
+        Vector2 center = rectTransform.position;
+        if (operateLocal == true)
+        {
+            RectTransform parentTransform = (RectTransform)rectTransform.parent;
+            Vector2 scaleFactor = (rectTransform.anchorMax - rectTransform.anchorMin);
+            Vector2 offset = default;
+            offset.x = scaleFactor.x == 0 ? (((scaleFactor.x / 2f) + rectTransform.anchorMin.x) + 0.5f) * parentTransform.rect.size.x : ((scaleFactor.x / 2f) + rectTransform.anchorMin.x) * parentTransform.rect.size.x;
+            offset.y = scaleFactor.y == 0 ? (((scaleFactor.y / 2f) + rectTransform.anchorMin.y) + 0.5f) * parentTransform.rect.size.y : ((scaleFactor.y / 2f) + rectTransform.anchorMin.y) * parentTransform.rect.size.y;
+            center += offset;
+            center -= ((Vector2)parentTransform.position);
+            if (localScalingFallback == ScalingMethod.Parent)
+            {
+                scaleFactor.x = scaleFactor.x == 0 ? 1 : scaleFactor.x;
+                scaleFactor.y = scaleFactor.y == 0 ? 1 : scaleFactor.y;
+                scaleFactor *= parentTransform.rect.size;
+            }
+            else
+            {
+                scaleFactor.x = scaleFactor.x == 0 ? canvasScaler.referenceResolution.x : scaleFactor.x * parentTransform.rect.size.x;
+                scaleFactor.y = scaleFactor.y == 0 ? canvasScaler.referenceResolution.y : scaleFactor.y * parentTransform.rect.size.y;
+            }
+            center = center / (scaleFactor);
+        }
+        else
+        {
+            center /= (canvasScaler.referenceResolution);
+        }
+        return center;
+    }
+    public Vector2 GetSize(ScalingMethod localScalingFallback = ScalingMethod.Parent, bool operateLocal = true)
+    {
+        Vector2 size = rectTransform.rect.size;
+        if (operateLocal==true)
+        {
+            RectTransform parentTransform = (RectTransform)rectTransform.parent;
+            if (parentTransform == null)
+                operateLocal = false;
+            else
+            {
+                Vector2 scaleFactor = (rectTransform.anchorMax - rectTransform.anchorMin);
+                if (localScalingFallback == ScalingMethod.Parent)
+                {
+                    scaleFactor.x = scaleFactor.x == 0 ? 1 : scaleFactor.x;
+                    scaleFactor.y = scaleFactor.y == 0 ? 1 : scaleFactor.y;
+                }
+                else
+                {
+                    scaleFactor.x = scaleFactor.x == 0 ? canvasScaler.referenceResolution.x : scaleFactor.x;
+                    scaleFactor.y = scaleFactor.y == 0 ? canvasScaler.referenceResolution.y : scaleFactor.y;
+                }
+                size /= (parentTransform.rect.size * scaleFactor);
+            }
+        }
+        else
+        {
+            size /= (canvasScaler.referenceResolution);
+        }
 
-    public void SetPos(Vector2 center)
+        return size;
+    }
+
+    public void SetPos(Vector2 center, bool operateLocal = true)
+    { 
+        if (operateLocal) 
+            SetLocalPos(center, ScalingMethod.Parent); 
+        else SetPos(center); 
+    }
+    public void SetPos(Vector2 center, ScalingMethod localScalingFallback = ScalingMethod.Parent) => SetLocalPos(center, localScalingFallback);
+    public void SetPos(Vector2 botLeftCorner, Vector2 botRightCorner, bool operateLocal = true)
+    { 
+        if (operateLocal) 
+            SetLocalPos(botLeftCorner, botRightCorner, ScalingMethod.Parent); 
+        else SetPos(botLeftCorner, botRightCorner);
+    }
+    public void SetPos(Vector2 botLeftCorner, Vector2 botRightCorner, ScalingMethod localScalingFallback = ScalingMethod.Parent) => SetLocalPos(botLeftCorner, botRightCorner, localScalingFallback);
+    public void SetPos(float left, float bottom, float right, float top, bool operateLocal = true)
+    { 
+        if (operateLocal) 
+            SetLocalPos(left, bottom, right, top, ScalingMethod.Parent); 
+        else SetPos(left, bottom, right, top); 
+    }
+    public void SetPos(float left, float bottom, float right, float top, ScalingMethod localScalingFallback = ScalingMethod.Parent) => SetLocalPos(left, bottom, right, top, localScalingFallback);
+    private void SetPos(Vector2 center)
     {
         //cache old values
         Vector2 oldAnchMin = rectTransform.anchorMin;
@@ -48,7 +131,11 @@ public class RectTransformController : MonoBehaviour
         currentScreenRes.y = Screen.height;
 
         //move object
-        rectTransform.position = center * currentScreenRes;
+        Vector3 pos = rectTransform.position;
+        pos.x = center.x * currentScreenRes.x;
+        pos.y = center.y * currentScreenRes.y;
+
+        rectTransform.transform.position = pos;
 
         //restore old interaction mode
         rectTransform.anchorMin = oldAnchMin;
@@ -58,7 +145,7 @@ public class RectTransformController : MonoBehaviour
         //restore obj size
         rectTransform.sizeDelta = oldSizeDelta;
     }
-    public void SetPos(Vector2 botLeftCorner, Vector2 topRightCorner)
+    private void SetPos(Vector2 botLeftCorner, Vector2 topRightCorner)
     {
         //cache old values
         Vector2 oldAnchMin = rectTransform.anchorMin;
@@ -108,7 +195,7 @@ public class RectTransformController : MonoBehaviour
         rectTransform.anchorMax = oldAnchMax;
         rectTransform.pivot = oldPivot;
     }
-    public void SetLocalPos(Vector2 botLeftCorner, Vector2 topRightCorner, LocalScalingFallback localScalingFallback = LocalScalingFallback.Parent)
+    private void SetLocalPos(Vector2 botLeftCorner, Vector2 topRightCorner, ScalingMethod localScalingFallback = ScalingMethod.Parent)
     {
         //cache values
         Vector2 oldPivot = rectTransform.pivot;
@@ -130,59 +217,59 @@ public class RectTransformController : MonoBehaviour
         customResolution.x = canvasScaler.referenceResolution.x;
         customResolution.y = canvasScaler.referenceResolution.y;
 
-        if (localScalingFallback == LocalScalingFallback.Parent)
+        if (localScalingFallback == ScalingMethod.Parent)
         {
             Vector2 lpScale;
             lpScale.x = anchorSize.x == 0 ? 1 : anchorSize.x;
             lpScale.y = anchorSize.y == 0 ? 1 : anchorSize.y;
 
-            //Vector2 AnchorMidpoint=(anchorSize / 2f) +rectTransform.anchorMin;
-            //Vector2 AnchorOffset = AnchorMidpoint - (Vector2.one * 0.5f);
-            //Vector2 anchoredCenter = (center - (Vector2.one * 0.5f))* lpScale + AnchorOffset;
+            Vector2 AnchorMidpoint = (anchorSize / 2f) + rectTransform.anchorMin;
+            Vector2 AnchorOffset = AnchorMidpoint - (Vector2.one * 0.5f);
+            Vector2 anchoredCenter = (center - (Vector2.one * 0.5f)) * lpScale + AnchorOffset;
 
-            //rectTransform.localPosition = ((anchoredCenter * parentSize));
+            rectTransform.localPosition = ((anchoredCenter * parentSize));
 
-            //rectTransform.sizeDelta = parentSize*lpScale*(targetSize-Vector2.one);
-            //Vector2 newSize = rectTransform.sizeDelta;
-            //newSize.x = anchorSize.x == 0 ? parentSize.x*lpScale.x*targetSize.x : rectTransform.sizeDelta.x;
-            //newSize.y = anchorSize.y == 0 ? parentSize.y * lpScale.y*targetSize.y : rectTransform.sizeDelta.y;
-            //rectTransform.sizeDelta = newSize;
-            //Debug.Log(rectTransform.sizeDelta);
+            rectTransform.sizeDelta = parentSize * lpScale * (targetSize - Vector2.one);
+            Vector2 newSize = rectTransform.sizeDelta;
+            newSize.x = anchorSize.x == 0 ? parentSize.x * lpScale.x * targetSize.x : rectTransform.sizeDelta.x;
+            newSize.y = anchorSize.y == 0 ? parentSize.y * lpScale.y * targetSize.y : rectTransform.sizeDelta.y;
+            rectTransform.sizeDelta = newSize;
+            Debug.Log(rectTransform.sizeDelta);
 
-            if (anchorSize.x == 0 && anchorSize.y != 0)
-            {
-                rectTransform.offsetMin = botLeftCorner * anchorSize * parentSize;
-                tmp.x = center.x * parentSize.x;
-                tmp.y = rectTransform.offsetMin.y;
-                rectTransform.offsetMin = tmp;
+            //if (anchorSize.x == 0 && anchorSize.y != 0)
+            //{
+            //    rectTransform.offsetMin = botLeftCorner * anchorSize * parentSize;
+            //    tmp.x = center.x * parentSize.x;
+            //    tmp.y = rectTransform.offsetMin.y;
+            //    rectTransform.offsetMin = tmp;
 
-                rectTransform.offsetMax = (topRightCorner - Vector2.one) * anchorSize * parentSize;
-                tmp.x = center.x * parentSize.x;
-                tmp.y = rectTransform.offsetMax.y;
-                rectTransform.offsetMax = tmp;
-            }
-            else if (anchorSize.x != 0 && anchorSize.y == 0)
-            {
-                rectTransform.offsetMin = botLeftCorner * anchorSize * parentSize;
-                tmp.x = rectTransform.offsetMin.x;
-                tmp.y = center.y * parentSize.y;
-                rectTransform.offsetMin = tmp;
+            //    rectTransform.offsetMax = (topRightCorner - Vector2.one) * anchorSize * parentSize;
+            //    tmp.x = center.x * parentSize.x;
+            //    tmp.y = rectTransform.offsetMax.y;
+            //    rectTransform.offsetMax = tmp;
+            //}
+            //else if (anchorSize.x != 0 && anchorSize.y == 0)
+            //{
+            //    rectTransform.offsetMin = botLeftCorner * anchorSize * parentSize;
+            //    tmp.x = rectTransform.offsetMin.x;
+            //    tmp.y = center.y * parentSize.y;
+            //    rectTransform.offsetMin = tmp;
 
-                rectTransform.offsetMax = (topRightCorner - Vector2.one) * anchorSize * parentSize;
-                tmp.x = rectTransform.offsetMax.x;
-                tmp.y = center.y * parentSize.y;
-                rectTransform.offsetMax = tmp;
-            }
-            else if (anchorSize.x == 0 && anchorSize.y == 0)
-            {
-                rectTransform.offsetMin = center * parentSize;
-                rectTransform.offsetMax = center * parentSize;
-            }
-            else
-            {
-                rectTransform.offsetMin = botLeftCorner * anchorSize * parentSize;
-                rectTransform.offsetMax = (topRightCorner - Vector2.one) * anchorSize * parentSize;
-            }
+            //    rectTransform.offsetMax = (topRightCorner - Vector2.one) * anchorSize * parentSize;
+            //    tmp.x = rectTransform.offsetMax.x;
+            //    tmp.y = center.y * parentSize.y;
+            //    rectTransform.offsetMax = tmp;
+            //}
+            //else if (anchorSize.x == 0 && anchorSize.y == 0)
+            //{
+            //    rectTransform.offsetMin = center * parentSize;
+            //    rectTransform.offsetMax = center * parentSize;
+            //}
+            //else
+            //{
+            //    rectTransform.offsetMin = botLeftCorner * anchorSize * parentSize;
+            //    rectTransform.offsetMax = (topRightCorner - Vector2.one) * anchorSize * parentSize;
+            //}
         }
         else
         {
@@ -222,7 +309,7 @@ public class RectTransformController : MonoBehaviour
             }
         }
 
-        if ((anchorSize.y == 0 || anchorSize.x == 0) && localScalingFallback == LocalScalingFallback.Screen)
+        if ((anchorSize.y == 0 || anchorSize.x == 0) && localScalingFallback == ScalingMethod.Screen)
         {
             Vector2 newSizeDelta = rectTransform.sizeDelta;
             if (anchorSize.x == 0)
@@ -235,7 +322,7 @@ public class RectTransformController : MonoBehaviour
             }
             rectTransform.sizeDelta = newSizeDelta;
         }
-        else if (localScalingFallback == LocalScalingFallback.Parent)
+        else if (localScalingFallback == ScalingMethod.Parent)
         {
             Vector2 newSizeDelta = rectTransform.sizeDelta;
             if (anchorSize.x == 0)
@@ -255,7 +342,7 @@ public class RectTransformController : MonoBehaviour
         rectTransform.pivot = oldPivot;
 
     }
-    public void SetLocalPos(float left, float bottom, float right, float top, LocalScalingFallback localScalingFallback = LocalScalingFallback.Parent)
+    private void SetLocalPos(float left, float bottom, float right, float top, ScalingMethod localScalingFallback = ScalingMethod.Parent)
     {
         Vector2 BotLeftCorn;
         Vector2 topRightCorn;
@@ -268,7 +355,7 @@ public class RectTransformController : MonoBehaviour
 
         SetLocalPos(BotLeftCorn, topRightCorn, localScalingFallback);
     }
-    public void SetPos(float left, float bottom, float right, float top)
+    private void SetPos(float left, float bottom, float right, float top)
     {
         Vector2 BotLeftCorn;
         Vector2 topRightCorn;
@@ -282,7 +369,7 @@ public class RectTransformController : MonoBehaviour
         SetPos(BotLeftCorn, topRightCorn);
     }
 
-    public void SetLocalPos(Vector2 center, LocalScalingFallback localScalingFallback = LocalScalingFallback.Parent)
+    private void SetLocalPos(Vector2 center, ScalingMethod localScalingFallback = ScalingMethod.Parent)
     {
         //cache old values
         Vector2 oldAnchMin = rectTransform.anchorMin;
@@ -300,7 +387,7 @@ public class RectTransformController : MonoBehaviour
         Vector2 parentSize = rectTransform.parent.GetComponent<RectTransform>().rect.size;
 
         Vector2 tmp;
-        if(localScalingFallback==LocalScalingFallback.Parent)
+        if(localScalingFallback==ScalingMethod.Parent)
         {
 
             if (anchorSize.x == 0 && anchorSize.y != 0)

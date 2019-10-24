@@ -19,10 +19,10 @@ public class PositionImage : MonoBehaviour
     private ControlMode controlMode = ControlMode.SinglePoint;
 
     [SerializeField, BoxGroup("Settings")]
-    private RectTransformController.LocalScalingFallback localScalingFallback = RectTransformController.LocalScalingFallback.Parent;
-
-    [SerializeField, BoxGroup("Settings")]
     private bool operateLocal=false;
+
+    [SerializeField, BoxGroup("Settings"), ShowIf("operateLocal")]
+    private RectTransformController.ScalingMethod localScalingFallback = RectTransformController.ScalingMethod.Parent;
 
     [SerializeField, BoxGroup("Points"), ShowIf("UsePoint")]
     Vector2 myPoint = new Vector2(0.25f, 0.25f);
@@ -53,29 +53,26 @@ public class PositionImage : MonoBehaviour
     {
         if (controlMode == ControlMode.SinglePoint)
         {
-            if (operateLocal)
-                rectTransformController.SetLocalPos(myPoint);
-            else
-                rectTransformController.SetPos(myPoint);
+            if(operateLocal)
+                rectTransformController.SetPos(myPoint, localScalingFallback);
+            else rectTransformController.SetPos(myPoint, false);
         }
         else if (controlMode == ControlMode.TwoCorners)
         {
-            if (operateLocal)
-                rectTransformController.SetLocalPos(botleftCornerPoint, topRightCornerPoint, localScalingFallback);
-            else
-                rectTransformController.SetPos(botleftCornerPoint, topRightCornerPoint);
+            if(operateLocal)
+                rectTransformController.SetPos(botleftCornerPoint, topRightCornerPoint, localScalingFallback);
+            else rectTransformController.SetPos(botleftCornerPoint, topRightCornerPoint, false);
         }
         else if (controlMode == ControlMode.FourSides)
         {
             if (operateLocal)
-            {
-                rectTransformController.SetLocalPos(left, bottom, right, top);
-            }
-            else
-            {
-                rectTransformController.SetPos(left, bottom, right, top);
-            }
+                rectTransformController.SetPos(left, bottom, right, top, localScalingFallback);
+            else rectTransformController.SetPos(left, bottom, right, top, false);
         }
+        Vector2 pos = rectTransformController.GetPos(localScalingFallback, operateLocal);
+        Vector3 size = rectTransformController.GetSize(localScalingFallback, operateLocal);
+        Debug.Log($"pos:({pos.x},{pos.y}) =:= size:({size.x},{size.y})");
+        Debug.Log($"abs pos:({rectTransformController.transform.position.x},{rectTransformController.transform.position.y}) =:= size:({size.x},{size.y})");
 
     }
 }
