@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using NaughtyAttributes;
+using System.Linq;
+
 
 public class PlaySound : MonoBehaviour
 {
-    List<AudioSource> audioSources = new List<AudioSource>();
-
 #pragma warning disable CS0649 // varriable is never assigned to and will always have it's default value
     [SerializeField, Required]
     AudioMixerGroup audioMixerGroup;
 #pragma warning restore CS0649 // varriable is never assigned to and will always have it's default value
 
     public bool loop;
+    public bool randomizePitch;
     public AudioClip defaultFile;
 #pragma warning disable CS0649 // varriable is never assigned to and will always have it's default value
     [SerializeField]
@@ -34,9 +35,11 @@ public class PlaySound : MonoBehaviour
     }
     public void playClip()
     {
+        Debug.Log("Playing:" + defaultFile.name);
         AudioSource audioSource = GetAudioSource();
         audioSource.clip = defaultFile;
         audioSource.outputAudioMixerGroup = audioMixerGroup;
+        audioSource.pitch = randomizePitch == true ? Random.Range(0.85f, 1.15f) : 1;
         audioSource.Play();
         return;
     }
@@ -52,12 +55,15 @@ public class PlaySound : MonoBehaviour
     {
         AudioSource rtnVal=null;
 
-        audioSources.Clear();
-        audioSources.AddRange(GetComponents<AudioSource>());
-        foreach(AudioSource audioSource in audioSources)
+        AudioSource[] audioSources = GetComponents<AudioSource>();
+        bool keepLooking = true;
+        foreach(AudioSource audioSource in audioSources.TakeWhile(x=> { return keepLooking; }))
         {
             if (audioSource.isPlaying != true)
+            {
+                keepLooking = false;
                 rtnVal = audioSource;
+            }
         }
 
         if (rtnVal == null)
@@ -72,6 +78,7 @@ public class PlaySound : MonoBehaviour
         AudioSource audioSource = GetAudioSource(); 
         audioSource.clip = Resources.Load(filePath) as AudioClip;
         audioSource.outputAudioMixerGroup = audioMixerGroup;
+        audioSource.pitch = randomizePitch == true ? Random.Range(0.85f, 1.15f) : 1;
         audioSource.Play();
         return;
     }

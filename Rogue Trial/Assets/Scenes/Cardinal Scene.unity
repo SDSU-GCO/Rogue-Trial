@@ -365,6 +365,7 @@ MonoBehaviour:
   audioMixerGroup: {fileID: 5705581910496193171, guid: 93ed9eda70f37cb48b5165cf87fae8bf,
     type: 2}
   loop: 1
+  randomizePitch: 0
   defaultFile: {fileID: 8300000, guid: c1cc00045cca41643a7704f1817ae78f, type: 3}
   crossSceneEvent: {fileID: 0}
 --- !u!81 &512198236
@@ -447,6 +448,7 @@ MonoBehaviour:
   audioMixerGroup: {fileID: -5055102301708549317, guid: 93ed9eda70f37cb48b5165cf87fae8bf,
     type: 2}
   loop: 0
+  randomizePitch: 1
   defaultFile: {fileID: 8300000, guid: 81d711eeeca1d204caddb899262afc68, type: 3}
   crossSceneEvent: {fileID: 11400000, guid: 3174651360015db40a55616ddef72737, type: 2}
 --- !u!114 &512198240
@@ -464,6 +466,7 @@ MonoBehaviour:
   audioMixerGroup: {fileID: -5055102301708549317, guid: 93ed9eda70f37cb48b5165cf87fae8bf,
     type: 2}
   loop: 0
+  randomizePitch: 1
   defaultFile: {fileID: 8300000, guid: a42689b25f6f5b842818c2c4138bf601, type: 3}
   crossSceneEvent: {fileID: 11400000, guid: aefcafe959fbc4c40b390191c2dd58d4, type: 2}
 --- !u!1001 &680600542
@@ -473,15 +476,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 8292333129032588385, guid: 8da49b9ee162a544891c5c2cd25d565c,
-        type: 3}
-      propertyPath: m_Lens.OrthographicSize
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 7758839803176447451, guid: 8da49b9ee162a544891c5c2cd25d565c,
         type: 3}
       propertyPath: m_Name
       value: Player 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8292333129032588385, guid: 8da49b9ee162a544891c5c2cd25d565c,
+        type: 3}
+      propertyPath: m_Lens.OrthographicSize
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7758839803176447445, guid: 8da49b9ee162a544891c5c2cd25d565c,
         type: 3}
