@@ -26,7 +26,7 @@ public class TraverseLevelDoor : TriggerPrompt
         {
             loadStarted = true;
             crossSceneSceneDataSO.previousScene = gameObject.scene;
-            SceneManager.LoadSceneAsync(sceneToLoad, LoadSceneMode.Additive);
+            SceneManager.LoadScene(sceneToLoad, LoadSceneMode.Additive);
             SceneManager.UnloadSceneAsync(gameObject.scene);
         }
     }

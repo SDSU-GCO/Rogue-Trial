@@ -281,4 +281,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d278f140f43f2b48ad8248fc91cd18e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  secondsToWaitBeforeLocking: 0.08
+  secondsToWaitBeforeLocking: 0.2

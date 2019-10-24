@@ -25,7 +25,7 @@ public class StartGame : MonoBehaviour
     {
         if (Input.anyKeyDown)
         {
-            SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
+            SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
             playerTransformSO.value.gameObject.SetActive(true);
             SceneManager.UnloadSceneAsync(gameObject.scene);
         }

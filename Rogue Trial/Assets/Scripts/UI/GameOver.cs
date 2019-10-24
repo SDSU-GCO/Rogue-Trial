@@ -82,7 +82,7 @@ public class GameOver : MonoBehaviour
             if (crossSceneSceneDataSO.activeScene != new Scene())
             {
                 PlayerRevivedSO.Event.Invoke();
-                SceneManager.LoadSceneAsync(crossSceneSceneDataSO.activeScene.name, LoadSceneMode.Additive);
+                SceneManager.LoadScene(crossSceneSceneDataSO.activeScene.name, LoadSceneMode.Additive);
                 SceneManager.UnloadSceneAsync(crossSceneSceneDataSO.activeScene.name);
             }
             else

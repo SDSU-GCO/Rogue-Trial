@@ -35,7 +35,6 @@ public class PlaySound : MonoBehaviour
     }
     public void playClip()
     {
-        Debug.Log("Playing:" + defaultFile.name);
         AudioSource audioSource = GetAudioSource();
         audioSource.clip = defaultFile;
         audioSource.outputAudioMixerGroup = audioMixerGroup;
