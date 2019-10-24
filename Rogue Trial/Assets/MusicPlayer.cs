@@ -63,6 +63,7 @@ public class MusicPlayer : MonoBehaviour
     {
         current = GetAudioSource();
         current.volume = volume;
+        current.loop = false;
         current.spatialize = true;
         current.outputAudioMixerGroup = audioMixerGroup;
         current.clip = nowPlaying =SelectRandomTrack();
@@ -85,9 +86,7 @@ public class MusicPlayer : MonoBehaviour
             }
         }
 
-        rtnVal = rtnVal == null?gameObject.AddComponent<AudioSource>():null;
-
-        rtnVal.loop = false;
+        rtnVal = rtnVal == null?gameObject.AddComponent<AudioSource>(): rtnVal;
         return rtnVal;
     }
 }
