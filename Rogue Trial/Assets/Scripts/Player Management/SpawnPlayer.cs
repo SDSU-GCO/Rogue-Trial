@@ -13,18 +13,20 @@ public class SpawnPlayer : MonoBehaviour
     CrossSceneTransformSO playerTransformSO;
     Transform[] childTransforms;
 
-    [SerializeField, BoxGroup("Component Refs")]
-    SpriteRenderer spriteRenderer = null;
+    SpriteRenderer[] spriteRenderers = null;
 #pragma warning restore CS0649 // varriable is never assigned to and will always have it's default value
     Transform target = null;
     private void OnValidate()
     {
-        if (spriteRenderer == null)
-            spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
+        SpriteRenderer tmp = GetComponent<SpriteRenderer>();
+        if(tmp!=null)
+            spriteRenderers.Append(tmp);
+
+        childTransforms = GetComponentsInChildren<Transform>();
     }
     private void Awake()
     {
-        childTransforms = GetComponentsInChildren<Transform>();
         bool loop=true;
         foreach(Transform t in childTransforms.TakeWhile( t => { return loop; }))
         {
@@ -35,8 +37,8 @@ public class SpawnPlayer : MonoBehaviour
             }
         }
 
-        if (spriteRenderer != null)
-            spriteRenderer.enabled = false;
+        foreach(SpriteRenderer sr in spriteRenderers)
+            sr.enabled = false;
     }
     private void Start()
     {

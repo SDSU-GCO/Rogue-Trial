@@ -16,6 +16,7 @@ public class GameOver : MonoBehaviour
     Animator animator;
     [SerializeField, HideInInspector]
     SpriteRenderer spriteRenderer;
+#pragma warning disable CS0649 // varriable is never assigned to and will always have it's default value
     [SerializeField, Required, BoxGroup("SO refs")]
     CrossSceneEventSO gameoverCrossSceneEvent;
     [SerializeField, Required, BoxGroup("SO refs")]
@@ -24,6 +25,7 @@ public class GameOver : MonoBehaviour
     CrossSceneSceneDataSO crossSceneSceneDataSO;
     [SerializeField, Required, BoxGroup("MB refs")]
     ScrollCredits scrollCredits = null;
+#pragma warning restore CS0649 // varriable is never assigned to and will always have it's default value
 #pragma warning disable IDE0044 // Add readonly modifier
     [SerializeField]
     private float secondsToFadeIn = 3;

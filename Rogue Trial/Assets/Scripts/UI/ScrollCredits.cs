@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using NaughtyAttributes;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(TextMeshProUGUI))]
@@ -13,10 +14,12 @@ public class ScrollCredits : MonoBehaviour
     TextMeshProUGUI textMeshProUGUI = null;
     [SerializeField, HideInInspector]
     Canvas canvas = null;
+#pragma warning disable CS0649 // varriable is never assigned to and will always have it's default value
     [SerializeField, Min(0)]
     float scrollSpeed;
-    [SerializeField]
+    [SerializeField, Required]
     TextAsset textAsset;
+#pragma warning restore CS0649 // varriable is never assigned to and will always have it's default value
     private void OnValidate()
     {
         if (textMeshProUGUI == null)
