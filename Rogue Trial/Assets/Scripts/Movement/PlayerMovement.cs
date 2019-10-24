@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using NaughtyAttributes;
+using ByteSheep.Events;
 
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(Rigidbody2D))]
@@ -28,11 +29,11 @@ public class PlayerMovement : MonoBehaviour
     [MinValue(0), BoxGroup("Jump vars")]
     public float allowedAirbornTime = .5f;
 
-    [ProgressBar("Jump", 0.5f, ProgressBarColor.Blue), ShowIf("showJumpBar")]
+    [ProgressBar("Jump", 0.5f, ProgressBarColor.Blue), ShowIf("ShowJumpBar")]
     public float airbornTime = 0;
 
-    private bool showJumpBar() => !isGrounded;
-    public UnityEvent Jumped;
+    private bool ShowJumpBar() => !isGrounded;
+    public QuickEvent Jumped;
 
     [MinValue(0), BoxGroup("Dash vars")]
     public float dashCooldown = .5f;
@@ -46,7 +47,7 @@ public class PlayerMovement : MonoBehaviour
     public float dash = 0;
     [ProgressBar("Dash", 0.5f, ProgressBarColor.Green), ShowIf("isDashing")]
     public float dashProgress = 0;
-    public UnityEvent Dashed;
+    public QuickEvent Dashed;
 
 
     bool jumpButtonPressed;
@@ -101,13 +102,9 @@ public class PlayerMovement : MonoBehaviour
         jumpButtonPressed = Input.GetAxis("Vertical") > float.Epsilon;
         isGrounded = CheckGrounded();
 
-        if (isGrounded)
+        if(enableDebugging==true)
         {
-            spriteRenderer.color = Color.green;
-        }
-        else
-        {
-            spriteRenderer.color = Color.white;
+            spriteRenderer.color = isGrounded ? Color.green : Color.white;
         }
 
         if (isGrounded)
@@ -163,18 +160,17 @@ public class PlayerMovement : MonoBehaviour
         dashUsed = isGrounded ? false : dashUsed;
     }
 
-    int groundLayers = (1 << (int)CustomGCOTypes.CollisionLayerKey.Ground) | (1 << (int)CustomGCOTypes.CollisionLayerKey.Platform);
+    readonly int groundLayers = (1 << (int)CustomGCOTypes.CollisionLayerKey.Ground) | (1 << (int)CustomGCOTypes.CollisionLayerKey.Platform);
     private bool CheckGrounded()
     {
         bool result = false;
         LayerMask layerMask = groundLayers;
-        List<Collider2D> results = new List<Collider2D>();
         ContactFilter2D contactFilter2D = new ContactFilter2D();
         contactFilter2D.SetLayerMask(layerMask);
 
         RaycastHit2D raycastHit2D;
         //capsule cast
-        raycastHit2D = Physics2D.CapsuleCast(((Vector2)transform.position) + capsuleCollider2D.offset, capsuleCollider2D.size, capsuleCollider2D.direction, 0, Vector2.down, 1, layerMask);
+        //raycastHit2D = Physics2D.CapsuleCast(((Vector2)transform.position) + capsuleCollider2D.offset, capsuleCollider2D.size, capsuleCollider2D.direction, 0, Vector2.down, 1, layerMask);
         //circle cast
         Vector2 circleOffset = capsuleCollider2D.size.y > capsuleCollider2D.size.x ?  capsuleCollider2D.offset + Vector2.down * ((capsuleCollider2D.size.y - capsuleCollider2D.size.x)/2.0f) : capsuleCollider2D.offset;
         Vector2 circleOrigin = (Vector2)transform.position + circleOffset;

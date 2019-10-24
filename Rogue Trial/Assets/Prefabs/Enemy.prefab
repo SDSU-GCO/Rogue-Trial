@@ -152,7 +152,7 @@ MonoBehaviour:
   range: 4
   offset: 1.5
   enemyListMBDO: {fileID: 0}
-  playerRefMBDO: {fileID: 0}
+  crossSceneTarget: {fileID: 11400000, guid: d539cd8740f2ba3479c6697c9afd74d1, type: 2}
   target: {fileID: 0}
   entityLogic: {fileID: 6318486361044167572}
   rangedCoolDownInSeconds: 0
@@ -170,21 +170,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hpUpdated:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: Event_One_Float, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
+    inspectorListHeight: 63
+    persistentCalls:
+      calls: []
+  DamagedEvent: {fileID: 0}
+  DiedEvent: {fileID: 0}
   disableColliderOnDeath: 1
   health: 3
   onDeathReplaceWith: {fileID: 3217357049256741924, guid: aeb67d0938d32664dba0d6605bff5c3f,
