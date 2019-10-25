@@ -47,8 +47,9 @@ public class Attack_Controller : MonoBehaviour
             PoofObject();
         }
     }
+
     //enemy/ally check
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (targetLayer.Contains((CustomGCOTypes.CollisionLayerKey)collision.gameObject.layer))
         {
@@ -58,10 +59,6 @@ public class Attack_Controller : MonoBehaviour
                 temp.TakeDamage(damage);
             }
         }
-        /*if ((CustomGCOTypes.CollisionLayerKey)collision.gameObject.layer != CustomGCOTypes.CollisionLayerKey.platforms)
-        {
-            PoofObject();
-        }*/
     }
 
     private void PoofObject()
