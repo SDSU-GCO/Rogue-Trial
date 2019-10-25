@@ -625,8 +625,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioMixerGroup: {fileID: 5705581910496193171, guid: 93ed9eda70f37cb48b5165cf87fae8bf,
     type: 2}
+  fadeSpeed: 1.5
   tracks:
-  - {fileID: 8300000, guid: c1cc00045cca41643a7704f1817ae78f, type: 3}
+  - {fileID: 8300000, guid: f3d4fa92c187e284484f3f9ef5a3de46, type: 3}
+  nowPlaying: {fileID: 0}
 --- !u!1 &1315798854
 GameObject:
   m_ObjectHideFlags: 0
@@ -777,7 +779,7 @@ MonoBehaviour:
     type: 2}
   loop: 0
   randomizePitch: 1
-  defaultFile: {fileID: 8300000, guid: a42689b25f6f5b842818c2c4138bf601, type: 3}
+  defaultFile: {fileID: 8300000, guid: 5492ff8cbab86864f98a0895e575d462, type: 3}
   crossSceneEvent: {fileID: 11400000, guid: aefcafe959fbc4c40b390191c2dd58d4, type: 2}
 --- !u!114 &2005224953
 MonoBehaviour:
@@ -795,5 +797,5 @@ MonoBehaviour:
     type: 2}
   loop: 0
   randomizePitch: 1
-  defaultFile: {fileID: 8300000, guid: 81d711eeeca1d204caddb899262afc68, type: 3}
+  defaultFile: {fileID: 8300000, guid: ec9d2e9fab479524f806372c6667666c, type: 3}
   crossSceneEvent: {fileID: 11400000, guid: 3174651360015db40a55616ddef72737, type: 2}
