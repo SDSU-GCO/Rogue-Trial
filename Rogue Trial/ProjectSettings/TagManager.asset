@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Cardinal Subsystem
+  - Cardinal System
   layers:
   - Default
   - TransparentFX
@@ -13,16 +15,16 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Platform
+  - Ground
+  - ally
+  - enemy
+  - npc
+  - enemyAttack
+  - allyAttack
+  - npcAttack
+  - Door
+  - Door Frame
   - 
   - 
   - 
