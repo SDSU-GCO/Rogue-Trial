@@ -39,6 +39,7 @@ public class Player_Attack_Logic : MonoBehaviour
         {
             spriteRenderer = GetComponent<SpriteRenderer>();
         }
+        if (fli)
     }
 
     private void InitializeFromRangedAttack()
