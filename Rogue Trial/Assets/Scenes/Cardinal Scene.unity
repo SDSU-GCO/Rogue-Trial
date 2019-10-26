@@ -494,7 +494,7 @@ PrefabInstance:
     - target: {fileID: 7758839803176447444, guid: 8da49b9ee162a544891c5c2cd25d565c,
         type: 3}
       propertyPath: Jumped.persistentCalls.calls.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7758839803176447444, guid: 8da49b9ee162a544891c5c2cd25d565c,
         type: 3}

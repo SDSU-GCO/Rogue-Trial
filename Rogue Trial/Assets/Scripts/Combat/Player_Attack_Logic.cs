@@ -23,6 +23,9 @@ public class Player_Attack_Logic : MonoBehaviour
     [SerializeField, HideInInspector]
     private new Rigidbody2D rigidbody2D;
 
+    [SerializeField, HideInInspector]
+    FlipSpriteOnVelocity flipSpriteOnVelocity;
+
     public float offset = 1.5f;
 
     private bool CheckRangedAttackNotNull() => rangedAttack != null;
@@ -39,7 +42,8 @@ public class Player_Attack_Logic : MonoBehaviour
         {
             spriteRenderer = GetComponent<SpriteRenderer>();
         }
-        if (fli)
+        if (flipSpriteOnVelocity == null)
+            flipSpriteOnVelocity = GetComponent<FlipSpriteOnVelocity>();
     }
 
     private void InitializeFromRangedAttack()
@@ -66,6 +70,9 @@ public class Player_Attack_Logic : MonoBehaviour
     {
         if (rangedCoolDownInSeconds == 0)
         {
+            if (flipSpriteOnVelocity)
+                flipSpriteOnVelocity.forceLookRight = spriteRenderer.flipY==true? true: false;
+
             Vector3 mouseScreenPosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
 
             Vector2 mouseposition = Camera.main.ScreenToWorldPoint(mouseScreenPosition);
@@ -82,6 +89,19 @@ public class Player_Attack_Logic : MonoBehaviour
 
             rangedCoolDownInSeconds = rangedCoolDownInSecondsDefault;
         }
+        Animator anim = GetComponent<Animator>();
+        AnimationClip clip = anim.runtimeAnimatorController.animationClips[0];
+        clip.AddEvent(restoreMovement);
+    }
+
+    public AnimationEvent restoreMovement = new AnimationEvent();
+
+    IEnumerator FreezeForSeconds()
+    {
+
+            yield return null;
+
+        flipSpriteOnVelocity.forceLookRight = null;
     }
 
     private void FlipWithVelocity()
