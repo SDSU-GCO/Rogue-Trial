@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Player_Attack_Logic : MonoBehaviour
 {
-    [SerializeField]
+    [SerializeField, Required]
     private Attack_Controller rangedAttack = null;
 
     [SerializeField, HideInInspector]
@@ -27,8 +27,6 @@ public class Player_Attack_Logic : MonoBehaviour
     FlipSpriteOnVelocity flipSpriteOnVelocity;
 
     public float offset = 1.5f;
-
-    private bool CheckRangedAttackNotNull() => rangedAttack != null;
 
     private void Awake()
     {
@@ -88,47 +86,6 @@ public class Player_Attack_Logic : MonoBehaviour
             childInstance.GetComponent<Rigidbody2D>().velocity = rangedAttack.speed * mouseposition.normalized;
 
             rangedCoolDownInSeconds = rangedCoolDownInSecondsDefault;
-        }
-        Animator anim = GetComponent<Animator>();
-        AnimationClip clip = anim.runtimeAnimatorController.animationClips[0];
-        clip.AddEvent(restoreMovement);
-    }
-
-    public AnimationEvent restoreMovement = new AnimationEvent();
-
-    IEnumerator FreezeForSeconds()
-    {
-
-            yield return null;
-
-        flipSpriteOnVelocity.forceLookRight = null;
-    }
-
-    private void FlipWithVelocity()
-    {
-        if (rigidbody2D.velocity.x < -0.00001)
-        {
-            spriteRenderer.flipX = false;
-        }
-        else if (rigidbody2D.velocity.x > 0.000001)
-        {
-            spriteRenderer.flipX = true;
-        }
-    }
-
-    public void FlipWithoutVelocity(string lastButtonPressed)
-    {
-        switch (lastButtonPressed)
-        {
-        case "a":
-            spriteRenderer.flipX = false;
-            break;
-        case "d":
-            spriteRenderer.flipX = true;
-            break;
-        default:
-            break;
-                
         }
     }
 }

@@ -1,37 +1,31 @@
 fileFormatVersion: 2
-guid: 92b5d2fcc91edd848beddc9237529540
+guid: f902a5db36878f640911da0fcab2e7f8
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -126026701665394731
-    second: Character dash_0
+      213: -7698306048768514179
+    second: Character walk_0
   - first:
-      213: -8776752312863759595
-    second: Character dash_1
+      213: 573738503502057678
+    second: Character walk_1
   - first:
-      213: -4211409851925079978
-    second: Character dash_2
+      213: 8217532833718735959
+    second: Character walk_2
   - first:
-      213: 678195106662832921
-    second: Character dash_3
+      213: 1846559352696472860
+    second: Character walk_3
   - first:
-      213: -8189019415210767740
-    second: Character dash_4
+      213: 6531501698716952246
+    second: Character walk_4
   - first:
-      213: -5410231666280253563
-    second: Character dash_5
+      213: -9209614507715961315
+    second: Character walk_5
   - first:
-      213: -7178886783337699062
-    second: Character dash_6
+      213: 2949508133970988396
+    second: Character walk_6
   - first:
-      213: -4017879139393827823
-    second: Character dash_7
-  - first:
-      213: -4537605754073064310
-    second: Character dash_8
-  - first:
-      213: -998326881977909600
-    second: Character dash_9
+      213: 8188334006853741665
+    second: Character walk_7
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -75,9 +69,9 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 128
+  spritePixelsToUnits: 64
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spriteGenerateFallbackPhysicsShape: 1
+  spriteGenerateFallbackPhysicsShape: 0
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -93,7 +87,7 @@ TextureImporter:
     maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 2
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -105,7 +99,7 @@ TextureImporter:
     maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 2
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -116,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Character dash_0
+      name: Character walk_0
       rect:
         serializedVersion: 2
         x: 0
@@ -130,14 +124,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: acfd817bf9686fc4ba10f71c017e2845
-      internalID: -126026701665394731
+      spriteID: a64e0a6d7b0a263419832f76d10bb6a9
+      internalID: -7698306048768514179
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Character dash_1
+      name: Character walk_1
       rect:
         serializedVersion: 2
         x: 128
@@ -151,14 +145,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d85a1907a5dc30146ab07aa8c7eb75b7
-      internalID: -8776752312863759595
+      spriteID: 85071157f16c95f4680842479ad4e7d9
+      internalID: 573738503502057678
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Character dash_2
+      name: Character walk_2
       rect:
         serializedVersion: 2
         x: 256
@@ -172,14 +166,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c57277438630d1c44af81f8b0a727abe
-      internalID: -4211409851925079978
+      spriteID: 2978fa83db0d3f94984290b3df5c68c0
+      internalID: 8217532833718735959
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Character dash_3
+      name: Character walk_3
       rect:
         serializedVersion: 2
         x: 384
@@ -193,14 +187,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d7a8e95e97ec9c14f8e4f06f226c3022
-      internalID: 678195106662832921
+      spriteID: 250dfe1af66c7d7479bf2f32d721094e
+      internalID: 1846559352696472860
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Character dash_4
+      name: Character walk_4
       rect:
         serializedVersion: 2
         x: 512
@@ -214,14 +208,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7ac98ade2687dc04099e099e633ebbe3
-      internalID: -8189019415210767740
+      spriteID: ddf8794aa86fe4a409b5a913aae864c1
+      internalID: 6531501698716952246
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Character dash_5
+      name: Character walk_5
       rect:
         serializedVersion: 2
         x: 640
@@ -235,14 +229,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 93bbcc619136ba149ab4d33665cc1680
-      internalID: -5410231666280253563
+      spriteID: 84fb5a84841980d4e8722e4d10998008
+      internalID: -9209614507715961315
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Character dash_6
+      name: Character walk_6
       rect:
         serializedVersion: 2
         x: 768
@@ -256,14 +250,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bb0ce838c3376db49942c1a056218dfa
-      internalID: -7178886783337699062
+      spriteID: 729c24ec50f02144588678e9ecab0ec8
+      internalID: 2949508133970988396
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Character dash_7
+      name: Character walk_7
       rect:
         serializedVersion: 2
         x: 896
@@ -277,50 +271,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 53a12c8d5dfb6264e8f713915ace9999
-      internalID: -4017879139393827823
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Character dash_8
-      rect:
-        serializedVersion: 2
-        x: 1024
-        y: 0
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9977b2280e2334c4b96d8abd3e593f46
-      internalID: -4537605754073064310
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Character dash_9
-      rect:
-        serializedVersion: 2
-        x: 1152
-        y: 0
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e194eb305f9f6874db7f2ecbfec1492d
-      internalID: -998326881977909600
+      spriteID: 947afa73b2af97445a344eee395f5814
+      internalID: 8188334006853741665
       vertices: []
       indices: 
       edges: []

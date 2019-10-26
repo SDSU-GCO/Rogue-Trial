@@ -35,20 +35,20 @@ public class FlipSpriteOnVelocity : MonoBehaviour
     {
         if (rigidbody2D.velocity.x < -deadZone)
         {
-            spriteRenderer.flipY = true;
+            spriteRenderer.flipX = true;
         }
         else if (rigidbody2D.velocity.x > deadZone)
         {
-            spriteRenderer.flipY = false;
+            spriteRenderer.flipX = false;
         }
 
         if (forceLookRight != null)
         {
             if (forceLookRight.Value)
-                spriteRenderer.flipY = false;
+                spriteRenderer.flipX = false;
             else
             {
-                spriteRenderer.flipY = true;
+                spriteRenderer.flipX = true;
             }
         }
     }
