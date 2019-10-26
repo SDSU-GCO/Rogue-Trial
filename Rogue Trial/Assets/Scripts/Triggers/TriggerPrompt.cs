@@ -79,7 +79,7 @@ public class TriggerPrompt : MonoBehaviour
                         crossSceneEvent.Event.Invoke();
                     }
                     activated.Invoke();
-                    trigger();
+                    Trigger();
                 }
 
                 doPrompt = false;
@@ -103,7 +103,7 @@ public class TriggerPrompt : MonoBehaviour
 
         loadPromptTracker = false;
     }
-    public virtual void trigger()
+    public virtual void Trigger()
     {
 
     }

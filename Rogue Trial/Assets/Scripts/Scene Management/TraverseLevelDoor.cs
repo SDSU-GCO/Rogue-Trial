@@ -31,5 +31,5 @@ public class TraverseLevelDoor : TriggerPrompt
         }
     }
 
-    public override void trigger() => LoadSceneAndUnloadThisOne();
+    public override void Trigger() => LoadSceneAndUnloadThisOne();
 }

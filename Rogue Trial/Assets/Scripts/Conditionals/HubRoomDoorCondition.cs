@@ -7,6 +7,8 @@ public class HubRoomDoorCondition : ConditionalComponent
 {
 #pragma warning disable CS0649 // varriable is never assigned to and will always have it's default value
     [SerializeField]
+    bool requireKeys = true;
+    [SerializeField]
     CrossSceneBoolSO[] roomClearData;
 #pragma warning restore CS0649 // varriable is never assigned to and will always have it's default value
 
@@ -18,7 +20,7 @@ public class HubRoomDoorCondition : ConditionalComponent
         {
             rtnVal = rtnVal && csb.value;
         }
-
+        rtnVal = requireKeys == true ? rtnVal : rtnVal!=true;
         return rtnVal;
     }
 
