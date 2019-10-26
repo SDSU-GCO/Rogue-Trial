@@ -337,11 +337,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4065100760009945, guid: 47d127fe5b17ea74cb40d060de9a7b16, type: 3}
       propertyPath: m_textInfo.lineCount
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4065100760009945, guid: 47d127fe5b17ea74cb40d060de9a7b16, type: 3}
       propertyPath: m_textInfo.pageCount
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4065100760009945, guid: 47d127fe5b17ea74cb40d060de9a7b16, type: 3}
+      propertyPath: m_fontSize
+      value: 108
+      objectReference: {fileID: 0}
+    - target: {fileID: 4065100760009945, guid: 47d127fe5b17ea74cb40d060de9a7b16, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 108
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47d127fe5b17ea74cb40d060de9a7b16, type: 3}
