@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Player_Attack_Logic : MonoBehaviour
 {
-    [SerializeField]
+    [SerializeField, Required]
     private Attack_Controller rangedAttack = null;
 
     [SerializeField, HideInInspector]
@@ -23,9 +23,10 @@ public class Player_Attack_Logic : MonoBehaviour
     [SerializeField, HideInInspector]
     private new Rigidbody2D rigidbody2D;
 
-    public float offset = 1.5f;
+    [SerializeField, HideInInspector]
+    FlipSpriteOnVelocity flipSpriteOnVelocity;
 
-    private bool CheckRangedAttackNotNull() => rangedAttack != null;
+    public float offset = 1.5f;
 
     private void Awake()
     {
@@ -39,6 +40,8 @@ public class Player_Attack_Logic : MonoBehaviour
         {
             spriteRenderer = GetComponent<SpriteRenderer>();
         }
+        if (flipSpriteOnVelocity == null)
+            flipSpriteOnVelocity = GetComponent<FlipSpriteOnVelocity>();
     }
 
     private void InitializeFromRangedAttack()
@@ -65,6 +68,9 @@ public class Player_Attack_Logic : MonoBehaviour
     {
         if (rangedCoolDownInSeconds == 0)
         {
+            if (flipSpriteOnVelocity)
+                flipSpriteOnVelocity.forceLookRight = spriteRenderer.flipY==true? true: false;
+
             Vector3 mouseScreenPosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
 
             Vector2 mouseposition = Camera.main.ScreenToWorldPoint(mouseScreenPosition);
@@ -80,34 +86,6 @@ public class Player_Attack_Logic : MonoBehaviour
             childInstance.GetComponent<Rigidbody2D>().velocity = rangedAttack.speed * mouseposition.normalized;
 
             rangedCoolDownInSeconds = rangedCoolDownInSecondsDefault;
-        }
-    }
-
-    private void FlipWithVelocity()
-    {
-        if (rigidbody2D.velocity.x < -0.00001)
-        {
-            spriteRenderer.flipX = false;
-        }
-        else if (rigidbody2D.velocity.x > 0.000001)
-        {
-            spriteRenderer.flipX = true;
-        }
-    }
-
-    public void FlipWithoutVelocity(string lastButtonPressed)
-    {
-        switch (lastButtonPressed)
-        {
-        case "a":
-            spriteRenderer.flipX = false;
-            break;
-        case "d":
-            spriteRenderer.flipX = true;
-            break;
-        default:
-            break;
-                
         }
     }
 }

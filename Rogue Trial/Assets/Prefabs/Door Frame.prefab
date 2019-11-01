@@ -126,6 +126,7 @@ MonoBehaviour:
   conditionalMixing: 1
   conditionalComponents:
   - {fileID: 8801559228322586560}
+  actionsOnTrigger: []
   triggered:
     inspectorListHeight: 63
     persistentCalls:
@@ -267,7 +268,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 5
 --- !u!114 &1637533521548369282
 MonoBehaviour:
