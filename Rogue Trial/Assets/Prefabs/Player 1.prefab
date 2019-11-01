@@ -595,7 +595,7 @@ MonoBehaviour:
   damage: 0
   spriteRenderer: {fileID: 0}
   rigidbody2D: {fileID: 0}
-  offset: 1.5
+  offset: 1
 --- !u!114 &2549030327463446236
 MonoBehaviour:
   m_ObjectHideFlags: 0

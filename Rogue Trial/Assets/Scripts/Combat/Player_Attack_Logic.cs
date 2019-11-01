@@ -39,7 +39,7 @@ public class Player_Attack_Logic : MonoBehaviour
         {
             spriteRenderer = GetComponent<SpriteRenderer>();
         }
-        if (fli)
+        
     }
 
     private void InitializeFromRangedAttack()
@@ -55,7 +55,7 @@ public class Player_Attack_Logic : MonoBehaviour
     void Update()
     {
          rangedCoolDownInSeconds = Mathf.Max(0, rangedCoolDownInSeconds - Time.deltaTime);
-        if (Input.GetMouseButton(1))
+        if (Input.GetMouseButton(1) && gameObject.GetComponent<PlayerMovement>().IsGrounded)
         {
             PlayerRangedAttack();
         }
@@ -78,6 +78,16 @@ public class Player_Attack_Logic : MonoBehaviour
             Vector3 temp = childInstance.transform.position;
             temp.z = transform.position.z;
             childInstance.transform.position = temp;
+            spriteRenderer = childInstance.GetComponent<SpriteRenderer>();
+            if (GetComponent<FlipSpriteOnVelocity>().forceLookRight != null)
+            {
+                if (GetComponent<FlipSpriteOnVelocity>().forceLookRight.Value)
+                    spriteRenderer.flipY = false;
+                else
+                {
+                    spriteRenderer.flipY = true;
+                }
+            }
             childInstance.GetComponent<Rigidbody2D>().velocity = rangedAttack.speed * mouseposition.normalized;
 
             rangedCoolDownInSeconds = rangedCoolDownInSecondsDefault;
