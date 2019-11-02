@@ -10,6 +10,14 @@ using ByteSheep.Events;
 [RequireComponent(typeof(CapsuleCollider2D))]
 public class PlayerMovement : MonoBehaviour
 {
+    enum MovementState
+    {
+        Enabled,
+        IgnoreInput,
+        Disabled,
+        DisabledKillMomentum
+    }
+    MovementState movementState = MovementState.Enabled;
 
     [SerializeField, Required, BoxGroup("Component Refs")]
     private new Rigidbody2D rigidbody2D = null;
@@ -33,7 +41,9 @@ public class PlayerMovement : MonoBehaviour
     public float airbornTime = 0;
 
     private bool ShowJumpBar() => !isGrounded;
-    public QuickEvent Jumped;
+
+    [SerializeField, BoxGroup("Jump vars")]
+    public QuickEvent Jumped = new QuickEvent();
 
     [MinValue(0), BoxGroup("Dash vars")]
     public float dashCooldown = .5f;
@@ -47,6 +57,7 @@ public class PlayerMovement : MonoBehaviour
     public float dash = 0;
     [ProgressBar("Dash", 0.5f, ProgressBarColor.Green), ShowIf("isDashing")]
     public float dashProgress = 0;
+    [BoxGroup("Dash vars")]
     public QuickEvent Dashed;
 
 
@@ -61,6 +72,8 @@ public class PlayerMovement : MonoBehaviour
 
     public bool IsGrounded => isGrounded;
     public bool IsDashing => isDashing;
+
+    public RigidbodyConstraints2D rigidbodyConstraints2D = RigidbodyConstraints2D.FreezeRotation;
 
     private void OnValidate()
     {
@@ -99,7 +112,12 @@ public class PlayerMovement : MonoBehaviour
     //update loop
     private void Update()
     {
-        jumpButtonPressed = Input.GetAxis("Vertical") > float.Epsilon;
+        if(movementState!=MovementState.Disabled)
+        {
+            airbornTime = Mathf.Min(airbornTime + Time.deltaTime, allowedAirbornTime + 1);
+        }
+
+        jumpButtonPressed = Input.GetAxis("Vertical") > float.Epsilon && (movementState==MovementState.Enabled);
         isGrounded = CheckGrounded();
 
         if(enableDebugging==true)
@@ -118,9 +136,12 @@ public class PlayerMovement : MonoBehaviour
 
         //Debug.Log(Input.GetAxis("Vertical"));
         //run
-        velocity = rigidbody2D.velocity;
-        velocity.x = Input.GetAxis("Horizontal") * runSpeed;
-        rigidbody2D.velocity = velocity;
+        if (movementState == MovementState.Enabled)
+        {
+            velocity = rigidbody2D.velocity;
+            velocity.x = Input.GetAxis("Horizontal") * runSpeed;
+            rigidbody2D.velocity = velocity;
+        }
 
         //jump
         if (jumpButtonPressed && airbornTime <= allowedAirbornTime)
@@ -133,31 +154,37 @@ public class PlayerMovement : MonoBehaviour
             Jumped.Invoke();
         }
 
-        //smart gravity
-        if(isGrounded!=true)
-        {
-            if (rigidbody2D.velocity.y < 0)
+        if(movementState != MovementState.Disabled && movementState!=MovementState.DisabledKillMomentum)
+        {        
+            //smart gravity
+            if (isGrounded != true)
             {
-                rigidbody2D.velocity += Vector2.up * (-9.8f) * (fallMultiplier) * Time.deltaTime;
-            }
-            else if (rigidbody2D.velocity.y > 0 && jumpButtonPressed != true)
-            {
-                rigidbody2D.velocity += Vector2.up * (-9.8f) * (lowJumpMultiplier) * Time.deltaTime;
+                if (rigidbody2D.velocity.y < 0)
+                {
+                    rigidbody2D.velocity += Vector2.up * (-9.8f) * (fallMultiplier) * Time.deltaTime;
+                }
+                else if (rigidbody2D.velocity.y > 0 && jumpButtonPressed != true)
+                {
+                    rigidbody2D.velocity += Vector2.up * (-9.8f) * (lowJumpMultiplier) * Time.deltaTime;
+                }
             }
         }
 
-        airbornTime = Mathf.Min(airbornTime + Time.deltaTime, allowedAirbornTime + 1);
 
+        
         //dash
-        if(Input.GetAxis("Dash") > float.Epsilon && dash == 0 && dashUsed!=true && isDashing==false)
+        if(Input.GetAxis("Dash") > float.Epsilon && dash == 0 && dashUsed!=true && isDashing==false && movementState==MovementState.Enabled && movementState != MovementState.DisabledKillMomentum)
         {
             isDashing = true;
             StartCoroutine(Dash());
             Dashed.Invoke();
         }
 
-        dash = Mathf.Max(dash - Time.deltaTime, 0);
-        dashUsed = isGrounded ? false : dashUsed;
+        if(movementState!=MovementState.Disabled && movementState != MovementState.DisabledKillMomentum)
+        {
+            dash = Mathf.Max(dash - Time.deltaTime, 0);
+            dashUsed = isGrounded ? false : dashUsed;
+        }
     }
 
     readonly int groundLayers = (1 << (int)CustomGCOTypes.CollisionLayerKey.Ground) | (1 << (int)CustomGCOTypes.CollisionLayerKey.Platform);
@@ -194,11 +221,14 @@ public class PlayerMovement : MonoBehaviour
         dash = dashCooldown;
         dashUsed = true;
         dashProgress = 0;
-        float forceDirection = (spriteRenderer.flipY ? (-1) : 1);
+        float forceDirection = (spriteRenderer.flipX ? (-1) : 1);
         while (dashProgress < dashTime)
         {
-            rigidbody2D.AddForce(Vector2.right * forceDirection * dashForce);
-            dashProgress += Time.deltaTime;
+            if (movementState != MovementState.Disabled && movementState != MovementState.DisabledKillMomentum)
+            {
+                rigidbody2D.AddForce(Vector2.right * forceDirection * dashForce);
+                dashProgress += Time.deltaTime;
+            }
             yield return null;
         }
         isDashing = false;

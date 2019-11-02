@@ -9,6 +9,8 @@ public class StartGame : MonoBehaviour
     CrossSceneBoolSO[] roomClearData;
     [SerializeField, Required]
     CrossSceneTransformSO playerTransformSO;
+    //[SerializeField, Required]
+    //CrossSceneTransformSO playerTransformSO2;
 #pragma warning restore CS0649 // varriable is never assigned to and will always have it's default value
     public string sceneName;
 

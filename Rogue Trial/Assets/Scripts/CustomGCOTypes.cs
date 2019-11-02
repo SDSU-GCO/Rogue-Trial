@@ -17,4 +17,12 @@ public class CustomGCOTypes : MonoBehaviour
         allyAttack = 14,
         npcAttack = 14,
     }
+
+    public enum GameState
+    {
+        PlayMode,
+        CutsceneNoInput,
+        CutsceneRestrictMovement,
+        Paused,
+    }
 }
