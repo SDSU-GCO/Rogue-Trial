@@ -168,7 +168,7 @@ public class PlayerMovement : MonoBehaviour
                     rigidbody2D.velocity += Vector2.up * (-9.8f) * (lowJumpMultiplier) * Time.deltaTime;
                 }
             }
-        }
+        } 
 
 
         
