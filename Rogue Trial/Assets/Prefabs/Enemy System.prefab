@@ -116,16 +116,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6318486361044167573, guid: 683de6f0eea6c764a8bbe364caf785ed,
-        type: 3}
-      propertyPath: playerRefMBDO
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6318486361044167573, guid: 683de6f0eea6c764a8bbe364caf785ed,
-        type: 3}
-      propertyPath: enemyListMBDO
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 3891534012402402601, guid: 683de6f0eea6c764a8bbe364caf785ed,
         type: 3}
       propertyPath: path.Array.size
@@ -141,6 +131,11 @@ PrefabInstance:
       propertyPath: path.Array.data[1]
       value: 
       objectReference: {fileID: 7556282105197864512}
+    - target: {fileID: 6318486361044167573, guid: 683de6f0eea6c764a8bbe364caf785ed,
+        type: 3}
+      propertyPath: playerRefMBDO
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 683de6f0eea6c764a8bbe364caf785ed, type: 3}
 --- !u!4 &7556282105500705746 stripped

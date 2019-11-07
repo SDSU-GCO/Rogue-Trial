@@ -1,30 +1,34 @@
 ﻿using UnityEngine;
-
+using UnityEngine.SceneManagement;
+using System.Linq;
 internal struct MBDOInitializationHelper
 {
-    private GameObject cardinalSubsystem;
+    private GameObject CardinalObj;
     private MBDataObjectReferences mbDatabaseObjectReferences;
     private MonoBehaviour caller;
     private bool isSetup;
+    bool isCardinal;
 
     public MBDOInitializationHelper(MonoBehaviour callerAkaThis)
     {
         isSetup = default;
-        cardinalSubsystem = default;
+        CardinalObj = default;
         mbDatabaseObjectReferences = default;
         caller = default;
+        isCardinal=default;
 
-        Setup(callerAkaThis);
+        SetupCardinalSubSystem(callerAkaThis);
     }
 
-    public void Setup(MonoBehaviour callerAkaThis)
+    public void SetupCardinalSubSystem(MonoBehaviour callerAkaThis)
     {
         isSetup = false;
-        cardinalSubsystem = null;
+        CardinalObj = null;
         mbDatabaseObjectReferences = null;
         caller = null;
-        if (callerAkaThis.gameObject.scene != new UnityEngine.SceneManagement.Scene())
+        if (callerAkaThis.gameObject.scene != new Scene())
         {
+            isCardinal = false;
             isSetup = true;
             caller = callerAkaThis;
 
@@ -32,21 +36,20 @@ internal struct MBDOInitializationHelper
 
             foreach (GameObject go in gameObjects)
             {
-                if (go.scene == caller.gameObject.scene && go.scene != new UnityEngine.SceneManagement.Scene())
+                if (go.scene == caller.gameObject.scene && go.scene != new Scene())
                 {
-                    cardinalSubsystem = go;
-                    Debug.Log("GOs: " + go.scene.name);
+                    CardinalObj = go;
                 }
             }
             //cardinalSubsystem = GameObject.Find("Cardinal Subsystem");
 
 
-            if (cardinalSubsystem != null)
+            if (CardinalObj != null)
             {
-                mbDatabaseObjectReferences = cardinalSubsystem.GetComponent<MBDataObjectReferences>();
+                mbDatabaseObjectReferences = CardinalObj.GetComponent<MBDataObjectReferences>();
                 if (mbDatabaseObjectReferences == null)
                 {
-                    Debug.Log("mbDatabaseObjectReferences not found in " + cardinalSubsystem);
+                    Debug.Log("mbDatabaseObjectReferences not found in " + CardinalObj);
                 }
             }
             else
@@ -58,17 +61,20 @@ internal struct MBDOInitializationHelper
 
     public void SetupMBDO<T>(ref T mbdo) where T : MBDataObject
     {
-        if(caller!=null && caller.gameObject.scene != new UnityEngine.SceneManagement.Scene())
+        if(caller!=null && caller.gameObject.scene != new Scene())
         {
             if (isSetup == false)
             {
                 Debug.LogWarning("MBDOInitializationHelper: " + mbdo + "is not set up in::: " + caller);
             }
-            else if (cardinalSubsystem != null && mbDatabaseObjectReferences != null)
+            else if (CardinalObj != null && mbDatabaseObjectReferences != null)
             {
-                if (mbdo == null && cardinalSubsystem.scene == caller.gameObject.scene && cardinalSubsystem.scene != new UnityEngine.SceneManagement.Scene())
+                if (mbdo == null && CardinalObj.scene != new Scene())
                 {
-                    mbDatabaseObjectReferences.TryPopulate(out mbdo);
+                    if(isCardinal == true)
+                        mbDatabaseObjectReferences.TryPopulate(out mbdo);
+                    else if(CardinalObj.scene == caller.gameObject.scene)
+                        mbDatabaseObjectReferences.TryPopulate(out mbdo);
                 }
             }
         }

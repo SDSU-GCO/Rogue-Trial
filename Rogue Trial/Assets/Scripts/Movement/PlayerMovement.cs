@@ -10,6 +10,14 @@ using ByteSheep.Events;
 [RequireComponent(typeof(CapsuleCollider2D))]
 public class PlayerMovement : MonoBehaviour
 {
+    enum MovementState
+    {
+        Enabled,
+        IgnoreInput,
+        Disabled,
+        DisabledKillMomentum
+    }
+    MovementState movementState = MovementState.Enabled;
 
     public CustomGCOTypes.MovementState movementState = CustomGCOTypes.MovementState.Enabled;
 
@@ -164,7 +172,6 @@ public class PlayerMovement : MonoBehaviour
             }
         } 
 
-        airbornTime = Mathf.Min(airbornTime + Time.deltaTime, allowedAirbornTime + 1);
 
         
         //dash
@@ -187,7 +194,6 @@ public class PlayerMovement : MonoBehaviour
     {
         bool result = false;
         LayerMask layerMask = groundLayers;
-        List<Collider2D> results = new List<Collider2D>();
         ContactFilter2D contactFilter2D = new ContactFilter2D();
         contactFilter2D.SetLayerMask(layerMask);
 

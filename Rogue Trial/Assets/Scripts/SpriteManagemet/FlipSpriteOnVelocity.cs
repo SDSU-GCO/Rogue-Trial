@@ -11,6 +11,8 @@ public class FlipSpriteOnVelocity : MonoBehaviour
     [SerializeField, Required, BoxGroup("Component Refs")]
     SpriteRenderer spriteRenderer = null;
 
+    public bool? forceLookRight=null;
+
     private void OnValidate()
     {
         Transform tmp = transform;
@@ -33,11 +35,21 @@ public class FlipSpriteOnVelocity : MonoBehaviour
     {
         if (rigidbody2D.velocity.x < -deadZone)
         {
-            spriteRenderer.flipY = true;
+            spriteRenderer.flipX = true;
         }
         else if (rigidbody2D.velocity.x > deadZone)
         {
-            spriteRenderer.flipY = false;
+            spriteRenderer.flipX = false;
+        }
+
+        if (forceLookRight != null)
+        {
+            if (forceLookRight.Value)
+                spriteRenderer.flipX = false;
+            else
+            {
+                spriteRenderer.flipX = true;
+            }
         }
     }
 

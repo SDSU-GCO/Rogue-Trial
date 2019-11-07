@@ -4,5 +4,23 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Title Screen.unity
+    guid: 97775eb927ac68744a9a842ccb418260
+  - enabled: 1
+    path: Assets/Scenes/Hub Room.unity
+    guid: ae365e0cdfe533743b4ee2ede8cd2ff3
+  - enabled: 1
+    path: Assets/Scenes/Combat Room.unity
+    guid: 40d6dec062ee1f34eb2563330c5ea364
+  - enabled: 1
+    path: Assets/Scenes/Keys Room.unity
+    guid: d2d500240d9ad914892e6f689d9a8d6a
+  - enabled: 1
+    path: Assets/Scenes/Boss Room.unity
+    guid: 73d13bb76a6fbff4cb9ceca5411fe8a9
+  - enabled: 1
+    path: Assets/Scenes/Cardinal Scene.unity
+    guid: b7bff5578c8c93848a620448742788c0
   m_configObjects: {}
