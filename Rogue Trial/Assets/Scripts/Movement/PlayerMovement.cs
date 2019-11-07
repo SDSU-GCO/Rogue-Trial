@@ -3,12 +3,15 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using NaughtyAttributes;
+using ByteSheep.Events;
 
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(CapsuleCollider2D))]
 public class PlayerMovement : MonoBehaviour
 {
+
+    public CustomGCOTypes.MovementState movementState = CustomGCOTypes.MovementState.Enabled;
 
     [SerializeField, Required, BoxGroup("Component Refs")]
     private new Rigidbody2D rigidbody2D = null;
@@ -28,11 +31,13 @@ public class PlayerMovement : MonoBehaviour
     [MinValue(0), BoxGroup("Jump vars")]
     public float allowedAirbornTime = .5f;
 
-    [ProgressBar("Jump", 0.5f, ProgressBarColor.Blue), ShowIf("showJumpBar")]
+    [ProgressBar("Jump", 0.5f, ProgressBarColor.Blue), ShowIf("ShowJumpBar")]
     public float airbornTime = 0;
 
-    private bool showJumpBar() => !isGrounded;
-    public UnityEvent Jumped;
+    private bool ShowJumpBar() => !isGrounded;
+
+    [SerializeField, BoxGroup("Jump vars")]
+    public QuickEvent Jumped = new QuickEvent();
 
     [MinValue(0), BoxGroup("Dash vars")]
     public float dashCooldown = .5f;
@@ -46,7 +51,8 @@ public class PlayerMovement : MonoBehaviour
     public float dash = 0;
     [ProgressBar("Dash", 0.5f, ProgressBarColor.Green), ShowIf("isDashing")]
     public float dashProgress = 0;
-    public UnityEvent Dashed;
+    [BoxGroup("Dash vars")]
+    public QuickEvent Dashed;
 
 
     bool jumpButtonPressed;
@@ -60,6 +66,8 @@ public class PlayerMovement : MonoBehaviour
 
     public bool IsGrounded => isGrounded;
     public bool IsDashing => isDashing;
+
+    public RigidbodyConstraints2D rigidbodyConstraints2D = RigidbodyConstraints2D.FreezeRotation;
 
     private void OnValidate()
     {
@@ -98,16 +106,17 @@ public class PlayerMovement : MonoBehaviour
     //update loop
     private void Update()
     {
-        jumpButtonPressed = Input.GetAxis("Vertical") > float.Epsilon;
+        if(movementState!=MovementState.Disabled)
+        {
+            airbornTime = Mathf.Min(airbornTime + Time.deltaTime, allowedAirbornTime + 1);
+        }
+
+        jumpButtonPressed = Input.GetAxis("Vertical") > float.Epsilon && (movementState==MovementState.Enabled);
         isGrounded = CheckGrounded();
 
-        if (isGrounded)
+        if(enableDebugging==true)
         {
-            spriteRenderer.color = Color.green;
-        }
-        else
-        {
-            spriteRenderer.color = Color.white;
+            spriteRenderer.color = isGrounded ? Color.green : Color.white;
         }
 
         if (isGrounded)
@@ -121,9 +130,12 @@ public class PlayerMovement : MonoBehaviour
 
         //Debug.Log(Input.GetAxis("Vertical"));
         //run
-        velocity = rigidbody2D.velocity;
-        velocity.x = Input.GetAxis("Horizontal") * runSpeed;
-        rigidbody2D.velocity = velocity;
+        if (movementState == MovementState.Enabled)
+        {
+            velocity = rigidbody2D.velocity;
+            velocity.x = Input.GetAxis("Horizontal") * runSpeed;
+            rigidbody2D.velocity = velocity;
+        }
 
         //jump
         if (jumpButtonPressed && airbornTime <= allowedAirbornTime)
@@ -136,34 +148,41 @@ public class PlayerMovement : MonoBehaviour
             Jumped.Invoke();
         }
 
-        //smart gravity
-        if(isGrounded!=true)
-        {
-            if (rigidbody2D.velocity.y < 0)
+        if(movementState != MovementState.Disabled && movementState!=MovementState.DisabledKillMomentum)
+        {        
+            //smart gravity
+            if (isGrounded != true)
             {
-                rigidbody2D.velocity += Vector2.up * (-9.8f) * (fallMultiplier) * Time.deltaTime;
+                if (rigidbody2D.velocity.y < 0)
+                {
+                    rigidbody2D.velocity += Vector2.up * (-9.8f) * (fallMultiplier) * Time.deltaTime;
+                }
+                else if (rigidbody2D.velocity.y > 0 && jumpButtonPressed != true)
+                {
+                    rigidbody2D.velocity += Vector2.up * (-9.8f) * (lowJumpMultiplier) * Time.deltaTime;
+                }
             }
-            else if (rigidbody2D.velocity.y > 0 && jumpButtonPressed != true)
-            {
-                rigidbody2D.velocity += Vector2.up * (-9.8f) * (lowJumpMultiplier) * Time.deltaTime;
-            }
-        }
+        } 
 
         airbornTime = Mathf.Min(airbornTime + Time.deltaTime, allowedAirbornTime + 1);
 
+        
         //dash
-        if(Input.GetAxis("Dash") > float.Epsilon && dash == 0 && dashUsed!=true && isDashing==false)
+        if(Input.GetAxis("Dash") > float.Epsilon && dash == 0 && dashUsed!=true && isDashing==false && movementState==MovementState.Enabled && movementState != MovementState.DisabledKillMomentum)
         {
             isDashing = true;
             StartCoroutine(Dash());
             Dashed.Invoke();
         }
 
-        dash = Mathf.Max(dash - Time.deltaTime, 0);
-        dashUsed = isGrounded ? false : dashUsed;
+        if(movementState!=MovementState.Disabled && movementState != MovementState.DisabledKillMomentum)
+        {
+            dash = Mathf.Max(dash - Time.deltaTime, 0);
+            dashUsed = isGrounded ? false : dashUsed;
+        }
     }
 
-    int groundLayers = (1 << (int)CustomGCOTypes.CollisionLayerKey.Ground) | (1 << (int)CustomGCOTypes.CollisionLayerKey.Platform);
+    readonly int groundLayers = (1 << (int)CustomGCOTypes.CollisionLayerKey.Ground) | (1 << (int)CustomGCOTypes.CollisionLayerKey.Platform);
     private bool CheckGrounded()
     {
         bool result = false;
@@ -174,7 +193,7 @@ public class PlayerMovement : MonoBehaviour
 
         RaycastHit2D raycastHit2D;
         //capsule cast
-        raycastHit2D = Physics2D.CapsuleCast(((Vector2)transform.position) + capsuleCollider2D.offset, capsuleCollider2D.size, capsuleCollider2D.direction, 0, Vector2.down, 1, layerMask);
+        //raycastHit2D = Physics2D.CapsuleCast(((Vector2)transform.position) + capsuleCollider2D.offset, capsuleCollider2D.size, capsuleCollider2D.direction, 0, Vector2.down, 1, layerMask);
         //circle cast
         Vector2 circleOffset = capsuleCollider2D.size.y > capsuleCollider2D.size.x ?  capsuleCollider2D.offset + Vector2.down * ((capsuleCollider2D.size.y - capsuleCollider2D.size.x)/2.0f) : capsuleCollider2D.offset;
         Vector2 circleOrigin = (Vector2)transform.position + circleOffset;
@@ -198,11 +217,14 @@ public class PlayerMovement : MonoBehaviour
         dash = dashCooldown;
         dashUsed = true;
         dashProgress = 0;
-        float forceDirection = (spriteRenderer.flipY ? (-1) : 1);
+        float forceDirection = (spriteRenderer.flipX ? (-1) : 1);
         while (dashProgress < dashTime)
         {
-            rigidbody2D.AddForce(Vector2.right * forceDirection * dashForce);
-            dashProgress += Time.deltaTime;
+            if (movementState != MovementState.Disabled && movementState != MovementState.DisabledKillMomentum)
+            {
+                rigidbody2D.AddForce(Vector2.right * forceDirection * dashForce);
+                dashProgress += Time.deltaTime;
+            }
             yield return null;
         }
         isDashing = false;
