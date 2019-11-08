@@ -23,6 +23,9 @@ public class Player_Attack_Logic : MonoBehaviour
     [SerializeField, HideInInspector]
     private new Rigidbody2D rigidbody2D;
 
+    [SerializeField, HideInInspector]
+    FlipSpriteOnVelocity flipSpriteOnVelocity;
+
     public float offset = 1.5f;
 
     private bool CheckRangedAttackNotNull() => rangedAttack != null;
@@ -39,7 +42,8 @@ public class Player_Attack_Logic : MonoBehaviour
         {
             spriteRenderer = GetComponent<SpriteRenderer>();
         }
-        
+        if (flipSpriteOnVelocity == null)
+            flipSpriteOnVelocity = GetComponent<FlipSpriteOnVelocity>();
     }
 
     private void InitializeFromRangedAttack()
@@ -55,7 +59,7 @@ public class Player_Attack_Logic : MonoBehaviour
     void Update()
     {
          rangedCoolDownInSeconds = Mathf.Max(0, rangedCoolDownInSeconds - Time.deltaTime);
-        if (Input.GetMouseButton(1) && gameObject.GetComponent<PlayerMovement>().IsGrounded)
+        if (Input.GetMouseButton(1))
         {
             PlayerRangedAttack();
         }
@@ -66,6 +70,9 @@ public class Player_Attack_Logic : MonoBehaviour
     {
         if (rangedCoolDownInSeconds == 0)
         {
+            if (flipSpriteOnVelocity)
+                flipSpriteOnVelocity.forceLookRight = spriteRenderer.flipY==true? true: false;
+
             Vector3 mouseScreenPosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
 
             Vector2 mouseposition = Camera.main.ScreenToWorldPoint(mouseScreenPosition);
@@ -78,16 +85,6 @@ public class Player_Attack_Logic : MonoBehaviour
             Vector3 temp = childInstance.transform.position;
             temp.z = transform.position.z;
             childInstance.transform.position = temp;
-            spriteRenderer = childInstance.GetComponent<SpriteRenderer>();
-            if (GetComponent<FlipSpriteOnVelocity>().forceLookRight != null)
-            {
-                if (GetComponent<FlipSpriteOnVelocity>().forceLookRight.Value)
-                    spriteRenderer.flipY = false;
-                else
-                {
-                    spriteRenderer.flipY = true;
-                }
-            }
             childInstance.GetComponent<Rigidbody2D>().velocity = rangedAttack.speed * mouseposition.normalized;
 
             rangedCoolDownInSeconds = rangedCoolDownInSecondsDefault;

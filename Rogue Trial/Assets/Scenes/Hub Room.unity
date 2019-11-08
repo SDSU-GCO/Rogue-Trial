@@ -3078,8 +3078,101 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72ab9b622599ff24f8dca9c8c357d752, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  requireKeys: 1
   roomClearData:
   - {fileID: 11400000, guid: 65a144b3840d5c248b2d1dc2deba619d, type: 2}
+--- !u!114 &1617355672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1617355670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72ab9b622599ff24f8dca9c8c357d752, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  requireKeys: 0
+  roomClearData:
+  - {fileID: 11400000, guid: 65a144b3840d5c248b2d1dc2deba619d, type: 2}
+  - {fileID: 11400000, guid: ecfd46c448bca4f4a8de3ad50cc595c6, type: 2}
+--- !u!114 &1617355673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1617355670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9602c0a991b969b4781d15f7f3d81087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerCondition: 2
+  conditionalMixing: 1
+  conditionalComponents:
+  - {fileID: 1617355672}
+  - {fileID: 1617355675}
+  actionsOnTrigger: []
+  triggered:
+    inspectorListHeight: 63
+    persistentCalls:
+      calls:
+      - genericMenuData:
+          selectedComponent: 10
+          selectedMember: 8
+          isDynamic: 0
+        target: {fileID: 1617355680}
+        memberName: DispPrompt
+        memberType: 8
+        argument:
+          supportedType: 0
+          stringArgument: 
+          intArgument: 0
+          floatArgument: 0
+          boolArgument: 0
+          colorArgument: {r: 0, g: 0, b: 0, a: 0}
+          vector2Argument: {x: 0, y: 0}
+          vector3Argument: {x: 0, y: 0, z: 0}
+          objectArgument: {fileID: 0}
+          gameObjectArgument: {fileID: 0}
+          transformArgument: {fileID: 0}
+        isDynamic: 0
+        isCallEnabled: 1
+--- !u!114 &1617355675 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8801559228322586560, guid: fd01eef741626eb4aa914622492d129d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1617355669}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1617355670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f441dc07791425841a194cf15c7ecc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1617355680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1617355670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4bf2a2599e50ae42aea3de1c396b8ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CrossSceneEventsToFire:
+  - {fileID: 11400000, guid: 3174651360015db40a55616ddef72737, type: 2}
+  activated:
+    inspectorListHeight: 63
+    persistentCalls:
+      calls: []
+  textMeshProReference: {fileID: 1347286711}
+  promptMessage: Boss Room
+  triggerKey: 102
 --- !u!1001 &1780439534
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3167,6 +3260,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72ab9b622599ff24f8dca9c8c357d752, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  requireKeys: 1
   roomClearData: []
 --- !u!1 &1895864869
 GameObject:
