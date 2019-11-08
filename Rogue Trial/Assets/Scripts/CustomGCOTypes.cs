@@ -17,7 +17,13 @@ public class CustomGCOTypes : MonoBehaviour
         allyAttack = 14,
         npcAttack = 14,
     }
-
+    public enum MovementState
+    {
+        Enabled,
+        IgnoreInput,
+        Disabled,
+        DisabledKillMomentum
+    }
     public enum GameState
     {
         PlayMode,

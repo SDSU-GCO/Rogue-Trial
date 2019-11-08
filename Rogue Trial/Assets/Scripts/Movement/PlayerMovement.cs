@@ -10,14 +10,8 @@ using ByteSheep.Events;
 [RequireComponent(typeof(CapsuleCollider2D))]
 public class PlayerMovement : MonoBehaviour
 {
-    enum MovementState
-    {
-        Enabled,
-        IgnoreInput,
-        Disabled,
-        DisabledKillMomentum
-    }
-    MovementState movementState = MovementState.Enabled;
+
+    public CustomGCOTypes.MovementState movementState = CustomGCOTypes.MovementState.Enabled;
 
     [SerializeField, Required, BoxGroup("Component Refs")]
     private new Rigidbody2D rigidbody2D = null;
@@ -112,12 +106,12 @@ public class PlayerMovement : MonoBehaviour
     //update loop
     private void Update()
     {
-        if(movementState!=MovementState.Disabled)
+        if(movementState!=CustomGCOTypes.MovementState.Disabled)
         {
             airbornTime = Mathf.Min(airbornTime + Time.deltaTime, allowedAirbornTime + 1);
         }
 
-        jumpButtonPressed = Input.GetAxis("Vertical") > float.Epsilon && (movementState==MovementState.Enabled);
+        jumpButtonPressed = Input.GetAxis("Vertical") > float.Epsilon && (movementState== CustomGCOTypes.MovementState.Enabled);
         isGrounded = CheckGrounded();
 
         if(enableDebugging==true)
@@ -136,7 +130,7 @@ public class PlayerMovement : MonoBehaviour
 
         //Debug.Log(Input.GetAxis("Vertical"));
         //run
-        if (movementState == MovementState.Enabled)
+        if (movementState == CustomGCOTypes.MovementState.Enabled)
         {
             velocity = rigidbody2D.velocity;
             velocity.x = Input.GetAxis("Horizontal") * runSpeed;
@@ -154,7 +148,7 @@ public class PlayerMovement : MonoBehaviour
             Jumped.Invoke();
         }
 
-        if(movementState != MovementState.Disabled && movementState!=MovementState.DisabledKillMomentum)
+        if(movementState != CustomGCOTypes.MovementState.Disabled && movementState!= CustomGCOTypes.MovementState.DisabledKillMomentum)
         {        
             //smart gravity
             if (isGrounded != true)
@@ -173,14 +167,14 @@ public class PlayerMovement : MonoBehaviour
 
         
         //dash
-        if(Input.GetAxis("Dash") > float.Epsilon && dash == 0 && dashUsed!=true && isDashing==false && movementState==MovementState.Enabled && movementState != MovementState.DisabledKillMomentum)
+        if(Input.GetAxis("Dash") > float.Epsilon && dash == 0 && dashUsed!=true && isDashing==false && movementState== CustomGCOTypes.MovementState.Enabled && movementState != CustomGCOTypes.MovementState.DisabledKillMomentum)
         {
             isDashing = true;
             StartCoroutine(Dash());
             Dashed.Invoke();
         }
 
-        if(movementState!=MovementState.Disabled && movementState != MovementState.DisabledKillMomentum)
+        if(movementState!= CustomGCOTypes.MovementState.Disabled && movementState != CustomGCOTypes.MovementState.DisabledKillMomentum)
         {
             dash = Mathf.Max(dash - Time.deltaTime, 0);
             dashUsed = isGrounded ? false : dashUsed;
@@ -224,7 +218,7 @@ public class PlayerMovement : MonoBehaviour
         float forceDirection = (spriteRenderer.flipX ? (-1) : 1);
         while (dashProgress < dashTime)
         {
-            if (movementState != MovementState.Disabled && movementState != MovementState.DisabledKillMomentum)
+            if (movementState != CustomGCOTypes.MovementState.Disabled && movementState != CustomGCOTypes.MovementState.DisabledKillMomentum)
             {
                 rigidbody2D.AddForce(Vector2.right * forceDirection * dashForce);
                 dashProgress += Time.deltaTime;
