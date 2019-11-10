@@ -245,7 +245,7 @@ GameObject:
   - component: {fileID: 3977492892785107439}
   - component: {fileID: 3222318933843911601}
   - component: {fileID: 4239498098057373765}
-  - component: {fileID: 861864189742172917}
+  - component: {fileID: 5279654558936316378}
   m_Layer: 11
   m_Name: Triangle
   m_TagString: Untagged
@@ -305,7 +305,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 8188334006853741665, guid: f902a5db36878f640911da0fcab2e7f8,
+  m_Sprite: {fileID: -7698306048768514179, guid: f902a5db36878f640911da0fcab2e7f8,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -332,7 +332,7 @@ MonoBehaviour:
   rigidbody2D: {fileID: 7758839803176447447}
   spriteRenderer: {fileID: 3222318933843911601}
   deadZone: 0.001
---- !u!95 &861864189742172917
+--- !u!95 &5279654558936316378
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0
@@ -570,6 +570,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa3a5e4f76a3c43408cb70d5ff4e1f84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movementState: 0
   rigidbody2D: {fileID: 7758839803176447447}
   capsuleCollider2D: {fileID: 7758839803176447450}
   spriteRenderer: {fileID: 3222318933843911601}
@@ -594,6 +595,7 @@ MonoBehaviour:
       calls: []
   isGrounded: 0
   isDashing: 0
+  rigidbodyConstraints2D: 4
   enableDebugging: 0
   circleCastOrigin: {fileID: 1749159719007511993}
   circleCastEdge: {fileID: 7758839802554142439}
@@ -617,7 +619,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 0}
   rigidbody2D: {fileID: 0}
   flipSpriteOnVelocity: {fileID: 0}
-  offset: 1.5
+  offset: 1
 --- !u!114 &2549030327463446236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -639,11 +641,14 @@ MonoBehaviour:
   disableColliderOnDeath: 1
   health: 3
   onDeathReplaceWith: {fileID: 0}
-  spriteRenderer: {fileID: 7758839803176447446}
   invincibilityTime: 0.5
   timeToFlashOnHit: 0.5
   flashSpeed: 20
-  flashCustomColor: 0
+  flashCustomColor: 1
+  flashingColors:
+    hurtColor: {r: 1, g: 0, b: 0, a: 1}
+    normalColor: {r: 1, g: 1, b: 1, a: 1}
+  spriteRenderer: {fileID: 3222318933843911601}
 --- !u!114 &6070498220698471068
 MonoBehaviour:
   m_ObjectHideFlags: 0

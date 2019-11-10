@@ -201,7 +201,7 @@ GameObject:
   - component: {fileID: 444972507}
   - component: {fileID: 444972506}
   m_Layer: 0
-  m_Name: New Sprite
+  m_Name: Loading Symbol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -556,11 +556,6 @@ PrefabInstance:
       propertyPath: Jumped.persistentCalls.calls.Array.data[0].genericMenuData.selectedMember
       value: 10
       objectReference: {fileID: 0}
-    - target: {fileID: 2549030327463446236, guid: 8da49b9ee162a544891c5c2cd25d565c,
-        type: 3}
-      propertyPath: hpUpdated.inspectorListHeight
-      value: 63
-      objectReference: {fileID: 0}
     - target: {fileID: 8980279948597124434, guid: 8da49b9ee162a544891c5c2cd25d565c,
         type: 3}
       propertyPath: crossSceneEvent
@@ -778,6 +773,11 @@ MonoBehaviour:
   audioMixerGroup: {fileID: -5055102301708549317, guid: 93ed9eda70f37cb48b5165cf87fae8bf,
     type: 2}
   loop: 0
+  UseDelay: 1
+  UseRandomDelay: 1
+  Delay: 0
+  MaxDelay: 0
+  MinDelay: 0
   randomizePitch: 1
   defaultFile: {fileID: 8300000, guid: 5492ff8cbab86864f98a0895e575d462, type: 3}
   crossSceneEvent: {fileID: 11400000, guid: aefcafe959fbc4c40b390191c2dd58d4, type: 2}
@@ -796,6 +796,11 @@ MonoBehaviour:
   audioMixerGroup: {fileID: -5055102301708549317, guid: 93ed9eda70f37cb48b5165cf87fae8bf,
     type: 2}
   loop: 0
+  UseDelay: 0
+  UseRandomDelay: 0
+  Delay: 0
+  MaxDelay: 0
+  MinDelay: 0
   randomizePitch: 1
   defaultFile: {fileID: 8300000, guid: ec9d2e9fab479524f806372c6667666c, type: 3}
   crossSceneEvent: {fileID: 11400000, guid: 3174651360015db40a55616ddef72737, type: 2}
