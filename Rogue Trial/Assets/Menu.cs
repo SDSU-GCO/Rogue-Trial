@@ -13,10 +13,10 @@ public class Menu : MonoBehaviour
     }
     private void OnEnable()
     {
-        
+        gameStateSO.MenuOpen = true;
     }
     private void OnDisable()
     {
-        
+        gameStateSO.MenuOpen = false;
     }
 }
