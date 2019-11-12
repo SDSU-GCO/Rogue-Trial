@@ -17,6 +17,8 @@ public class GameOver : MonoBehaviour
     [SerializeField, HideInInspector]
     SpriteRenderer spriteRenderer;
 #pragma warning disable CS0649 // varriable is never assigned to and will always have it's default value
+    [SerializeField, HideInInspector, Required]
+    GameStateSO gameStateSO;
     [SerializeField, Required, BoxGroup("SO refs")]
     CrossSceneEventSO gameoverCrossSceneEvent;
     [SerializeField, Required, BoxGroup("SO refs")]
@@ -47,6 +49,10 @@ public class GameOver : MonoBehaviour
         {
             spriteRenderer = GetComponent<SpriteRenderer>();
         }
+        if(gameStateSO == null)
+        {
+            gameStateSO = AssetManagement.FindAssetByType<GameStateSO>();
+        }
     }
     private void OnEnable()
     {
@@ -64,8 +70,11 @@ public class GameOver : MonoBehaviour
         temp.a = 0;
         currentTime = 0;
         image.color = temp;
-        Time.timeScale = 0;
-        Time.fixedDeltaTime = 0;
+        if(gameStateSO.gameState!= CustomGCOTypes.GameState.Paused)
+        {
+            gameStateSO.gameState = CustomGCOTypes.GameState.Paused;
+            gameStateSO.updatedValue.Invoke();
+        }
         StartCoroutine(FadeIn());
     }
 
@@ -75,10 +84,13 @@ public class GameOver : MonoBehaviour
     private void Update()
     {
         image.sprite = spriteRenderer.sprite;
-        if (Input.anyKeyDown && !Input.GetKeyDown(KeyCode.Escape) && isOpaque == true)
+        if (Input.anyKeyDown && !Input.GetKeyDown(KeyCode.Escape) && isOpaque == true  && gameStateSO.MenuOpen!=true)
         {
-            Time.timeScale = 1;
-            Time.fixedDeltaTime = 0.02f;
+            if (gameStateSO.gameState != CustomGCOTypes.GameState.PlayMode)
+            {
+                gameStateSO.gameState = CustomGCOTypes.GameState.PlayMode;
+                gameStateSO.updatedValue.Invoke();
+            }
             if (crossSceneSceneDataSO.activeScene != new Scene())
             {
                 PlayerRevivedSO.Event.Invoke();

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Menu : MonoBehaviour
 {
-    [SerializeField]
+    [SerializeField, HideInInspector]
     GameStateSO gameStateSO;
     private void OnValidate()
     {
@@ -13,10 +13,18 @@ public class Menu : MonoBehaviour
     }
     private void OnEnable()
     {
-        gameStateSO.MenuOpen = true;
+        if (gameStateSO.MenuOpen != true)
+        {
+            gameStateSO.MenuOpen = true;
+            gameStateSO.updatedValue.Invoke();
+        }
     }
     private void OnDisable()
     {
-        gameStateSO.MenuOpen = false;
+        if (gameStateSO.MenuOpen == true)
+        {
+            gameStateSO.MenuOpen = true;
+            gameStateSO.updatedValue.Invoke();
+        }
     }
 }

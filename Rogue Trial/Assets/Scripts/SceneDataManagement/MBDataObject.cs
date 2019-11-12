@@ -2,7 +2,7 @@
 
 public class MBDataObject : MonoBehaviour
 {
-    private void OnValidate()
+    public virtual void OnValidate()
     {
         MBDataObjectReferences mbdoRefs = GetComponent<MBDataObjectReferences>();
         if (mbdoRefs != null && mbdoRefs.mbDataObjects.Contains(this) != true)
@@ -11,6 +11,13 @@ public class MBDataObject : MonoBehaviour
             mbdoRefs.mbDataObjects.Add(this);
         }
     }
-    
-
+    public virtual void Reset()
+    {
+        MBDataObjectReferences mbdoRefs = GetComponent<MBDataObjectReferences>();
+        if (mbdoRefs != null && mbdoRefs.mbDataObjects.Contains(this) != true)
+        {
+            Debug.LogWarning($"Warning: {this} has not been added to {mbdoRefs}, adding now...");
+            mbdoRefs.mbDataObjects.Add(this);
+        }
+    }
 }

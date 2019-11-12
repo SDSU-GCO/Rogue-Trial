@@ -135,7 +135,7 @@ MonoBehaviour:
   m_ScreenY: 0.5
   m_CameraDistance: 10
   m_DeadZoneWidth: 0.1
-  m_DeadZoneHeight: 0.1
+  m_DeadZoneHeight: 0.3
   m_DeadZoneDepth: 0
   m_UnlimitedSoftZone: 0
   m_SoftZoneWidth: 0.8
@@ -447,9 +447,10 @@ GameObject:
   - component: {fileID: 5589749906151201696}
   - component: {fileID: 2549030327463446236}
   - component: {fileID: 6070498220698471068}
+  - component: {fileID: 6003605253688417003}
   m_Layer: 10
-  m_Name: Player 1
-  m_TagString: Untagged
+  m_Name: Player
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -570,7 +571,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa3a5e4f76a3c43408cb70d5ff4e1f84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementState: 0
   rigidbody2D: {fileID: 7758839803176447447}
   capsuleCollider2D: {fileID: 7758839803176447450}
   spriteRenderer: {fileID: 3222318933843911601}
@@ -593,9 +593,11 @@ MonoBehaviour:
     inspectorListHeight: 63
     persistentCalls:
       calls: []
+  enableInputs: 1
+  movementState: 0
   isGrounded: 0
   isDashing: 0
-  rigidbodyConstraints2D: 4
+  playerTransformMBDO: {fileID: 0}
   enableDebugging: 0
   circleCastOrigin: {fileID: 1749159719007511993}
   circleCastEdge: {fileID: 7758839802554142439}
@@ -646,8 +648,8 @@ MonoBehaviour:
   flashSpeed: 20
   flashCustomColor: 1
   flashingColors:
-    hurtColor: {r: 1, g: 0, b: 0, a: 1}
     normalColor: {r: 1, g: 1, b: 1, a: 1}
+    hurtColor: {r: 1, g: 0, b: 0, a: 1}
   spriteRenderer: {fileID: 3222318933843911601}
 --- !u!114 &6070498220698471068
 MonoBehaviour:
@@ -668,3 +670,77 @@ MonoBehaviour:
   - {fileID: 7758839803176447444}
   Died: {fileID: 11400000, guid: 5e027eba6205b804199e1b0db7969067, type: 2}
   Revived: {fileID: 11400000, guid: d4e997a5cfabfd841af546bbffc22037, type: 2}
+--- !u!114 &6003605253688417003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7758839803176447451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 810271a1d95bc6c40aebeb6896e2677c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RulesTemplate:
+  - IfConditions:
+      ifCheck: 2
+      gameState: 0
+      Menu: 0
+    SetStates:
+      thenSet: 2
+      movementState: 0
+      EnableInputs: 1
+  - IfConditions:
+      ifCheck: 2
+      gameState: 1
+      Menu: 0
+    SetStates:
+      thenSet: 2
+      movementState: 0
+      EnableInputs: 0
+  - IfConditions:
+      ifCheck: 2
+      gameState: 2
+      Menu: 0
+    SetStates:
+      thenSet: 2
+      movementState: 2
+      EnableInputs: 0
+  - IfConditions:
+      ifCheck: 2
+      gameState: 3
+      Menu: 0
+    SetStates:
+      thenSet: 2
+      movementState: 1
+      EnableInputs: 0
+  - IfConditions:
+      ifCheck: 2
+      gameState: 0
+      Menu: 1
+    SetStates:
+      thenSet: 2
+      movementState: 1
+      EnableInputs: 0
+  - IfConditions:
+      ifCheck: 2
+      gameState: 1
+      Menu: 1
+    SetStates:
+      thenSet: 2
+      movementState: 1
+      EnableInputs: 0
+  - IfConditions:
+      ifCheck: 1
+      gameState: 1
+      Menu: 1
+    SetStates:
+      thenSet: 1
+      movementState: 1
+      EnableInputs: 0
+  movables:
+  - {fileID: 7758839803176447444}
+  usesInputs:
+  - {fileID: 7758839803176447444}
+  gameStateSO: {fileID: 11400000, guid: c958049ac6246424db109b1e303a10ea, type: 2}

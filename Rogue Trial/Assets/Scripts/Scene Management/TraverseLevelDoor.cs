@@ -16,7 +16,7 @@ public class TraverseLevelDoor : TriggerPrompt
 
     private void OnValidate()
     {
-        promptMessage = "Press 'f' to enter \""+sceneToLoad+"\"";
+        promptMessage = "Press 'f' to enter \"" + sceneToLoad + "\"";
     }
 
     bool loadStarted = false;

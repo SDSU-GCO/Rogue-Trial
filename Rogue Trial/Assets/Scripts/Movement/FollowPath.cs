@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
-public class FollowPath : MonoBehaviour
+public class FollowPath : MonoBehaviour, IMovable
 {
     public CustomGCOTypes.MovementState movementState = CustomGCOTypes.MovementState.Enabled;
 
@@ -22,6 +22,12 @@ public class FollowPath : MonoBehaviour
 
     [SerializeField, HideInInspector]
     private SpriteRenderer spriteRenederer;
+
+    public CustomGCOTypes.MovementState MovementState 
+    { 
+        get => movementState; 
+        set => movementState=value; 
+    }
 
     private void OnValidate()
     {

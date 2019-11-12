@@ -6,7 +6,7 @@ using NaughtyAttributes;
 using UnityEngine.SceneManagement;
 using ByteSheep.Events;
 
-public class TriggerPrompt : MonoBehaviour
+public class TriggerPrompt : MonoBehaviour, IUsesInput
 {
 #pragma warning disable CS0649 // varriable is never assigned to and will always have it's default value
     [SerializeField, BoxGroup("Events")]
@@ -19,8 +19,14 @@ public class TriggerPrompt : MonoBehaviour
     protected string promptMessage = "Press 'w' to ";
     [SerializeField, BoxGroup("Prompt Settings")]
     protected KeyCode triggerKey = KeyCode.W;
-    
+
 #pragma warning restore CS0649 // varriable is never assigned to and will always have it's default value
+    bool enableInput=true;
+    public bool EnableInputs
+    {
+        get => enableInput;
+        set => enableInput = value;
+    }
 
     bool doPrompt = false;
     public void DispPrompt()
@@ -72,7 +78,7 @@ public class TriggerPrompt : MonoBehaviour
                     promptUp = true;
                 }
 
-                if (Input.GetKeyDown(triggerKey) == true)
+                if (Input.GetKeyDown(triggerKey) == true && enableInput)
                 {
                     foreach(CrossSceneEventSO crossSceneEvent in CrossSceneEventsToFire)
                     {
