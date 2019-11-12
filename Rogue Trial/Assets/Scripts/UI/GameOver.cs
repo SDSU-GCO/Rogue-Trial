@@ -70,11 +70,6 @@ public class GameOver : MonoBehaviour
         temp.a = 0;
         currentTime = 0;
         image.color = temp;
-        if(gameStateSO.gameState!= CustomGCOTypes.GameState.Paused)
-        {
-            gameStateSO.gameState = CustomGCOTypes.GameState.Paused;
-            gameStateSO.updatedValue.Invoke();
-        }
         StartCoroutine(FadeIn());
     }
 
@@ -86,11 +81,6 @@ public class GameOver : MonoBehaviour
         image.sprite = spriteRenderer.sprite;
         if (Input.anyKeyDown && !Input.GetKeyDown(KeyCode.Escape) && isOpaque == true  && gameStateSO.MenuOpen!=true)
         {
-            if (gameStateSO.gameState != CustomGCOTypes.GameState.PlayMode)
-            {
-                gameStateSO.gameState = CustomGCOTypes.GameState.PlayMode;
-                gameStateSO.updatedValue.Invoke();
-            }
             if (crossSceneSceneDataSO.activeScene != new Scene())
             {
                 PlayerRevivedSO.Event.Invoke();
