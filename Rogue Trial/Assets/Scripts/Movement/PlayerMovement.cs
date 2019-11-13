@@ -125,7 +125,7 @@ public class PlayerMovement : MonoBehaviour, IMovable, IUsesInput
             spriteRenderer = GetComponent<SpriteRenderer>();
         }
 
-        Debug.Log("OnValidate: " + this);
+        Debug.Log("OnValidate: " + this + " scene: " + gameObject.scene.name);
         if (playerTransformMBDO == null)
         {
             MBDOInitializationHelper mBDOInitializationHelper = default;

@@ -32,6 +32,7 @@ public class SpawnPlayer : MonoBehaviour
 
         if (playerTransformMBDO == null)
         {
+            Debug.LogWarning("playerTransformMBDO is null in "+this + " scene: "+gameObject.scene.name);
             MBDOInitializationHelper mBDOInitializationHelper = default;
 
             //IMPORTNANT STEP!!!
@@ -72,7 +73,7 @@ public class SpawnPlayer : MonoBehaviour
     }
     private void Start()
     {
-        Debug.Log("Start: " + this);
+        Debug.Log("Start: " + this + " scene: " + gameObject.scene.name);
         if (playerTransformMBDO == null)
             Debug.LogError("playerTransformMBDO null in: " + this);
         playerTransformMBDO.playerTransform.position = target == null ? transform.position : target.position;
