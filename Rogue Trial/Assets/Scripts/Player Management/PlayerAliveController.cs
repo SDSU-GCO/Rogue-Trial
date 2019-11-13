@@ -19,7 +19,10 @@ public class PlayerAliveController : MonoBehaviour
     private void OnValidate()
     {
         if (entity_Logic == null)
+        {
+            Debug.LogWarning("entity_Logic is not assigned in "+this+" in " +gameObject.scene.name);
             entity_Logic = GetComponent<Entity_Logic>();
+        }
     }
     private void Awake()
     {

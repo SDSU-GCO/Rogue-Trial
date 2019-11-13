@@ -189,7 +189,7 @@ public class PlayerMovement : MonoBehaviour, IMovable, IUsesInput
                 }
 
                 //jump
-                if (jumpButtonPressed && airbornTime <= allowedAirbornTime)
+                if (jumpButtonPressed && airbornTime < allowedAirbornTime)
                 {
                     velocity = rigidbody2D.velocity;
                     velocity.y = jumpVelocity;
@@ -220,7 +220,7 @@ public class PlayerMovement : MonoBehaviour, IMovable, IUsesInput
                 dashUsed = isGrounded ? false : dashUsed;
 
                 //update airborn timer
-                airbornTime = Mathf.Min(airbornTime + Time.deltaTime, allowedAirbornTime + 1);
+                airbornTime = Mathf.Min(airbornTime + Time.deltaTime, allowedAirbornTime);
 
                 //update jump constraints
                 if (isGrounded)//reset the jump on the ground
