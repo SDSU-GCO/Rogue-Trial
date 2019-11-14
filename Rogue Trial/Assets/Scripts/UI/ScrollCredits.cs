@@ -22,6 +22,10 @@ public class ScrollCredits : MonoBehaviour
 #pragma warning restore CS0649 // varriable is never assigned to and will always have it's default value
     private void OnValidate()
     {
+
+#if UNITY_EDITOR
+
+
         if (textMeshProUGUI == null)
         {
             textMeshProUGUI = GetComponent<TextMeshProUGUI>();
@@ -34,7 +38,7 @@ public class ScrollCredits : MonoBehaviour
         {
             rectTransform = GetComponent<RectTransform>();
         }
-        if (canvas==null)
+        if (canvas == null)
         {
             RectTransform tmp = rectTransform;
             while (canvas == null && tmp != null)
@@ -43,6 +47,10 @@ public class ScrollCredits : MonoBehaviour
                 tmp = (RectTransform)tmp.parent;
             }
         }
+
+        UnityEditor.EditorUtility.SetDirty(this);
+#endif
+
     }
 
     bool notStarted=true;

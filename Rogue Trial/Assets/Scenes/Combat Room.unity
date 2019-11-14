@@ -359,6 +359,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &673415215 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 158226047452895490, guid: 75b34decd95232f4781ba11f059d231b,
+    type: 3}
+  m_PrefabInstance: {fileID: 158226045466855951}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &683006131
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1057,6 +1063,21 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 158226047138341575, guid: 75b34decd95232f4781ba11f059d231b,
+        type: 3}
+      propertyPath: uITabControllers.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 158226047138341575, guid: 75b34decd95232f4781ba11f059d231b,
+        type: 3}
+      propertyPath: tabs
+      value: 
+      objectReference: {fileID: 673415215}
+    - target: {fileID: 875976227558564602, guid: 75b34decd95232f4781ba11f059d231b,
+        type: 3}
+      propertyPath: canvas
+      value: 
+      objectReference: {fileID: 1283494547}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 75b34decd95232f4781ba11f059d231b, type: 3}
 --- !u!50 &5230207506299310956
