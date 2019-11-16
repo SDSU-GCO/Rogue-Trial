@@ -1,0 +1,13 @@
+	[merge]
+    tool = unityyamlmerge
+
+    [mergetool unityyamlmerge]
+    trustExitCode = false
+    cmd = 'CProgram FilesUnityHubEditor2019.2.4f1EditorDataToolsUnityYAMLMerge.exe' merge -p $MERGED $REMOTE $LOCAL $MERGED
+	
+	[mergetool meld]
+    cmd = 'CProgram Files (x86)MeldMeld.exe' $LOCAL $MERGED $REMOTE --output $MERGED
+
+[mergetool]
+	keepBackup = false
+	prompt = false

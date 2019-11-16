@@ -54,7 +54,9 @@ public class Entity_Logic : MonoBehaviour
         {
             if(DamagedEvent!=null)
                 DamagedEvent.Event.Invoke();
+            
             health -= amount;
+
             invincibility = 0;
 
             hpUpdated.Invoke(health);
