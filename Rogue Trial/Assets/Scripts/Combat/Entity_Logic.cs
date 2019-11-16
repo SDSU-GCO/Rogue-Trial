@@ -52,9 +52,9 @@ public class Entity_Logic : MonoBehaviour
     {
         if (invincibility >= invincibilityTime)
         {
-            if(DamagedEvent!=null)
+            if (DamagedEvent != null)
                 DamagedEvent.Event.Invoke();
-            
+
             health -= amount;
 
             invincibility = 0;
@@ -66,13 +66,15 @@ public class Entity_Logic : MonoBehaviour
             }
             else
             {
-                if(flashCustomColor)
+                if (flashCustomColor)
                     StartCoroutine(ChangeColor());
             }
         }
     }
 
-    public void CommitSuduku()
+    
+
+public void CommitSuduku()
     {
         if (DiedEvent != null)
             DiedEvent.Event.Invoke();
@@ -174,6 +176,7 @@ public class Entity_Logic : MonoBehaviour
         spriteRenderer.color = flashingColors.normalColor;
     }
 }
+
 
 [System.Serializable]
 public class Event_One_Float : QuickEvent<float>
