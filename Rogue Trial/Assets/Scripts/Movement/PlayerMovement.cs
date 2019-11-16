@@ -108,55 +108,55 @@ public class PlayerMovement : MonoBehaviour, IMovable, IUsesInput
     [SerializeField, HideInInspector]
     PlayerTransformMBDO playerTransformMBDO;
 
-    private void OnValidate()
-    {
-        if (rigidbody2D == null)
-        {
-            rigidbody2D = GetComponent<Rigidbody2D>();
-        }
+    //private void OnValidate()
+    //{
+    //    if (rigidbody2D == null)
+    //    {
+    //        rigidbody2D = GetComponent<Rigidbody2D>();
+    //    }
 
-        if (capsuleCollider2D == null)
-        {
-            capsuleCollider2D = GetComponent<CapsuleCollider2D>();
-        }
+    //    if (capsuleCollider2D == null)
+    //    {
+    //        capsuleCollider2D = GetComponent<CapsuleCollider2D>();
+    //    }
 
-        if (spriteRenderer == null)
-        {
-            spriteRenderer = GetComponent<SpriteRenderer>();
-        }
+    //    if (spriteRenderer == null)
+    //    {
+    //        spriteRenderer = GetComponent<SpriteRenderer>();
+    //    }
 
-        Debug.Log("OnValidate: " + this + " scene: " + gameObject.scene.name);
-        if (playerTransformMBDO == null)
-        {
-            MBDOInitializationHelper mBDOInitializationHelper = default;
+    //    Debug.Log("OnValidate: " + this + " scene: " + gameObject.scene.name);
+    //    if (playerTransformMBDO == null)
+    //    {
+    //        MBDOInitializationHelper mBDOInitializationHelper = default;
 
-            //IMPORTNANT STEP!!!
-            mBDOInitializationHelper.SetupCardinalSubSystem(this);
-            mBDOInitializationHelper.SetupMBDO(ref playerTransformMBDO);
-            if(playerTransformMBDO!=null && playerTransformMBDO.playerTransform==null)
-            {
-                Debug.LogWarning("Assignment to playerTransformMBDO.playerTransform in: " + this);
-                playerTransformMBDO.playerTransform = transform;
-            }
-        }
-    }
-    private void Reset()
-    {
-        Debug.Log("OnReset: " + this);
-        if (playerTransformMBDO == null)
-        {
-            MBDOInitializationHelper mBDOInitializationHelper = default;
+    //        //IMPORTNANT STEP!!!
+    //        mBDOInitializationHelper.SetupCardinalSubSystem(this);
+    //        mBDOInitializationHelper.SetupMBDO(ref playerTransformMBDO);
+    //        if(playerTransformMBDO!=null && playerTransformMBDO.playerTransform==null)
+    //        {
+    //            Debug.LogWarning("Assignment to playerTransformMBDO.playerTransform in: " + this);
+    //            playerTransformMBDO.playerTransform = transform;
+    //        }
+    //    }
+    //}
+    //private void Reset()
+    //{
+    //    Debug.Log("OnReset: " + this);
+    //    if (playerTransformMBDO == null)
+    //    {
+    //        MBDOInitializationHelper mBDOInitializationHelper = default;
 
-            //IMPORTNANT STEP!!!
-            mBDOInitializationHelper.SetupCardinalSubSystem(this);
-            mBDOInitializationHelper.SetupMBDO(ref playerTransformMBDO);
-            if (playerTransformMBDO != null && playerTransformMBDO.playerTransform == null)
-            {
-                Debug.LogWarning("Assignment to playerTransformMBDO.playerTransform in: " + this);
-                playerTransformMBDO.playerTransform = transform;
-            }
-        }
-    }
+    //        //IMPORTNANT STEP!!!
+    //        mBDOInitializationHelper.SetupCardinalSubSystem(this);
+    //        mBDOInitializationHelper.SetupMBDO(ref playerTransformMBDO);
+    //        if (playerTransformMBDO != null && playerTransformMBDO.playerTransform == null)
+    //        {
+    //            Debug.LogWarning("Assignment to playerTransformMBDO.playerTransform in: " + this);
+    //            playerTransformMBDO.playerTransform = transform;
+    //        }
+    //    }
+    //}
 
     private void Awake()
     {

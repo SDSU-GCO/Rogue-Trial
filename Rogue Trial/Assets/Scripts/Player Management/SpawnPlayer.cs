@@ -32,19 +32,25 @@ public class SpawnPlayer : MonoBehaviour
 
         if (playerTransformMBDO == null)
         {
-            Debug.LogWarning("playerTransformMBDO is null in "+this + " scene: "+gameObject.scene.name);
             MBDOInitializationHelper mBDOInitializationHelper = default;
 
             //IMPORTNANT STEP!!!
             mBDOInitializationHelper.SetupCardinalSubSystem(this);
             mBDOInitializationHelper.SetupMBDO(ref playerTransformMBDO);
         }
+#if UNITY_EDITOR
+        UnityEditor.EditorUtility.SetDirty(this);
+#endif
     }
     private void Reset()
     {
         if(crossSceneSceneDataSO==null)
         {
             crossSceneSceneDataSO = AssetManagement.FindAssetByType<CrossSceneSceneDataSO>();
+
+#if UNITY_EDITOR
+            UnityEditor.EditorUtility.SetDirty(this);
+#endif
         }
         if (playerTransformMBDO == null)
         {
@@ -73,7 +79,6 @@ public class SpawnPlayer : MonoBehaviour
     }
     private void Start()
     {
-        Debug.Log("Start: " + this + " scene: " + gameObject.scene.name);
         if (playerTransformMBDO == null)
             Debug.LogError("playerTransformMBDO null in: " + this);
         playerTransformMBDO.playerTransform.position = target == null ? transform.position : target.position;

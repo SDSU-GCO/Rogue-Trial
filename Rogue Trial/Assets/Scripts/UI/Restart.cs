@@ -18,6 +18,10 @@ public class Restart : MonoBehaviour
         if (gameStateSO == null)
         {
             gameStateSO = AssetManagement.FindAssetByType<GameStateSO>();
+
+#if UNITY_EDITOR
+            UnityEditor.EditorUtility.SetDirty(this);
+#endif
         }
     }
     public void RestartLevel()
@@ -31,7 +35,7 @@ public class Restart : MonoBehaviour
         if (crossSceneSceneDataSO.activeScene != new Scene())
         {
             SceneManager.LoadScene(crossSceneSceneDataSO.activeScene.name, LoadSceneMode.Additive);
-            SceneManager.UnloadSceneAsync(crossSceneSceneDataSO.activeScene.name);
+            SceneManager.UnloadSceneAsync(gameObject.scene);
         }
         else
         {

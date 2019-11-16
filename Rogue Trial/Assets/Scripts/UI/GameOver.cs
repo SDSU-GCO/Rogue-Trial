@@ -38,20 +38,32 @@ public class GameOver : MonoBehaviour
         if (animator == null)
         {
             animator = GetComponent<Animator>();
+#if UNITY_EDITOR
+            UnityEditor.EditorUtility.SetDirty(this);
+#endif
         }
 
         if (image == null)
         {
             image = GetComponent<Image>();
+#if UNITY_EDITOR
+            UnityEditor.EditorUtility.SetDirty(this);
+#endif
         }
 
         if (spriteRenderer == null)
         {
             spriteRenderer = GetComponent<SpriteRenderer>();
+#if UNITY_EDITOR
+            UnityEditor.EditorUtility.SetDirty(this);
+#endif
         }
-        if(gameStateSO == null)
+        if (gameStateSO == null)
         {
             gameStateSO = AssetManagement.FindAssetByType<GameStateSO>();
+#if UNITY_EDITOR
+            UnityEditor.EditorUtility.SetDirty(this);
+#endif
         }
     }
     private void OnEnable()

@@ -70,6 +70,10 @@ public class StateController : MonoBehaviour
         }
         if (gameStateSO == null)
             gameStateSO = AssetManagement.FindAssetByType<GameStateSO>();
+
+#if UNITY_EDITOR
+        UnityEditor.EditorUtility.SetDirty(this);
+#endif
     }
     public void ApplyRules()
     {

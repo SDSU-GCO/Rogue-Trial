@@ -270,7 +270,7 @@ MonoBehaviour:
   movables: []
   usesInputs:
   - {fileID: 1617818259274187875}
-  gameStateSO: {fileID: 0}
+  gameStateSO: {fileID: 11400000, guid: c958049ac6246424db109b1e303a10ea, type: 2}
 --- !u!1 &1617818260266076291
 GameObject:
   m_ObjectHideFlags: 0

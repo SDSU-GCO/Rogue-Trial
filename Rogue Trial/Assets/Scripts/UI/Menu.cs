@@ -9,7 +9,12 @@ public class Menu : MonoBehaviour
     private void OnValidate()
     {
         if(gameStateSO==null)
+        {
             gameStateSO = AssetManagement.FindAssetByType<GameStateSO>();
+#if UNITY_EDITOR
+            UnityEditor.EditorUtility.SetDirty(this);
+#endif
+        }
     }
     private void OnEnable()
     {
@@ -23,7 +28,7 @@ public class Menu : MonoBehaviour
     {
         if (gameStateSO.MenuOpen == true)
         {
-            gameStateSO.MenuOpen = true;
+            gameStateSO.MenuOpen = false;
             gameStateSO.updatedValue.Invoke();
         }
     }

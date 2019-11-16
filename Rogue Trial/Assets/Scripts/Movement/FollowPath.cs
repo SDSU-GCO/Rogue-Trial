@@ -34,16 +34,16 @@ public class FollowPath : MonoBehaviour, IMovable
         if (spriteRenederer == null)
         {
             spriteRenederer = GetComponent<SpriteRenderer>();
+#if UNITY_EDITOR
+            UnityEditor.EditorUtility.SetDirty(this);
+#endif
         }
-    }
-
-    private void Awake()
-    {
-        rigidbody2D = GetComponent<Rigidbody2D>();
-        if (spriteRenederer == null)
+        if (rigidbody2D == null)
         {
-            Debug.Log("Bootstrapping");
-            spriteRenederer = GetComponent<SpriteRenderer>();
+            rigidbody2D = GetComponent<Rigidbody2D>();
+#if UNITY_EDITOR
+            UnityEditor.EditorUtility.SetDirty(this);
+#endif
         }
     }
     private void OnEnable()

@@ -918,6 +918,7 @@ MonoBehaviour:
   playerRevived: {fileID: 11400000, guid: d4e997a5cfabfd841af546bbffc22037, type: 2}
   crossSceneSceneDataSO: {fileID: 11400000, guid: 7a03934cafd96ff469522aa883a1d3aa,
     type: 2}
+  gameStateSO: {fileID: 11400000, guid: c958049ac6246424db109b1e303a10ea, type: 2}
   defaultScene:
     m_Handle: 0
 --- !u!1 &158226047062453063
@@ -1024,13 +1025,14 @@ GameObject:
   - component: {fileID: 158226047138341573}
   - component: {fileID: 158226047138341574}
   - component: {fileID: 158226047138341575}
+  - component: {fileID: 1546616626910232723}
   m_Layer: 5
   m_Name: Menu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &158226047138341576
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1110,6 +1112,19 @@ MonoBehaviour:
   uIContentFrameControllers:
   - {fileID: 158226047062453061}
   - {fileID: 4142348365798842634}
+--- !u!114 &1546616626910232723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 158226047138341577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: def06a9775a32a64fbdcc35ae5b88ba0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameStateSO: {fileID: 11400000, guid: c958049ac6246424db109b1e303a10ea, type: 2}
 --- !u!1 &158226047377622883
 GameObject:
   m_ObjectHideFlags: 0
@@ -1876,6 +1891,7 @@ MonoBehaviour:
   image: {fileID: 8667757729840236930}
   animator: {fileID: 6901255856222861558}
   spriteRenderer: {fileID: 2559316870205969876}
+  gameStateSO: {fileID: 11400000, guid: c958049ac6246424db109b1e303a10ea, type: 2}
   gameoverCrossSceneEvent: {fileID: 11400000, guid: 5e027eba6205b804199e1b0db7969067,
     type: 2}
   PlayerRevivedSO: {fileID: 11400000, guid: d4e997a5cfabfd841af546bbffc22037, type: 2}
@@ -2723,6 +2739,7 @@ MonoBehaviour:
   playerRevived: {fileID: 11400000, guid: d4e997a5cfabfd841af546bbffc22037, type: 2}
   crossSceneSceneDataSO: {fileID: 11400000, guid: 7a03934cafd96ff469522aa883a1d3aa,
     type: 2}
+  gameStateSO: {fileID: 11400000, guid: c958049ac6246424db109b1e303a10ea, type: 2}
   defaultScene:
     m_Handle: 0
 --- !u!1 &6105105449140471223

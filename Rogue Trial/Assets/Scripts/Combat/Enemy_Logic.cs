@@ -18,6 +18,10 @@ public class Enemy_Logic : MonoBehaviour
         {
             rangedCoolDownInSeconds = 0;
             rangedCoolDownInSecondsDefault = rangedAttack.AttackDelay;
+
+#if UNITY_EDITOR
+            UnityEditor.EditorUtility.SetDirty(this);
+#endif
         }
     }
 
@@ -76,6 +80,10 @@ public class Enemy_Logic : MonoBehaviour
         if (entityLogic == null)
         {
             entityLogic = GetComponent<Entity_Logic>();
+
+#if UNITY_EDITOR
+            UnityEditor.EditorUtility.SetDirty(this);
+#endif
         }
     }
 

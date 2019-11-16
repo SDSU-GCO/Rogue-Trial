@@ -25,14 +25,23 @@ public class ScrollCredits : MonoBehaviour
         if (textMeshProUGUI == null)
         {
             textMeshProUGUI = GetComponent<TextMeshProUGUI>();
+#if UNITY_EDITOR
+            UnityEditor.EditorUtility.SetDirty(this);
+#endif
         }
         if (textMeshProUGUI != null)
         {
             textMeshProUGUI.text = textAsset.text;
+#if UNITY_EDITOR
+            UnityEditor.EditorUtility.SetDirty(this);
+#endif
         }
         if (rectTransform == null)
         {
             rectTransform = GetComponent<RectTransform>();
+#if UNITY_EDITOR
+            UnityEditor.EditorUtility.SetDirty(this);
+#endif
         }
         if (canvas==null)
         {
@@ -41,6 +50,9 @@ public class ScrollCredits : MonoBehaviour
             {
                 canvas = tmp.GetComponent<Canvas>();
                 tmp = (RectTransform)tmp.parent;
+#if UNITY_EDITOR
+                UnityEditor.EditorUtility.SetDirty(this);
+#endif
             }
         }
     }
