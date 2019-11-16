@@ -18,6 +18,9 @@ public class volumeLogic : MonoBehaviour
         if(scrollBar==null)
         {
             scrollBar = GetComponent<Scrollbar>();
+#if UNITY_EDITOR
+            UnityEditor.EditorUtility.SetDirty(this);
+#endif
         }
     }
     private void OnEnable()

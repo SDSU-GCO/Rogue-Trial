@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
-public class FollowPath : MonoBehaviour
+public class FollowPath : MonoBehaviour, IMovable
 {
     public CustomGCOTypes.MovementState movementState = CustomGCOTypes.MovementState.Enabled;
 
@@ -23,21 +23,27 @@ public class FollowPath : MonoBehaviour
     [SerializeField, HideInInspector]
     private SpriteRenderer spriteRenederer;
 
+    public CustomGCOTypes.MovementState MovementState 
+    { 
+        get => movementState; 
+        set => movementState=value; 
+    }
+
     private void OnValidate()
     {
         if (spriteRenederer == null)
         {
             spriteRenederer = GetComponent<SpriteRenderer>();
+#if UNITY_EDITOR
+            UnityEditor.EditorUtility.SetDirty(this);
+#endif
         }
-    }
-
-    private void Awake()
-    {
-        rigidbody2D = GetComponent<Rigidbody2D>();
-        if (spriteRenederer == null)
+        if (rigidbody2D == null)
         {
-            Debug.Log("Bootstrapping");
-            spriteRenederer = GetComponent<SpriteRenderer>();
+            rigidbody2D = GetComponent<Rigidbody2D>();
+#if UNITY_EDITOR
+            UnityEditor.EditorUtility.SetDirty(this);
+#endif
         }
     }
     private void OnEnable()

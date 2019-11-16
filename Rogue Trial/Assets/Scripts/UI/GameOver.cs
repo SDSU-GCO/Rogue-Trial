@@ -17,6 +17,8 @@ public class GameOver : MonoBehaviour
     [SerializeField, HideInInspector]
     SpriteRenderer spriteRenderer;
 #pragma warning disable CS0649 // varriable is never assigned to and will always have it's default value
+    [SerializeField, HideInInspector, Required]
+    GameStateSO gameStateSO;
     [SerializeField, Required, BoxGroup("SO refs")]
     CrossSceneEventSO gameoverCrossSceneEvent;
     [SerializeField, Required, BoxGroup("SO refs")]
@@ -36,16 +38,32 @@ public class GameOver : MonoBehaviour
         if (animator == null)
         {
             animator = GetComponent<Animator>();
+#if UNITY_EDITOR
+            UnityEditor.EditorUtility.SetDirty(this);
+#endif
         }
 
         if (image == null)
         {
             image = GetComponent<Image>();
+#if UNITY_EDITOR
+            UnityEditor.EditorUtility.SetDirty(this);
+#endif
         }
 
         if (spriteRenderer == null)
         {
             spriteRenderer = GetComponent<SpriteRenderer>();
+#if UNITY_EDITOR
+            UnityEditor.EditorUtility.SetDirty(this);
+#endif
+        }
+        if (gameStateSO == null)
+        {
+            gameStateSO = AssetManagement.FindAssetByType<GameStateSO>();
+#if UNITY_EDITOR
+            UnityEditor.EditorUtility.SetDirty(this);
+#endif
         }
     }
     private void OnEnable()
@@ -64,8 +82,6 @@ public class GameOver : MonoBehaviour
         temp.a = 0;
         currentTime = 0;
         image.color = temp;
-        Time.timeScale = 0;
-        Time.fixedDeltaTime = 0;
         StartCoroutine(FadeIn());
     }
 
@@ -75,10 +91,8 @@ public class GameOver : MonoBehaviour
     private void Update()
     {
         image.sprite = spriteRenderer.sprite;
-        if (Input.anyKeyDown && !Input.GetKeyDown(KeyCode.Escape) && isOpaque == true)
+        if (Input.anyKeyDown && !Input.GetKeyDown(KeyCode.Escape) && isOpaque == true  && gameStateSO.MenuOpen!=true)
         {
-            Time.timeScale = 1;
-            Time.fixedDeltaTime = 0.02f;
             if (crossSceneSceneDataSO.activeScene != new Scene())
             {
                 PlayerRevivedSO.Event.Invoke();

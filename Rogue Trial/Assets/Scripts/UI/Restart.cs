@@ -9,17 +9,33 @@ public class Restart : MonoBehaviour
     CrossSceneEventSO playerRevived;
     [SerializeField, Required]
     CrossSceneSceneDataSO crossSceneSceneDataSO;
+    [SerializeField, HideInInspector, Required]
+    GameStateSO gameStateSO;
 #pragma warning restore CS0649 // varriable is never assigned to and will always have it's default value
     public Scene defaultScene;
+    private void OnValidate()
+    {
+        if (gameStateSO == null)
+        {
+            gameStateSO = AssetManagement.FindAssetByType<GameStateSO>();
+
+#if UNITY_EDITOR
+            UnityEditor.EditorUtility.SetDirty(this);
+#endif
+        }
+    }
     public void RestartLevel()
     {
-        Time.timeScale = 1;
-        Time.fixedDeltaTime = 0.02f;
+        if (gameStateSO.gameState != CustomGCOTypes.GameState.PlayMode)
+        {
+            gameStateSO.gameState = CustomGCOTypes.GameState.PlayMode;
+            gameStateSO.updatedValue.Invoke();
+        }
         playerRevived.Event.Invoke();
         if (crossSceneSceneDataSO.activeScene != new Scene())
         {
             SceneManager.LoadScene(crossSceneSceneDataSO.activeScene.name, LoadSceneMode.Additive);
-            SceneManager.UnloadSceneAsync(crossSceneSceneDataSO.activeScene.name);
+            SceneManager.UnloadSceneAsync(gameObject.scene);
         }
         else
         {
@@ -29,8 +45,11 @@ public class Restart : MonoBehaviour
     }
     public void RestartGame()
     {
-        Time.timeScale = 1;
-        Time.fixedDeltaTime = 0.02f;
+        if (gameStateSO.gameState != CustomGCOTypes.GameState.PlayMode)
+        {
+            gameStateSO.gameState = CustomGCOTypes.GameState.PlayMode;
+            gameStateSO.updatedValue.Invoke();
+        }
         playerRevived.Event.Invoke();
         SceneManager.LoadScene(0, LoadSceneMode.Additive);
         SceneManager.UnloadSceneAsync(gameObject.scene.name);

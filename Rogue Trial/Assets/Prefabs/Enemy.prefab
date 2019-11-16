@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 6318486361044167572}
   - component: {fileID: 3891534012402402601}
   - component: {fileID: 6665508661874112180}
+  - component: {fileID: 5832676581953719602}
   m_Layer: 11
   m_Name: Enemy
   m_TagString: Untagged
@@ -157,7 +158,7 @@ MonoBehaviour:
   range: 4
   offset: 1.5
   enemyListMBDO: {fileID: 0}
-  crossSceneTarget: {fileID: 11400000, guid: d539cd8740f2ba3479c6697c9afd74d1, type: 2}
+  playerTransformMBDO: {fileID: 0}
   target: {fileID: 0}
   entityLogic: {fileID: 6318486361044167572}
   rangedCoolDownInSeconds: 0
@@ -184,11 +185,14 @@ MonoBehaviour:
   health: 3
   onDeathReplaceWith: {fileID: 3217357049256741924, guid: aeb67d0938d32664dba0d6605bff5c3f,
     type: 3}
-  spriteRenderer: {fileID: 6318486361044167578}
   invincibilityTime: 0.5
   timeToFlashOnHit: 0.5
   flashSpeed: 20
   flashCustomColor: 0
+  flashingColors:
+    normalColor: {r: 1, g: 1, b: 1, a: 1}
+    hurtColor: {r: 1, g: 0, b: 0, a: 1}
+  spriteRenderer: {fileID: 6318486361044167578}
 --- !u!114 &3891534012402402601
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -201,6 +205,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c67d6b0894429b8428261bb3f20668f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movementState: 0
   interpolationRate: 0.5
   animationCurve:
     serializedVersion: 2
@@ -247,3 +252,68 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &5832676581953719602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6318486361044167583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 810271a1d95bc6c40aebeb6896e2677c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RulesTemplate:
+  - IfConditions:
+      ifCheck: 0
+      gameState: 0
+      Menu: 0
+    SetStates:
+      thenSet: 0
+      movementState: 0
+      EnableInputs: 0
+  - IfConditions:
+      ifCheck: 0
+      gameState: 1
+      Menu: 0
+    SetStates:
+      thenSet: 0
+      movementState: 0
+      EnableInputs: 0
+  - IfConditions:
+      ifCheck: 1
+      gameState: 0
+      Menu: 0
+    SetStates:
+      thenSet: 0
+      movementState: 0
+      EnableInputs: 0
+  - IfConditions:
+      ifCheck: 1
+      gameState: 3
+      Menu: 1
+    SetStates:
+      thenSet: 0
+      movementState: 1
+      EnableInputs: 0
+  - IfConditions:
+      ifCheck: 0
+      gameState: 2
+      Menu: 0
+    SetStates:
+      thenSet: 0
+      movementState: 1
+      EnableInputs: 0
+  - IfConditions:
+      ifCheck: 0
+      gameState: 3
+      Menu: 0
+    SetStates:
+      thenSet: 0
+      movementState: 1
+      EnableInputs: 0
+  movables:
+  - {fileID: 3891534012402402601}
+  usesInputs: []
+  gameStateSO: {fileID: 0}

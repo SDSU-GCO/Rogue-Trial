@@ -16,7 +16,10 @@ public class TraverseLevelDoor : TriggerPrompt
 
     private void OnValidate()
     {
-        promptMessage = "Press 'f' to enter \""+sceneToLoad+"\"";
+        promptMessage = "Press 'f' to enter \"" + sceneToLoad + "\"";
+#if UNITY_EDITOR
+        UnityEditor.EditorUtility.SetDirty(this);
+#endif
     }
 
     bool loadStarted = false;

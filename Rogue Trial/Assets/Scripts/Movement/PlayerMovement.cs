@@ -8,11 +8,8 @@ using ByteSheep.Events;
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(CapsuleCollider2D))]
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour, IMovable, IUsesInput
 {
-
-    public CustomGCOTypes.MovementState movementState = CustomGCOTypes.MovementState.Enabled;
-
     [SerializeField, Required, BoxGroup("Component Refs")]
     private new Rigidbody2D rigidbody2D = null;
     [SerializeField, Required, BoxGroup("Component Refs")]
@@ -55,9 +52,48 @@ public class PlayerMovement : MonoBehaviour
     public QuickEvent Dashed;
 
 
-    bool jumpButtonPressed;
+    [SerializeField, BoxGroup("Constraints")]
+    bool enableInputs = true;
+    public bool EnableInputs
+    {
+        get => enableInputs;
+        set => enableInputs = value;
+    }
 
-
+    [SerializeField, BoxGroup("Constraints")]
+    CustomGCOTypes.MovementState movementState = CustomGCOTypes.MovementState.Enabled;
+    public CustomGCOTypes.MovementState MovementState
+    {
+        get
+        {
+            return movementState;
+        }
+        set
+        {
+            if (value == CustomGCOTypes.MovementState.Disabled)
+            {
+                //cache momentum
+                cachedVelocity = rigidbody2D.velocity;
+                rigidbody2D.constraints = RigidbodyConstraints2D.FreezeAll;
+            }
+            else if (value == CustomGCOTypes.MovementState.DisabledKillMomentum)
+            {
+                rigidbody2D.constraints = RigidbodyConstraints2D.FreezeAll;
+                cachedVelocity = Vector2.zero;
+            }
+            else if (value == CustomGCOTypes.MovementState.Enabled)
+            {
+                rigidbody2D.constraints = RigidbodyConstraints2D.FreezeRotation;
+                rigidbody2D.velocity = cachedVelocity;
+            }
+            else
+            {
+                Debug.LogError(value + " is not implemented yet!");
+            }
+            movementState = value;
+        }
+    }
+    Vector2 cachedVelocity = Vector2.zero;
 
     [SerializeField, ReadOnly]
     private bool isGrounded = true;
@@ -67,117 +103,135 @@ public class PlayerMovement : MonoBehaviour
     public bool IsGrounded => isGrounded;
     public bool IsDashing => isDashing;
 
-    public RigidbodyConstraints2D rigidbodyConstraints2D = RigidbodyConstraints2D.FreezeRotation;
+    bool jumpButtonPressed;
 
-    private void OnValidate()
-    {
-        if (rigidbody2D == null)
-        {
-            rigidbody2D = GetComponent<Rigidbody2D>();
-        }
+    [SerializeField, HideInInspector]
+    PlayerTransformMBDO playerTransformMBDO;
 
-        if (capsuleCollider2D == null)
-        {
-            capsuleCollider2D = GetComponent<CapsuleCollider2D>();
-        }
+    //private void OnValidate()
+    //{
+    //    if (rigidbody2D == null)
+    //    {
+    //        rigidbody2D = GetComponent<Rigidbody2D>();
+    //    }
 
-        if (spriteRenderer == null)
-        {
-            spriteRenderer = GetComponent<SpriteRenderer>();
-        }
-    }
+    //    if (capsuleCollider2D == null)
+    //    {
+    //        capsuleCollider2D = GetComponent<CapsuleCollider2D>();
+    //    }
 
-    private Vector2 velocity = new Vector2();
+    //    if (spriteRenderer == null)
+    //    {
+    //        spriteRenderer = GetComponent<SpriteRenderer>();
+    //    }
+
+    //    Debug.Log("OnValidate: " + this + " scene: " + gameObject.scene.name);
+    //    if (playerTransformMBDO == null)
+    //    {
+    //        MBDOInitializationHelper mBDOInitializationHelper = default;
+
+    //        //IMPORTNANT STEP!!!
+    //        mBDOInitializationHelper.SetupCardinalSubSystem(this);
+    //        mBDOInitializationHelper.SetupMBDO(ref playerTransformMBDO);
+    //        if(playerTransformMBDO!=null && playerTransformMBDO.playerTransform==null)
+    //        {
+    //            Debug.LogWarning("Assignment to playerTransformMBDO.playerTransform in: " + this);
+    //            playerTransformMBDO.playerTransform = transform;
+    //        }
+    //    }
+    //}
+    //private void Reset()
+    //{
+    //    Debug.Log("OnReset: " + this);
+    //    if (playerTransformMBDO == null)
+    //    {
+    //        MBDOInitializationHelper mBDOInitializationHelper = default;
+
+    //        //IMPORTNANT STEP!!!
+    //        mBDOInitializationHelper.SetupCardinalSubSystem(this);
+    //        mBDOInitializationHelper.SetupMBDO(ref playerTransformMBDO);
+    //        if (playerTransformMBDO != null && playerTransformMBDO.playerTransform == null)
+    //        {
+    //            Debug.LogWarning("Assignment to playerTransformMBDO.playerTransform in: " + this);
+    //            playerTransformMBDO.playerTransform = transform;
+    //        }
+    //    }
+    //}
 
     private void Awake()
     {
-        if(enableDebugging)
-        {
-            circleCastEdge.GetComponent<SpriteRenderer>().enabled = true;
-            circleCastOrigin.GetComponent<SpriteRenderer>().enabled = true;
-        }
-        else
-        {
-            circleCastEdge.GetComponent<SpriteRenderer>().enabled = false;
-            circleCastOrigin.GetComponent<SpriteRenderer>().enabled = false;
-        }
+        if (circleCastEdge != null)
+            circleCastEdge.GetComponent<SpriteRenderer>().enabled = enableDebugging;
+
+        if (circleCastOrigin != null)
+            circleCastOrigin.GetComponent<SpriteRenderer>().enabled = enableDebugging;
     }
 
     //update loop
     private void Update()
     {
-        if(movementState!=CustomGCOTypes.MovementState.Disabled)
+        if(movementState == CustomGCOTypes.MovementState.Enabled)
         {
-            airbornTime = Mathf.Min(airbornTime + Time.deltaTime, allowedAirbornTime + 1);
-        }
+            {//handle inputs
+                jumpButtonPressed = Input.GetAxis("Vertical") > float.Epsilon;
 
-        jumpButtonPressed = Input.GetAxis("Vertical") > float.Epsilon && (movementState== CustomGCOTypes.MovementState.Enabled);
-        isGrounded = CheckGrounded();
+                //run
+                Vector2 velocity = rigidbody2D.velocity;
+                velocity.x = Input.GetAxis("Horizontal") * runSpeed;
+                rigidbody2D.velocity = velocity;
 
-        if(enableDebugging==true)
-        {
-            spriteRenderer.color = isGrounded ? Color.green : Color.white;
-        }
-
-        if (isGrounded)
-        {
-            airbornTime = 0;
-        }
-        if (!isGrounded && jumpButtonPressed!=true)
-        {
-            airbornTime = allowedAirbornTime;
-        }
-
-        //Debug.Log(Input.GetAxis("Vertical"));
-        //run
-        if (movementState == CustomGCOTypes.MovementState.Enabled)
-        {
-            velocity = rigidbody2D.velocity;
-            velocity.x = Input.GetAxis("Horizontal") * runSpeed;
-            rigidbody2D.velocity = velocity;
-        }
-
-        //jump
-        if (jumpButtonPressed && airbornTime <= allowedAirbornTime)
-        {
-            velocity = rigidbody2D.velocity;
-            velocity.y = jumpVelocity;
-            rigidbody2D.velocity = velocity;
-            ////non linear jump
-            //rigidbody2D.AddForce(Vector2.up * jumpVelocity);
-            Jumped.Invoke();
-        }
-
-        if(movementState != CustomGCOTypes.MovementState.Disabled && movementState!= CustomGCOTypes.MovementState.DisabledKillMomentum)
-        {        
-            //smart gravity
-            if (isGrounded != true)
-            {
-                if (rigidbody2D.velocity.y < 0)
+                //dash
+                if (Input.GetAxis("Dash") > float.Epsilon && dash == 0 && dashUsed != true && isDashing == false)
                 {
-                    rigidbody2D.velocity += Vector2.up * (-9.8f) * (fallMultiplier) * Time.deltaTime;
+                    isDashing = true;
+                    StartCoroutine(Dash());
+                    Dashed.Invoke();
                 }
-                else if (rigidbody2D.velocity.y > 0 && jumpButtonPressed != true)
+
+                //jump
+                if (jumpButtonPressed && airbornTime < allowedAirbornTime)
                 {
-                    rigidbody2D.velocity += Vector2.up * (-9.8f) * (lowJumpMultiplier) * Time.deltaTime;
+                    velocity = rigidbody2D.velocity;
+                    velocity.y = jumpVelocity;
+                    rigidbody2D.velocity = velocity;
+                    ////non linear jump
+                    //rigidbody2D.AddForce(Vector2.up * jumpVelocity);
+                    Jumped.Invoke();
                 }
             }
-        } 
 
+            {//update physics
+                isGrounded = CheckGrounded();
+                //smart gravity
+                if (isGrounded != true)
+                {
+                    if (rigidbody2D.velocity.y < 0)
+                    {
+                        rigidbody2D.velocity += Vector2.up * (-9.8f) * (fallMultiplier) * Time.deltaTime;
+                    }
+                    else if (rigidbody2D.velocity.y > 0 && jumpButtonPressed != true)
+                    {
+                        rigidbody2D.velocity += Vector2.up * (-9.8f) * (lowJumpMultiplier) * Time.deltaTime;
+                    }
+                }
 
-        
-        //dash
-        if(Input.GetAxis("Dash") > float.Epsilon && dash == 0 && dashUsed!=true && isDashing==false && movementState== CustomGCOTypes.MovementState.Enabled && movementState != CustomGCOTypes.MovementState.DisabledKillMomentum)
-        {
-            isDashing = true;
-            StartCoroutine(Dash());
-            Dashed.Invoke();
+                //update dash timer
+                dash = Mathf.Max(dash - Time.deltaTime, 0);
+                dashUsed = isGrounded ? false : dashUsed;
+
+                //update airborn timer
+                airbornTime = Mathf.Min(airbornTime + Time.deltaTime, allowedAirbornTime);
+
+                //update jump constraints
+                if (isGrounded)//reset the jump on the ground
+                    airbornTime = 0;
+                else if (jumpButtonPressed != true)//if we release the jump button off the ground, don't allow a resume jump
+                    airbornTime = allowedAirbornTime;
+            }
         }
-
-        if(movementState!= CustomGCOTypes.MovementState.Disabled && movementState != CustomGCOTypes.MovementState.DisabledKillMomentum)
+        if (enableDebugging == true)//change the color while on the ground
         {
-            dash = Mathf.Max(dash - Time.deltaTime, 0);
-            dashUsed = isGrounded ? false : dashUsed;
+            spriteRenderer.color = isGrounded ? Color.green : Color.white;
         }
     }
 
@@ -218,7 +272,7 @@ public class PlayerMovement : MonoBehaviour
         float forceDirection = (spriteRenderer.flipX ? (-1) : 1);
         while (dashProgress < dashTime)
         {
-            if (movementState != CustomGCOTypes.MovementState.Disabled && movementState != CustomGCOTypes.MovementState.DisabledKillMomentum)
+            if (movementState==CustomGCOTypes.MovementState.Enabled)
             {
                 rigidbody2D.AddForce(Vector2.right * forceDirection * dashForce);
                 dashProgress += Time.deltaTime;

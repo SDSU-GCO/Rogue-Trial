@@ -22,13 +22,19 @@ public class TextScaler : MonoBehaviour
         if(textMeshPro==null)
         { 
             textMeshPro = GetComponent<TextMeshProUGUI>();
+#if UNITY_EDITOR
+            UnityEditor.EditorUtility.SetDirty(this);
+#endif
         }
-        
+
         RectTransform tmp = GetComponent<RectTransform>();
         while (canvasScaler == null && tmp != null)
         {
             canvasScaler = tmp.GetComponent<CanvasScaler>();
             tmp = (RectTransform)tmp.parent;
+#if UNITY_EDITOR
+            UnityEditor.EditorUtility.SetDirty(this);
+#endif
         }
     }
     private void Awake()

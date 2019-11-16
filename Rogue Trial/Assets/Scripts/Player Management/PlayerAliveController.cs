@@ -19,12 +19,27 @@ public class PlayerAliveController : MonoBehaviour
     private void OnValidate()
     {
         if (entity_Logic == null)
+        {
+            Debug.LogWarning("entity_Logic is not assigned in "+this+" in " +gameObject.scene.name);
             entity_Logic = GetComponent<Entity_Logic>();
+#if UNITY_EDITOR
+            UnityEditor.EditorUtility.SetDirty(this);
+#endif
+        }
     }
     private void Awake()
     {
+    }
+    private void OnEnable()
+    {
         Died.Event.AddListener(die);
         Revived.Event.AddListener(res);
+        oldHP = entity_Logic.health;
+    }
+    private void OnDisable()
+    {
+        Died.Event.RemoveListener(die);
+        Revived.Event.RemoveListener(res);
         oldHP = entity_Logic.health;
     }
     public void die()
