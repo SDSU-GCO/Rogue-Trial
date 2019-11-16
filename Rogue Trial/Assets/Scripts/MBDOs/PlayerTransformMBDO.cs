@@ -18,10 +18,10 @@ public class PlayerTransformMBDO : MBDataObject
             {
                 Debug.LogWarning("Assignment to playerTransformMBDO.playerTransform in: " + this + " scene: " + gameObject.scene.name);
                 playerTransform = go.GetComponent<Transform>();
-                UnityEditor.EditorUtility.SetDirty(this);
             }
         }
         base.OnValidate();
+        UnityEditor.EditorUtility.SetDirty(this);
 #endif 
     }
 }

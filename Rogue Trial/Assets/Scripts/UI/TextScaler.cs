@@ -8,7 +8,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(TextMeshProUGUI))]
 public class TextScaler : MonoBehaviour
 {
-    [HideInInspector]
+    [SerializeField, HideInInspector]
     TextMeshProUGUI textMeshPro = null;
     [SerializeField, HideInInspector]
     CanvasScaler canvasScaler = null;
@@ -39,7 +39,6 @@ public class TextScaler : MonoBehaviour
     }
     private void Awake()
     {
-        OnValidate();
         fontSize = textMeshPro.fontSize;
     }
     private void Update()

@@ -59,6 +59,9 @@ public class SpawnPlayer : MonoBehaviour
             //IMPORTNANT STEP!!!
             mBDOInitializationHelper.SetupCardinalSubSystem(this);
             mBDOInitializationHelper.SetupMBDO(ref playerTransformMBDO);
+#if UNITY_EDITOR
+            UnityEditor.EditorUtility.SetDirty(this);
+#endif
         }
     }
     private void Awake()
