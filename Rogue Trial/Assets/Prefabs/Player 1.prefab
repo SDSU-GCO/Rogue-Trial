@@ -247,7 +247,7 @@ GameObject:
   - component: {fileID: 4239498098057373765}
   - component: {fileID: 5279654558936316378}
   m_Layer: 11
-  m_Name: Triangle
+  m_Name: Character Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -446,6 +446,7 @@ GameObject:
   - component: {fileID: 7758839803176447444}
   - component: {fileID: 5589749906151201696}
   - component: {fileID: 2549030327463446236}
+  - component: {fileID: 1940892472716137220}
   - component: {fileID: 6070498220698471068}
   m_Layer: 10
   m_Name: Player 1
@@ -646,9 +647,23 @@ MonoBehaviour:
   flashSpeed: 20
   flashCustomColor: 1
   flashingColors:
-    hurtColor: {r: 1, g: 0, b: 0, a: 1}
     normalColor: {r: 1, g: 1, b: 1, a: 1}
+    hurtColor: {r: 1, g: 0, b: 0, a: 1}
   spriteRenderer: {fileID: 3222318933843911601}
+--- !u!114 &1940892472716137220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7758839803176447451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5384d495090e4ea43a72870c26641349, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MeshRendererObjects:
+  - {fileID: 7758839803176447451}
 --- !u!114 &6070498220698471068
 MonoBehaviour:
   m_ObjectHideFlags: 0
