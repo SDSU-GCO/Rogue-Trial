@@ -316,4 +316,4 @@ MonoBehaviour:
   movables:
   - {fileID: 3891534012402402601}
   usesInputs: []
-  gameStateSO: {fileID: 0}
+  gameStateSO: {fileID: 11400000, guid: c958049ac6246424db109b1e303a10ea, type: 2}
