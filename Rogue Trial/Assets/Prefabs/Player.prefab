@@ -758,9 +758,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _PreviousHealth: 0
-  _CurrentHealth: 12
+  _CurrentHealth: 4
   _PreviousMaxHealth: 0
-  _MaxHealth: 12
+  _MaxHealth: 4
   EmptyEvent:
     inspectorListHeight: 63
     persistentCalls:

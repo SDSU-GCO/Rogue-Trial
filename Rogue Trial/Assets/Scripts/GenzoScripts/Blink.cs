@@ -12,7 +12,7 @@ public class Blink : MonoBehaviour
     private void Awake() {
         MeshRendererObjects.ForEach( x => MeshRenderers.Add( x.GetComponent<Renderer>() ));
         //MeshRenderer = GetComponent<MeshRenderer>();
-        MeshRenderers.ForEach( x => Debug.Log( x.name ) );
+        //MeshRenderers.ForEach( x => Debug.Log( x.name ) );
     }
 
     public void BlinkTime(float inOffset, float inRepeatDelay, float inIterations) { 

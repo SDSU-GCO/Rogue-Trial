@@ -35,13 +35,13 @@ public class DiscreteHpBar : MonoBehaviour
         }
     }
     private void AddLastHp() {
-        Debug.Log("Add");
+        //Debug.Log("Add");
         HeartContainers.Add( CreateHeartContainer() );
         UpdateSpacing();
         SetHp(HealthObjectRef.CurrentHealth);
     }
     private void RemoveLastHp() {
-        Debug.Log("Remove");
+        //Debug.Log("Remove");
         if( HeartContainers.Count > 0 ) {
             GameObject RemoveObj = HeartContainers.Last();
             RemoveObj.SetActive( false );
@@ -72,7 +72,7 @@ public class DiscreteHpBar : MonoBehaviour
         int TargetSegmentCount = Mathf.CeilToInt( (float) inMaxHealth / SegmentCount );
         int Delta = TargetSegmentCount - PrevSegmentCount;
 
-        Debug.Log($"{PrevSegmentCount} -> {TargetSegmentCount}");
+        //Debug.Log($"{PrevSegmentCount} -> {TargetSegmentCount}");
 
         for( int i = 0; i < Mathf.Abs(Delta); i++ ){
             if(Delta > 0) AddLastHp();
@@ -113,7 +113,7 @@ public class DiscreteHpBar : MonoBehaviour
         HealthObjectRef.IncreaseEvent.AddListener( SetMaxHp );
         HealthObjectRef.DecreaseEvent.AddListener( SetMaxHp );
 
-        Debug.Log($"{HealthObjectRef.CurrentHealth}/{HealthObjectRef.MaxHealth}");
+        //Debug.Log($"{HealthObjectRef.CurrentHealth}/{HealthObjectRef.MaxHealth}");
         SetMaxHp( HealthObjectRef.MaxHealth );
 
     }
