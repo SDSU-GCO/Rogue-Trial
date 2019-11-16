@@ -95,7 +95,7 @@ public class Player_Attack_Logic : MonoBehaviour
                 {
                     childSprite.flipX = spriteRenderer.flipX;
                 }
-            Debug.Log(spriteRenderer.flipX);
+            //Debug.Log(spriteRenderer.flipX);
             
         }
     }

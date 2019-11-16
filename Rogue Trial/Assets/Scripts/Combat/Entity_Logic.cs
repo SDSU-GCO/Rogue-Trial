@@ -13,12 +13,40 @@ public class Entity_Logic : MonoBehaviour
     CrossSceneEventSO DamagedEvent;
     [SerializeField]
     CrossSceneEventSO DiedEvent;
+    [SerializeField]
+    Health healthComponent;
 #pragma warning restore CS0649 // varriable is never assigned to and will always have it's default value
 
     //entity parameters
     public bool disableColliderOnDeath = true;
 
-    public float health = 3f;
+    public int health
+    {
+        get
+        {
+            if(healthComponent!=null)
+            {
+                return healthComponent.CurrentHealth;
+            }
+            else
+            {
+                Debug.LogError("Attach a health component to " + this + "you dum dum");
+                return 1;
+            }
+        }
+        set
+        {
+
+            if (healthComponent != null)
+            {
+                healthComponent.CurrentHealth = value;
+            }
+            else
+            {
+                Debug.LogError("Attach a health component to " + this + "you dum dum");
+            }
+        }
+    }
 
     private void OnValidate()
     {
@@ -29,6 +57,14 @@ public class Entity_Logic : MonoBehaviour
             UnityEditor.EditorUtility.SetDirty(this);
 #endif
         }
+        if (healthComponent == null)
+        {
+            healthComponent = GetComponent<Health>();
+#if UNITY_EDITOR
+            UnityEditor.EditorUtility.SetDirty(this);
+#endif
+        }
+
     }
 
     public GameObject onDeathReplaceWith;
@@ -48,7 +84,7 @@ public class Entity_Logic : MonoBehaviour
     public float timeToFlashOnHit = 0.5f;
 
     //take damage function
-    public void TakeDamage(float amount)
+    public void TakeDamage(int amount)
     {
         if (invincibility >= invincibilityTime)
         {

@@ -15,7 +15,7 @@ public class PlayerAliveController : MonoBehaviour
     [SerializeField, Required]
     CrossSceneEventSO Revived;
 #pragma warning restore CS0649 // varriable is never assigned to and will always have it's default value
-    float oldHP;
+    int oldHP;
     private void OnValidate()
     {
         if (entity_Logic == null)
@@ -26,9 +26,6 @@ public class PlayerAliveController : MonoBehaviour
             UnityEditor.EditorUtility.SetDirty(this);
 #endif
         }
-    }
-    private void Awake()
-    {
     }
     private void OnEnable()
     {
