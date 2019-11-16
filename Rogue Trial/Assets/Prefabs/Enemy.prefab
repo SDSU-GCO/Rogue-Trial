@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 3891534012402402601}
   - component: {fileID: 6665508661874112180}
   - component: {fileID: 5832676581953719602}
+  - component: {fileID: 8277920464738141608}
   m_Layer: 11
   m_Name: Enemy
   m_TagString: Untagged
@@ -181,8 +182,8 @@ MonoBehaviour:
       calls: []
   DamagedEvent: {fileID: 0}
   DiedEvent: {fileID: 0}
+  healthComponent: {fileID: 8277920464738141608}
   disableColliderOnDeath: 1
-  health: 3
   onDeathReplaceWith: {fileID: 3217357049256741924, guid: aeb67d0938d32664dba0d6605bff5c3f,
     type: 3}
   invincibilityTime: 0.5
@@ -317,3 +318,43 @@ MonoBehaviour:
   - {fileID: 3891534012402402601}
   usesInputs: []
   gameStateSO: {fileID: 11400000, guid: c958049ac6246424db109b1e303a10ea, type: 2}
+--- !u!114 &8277920464738141608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6318486361044167583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e590ff339d5475343b0fb1d47b8114d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _PreviousHealth: 0
+  _CurrentHealth: 3
+  _PreviousMaxHealth: 0
+  _MaxHealth: 3
+  EmptyEvent:
+    inspectorListHeight: 63
+    persistentCalls:
+      calls: []
+  MaxEvent:
+    inspectorListHeight: 63
+    persistentCalls:
+      calls: []
+  DecreaseEvent:
+    inspectorListHeight: 63
+    persistentCalls:
+      calls: []
+  IncreaseEvent:
+    inspectorListHeight: 63
+    persistentCalls:
+      calls: []
+  InflictEvent:
+    inspectorListHeight: 63
+    persistentCalls:
+      calls: []
+  HealEvent:
+    inspectorListHeight: 63
+    persistentCalls:
+      calls: []
