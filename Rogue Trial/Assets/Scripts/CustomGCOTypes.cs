@@ -20,7 +20,6 @@ public class CustomGCOTypes : MonoBehaviour
     public enum MovementState
     {
         Enabled,
-        IgnoreInput,
         Disabled,
         DisabledKillMomentum
     }

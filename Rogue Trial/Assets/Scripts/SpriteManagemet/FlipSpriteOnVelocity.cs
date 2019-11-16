@@ -15,18 +15,24 @@ public class FlipSpriteOnVelocity : MonoBehaviour
 
     private void OnValidate()
     {
-        Transform tmp = transform;
-        do
+        Transform tmp = transform; 
+        while (rigidbody2D == null && tmp != null)
         {
             rigidbody2D = tmp.GetComponent<Rigidbody2D>();
             tmp = tmp.parent;
-        } while (rigidbody2D == null && tmp != null);
-        tmp = transform;
-        do
+#if UNITY_EDITOR
+            UnityEditor.EditorUtility.SetDirty(this);
+#endif
+        }
+        tmp = transform; 
+        while (spriteRenderer == null && tmp != null)
         {
             spriteRenderer = tmp.GetComponent<SpriteRenderer>();
             tmp = tmp.parent;
-        } while (spriteRenderer == null && tmp != null);
+#if UNITY_EDITOR
+            UnityEditor.EditorUtility.SetDirty(this);
+#endif
+        }
     }
 
     public float deadZone = 0.001f;

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1617818259274187885}
   - component: {fileID: 1617818259274187875}
   - component: {fileID: 8801559228322586560}
+  - component: {fileID: 5399627397080553509}
   m_Layer: 16
   m_Name: Door
   m_TagString: Untagged
@@ -133,7 +134,7 @@ MonoBehaviour:
       calls:
       - genericMenuData:
           selectedComponent: 5
-          selectedMember: 8
+          selectedMember: 9
           isDynamic: 0
         target: {fileID: 1617818259274187875}
         memberName: DispPrompt
@@ -188,7 +189,88 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f441dc07791425841a194cf15c7ecc18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTransformSO: {fileID: 11400000, guid: d539cd8740f2ba3479c6697c9afd74d1, type: 2}
+  playerTransformMBDO: {fileID: 0}
+--- !u!114 &5399627397080553509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1617818259274187881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 810271a1d95bc6c40aebeb6896e2677c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RulesTemplate:
+  - IfConditions:
+      ifCheck: 2
+      gameState: 0
+      Menu: 0
+    SetStates:
+      thenSet: 1
+      movementState: 0
+      EnableInputs: 1
+  - IfConditions:
+      ifCheck: 2
+      gameState: 1
+      Menu: 0
+    SetStates:
+      thenSet: 1
+      movementState: 0
+      EnableInputs: 0
+  - IfConditions:
+      ifCheck: 2
+      gameState: 2
+      Menu: 0
+    SetStates:
+      thenSet: 1
+      movementState: 0
+      EnableInputs: 0
+  - IfConditions:
+      ifCheck: 2
+      gameState: 3
+      Menu: 0
+    SetStates:
+      thenSet: 1
+      movementState: 0
+      EnableInputs: 0
+  - IfConditions:
+      ifCheck: 2
+      gameState: 0
+      Menu: 1
+    SetStates:
+      thenSet: 1
+      movementState: 0
+      EnableInputs: 0
+  - IfConditions:
+      ifCheck: 2
+      gameState: 1
+      Menu: 1
+    SetStates:
+      thenSet: 1
+      movementState: 0
+      EnableInputs: 0
+  - IfConditions:
+      ifCheck: 2
+      gameState: 2
+      Menu: 1
+    SetStates:
+      thenSet: 1
+      movementState: 0
+      EnableInputs: 0
+  - IfConditions:
+      ifCheck: 2
+      gameState: 3
+      Menu: 1
+    SetStates:
+      thenSet: 1
+      movementState: 0
+      EnableInputs: 0
+  movables: []
+  usesInputs:
+  - {fileID: 1617818259274187875}
+  gameStateSO: {fileID: 11400000, guid: c958049ac6246424db109b1e303a10ea, type: 2}
 --- !u!1 &1617818260266076291
 GameObject:
   m_ObjectHideFlags: 0

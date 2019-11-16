@@ -57,12 +57,19 @@ public class PanelController : MonoBehaviour
             foreach (UITabController uITabController in uITabControllers)
             {
                 uITabController.panelController = this;
+#if UNITY_EDITOR
+                UnityEditor.EditorUtility.SetDirty(uITabController);
+#endif
             }
         }
         else
         {
             Debug.LogError("Tabs is null in " + this);
         }
+
+#if UNITY_EDITOR
+        UnityEditor.EditorUtility.SetDirty(this);
+#endif
     }
 
     public void SetActiveFrame(UIContentFrameController frameToActivate)

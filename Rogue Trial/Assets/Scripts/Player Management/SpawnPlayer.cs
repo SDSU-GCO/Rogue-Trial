@@ -10,7 +10,7 @@ public class SpawnPlayer : MonoBehaviour
     [SerializeField, Required]
     CrossSceneSceneDataSO crossSceneSceneDataSO;
     [SerializeField, Required]
-    CrossSceneTransformSO playerTransformSO;
+    PlayerTransformMBDO playerTransformMBDO;
     Transform[] childTransforms;
 
     SpriteRenderer[] spriteRenderers = null;
@@ -24,10 +24,50 @@ public class SpawnPlayer : MonoBehaviour
             spriteRenderers.Append(tmp);
 
         childTransforms = GetComponentsInChildren<Transform>();
+
+        if (crossSceneSceneDataSO == null)
+        {
+            crossSceneSceneDataSO = AssetManagement.FindAssetByType<CrossSceneSceneDataSO>();
+        }
+
+        if (playerTransformMBDO == null)
+        {
+            MBDOInitializationHelper mBDOInitializationHelper = default;
+
+            //IMPORTNANT STEP!!!
+            mBDOInitializationHelper.SetupCardinalSubSystem(this);
+            mBDOInitializationHelper.SetupMBDO(ref playerTransformMBDO);
+        }
+#if UNITY_EDITOR
+        UnityEditor.EditorUtility.SetDirty(this);
+#endif
+    }
+    private void Reset()
+    {
+        if(crossSceneSceneDataSO==null)
+        {
+            crossSceneSceneDataSO = AssetManagement.FindAssetByType<CrossSceneSceneDataSO>();
+
+#if UNITY_EDITOR
+            UnityEditor.EditorUtility.SetDirty(this);
+#endif
+        }
+        if (playerTransformMBDO == null)
+        {
+            MBDOInitializationHelper mBDOInitializationHelper = default;
+
+            //IMPORTNANT STEP!!!
+            mBDOInitializationHelper.SetupCardinalSubSystem(this);
+            mBDOInitializationHelper.SetupMBDO(ref playerTransformMBDO);
+#if UNITY_EDITOR
+            UnityEditor.EditorUtility.SetDirty(this);
+#endif
+        }
     }
     private void Awake()
     {
         bool loop=true;
+        target = transform;
         foreach(Transform t in childTransforms.TakeWhile( t => { return loop; }))
         {
             if (crossSceneSceneDataSO.previousScene.name == t.name)
@@ -42,8 +82,8 @@ public class SpawnPlayer : MonoBehaviour
     }
     private void Start()
     {
-        if (playerTransformSO == null)
-            Debug.LogError("crossSceneDataSO null in: "+this);
-        playerTransformSO.value.position = target == null ? transform.position : target.position;
+        if (playerTransformMBDO == null)
+            Debug.LogError("playerTransformMBDO null in: " + this);
+        playerTransformMBDO.playerTransform.position = target == null ? transform.position : target.position;
     }
 }

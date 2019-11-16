@@ -25,13 +25,15 @@ public class Entity_Logic : MonoBehaviour
         if (spriteRenderer == null)
         {
             spriteRenderer = GetComponent<SpriteRenderer>();
+#if UNITY_EDITOR
+            UnityEditor.EditorUtility.SetDirty(this);
+#endif
         }
     }
 
     public GameObject onDeathReplaceWith;
 
     //initialize ambiguous parameters
-    public void Awake() => OnValidate();
     private void Start() => hpUpdated.Invoke(health);
     private void OnEnable() => hpUpdated.Invoke(health);
 
@@ -52,7 +54,9 @@ public class Entity_Logic : MonoBehaviour
         {
             if(DamagedEvent!=null)
                 DamagedEvent.Event.Invoke();
+            
             health -= amount;
+
             invincibility = 0;
 
             hpUpdated.Invoke(health);

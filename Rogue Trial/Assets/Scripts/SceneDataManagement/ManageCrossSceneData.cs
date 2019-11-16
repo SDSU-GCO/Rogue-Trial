@@ -10,10 +10,6 @@ public class ManageCrossSceneData : MonoBehaviour
 #pragma warning disable CS0649 // varriable is never assigned to and will always have it's default value
     [SerializeField, Required]
     CrossSceneBoolSO[] roomClearData;
-    [SerializeField, Required]
-    CrossSceneTransformSO player;
-    [SerializeField, Required]
-    Transform playerTransform = null;
 #pragma warning restore CS0649 // varriable is never assigned to and will always have it's default value
 
 
@@ -24,7 +20,6 @@ public class ManageCrossSceneData : MonoBehaviour
         {
             csb.value = false;
         }
-        player.value = playerTransform;
     }
     
 }

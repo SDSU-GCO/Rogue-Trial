@@ -18,12 +18,21 @@ public class RectTransformController : MonoBehaviour
     private void OnValidate()
     {
         if (rectTransform == null)
-            rectTransform = GetComponent<RectTransform>();
+        {
+
+        rectTransform = GetComponent<RectTransform>();
+#if UNITY_EDITOR
+            UnityEditor.EditorUtility.SetDirty(this);
+#endif
+        }
         RectTransform tmp = rectTransform;
         while (canvasScaler == null && tmp != null)
         {
             canvasScaler = tmp.GetComponent<CanvasScaler>();
             tmp = (RectTransform) tmp.parent;
+#if UNITY_EDITOR
+            UnityEditor.EditorUtility.SetDirty(this);
+#endif
         }
     }
 

@@ -24,11 +24,17 @@ public class PlayerAnimation : MonoBehaviour
         if (rigidbody2D == null)
         {
             rigidbody2D = GetComponent<Rigidbody2D>();
+#if UNITY_EDITOR
+            UnityEditor.EditorUtility.SetDirty(this);
+#endif
         }
 
         if (animator == null)
         {
             animator = GetComponent<Animator>();
+#if UNITY_EDITOR
+            UnityEditor.EditorUtility.SetDirty(this);
+#endif
         }
     }
     public void SetToAttack() => SetAnimationState(AnimationState.ATTACKING);
