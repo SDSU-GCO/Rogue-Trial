@@ -18,13 +18,16 @@ public class PlayerAliveController : MonoBehaviour
     int oldHP;
     private void OnValidate()
     {
-        if (entity_Logic == null)
+        if (Application.isEditor)
         {
-            Debug.LogWarning("entity_Logic is not assigned in "+this+" in " +gameObject.scene.name);
-            entity_Logic = GetComponent<Entity_Logic>();
+            if (entity_Logic == null)
+            {
+                Debug.LogWarning("entity_Logic is not assigned in " + this + " in " + gameObject.scene.name);
+                entity_Logic = GetComponent<Entity_Logic>();
 #if UNITY_EDITOR
-            UnityEditor.EditorUtility.SetDirty(this);
+                UnityEditor.EditorUtility.SetDirty(this);
 #endif
+            }
         }
     }
     private void OnEnable()

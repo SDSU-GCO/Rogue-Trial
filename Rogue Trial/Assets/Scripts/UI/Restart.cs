@@ -15,11 +15,13 @@ public class Restart : MonoBehaviour
     public Scene defaultScene;
     private void OnValidate()
     {
+        if(Application.isEditor)
+        
         if (gameStateSO == null)
         {
+#if UNITY_EDITOR
             gameStateSO = AssetManagement.FindAssetByType<GameStateSO>();
 
-#if UNITY_EDITOR
             UnityEditor.EditorUtility.SetDirty(this);
 #endif
         }

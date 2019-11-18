@@ -68,8 +68,11 @@ public class PlaySound : MonoBehaviour
 
     private void OnValidate()
     {
-        if (audioMixerGroup == null)
-            Debug.LogError(this);
+        if (Application.isEditor)
+        {
+            if (audioMixerGroup == null)
+                Debug.LogError(this);
+        }
     }
 
     public void PlayFile(string filePath)

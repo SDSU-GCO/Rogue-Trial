@@ -5,8 +5,10 @@ using NaughtyAttributes;
 
 public class FlipSpriteOnVelocity : MonoBehaviour
 {
+#pragma warning disable CS0109
     [SerializeField, Required, BoxGroup("Component Refs")]
     new Rigidbody2D rigidbody2D = null;
+#pragma warning restore CS0109
 
     [SerializeField, Required, BoxGroup("Component Refs")]
     SpriteRenderer spriteRenderer = null;
@@ -15,23 +17,26 @@ public class FlipSpriteOnVelocity : MonoBehaviour
 
     private void OnValidate()
     {
-        Transform tmp = transform; 
-        while (rigidbody2D == null && tmp != null)
+        if (Application.isEditor)
         {
-            rigidbody2D = tmp.GetComponent<Rigidbody2D>();
-            tmp = tmp.parent;
+            Transform tmp = transform;
+            while (rigidbody2D == null && tmp != null)
+            {
+                rigidbody2D = tmp.GetComponent<Rigidbody2D>();
+                tmp = tmp.parent;
 #if UNITY_EDITOR
-            UnityEditor.EditorUtility.SetDirty(this);
+                UnityEditor.EditorUtility.SetDirty(this);
 #endif
-        }
-        tmp = transform; 
-        while (spriteRenderer == null && tmp != null)
-        {
-            spriteRenderer = tmp.GetComponent<SpriteRenderer>();
-            tmp = tmp.parent;
+            }
+            tmp = transform;
+            while (spriteRenderer == null && tmp != null)
+            {
+                spriteRenderer = tmp.GetComponent<SpriteRenderer>();
+                tmp = tmp.parent;
 #if UNITY_EDITOR
-            UnityEditor.EditorUtility.SetDirty(this);
+                UnityEditor.EditorUtility.SetDirty(this);
 #endif
+            }
         }
     }
 

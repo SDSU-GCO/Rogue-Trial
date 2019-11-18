@@ -50,21 +50,23 @@ public class Entity_Logic : MonoBehaviour
 
     private void OnValidate()
     {
-        if (spriteRenderer == null)
+        if (Application.isEditor)
         {
-            spriteRenderer = GetComponent<SpriteRenderer>();
+            if (spriteRenderer == null)
+            {
+                spriteRenderer = GetComponent<SpriteRenderer>();
 #if UNITY_EDITOR
-            UnityEditor.EditorUtility.SetDirty(this);
+                UnityEditor.EditorUtility.SetDirty(this);
 #endif
-        }
-        if (healthComponent == null)
-        {
-            healthComponent = GetComponent<Health>();
+            }
+            if (healthComponent == null)
+            {
+                healthComponent = GetComponent<Health>();
 #if UNITY_EDITOR
-            UnityEditor.EditorUtility.SetDirty(this);
+                UnityEditor.EditorUtility.SetDirty(this);
 #endif
+            }
         }
-
     }
 
     public GameObject onDeathReplaceWith;

@@ -4,29 +4,30 @@ using UnityEngine;
 
 public class CheckEnemyList : ConditionalComponent
 {
-    [SerializeField]
-    [HideInInspector]
-    public EnemyListMBDO enemyListMBDO;
-
-    
+#pragma warning disable CS0649
+    [SerializeField, HideInInspector]
+    EnemyListMBDO enemyListMBDO;
+#pragma warning restore CS0649
 
     private void OnValidate()
     {
-
-        if (enemyListMBDO == null)
-        {
-            MBDOInitializationHelper mBDOInitializationHelper = default;
-
-            //IMPORTNANT STEP!!!
-            mBDOInitializationHelper.SetupCardinalSubSystem(this);
-            mBDOInitializationHelper.SetupMBDO(ref enemyListMBDO);
-        }
-
 #if UNITY_EDITOR
-        UnityEditor.EditorUtility.SetDirty(this);
+        if (Application.isEditor)
+        {
+
+            if (enemyListMBDO == null)
+            {
+                MBDOInitializationHelper mBDOInitializationHelper = default;
+
+                //IMPORTNANT STEP!!!
+                mBDOInitializationHelper.SetupCardinalSubSystem(this);
+                mBDOInitializationHelper.SetupMBDO(ref enemyListMBDO);
+            }
+
+            UnityEditor.EditorUtility.SetDirty(this);
+        }
 #endif
     }
-
 
 
     public override bool Result(Collider2D dafuqIsThis)

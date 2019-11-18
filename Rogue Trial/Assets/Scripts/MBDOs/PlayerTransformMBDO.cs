@@ -10,18 +10,21 @@ public class PlayerTransformMBDO : MBDataObject
     public UnityEvent update;
     public override void OnValidate()
     {
-#if UNITY_EDITOR
-        if (playerTransform == null)
+        if (Application.isEditor)
         {
-            GameObject go = GameObject.FindGameObjectWithTag("Player");
-            if (go != null && go.scene != new UnityEngine.SceneManagement.Scene() && go.scene == gameObject.scene)
+#if UNITY_EDITOR
+            if (playerTransform == null)
             {
-                Debug.LogWarning("Assignment to playerTransformMBDO.playerTransform in: " + this + " scene: " + gameObject.scene.name);
-                playerTransform = go.GetComponent<Transform>();
+                GameObject go = GameObject.FindGameObjectWithTag("Player");
+                if (go != null && go.scene != new UnityEngine.SceneManagement.Scene() && go.scene == gameObject.scene)
+                {
+                    Debug.LogWarning("Assignment to playerTransformMBDO.playerTransform in: " + this + " scene: " + gameObject.scene.name);
+                    playerTransform = go.GetComponent<Transform>();
+                }
             }
+            base.OnValidate();
+            UnityEditor.EditorUtility.SetDirty(this);
+#endif
         }
-        base.OnValidate();
-        UnityEditor.EditorUtility.SetDirty(this);
-#endif 
     }
 }

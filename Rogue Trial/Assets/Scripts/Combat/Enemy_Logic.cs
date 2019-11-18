@@ -57,33 +57,36 @@ public class Enemy_Logic : MonoBehaviour
 
     private void OnValidate()
     {
-        InitializeFromRangedAttack();
-
-        if (enemyListMBDO == null)
+        if (Application.isEditor)
         {
-            MBDOInitializationHelper mBDOInitializationHelper = default;
+            InitializeFromRangedAttack();
 
-            //IMPORTNANT STEP!!!
-            mBDOInitializationHelper.SetupCardinalSubSystem(this);
-            mBDOInitializationHelper.SetupMBDO(ref enemyListMBDO);
-        }
+            if (enemyListMBDO == null)
+            {
+                MBDOInitializationHelper mBDOInitializationHelper = default;
 
-        if (playerTransformMBDO == null)
-        {
-            MBDOInitializationHelper mBDOInitializationHelper = default;
+                //IMPORTNANT STEP!!!
+                mBDOInitializationHelper.SetupCardinalSubSystem(this);
+                mBDOInitializationHelper.SetupMBDO(ref enemyListMBDO);
+            }
 
-            //IMPORTNANT STEP!!!
-            mBDOInitializationHelper.SetupCardinalSubSystem(this);
-            mBDOInitializationHelper.SetupMBDO(ref playerTransformMBDO);
-        }
+            if (playerTransformMBDO == null)
+            {
+                MBDOInitializationHelper mBDOInitializationHelper = default;
 
-        if (entityLogic == null)
-        {
-            entityLogic = GetComponent<Entity_Logic>();
+                //IMPORTNANT STEP!!!
+                mBDOInitializationHelper.SetupCardinalSubSystem(this);
+                mBDOInitializationHelper.SetupMBDO(ref playerTransformMBDO);
+            }
+
+            if (entityLogic == null)
+            {
+                entityLogic = GetComponent<Entity_Logic>();
 
 #if UNITY_EDITOR
-            UnityEditor.EditorUtility.SetDirty(this);
+                UnityEditor.EditorUtility.SetDirty(this);
 #endif
+            }
         }
     }
 

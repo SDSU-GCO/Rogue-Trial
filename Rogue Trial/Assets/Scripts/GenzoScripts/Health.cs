@@ -1,6 +1,7 @@
 ﻿using ByteSheep.Events;
 using UnityEngine;
 using System;
+using NaughtyAttributes;
 
 public class Health : MonoBehaviour{ 
 

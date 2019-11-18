@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using UnityEditor;
 using UnityEngine.Assertions;
 using ByteSheep.Events;
+using NaughtyAttributes;
 
 [RequireComponent(typeof(RectTransform))]
 [RequireComponent(typeof(Image))]

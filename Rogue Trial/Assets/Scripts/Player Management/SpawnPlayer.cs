@@ -7,63 +7,74 @@ using System.Linq;
 public class SpawnPlayer : MonoBehaviour
 {
 #pragma warning disable CS0649 // varriable is never assigned to and will always have it's default value
-    [SerializeField, Required]
+    [SerializeField]
     CrossSceneSceneDataSO crossSceneSceneDataSO;
-    [SerializeField, Required]
+    [SerializeField]
     PlayerTransformMBDO playerTransformMBDO;
+    [SerializeField,HideInInspector]
     Transform[] childTransforms;
 
+    [SerializeField, HideInInspector]
     SpriteRenderer[] spriteRenderers = null;
 #pragma warning restore CS0649 // varriable is never assigned to and will always have it's default value
     Transform target = null;
     private void OnValidate()
     {
-        spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
-        SpriteRenderer tmp = GetComponent<SpriteRenderer>();
-        if(tmp!=null)
-            spriteRenderers.Append(tmp);
-
-        childTransforms = GetComponentsInChildren<Transform>();
-
-        if (crossSceneSceneDataSO == null)
+        if (Application.isEditor)
         {
-            crossSceneSceneDataSO = AssetManagement.FindAssetByType<CrossSceneSceneDataSO>();
-        }
+            spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
+            SpriteRenderer tmp = GetComponent<SpriteRenderer>();
+            if (tmp != null)
+                spriteRenderers.Append(tmp);
 
-        if (playerTransformMBDO == null)
-        {
-            MBDOInitializationHelper mBDOInitializationHelper = default;
+            childTransforms = GetComponentsInChildren<Transform>();
 
-            //IMPORTNANT STEP!!!
-            mBDOInitializationHelper.SetupCardinalSubSystem(this);
-            mBDOInitializationHelper.SetupMBDO(ref playerTransformMBDO);
-        }
+            if (crossSceneSceneDataSO == null)
+            {
 #if UNITY_EDITOR
-        UnityEditor.EditorUtility.SetDirty(this);
+                crossSceneSceneDataSO = AssetManagement.FindAssetByType<CrossSceneSceneDataSO>();
 #endif
+            }
+
+            if (playerTransformMBDO == null)
+            {
+                MBDOInitializationHelper mBDOInitializationHelper = default;
+
+                //IMPORTNANT STEP!!!
+                mBDOInitializationHelper.SetupCardinalSubSystem(this);
+                mBDOInitializationHelper.SetupMBDO(ref playerTransformMBDO);
+            }
+#if UNITY_EDITOR
+            UnityEditor.EditorUtility.SetDirty(this);
+#endif
+        }
     }
     private void Reset()
     {
-        if(crossSceneSceneDataSO==null)
+        if (Application.isEditor)
         {
-            crossSceneSceneDataSO = AssetManagement.FindAssetByType<CrossSceneSceneDataSO>();
-
+            if (crossSceneSceneDataSO == null)
+            {
 #if UNITY_EDITOR
-            UnityEditor.EditorUtility.SetDirty(this);
-#endif
-        }
-        if (playerTransformMBDO == null)
-        {
-            MBDOInitializationHelper mBDOInitializationHelper = default;
+                crossSceneSceneDataSO = AssetManagement.FindAssetByType<CrossSceneSceneDataSO>();
 
-            //IMPORTNANT STEP!!!
-            mBDOInitializationHelper.SetupCardinalSubSystem(this);
-            mBDOInitializationHelper.SetupMBDO(ref playerTransformMBDO);
-#if UNITY_EDITOR
-            UnityEditor.EditorUtility.SetDirty(this);
+                UnityEditor.EditorUtility.SetDirty(this);
 #endif
+            }
+            if (playerTransformMBDO == null)
+            {
+                MBDOInitializationHelper mBDOInitializationHelper = default;
+
+                //IMPORTNANT STEP!!!
+                mBDOInitializationHelper.SetupCardinalSubSystem(this);
+                mBDOInitializationHelper.SetupMBDO(ref playerTransformMBDO);
+#if UNITY_EDITOR
+                UnityEditor.EditorUtility.SetDirty(this);
+#endif
+            }
         }
     }
+
     private void Awake()
     {
         bool loop=true;

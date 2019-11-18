@@ -16,7 +16,9 @@ public class Attack_Controller : MonoBehaviour
     public float speed = 7;
     [ReorderableList]
     public List<CustomGCOTypes.CollisionLayerKey> targetLayer = new List<CustomGCOTypes.CollisionLayerKey>();
+#pragma warning disable CS0109
     private new Collider collider = null;
+#pragma warning restore CS0109
     public delegate void Callback();
     public Callback whenDestroyed;
 

@@ -10,8 +10,10 @@ using ByteSheep.Events;
 [RequireComponent(typeof(CapsuleCollider2D))]
 public class PlayerMovement : MonoBehaviour, IMovable, IUsesInput
 {
+#pragma warning disable CS0109
     [SerializeField, Required, BoxGroup("Component Refs")]
     private new Rigidbody2D rigidbody2D = null;
+#pragma warning restore CS0109
     [SerializeField, Required, BoxGroup("Component Refs")]
     private CapsuleCollider2D capsuleCollider2D = null;
     [SerializeField, Required, BoxGroup("Component Refs")]
@@ -237,17 +239,23 @@ public class PlayerMovement : MonoBehaviour, IMovable, IUsesInput
 
     [ReorderableList]
     public List<CustomGCOTypes.CollisionLayerKey> targetCollisionLayers = new List<CustomGCOTypes.CollisionLayerKey>();
+#pragma warning disable CS0649
+    [SerializeField,HideInInspector]
     int groundLayers;
+#pragma warning restore CS0649
     private void OnValidate()
     {
-        groundLayers = 0;
-        foreach(CustomGCOTypes.CollisionLayerKey collisionLayerKey in targetCollisionLayers)
-        {
-            groundLayers |= 1 << ((int)collisionLayerKey);
-        }
-
 #if UNITY_EDITOR
-        UnityEditor.EditorUtility.SetDirty(this);
+        if (Application.isEditor)
+        {
+            groundLayers = 0;
+            foreach (CustomGCOTypes.CollisionLayerKey collisionLayerKey in targetCollisionLayers)
+            {
+                groundLayers |= 1 << ((int)collisionLayerKey);
+            }
+
+            UnityEditor.EditorUtility.SetDirty(this);
+        }
 #endif
     }
     private bool CheckGrounded()
@@ -270,7 +278,7 @@ public class PlayerMovement : MonoBehaviour, IMovable, IUsesInput
             circleCastEdge.position = new Vector3(circleRadius.x, circleRadius.y, circleCastOrigin.position.z);
         raycastHit2D = Physics2D.CircleCast(circleOrigin, capsuleCollider2D.size.x*0.5f, Vector2.down, Mathf.Infinity, layerMask);
 
-        if (raycastHit2D.collider != null && raycastHit2D.distance > 0 && raycastHit2D.distance < 0.1)
+        if (raycastHit2D.collider != null && raycastHit2D.distance > 0 && raycastHit2D.distance < 0.2)
         {
             result = true;
         }

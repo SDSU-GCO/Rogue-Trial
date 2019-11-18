@@ -19,9 +19,10 @@ public class Player_Attack_Logic : MonoBehaviour
 
     [SerializeField, BoxGroup("Component Refs")]
     public SpriteRenderer spriteRenderer;
-
+#pragma warning disable CS0109
     [SerializeField, BoxGroup("Component Refs")]
     private new Rigidbody2D rigidbody2D;
+#pragma warning restore CS0109
 
     [SerializeField, BoxGroup("Component Refs")]
     FlipSpriteOnVelocity flipSpriteOnVelocity;

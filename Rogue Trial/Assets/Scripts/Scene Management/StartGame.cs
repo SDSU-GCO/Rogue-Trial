@@ -16,10 +16,12 @@ public class StartGame : MonoBehaviour
 
     private void OnValidate()
     {
+        if(Application.isEditor)
+        
         if (gameStateSO == null)
         {
-            gameStateSO = AssetManagement.FindAssetByType<GameStateSO>();
 #if UNITY_EDITOR
+            gameStateSO = AssetManagement.FindAssetByType<GameStateSO>();
             UnityEditor.EditorUtility.SetDirty(this);
 #endif
         }

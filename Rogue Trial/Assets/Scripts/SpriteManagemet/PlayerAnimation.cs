@@ -16,11 +16,15 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField, HideInInspector]
     public PlayerMovement movement;
 
+#pragma warning disable CS0109
     [SerializeField, HideInInspector]
     private new Rigidbody2D rigidbody2D;
+#pragma warning restore CS0109
 
     private void OnValidate()
     {
+        if(Application.isEditor)
+        
         if (rigidbody2D == null)
         {
             rigidbody2D = GetComponent<Rigidbody2D>();

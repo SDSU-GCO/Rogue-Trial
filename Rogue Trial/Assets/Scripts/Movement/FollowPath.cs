@@ -12,7 +12,10 @@ public class FollowPath : MonoBehaviour, IMovable
     [ReorderableList]
     public List<Transform> path;
 
+#pragma warning disable CS0109
+    [SerializeField,HideInInspector]
     private new Rigidbody2D rigidbody2D;
+#pragma warning restore CS0109
     private float pathProgress;
 #pragma warning disable IDE0044 // Add readonly modifier
     private Transform nextTarget;
@@ -31,19 +34,22 @@ public class FollowPath : MonoBehaviour, IMovable
 
     private void OnValidate()
     {
-        if (spriteRenederer == null)
+        if (Application.isEditor)
         {
-            spriteRenederer = GetComponent<SpriteRenderer>();
+            if (spriteRenederer == null)
+            {
+                spriteRenederer = GetComponent<SpriteRenderer>();
 #if UNITY_EDITOR
-            UnityEditor.EditorUtility.SetDirty(this);
+                UnityEditor.EditorUtility.SetDirty(this);
 #endif
-        }
-        if (rigidbody2D == null)
-        {
-            rigidbody2D = GetComponent<Rigidbody2D>();
+            }
+            if (rigidbody2D == null)
+            {
+                rigidbody2D = GetComponent<Rigidbody2D>();
 #if UNITY_EDITOR
-            UnityEditor.EditorUtility.SetDirty(this);
+                UnityEditor.EditorUtility.SetDirty(this);
 #endif
+            }
         }
     }
     private void OnEnable()

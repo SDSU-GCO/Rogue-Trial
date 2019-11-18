@@ -11,12 +11,15 @@ public abstract class TextPrinter : MonoBehaviour
     TextMeshProUGUI textMeshPro = null;
     private void OnValidate()
     {
-        if (textMeshPro == null)
+        if (Application.isEditor)
         {
-            textMeshPro = GetComponent<TextMeshProUGUI>();
+            if (textMeshPro == null)
+            {
+                textMeshPro = GetComponent<TextMeshProUGUI>();
 #if UNITY_EDITOR
-            UnityEditor.EditorUtility.SetDirty(this);
+                UnityEditor.EditorUtility.SetDirty(this);
 #endif
+            }
         }
     }
     

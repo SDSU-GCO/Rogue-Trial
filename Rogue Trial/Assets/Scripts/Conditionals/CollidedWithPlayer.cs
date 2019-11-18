@@ -11,24 +11,30 @@ public class CollidedWithPlayer : ConditionalComponent
 #pragma warning restore CS0649 // varriable is never assigned to and will always have it's default value
     private void OnValidate()
     {
-        if (playerTransformMBDO == null)
+        if (Application.isEditor)
         {
-            MBDOInitializationHelper mBDOInitializationHelper = default;
+            if (playerTransformMBDO == null)
+            {
+                MBDOInitializationHelper mBDOInitializationHelper = default;
 
-            //IMPORTNANT STEP!!!
-            mBDOInitializationHelper.SetupCardinalSubSystem(this);
-            mBDOInitializationHelper.SetupMBDO(ref playerTransformMBDO);
+                //IMPORTNANT STEP!!!
+                mBDOInitializationHelper.SetupCardinalSubSystem(this);
+                mBDOInitializationHelper.SetupMBDO(ref playerTransformMBDO);
+            }
         }
     }
     private void Reset()
     {
-        if (playerTransformMBDO == null)
+        if (Application.isEditor)
         {
-            MBDOInitializationHelper mBDOInitializationHelper = default;
+            if (playerTransformMBDO == null)
+            {
+                MBDOInitializationHelper mBDOInitializationHelper = default;
 
-            //IMPORTNANT STEP!!!
-            mBDOInitializationHelper.SetupCardinalSubSystem(this);
-            mBDOInitializationHelper.SetupMBDO(ref playerTransformMBDO);
+                //IMPORTNANT STEP!!!
+                mBDOInitializationHelper.SetupCardinalSubSystem(this);
+                mBDOInitializationHelper.SetupMBDO(ref playerTransformMBDO);
+            }
         }
     }
     public override bool Result(Collider2D otherCollider) =>

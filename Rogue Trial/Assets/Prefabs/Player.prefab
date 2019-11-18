@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 20711162399991575}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: -0.00000023841858, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7747574028201816898}
@@ -599,8 +599,9 @@ MonoBehaviour:
   isGrounded: 0
   isDashing: 0
   playerTransformMBDO: {fileID: 0}
-  targetCollisionLayers: 09000000080000000b000000
-  enableDebugging: 0
+  targetCollisionLayers: 08000000090000000b000000
+  groundLayers: 2816
+  enableDebugging: 1
   circleCastOrigin: {fileID: 1749159719007511993}
   circleCastEdge: {fileID: 7758839802554142439}
 --- !u!114 &5589749906151201696

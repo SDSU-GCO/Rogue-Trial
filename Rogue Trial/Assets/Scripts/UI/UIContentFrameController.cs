@@ -10,16 +10,19 @@ public class UIContentFrameController : MonoBehaviour
 
     private void OnValidate()
     {
-        Transform transformRef = transform;
-        bool panelNotFount = true;
-        while (panelNotFount == true && transform.parent != null)
+        if (Application.isEditor)
         {
-            transformRef = transformRef.parent;
-            PanelController panelController = transformRef.GetComponent<PanelController>();
-            if (panelController != null)
+            Transform transformRef = transform;
+            bool panelNotFount = true;
+            while (panelNotFount == true && transform.parent != null)
             {
-                panelNotFount = false;
-                panelController.OnValidate();
+                transformRef = transformRef.parent;
+                PanelController panelController = transformRef.GetComponent<PanelController>();
+                if (panelController != null)
+                {
+                    panelNotFount = false;
+                    panelController.OnValidate();
+                }
             }
         }
     }

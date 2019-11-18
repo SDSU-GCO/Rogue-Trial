@@ -47,6 +47,10 @@ MonoBehaviour:
   crossSceneSceneDataSO: {fileID: 11400000, guid: 7a03934cafd96ff469522aa883a1d3aa,
     type: 2}
   playerTransformMBDO: {fileID: 0}
+  childTransforms:
+  - {fileID: 7327546161167069818}
+  spriteRenderers:
+  - {fileID: 7327546161167069817}
 --- !u!212 &7327546161167069817
 SpriteRenderer:
   m_ObjectHideFlags: 0

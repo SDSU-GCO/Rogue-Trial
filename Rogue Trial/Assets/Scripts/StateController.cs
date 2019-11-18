@@ -51,29 +51,33 @@ public class StateController : MonoBehaviour
     [SerializeField, ReadOnly]
     List<MonoBehaviour> usesInputs = new List<MonoBehaviour>();
 
+#pragma warning disable CS0649
     [SerializeField]
     GameStateSO gameStateSO;
-    
+#pragma warning restore CS0649
+
     public void OnValidate()
     {
-        IMovable[] movables1 = GetComponents<IMovable>();
-        IUsesInput[] usesInputs1 = GetComponents<IUsesInput>();
-        movables.Clear();
-        usesInputs.Clear();
-        foreach(IMovable movable in movables1)
+        if (Application.isEditor)
         {
-            movables.Add((MonoBehaviour)movable);
-        }
-        foreach (IUsesInput usesInput in usesInputs1)
-        {
-            usesInputs.Add((MonoBehaviour)usesInput);
-        }
-        if (gameStateSO == null)
-            gameStateSO = AssetManagement.FindAssetByType<GameStateSO>();
-
 #if UNITY_EDITOR
-        UnityEditor.EditorUtility.SetDirty(this);
+            IMovable[] movables1 = GetComponents<IMovable>();
+            IUsesInput[] usesInputs1 = GetComponents<IUsesInput>();
+            movables.Clear();
+            usesInputs.Clear();
+            foreach (IMovable movable in movables1)
+            {
+                movables.Add((MonoBehaviour)movable);
+            }
+            foreach (IUsesInput usesInput in usesInputs1)
+            {
+                usesInputs.Add((MonoBehaviour)usesInput);
+            }
+            if (gameStateSO == null)
+                gameStateSO = AssetManagement.FindAssetByType<GameStateSO>();
+            UnityEditor.EditorUtility.SetDirty(this);
 #endif
+        }
     }
     public void ApplyRules()
     {

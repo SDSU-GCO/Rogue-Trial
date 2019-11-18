@@ -2732,6 +2732,11 @@ PrefabInstance:
       propertyPath: promptMessage
       value: Press 'f' to enter "Keys Room"
       objectReference: {fileID: 0}
+    - target: {fileID: 8801559228322586560, guid: fd01eef741626eb4aa914622492d129d,
+        type: 3}
+      propertyPath: playerTransformMBDO
+      value: 
+      objectReference: {fileID: 1780439535}
     - target: {fileID: 1617818260266076288, guid: fd01eef741626eb4aa914622492d129d,
         type: 3}
       propertyPath: m_Constraints
@@ -2747,11 +2752,6 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 8801559228322586560, guid: fd01eef741626eb4aa914622492d129d,
-        type: 3}
-      propertyPath: playerTransformMBDO
-      value: 
-      objectReference: {fileID: 1780439535}
     - target: {fileID: 1617818259274187884, guid: fd01eef741626eb4aa914622492d129d,
         type: 3}
       propertyPath: m_Color.a
@@ -2811,10 +2811,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1493897329}
     m_Modifications:
-    - target: {fileID: 4065100760009943, guid: 47d127fe5b17ea74cb40d060de9a7b16, type: 3}
-      propertyPath: m_Name
-      value: Prompt
-      objectReference: {fileID: 0}
     - target: {fileID: 4065100760009944, guid: 47d127fe5b17ea74cb40d060de9a7b16, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2898,6 +2894,10 @@ PrefabInstance:
     - target: {fileID: 4065100760009944, guid: 47d127fe5b17ea74cb40d060de9a7b16, type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4065100760009943, guid: 47d127fe5b17ea74cb40d060de9a7b16, type: 3}
+      propertyPath: m_Name
+      value: Prompt
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47d127fe5b17ea74cb40d060de9a7b16, type: 3}
@@ -2988,9 +2988,39 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7327546161167069819, guid: 0bef1fbe898d79547acda88d8b9623d1,
         type: 3}
+      propertyPath: childTransforms.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7327546161167069819, guid: 0bef1fbe898d79547acda88d8b9623d1,
+        type: 3}
+      propertyPath: spriteRenderers.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7327546161167069819, guid: 0bef1fbe898d79547acda88d8b9623d1,
+        type: 3}
       propertyPath: playerTransformMBDO
       value: 
       objectReference: {fileID: 1780439535}
+    - target: {fileID: 7327546161167069819, guid: 0bef1fbe898d79547acda88d8b9623d1,
+        type: 3}
+      propertyPath: childTransforms.Array.data[1]
+      value: 
+      objectReference: {fileID: 134027774}
+    - target: {fileID: 7327546161167069819, guid: 0bef1fbe898d79547acda88d8b9623d1,
+        type: 3}
+      propertyPath: childTransforms.Array.data[2]
+      value: 
+      objectReference: {fileID: 504416561}
+    - target: {fileID: 7327546161167069819, guid: 0bef1fbe898d79547acda88d8b9623d1,
+        type: 3}
+      propertyPath: spriteRenderers.Array.data[1]
+      value: 
+      objectReference: {fileID: 134027775}
+    - target: {fileID: 7327546161167069819, guid: 0bef1fbe898d79547acda88d8b9623d1,
+        type: 3}
+      propertyPath: spriteRenderers.Array.data[2]
+      value: 
+      objectReference: {fileID: 504416562}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0bef1fbe898d79547acda88d8b9623d1, type: 3}
 --- !u!4 &1395814122 stripped
@@ -3006,11 +3036,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1493897329}
     m_Modifications:
-    - target: {fileID: 158226047436450906, guid: 75b34decd95232f4781ba11f059d231b,
-        type: 3}
-      propertyPath: m_Name
-      value: Menu Controller
-      objectReference: {fileID: 0}
     - target: {fileID: 158226047436450905, guid: 75b34decd95232f4781ba11f059d231b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3116,6 +3141,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 158226047436450906, guid: 75b34decd95232f4781ba11f059d231b,
+        type: 3}
+      propertyPath: m_Name
+      value: Menu Controller
+      objectReference: {fileID: 0}
     - target: {fileID: 1495793014395666767, guid: 75b34decd95232f4781ba11f059d231b,
         type: 3}
       propertyPath: m_SizeDelta.x
@@ -3175,7 +3205,7 @@ GameObject:
   - component: {fileID: 1446805370}
   - component: {fileID: 1446805376}
   - component: {fileID: 1446805375}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6705,6 +6735,11 @@ PrefabInstance:
       propertyPath: textMeshProReference
       value: 
       objectReference: {fileID: 1347286711}
+    - target: {fileID: 8801559228322586560, guid: fd01eef741626eb4aa914622492d129d,
+        type: 3}
+      propertyPath: playerTransformMBDO
+      value: 
+      objectReference: {fileID: 1780439535}
     - target: {fileID: 1617818260266076288, guid: fd01eef741626eb4aa914622492d129d,
         type: 3}
       propertyPath: m_Constraints
@@ -6720,11 +6755,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 8801559228322586560, guid: fd01eef741626eb4aa914622492d129d,
+    - target: {fileID: 1617818259274187884, guid: fd01eef741626eb4aa914622492d129d,
         type: 3}
-      propertyPath: playerTransformMBDO
-      value: 
-      objectReference: {fileID: 1780439535}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5399627397080553509, guid: fd01eef741626eb4aa914622492d129d,
         type: 3}
       propertyPath: usesInputs.Array.size
@@ -6735,11 +6770,6 @@ PrefabInstance:
       propertyPath: usesInputs.Array.data[1]
       value: 
       objectReference: {fileID: 1617355680}
-    - target: {fileID: 1617818259274187884, guid: fd01eef741626eb4aa914622492d129d,
-        type: 3}
-      propertyPath: m_Color.a
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fd01eef741626eb4aa914622492d129d, type: 3}
 --- !u!1 &1617355670 stripped
@@ -7039,11 +7069,6 @@ PrefabInstance:
       propertyPath: playerTransformMBDO
       value: 
       objectReference: {fileID: 1780439535}
-    - target: {fileID: 823911482339405376, guid: 8da49b9ee162a544891c5c2cd25d565c,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.00000023841858
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8da49b9ee162a544891c5c2cd25d565c, type: 3}
 --- !u!1 &1824708858 stripped
@@ -7229,6 +7254,11 @@ PrefabInstance:
       propertyPath: sceneToLoad
       value: Combat Room
       objectReference: {fileID: 0}
+    - target: {fileID: 8801559228322586560, guid: fd01eef741626eb4aa914622492d129d,
+        type: 3}
+      propertyPath: playerTransformMBDO
+      value: 
+      objectReference: {fileID: 1780439535}
     - target: {fileID: 1617818260266076288, guid: fd01eef741626eb4aa914622492d129d,
         type: 3}
       propertyPath: m_Constraints
@@ -7244,11 +7274,6 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 8801559228322586560, guid: fd01eef741626eb4aa914622492d129d,
-        type: 3}
-      propertyPath: playerTransformMBDO
-      value: 
-      objectReference: {fileID: 1780439535}
     - target: {fileID: 1617818259274187884, guid: fd01eef741626eb4aa914622492d129d,
         type: 3}
       propertyPath: m_Color.a
