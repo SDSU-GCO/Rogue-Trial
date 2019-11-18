@@ -599,6 +599,7 @@ MonoBehaviour:
   isGrounded: 0
   isDashing: 0
   playerTransformMBDO: {fileID: 0}
+  targetCollisionLayers: 09000000080000000b000000
   enableDebugging: 0
   circleCastOrigin: {fileID: 1749159719007511993}
   circleCastEdge: {fileID: 7758839802554142439}
@@ -619,9 +620,10 @@ MonoBehaviour:
   rangedCoolDownInSeconds: 0
   rangedCoolDownInSecondsDefault: 0
   damage: 0
-  spriteRenderer: {fileID: 0}
-  rigidbody2D: {fileID: 0}
-  flipSpriteOnVelocity: {fileID: 0}
+  spriteRenderer: {fileID: 3222318933843911601}
+  rigidbody2D: {fileID: 7758839803176447447}
+  flipSpriteOnVelocity: {fileID: 4239498098057373765}
+  playerMovement: {fileID: 7758839803176447444}
   offset: 1
 --- !u!114 &2549030327463446236
 MonoBehaviour:

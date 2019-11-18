@@ -148,9 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f610aa75f7374445b1d1e3903d873fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToLive: 0.5
-  LiveForever: 0
-  AttackDelay: 0.75
+  AttackDelay: 0.2
   damage: 1
   speed: 0
   targetLayer: 0b000000

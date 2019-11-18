@@ -64,7 +64,7 @@ public class Player_Attack_Logic : MonoBehaviour
     void Update()
     {
         rangedCoolDownInSeconds = Mathf.Max(0, rangedCoolDownInSeconds - Time.deltaTime);
-        if (Input.GetMouseButton(1))
+        if (Input.GetMouseButtonDown(1))
         {
             PlayerRangedAttack();
         }

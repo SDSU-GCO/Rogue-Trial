@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Attack_Controller : MonoBehaviour
 {
-    [SerializeField]
-    private float timeToLive = 0.5f;//in seconds
-    [SerializeField]
-#pragma warning disable IDE0044 // Add readonly modifier
-    private bool LiveForever = false;
-#pragma warning restore IDE0044 // Add readonly modifier
-    private float originalTimeToLive;//in seconds
+//    [SerializeField]
+//    private float timeToLive = 0.5f;//in seconds
+//    [SerializeField]
+//#pragma warning disable IDE0044 // Add readonly modifier
+//    private bool LiveForever = false;
+//#pragma warning restore IDE0044 // Add readonly modifier
+//    private float originalTimeToLive;//in seconds
     public float AttackDelay = 0.75f;
     public int damage;
     public float speed = 7;
@@ -24,9 +24,9 @@ public class Attack_Controller : MonoBehaviour
 
     private void Awake()
     {
-        originalTimeToLive = timeToLive;
+        //originalTimeToLive = timeToLive;
         collider = GetComponent<Collider>();
-        if (collider != null && collider.isTrigger == false && LiveForever == false)
+        if (collider != null && collider.isTrigger == false/* && LiveForever == false*/)
         {
             collider.enabled = false;
         }
@@ -35,19 +35,19 @@ public class Attack_Controller : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (LiveForever != true)
-        {
-            timeToLive -= Time.deltaTime;
-        }
+        //if (LiveForever != true)
+        //{
+        //    timeToLive -= Time.deltaTime;
+        //}
 
-        if (collider != null && timeToLive < originalTimeToLive / 2.0f)
+        if (collider != null /*&& timeToLive < originalTimeToLive / 2.0f*/)
         {
             collider.enabled = true;
         }
-        if (timeToLive <= 0)
-        {
-            PoofObject();
-        }
+        //if (timeToLive <= 0)
+        //{
+        //    PoofObject();
+        //}
     }
 
     //enemy/ally check
@@ -63,7 +63,7 @@ public class Attack_Controller : MonoBehaviour
         }
     }
 
-    private void PoofObject()
+    public void PoofObject()
     {
         whenDestroyed.Invoke();
         if (onDestroySpawnPrefab != null)

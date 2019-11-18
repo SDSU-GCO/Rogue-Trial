@@ -235,7 +235,21 @@ public class PlayerMovement : MonoBehaviour, IMovable, IUsesInput
         }
     }
 
-    readonly int groundLayers = (1 << (int)CustomGCOTypes.CollisionLayerKey.Ground) | (1 << (int)CustomGCOTypes.CollisionLayerKey.Platform);
+    [ReorderableList]
+    public List<CustomGCOTypes.CollisionLayerKey> targetCollisionLayers = new List<CustomGCOTypes.CollisionLayerKey>();
+    int groundLayers;
+    private void OnValidate()
+    {
+        groundLayers = 0;
+        foreach(CustomGCOTypes.CollisionLayerKey collisionLayerKey in targetCollisionLayers)
+        {
+            groundLayers |= 1 << ((int)collisionLayerKey);
+        }
+
+#if UNITY_EDITOR
+        UnityEditor.EditorUtility.SetDirty(this);
+#endif
+    }
     private bool CheckGrounded()
     {
         bool result = false;
