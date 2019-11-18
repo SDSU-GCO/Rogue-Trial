@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Player_Attack_Logic : MonoBehaviour
 {
-    [SerializeField]
+    [SerializeField, BoxGroup("Prefabs")]
     private Attack_Controller rangedAttack = null;
 
     [SerializeField, HideInInspector]
@@ -17,13 +17,13 @@ public class Player_Attack_Logic : MonoBehaviour
     [SerializeField, HideInInspector]
     private int damage;
 
-    [SerializeField, HideInInspector]
+    [SerializeField, BoxGroup("Component Refs")]
     public SpriteRenderer spriteRenderer;
 
-    [SerializeField, HideInInspector]
+    [SerializeField, BoxGroup("Component Refs")]
     private new Rigidbody2D rigidbody2D;
 
-    [SerializeField, HideInInspector]
+    [SerializeField, BoxGroup("Component Refs")]
     FlipSpriteOnVelocity flipSpriteOnVelocity;
 
     public float offset = 1.5f;
@@ -70,15 +70,36 @@ public class Player_Attack_Logic : MonoBehaviour
     {
         if (rangedCoolDownInSeconds == 0)
         {
-            if (flipSpriteOnVelocity)
-                flipSpriteOnVelocity.forceLookRight = spriteRenderer.flipX;
+            if (flipSpriteOnVelocity!=null)
+                flipSpriteOnVelocity.forceLookRight = !spriteRenderer.flipX;
 
-            Vector3 mouseScreenPosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
+            //original attack pos code
+            //Vector3 mouseScreenPosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
+            //Vector2 mouseposition = Camera.main.ScreenToWorldPoint(mouseScreenPosition);
+            //mouseposition = (mouseposition - (Vector2)transform.position).normalized * offset;
+            //GameObject childInstance = Instantiate(rangedAttack.gameObject, mouseposition + (Vector2)transform.position, transform.rotation);
 
-            Vector2 mouseposition = Camera.main.ScreenToWorldPoint(mouseScreenPosition);
-            mouseposition = (mouseposition - (Vector2)transform.position).normalized * offset;
+            //discussed pos attack code
+            GameObject childInstance = null;
+            if (spriteRenderer.flipX != true)
+                childInstance = Instantiate(rangedAttack.gameObject, Vector2.right * offset + (Vector2)transform.position, transform.rotation);
+            else
+                childInstance = Instantiate(rangedAttack.gameObject, Vector2.left * offset + (Vector2)transform.position, transform.rotation);
 
-            GameObject childInstance = Instantiate(rangedAttack.gameObject, mouseposition + (Vector2)transform.position, transform.rotation);
+            //proposed attack pos code
+            //GameObject childInstance = null;
+            //Vector3 mouseScreenPosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
+            //Vector2 mouseposition = Camera.main.ScreenToWorldPoint(mouseScreenPosition);
+            //Vector2 normalPos = (mouseposition - (Vector2)transform.position).normalized;
+
+            //if (spriteRenderer.flipX != true && normalPos.x < 0)
+            //    normalPos.x = normalPos.x * -1;
+            //else if (spriteRenderer.flipX == true && normalPos.x > 0)
+            //    normalPos.x = normalPos.x * -1;
+
+            //mouseposition = normalPos * offset;
+            //childInstance = Instantiate(rangedAttack.gameObject, mouseposition + (Vector2)transform.position, transform.rotation);
+
 
             Vector3 temp = childInstance.transform.position;
             temp.z = transform.position.z;
@@ -89,14 +110,24 @@ public class Player_Attack_Logic : MonoBehaviour
 
             rangedCoolDownInSeconds = rangedCoolDownInSecondsDefault;
 
-            
-                SpriteRenderer childSprite = childInstance.GetComponent<SpriteRenderer>();
-                if (childSprite != null)
-                {
-                    childSprite.flipX = spriteRenderer.flipX;
-                }
+
+            SpriteRenderer childSprite = childInstance.GetComponent<SpriteRenderer>();
+            if (childSprite != null)
+            {
+                childSprite.flipX = spriteRenderer.flipX;
+            }
+            Attack_Controller childAttack_Controller = childInstance.GetComponent<Attack_Controller>();
+            if (childAttack_Controller != null)
+            {
+                childAttack_Controller.whenDestroyed = ResetForceLook;
+            }
             //Debug.Log(spriteRenderer.flipX);
-            
+
         }
+    }
+    void ResetForceLook()
+    {
+        if (flipSpriteOnVelocity != null)
+            flipSpriteOnVelocity.forceLookRight = null;
     }
 }

@@ -17,6 +17,8 @@ public class Attack_Controller : MonoBehaviour
     [ReorderableList]
     public List<CustomGCOTypes.CollisionLayerKey> targetLayer = new List<CustomGCOTypes.CollisionLayerKey>();
     private new Collider collider = null;
+    public delegate void Callback();
+    public Callback whenDestroyed;
 
     public GameObject onDestroySpawnPrefab;
 
@@ -63,6 +65,7 @@ public class Attack_Controller : MonoBehaviour
 
     private void PoofObject()
     {
+        whenDestroyed.Invoke();
         if (onDestroySpawnPrefab != null)
         {
             Instantiate(onDestroySpawnPrefab, transform.position, transform.rotation);
