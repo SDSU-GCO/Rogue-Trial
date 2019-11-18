@@ -26,6 +26,9 @@ public class Player_Attack_Logic : MonoBehaviour
     [SerializeField, BoxGroup("Component Refs")]
     FlipSpriteOnVelocity flipSpriteOnVelocity;
 
+    [SerializeField, BoxGroup("Component Refs")]
+    PlayerMovement playerMovement;
+
     public float offset = 1.5f;
 
     private bool CheckRangedAttackNotNull() => rangedAttack != null;
@@ -44,6 +47,8 @@ public class Player_Attack_Logic : MonoBehaviour
         }
         if (flipSpriteOnVelocity == null)
             flipSpriteOnVelocity = GetComponent<FlipSpriteOnVelocity>();
+        if (playerMovement == null)
+            playerMovement = GetComponent<PlayerMovement>();
     }
 
     private void InitializeFromRangedAttack()
@@ -73,7 +78,7 @@ public class Player_Attack_Logic : MonoBehaviour
             if (flipSpriteOnVelocity!=null)
                 flipSpriteOnVelocity.forceLookRight = !spriteRenderer.flipX;
 
-            //original attack pos code
+            ////original attack pos code
             //Vector3 mouseScreenPosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
             //Vector2 mouseposition = Camera.main.ScreenToWorldPoint(mouseScreenPosition);
             //mouseposition = (mouseposition - (Vector2)transform.position).normalized * offset;
@@ -85,8 +90,9 @@ public class Player_Attack_Logic : MonoBehaviour
                 childInstance = Instantiate(rangedAttack.gameObject, Vector2.right * offset + (Vector2)transform.position, transform.rotation);
             else
                 childInstance = Instantiate(rangedAttack.gameObject, Vector2.left * offset + (Vector2)transform.position, transform.rotation);
+            playerMovement.MovementState = CustomGCOTypes.MovementState.Disabled;
 
-            //proposed attack pos code
+            ////proposed attack pos code ver 1
             //GameObject childInstance = null;
             //Vector3 mouseScreenPosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
             //Vector2 mouseposition = Camera.main.ScreenToWorldPoint(mouseScreenPosition);
@@ -96,6 +102,30 @@ public class Player_Attack_Logic : MonoBehaviour
             //    normalPos.x = normalPos.x * -1;
             //else if (spriteRenderer.flipX == true && normalPos.x > 0)
             //    normalPos.x = normalPos.x * -1;
+
+            //mouseposition = normalPos * offset;
+            //childInstance = Instantiate(rangedAttack.gameObject, mouseposition + (Vector2)transform.position, transform.rotation);
+
+
+            ////proposed attack pos code ver 2
+            //GameObject childInstance = null;
+            //Vector3 mouseScreenPosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
+            //Vector2 mouseposition = Camera.main.ScreenToWorldPoint(mouseScreenPosition);
+            //Vector2 normalPos = (mouseposition - (Vector2)transform.position).normalized;
+
+            //if(spriteRenderer != null && flipSpriteOnVelocity!=null)
+            //{
+            //    if (normalPos.x < 0)
+            //    {
+            //        spriteRenderer.flipX = true;
+            //        flipSpriteOnVelocity.forceLookRight = false;
+            //    }
+            //    else
+            //    {
+            //        spriteRenderer.flipX = false;
+            //        flipSpriteOnVelocity.forceLookRight = true;
+            //    }
+            //}
 
             //mouseposition = normalPos * offset;
             //childInstance = Instantiate(rangedAttack.gameObject, mouseposition + (Vector2)transform.position, transform.rotation);
@@ -127,6 +157,8 @@ public class Player_Attack_Logic : MonoBehaviour
     }
     void ResetForceLook()
     {
+
+        playerMovement.MovementState = CustomGCOTypes.MovementState.Enabled;
         if (flipSpriteOnVelocity != null)
             flipSpriteOnVelocity.forceLookRight = null;
     }
