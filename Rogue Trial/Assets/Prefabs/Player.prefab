@@ -652,7 +652,7 @@ MonoBehaviour:
   flashCustomColor: 1
   flashingColors:
     normalColor: {r: 1, g: 1, b: 1, a: 1}
-    hurtColor: {r: 1, g: 0, b: 0, a: 1}
+    hurtColor: {r: 1, g: 0.5882353, b: 0.5882353, a: 1}
   spriteRenderer: {fileID: 3222318933843911601}
 --- !u!114 &6070498220698471068
 MonoBehaviour:

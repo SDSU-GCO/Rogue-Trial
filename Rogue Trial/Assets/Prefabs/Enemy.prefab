@@ -189,10 +189,10 @@ MonoBehaviour:
   invincibilityTime: 0.5
   timeToFlashOnHit: 0.5
   flashSpeed: 20
-  flashCustomColor: 0
+  flashCustomColor: 1
   flashingColors:
     normalColor: {r: 1, g: 1, b: 1, a: 1}
-    hurtColor: {r: 1, g: 0, b: 0, a: 1}
+    hurtColor: {r: 1, g: 0.39215687, b: 0.39215687, a: 1}
   spriteRenderer: {fileID: 6318486361044167578}
 --- !u!114 &3891534012402402601
 MonoBehaviour:
