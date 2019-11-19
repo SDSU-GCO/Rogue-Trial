@@ -601,7 +601,7 @@ MonoBehaviour:
   playerTransformMBDO: {fileID: 0}
   targetCollisionLayers: 08000000090000000b000000
   groundLayers: 2816
-  enableDebugging: 1
+  enableDebugging: 0
   circleCastOrigin: {fileID: 1749159719007511993}
   circleCastEdge: {fileID: 7758839802554142439}
 --- !u!114 &5589749906151201696
@@ -789,4 +789,4 @@ MonoBehaviour:
     persistentCalls:
       calls: []
   _MaxHealth: 4
-  _CurrentHealth: 4
+  _CurrentHealth: 10

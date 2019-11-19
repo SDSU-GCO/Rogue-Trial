@@ -26,8 +26,14 @@ public class TraverseLevelDoor : TriggerPrompt
     }
 
     bool loadStarted = false;
+
+    [SerializeField] CrossSceneCinemachineBrainSO crossSceneCinemachineBrainSO;
     public void LoadSceneAndUnloadThisOne()
     {
+        if (crossSceneCinemachineBrainSO != null)
+            crossSceneCinemachineBrainSO.value.m_DefaultBlend.m_Style = Cinemachine.CinemachineBlendDefinition.Style.Cut;
+
+
         if (loadStarted != true)
         {
             loadStarted = true;

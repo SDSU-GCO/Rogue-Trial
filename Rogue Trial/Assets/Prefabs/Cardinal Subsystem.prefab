@@ -99,4 +99,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   crossSceneSceneData: {fileID: 11400000, guid: 7a03934cafd96ff469522aa883a1d3aa,
     type: 2}
+  crossSceneCinemachineBrainSO: {fileID: 11400000, guid: a3131a156c94ac74e913b5ef6313dc66,
+    type: 2}
   cardinalSceneName: Cardinal Scene

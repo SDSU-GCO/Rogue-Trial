@@ -303,6 +303,7 @@ GameObject:
   - component: {fileID: 512198237}
   - component: {fileID: 512198236}
   - component: {fileID: 512198234}
+  - component: {fileID: 512198235}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -328,8 +329,8 @@ MonoBehaviour:
   m_WorldUpOverride: {fileID: 0}
   m_UpdateMethod: 2
   m_DefaultBlend:
-    m_Style: 0
-    m_Time: 2
+    m_Style: 1
+    m_Time: 1
     m_CustomCurve:
       serializedVersion: 2
       m_Curve: []
@@ -347,6 +348,20 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: Cinemachine.CinemachineBrain+VcamActivatedEvent, Cinemachine, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &512198235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 512198233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7aa8b9e5906a10b4f88d9c0d750ca620, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crossSceneCinemachineBrainSO: {fileID: 11400000, guid: a3131a156c94ac74e913b5ef6313dc66,
+    type: 2}
 --- !u!81 &512198236
 AudioListener:
   m_ObjectHideFlags: 0

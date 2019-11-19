@@ -1090,6 +1090,7 @@ MonoBehaviour:
   gameStateSO: {fileID: 11400000, guid: c958049ac6246424db109b1e303a10ea, type: 2}
   defaultScene:
     m_Handle: 0
+  crossSceneCinemachineBrainSO: {fileID: 0}
 --- !u!1 &158226047062453063
 GameObject:
   m_ObjectHideFlags: 0
@@ -2786,6 +2787,7 @@ MonoBehaviour:
   gameStateSO: {fileID: 11400000, guid: c958049ac6246424db109b1e303a10ea, type: 2}
   defaultScene:
     m_Handle: 0
+  crossSceneCinemachineBrainSO: {fileID: 0}
 --- !u!1 &6105105449140471223
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,12 +11,19 @@ public class LoadCardinal : MonoBehaviour
     [SerializeField, Required]
     CrossSceneSceneDataSO crossSceneSceneData;
     [SerializeField] 
+    CrossSceneCinemachineBrainSO crossSceneCinemachineBrainSO;
+    [SerializeField] 
     string cardinalSceneName = "Cardinal Scene";
 #pragma warning restore CS0649 // varriable is never assigned to and will always have it's default value
     private void Awake()
     {
         crossSceneSceneData.activeScene = gameObject.scene;
         LoadCardinalScene();        
+    }
+    private void Start()
+    {
+        if (crossSceneCinemachineBrainSO != null)
+            crossSceneCinemachineBrainSO.value.m_DefaultBlend.m_Style = Cinemachine.CinemachineBlendDefinition.Style.Cut;
     }
     private void OnEnable()
     {

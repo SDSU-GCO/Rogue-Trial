@@ -26,8 +26,13 @@ public class Restart : MonoBehaviour
 #endif
         }
     }
+    [SerializeField] CrossSceneCinemachineBrainSO crossSceneCinemachineBrainSO;
     public void RestartLevel()
     {
+        if (crossSceneCinemachineBrainSO != null)
+            crossSceneCinemachineBrainSO.value.m_DefaultBlend.m_Style = Cinemachine.CinemachineBlendDefinition.Style.Cut;
+
+
         if (gameStateSO.gameState != CustomGCOTypes.GameState.PlayMode)
         {
             gameStateSO.gameState = CustomGCOTypes.GameState.PlayMode;
@@ -47,6 +52,10 @@ public class Restart : MonoBehaviour
     }
     public void RestartGame()
     {
+        if (crossSceneCinemachineBrainSO != null)
+            crossSceneCinemachineBrainSO.value.m_DefaultBlend.m_Style = Cinemachine.CinemachineBlendDefinition.Style.Cut;
+
+
         if (gameStateSO.gameState != CustomGCOTypes.GameState.PlayMode)
         {
             gameStateSO.gameState = CustomGCOTypes.GameState.PlayMode;
