@@ -210,9 +210,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba8c5e0066d1ce940b44193342255aab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomClearData: []
+  roomClearData:
+  - {fileID: 11400000, guid: 828265cac33631548b93b7c5a9888c2a, type: 2}
+  - {fileID: 11400000, guid: 65a144b3840d5c248b2d1dc2deba619d, type: 2}
+  - {fileID: 11400000, guid: ecfd46c448bca4f4a8de3ad50cc595c6, type: 2}
+  - {fileID: 11400000, guid: b1a73d8942e6c6741896a37210bc51a6, type: 2}
+  CurrentPlayerHealthSO: {fileID: 11400000, guid: 76dce48c305ab784a8992eaa0dc4282b,
+    type: 2}
   sceneName: Hub Room
   gameStateSO: {fileID: 11400000, guid: c958049ac6246424db109b1e303a10ea, type: 2}
+  defaultHP: 100000
 --- !u!114 &615106032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -566,27 +573,27 @@ PrefabInstance:
     - target: {fileID: 771384359259923228, guid: 75b34decd95232f4781ba11f059d231b,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 0
+      value: 277
       objectReference: {fileID: 0}
     - target: {fileID: 771384359259923228, guid: 75b34decd95232f4781ba11f059d231b,
         type: 3}
       propertyPath: m_textInfo.spaceCount
-      value: 0
+      value: 38
       objectReference: {fileID: 0}
     - target: {fileID: 771384359259923228, guid: 75b34decd95232f4781ba11f059d231b,
         type: 3}
       propertyPath: m_textInfo.wordCount
-      value: 0
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 771384359259923228, guid: 75b34decd95232f4781ba11f059d231b,
         type: 3}
       propertyPath: m_textInfo.lineCount
-      value: 0
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 771384359259923228, guid: 75b34decd95232f4781ba11f059d231b,
         type: 3}
       propertyPath: m_textInfo.pageCount
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 75b34decd95232f4781ba11f059d231b, type: 3}

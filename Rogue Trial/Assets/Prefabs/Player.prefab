@@ -760,10 +760,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e590ff339d5475343b0fb1d47b8114d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _CurrentPlayerHealthSO: {fileID: 11400000, guid: 76dce48c305ab784a8992eaa0dc4282b,
+    type: 2}
   _PreviousHealth: 0
-  _CurrentHealth: 4
   _PreviousMaxHealth: 0
-  _MaxHealth: 4
   EmptyEvent:
     inspectorListHeight: 63
     persistentCalls:
@@ -788,3 +788,5 @@ MonoBehaviour:
     inspectorListHeight: 63
     persistentCalls:
       calls: []
+  _MaxHealth: 4
+  _CurrentHealth: 4

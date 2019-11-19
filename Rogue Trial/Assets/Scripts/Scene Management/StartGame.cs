@@ -7,6 +7,8 @@ public class StartGame : MonoBehaviour
 #pragma warning disable CS0649 // varriable is never assigned to and will always have it's default value
     [SerializeField]
     CrossSceneBoolSO[] roomClearData;
+    [SerializeField]
+    CrossSceneIntSO CurrentPlayerHealthSO;
     //[SerializeField, Required]
     //CrossSceneTransformSO playerTransformSO2;
 #pragma warning restore CS0649 // varriable is never assigned to and will always have it's default value
@@ -27,11 +29,20 @@ public class StartGame : MonoBehaviour
         }
     }
 
+    [SerializeField] int defaultHP;
     private void Start()
     {
         foreach(CrossSceneBoolSO csb in roomClearData)
         {
             csb.value = false;
+        }
+        if(CurrentPlayerHealthSO!=null)
+        {
+            CurrentPlayerHealthSO.value = defaultHP;
+        }
+        else
+        {
+            Debug.LogError("CurrentPlayerHealthSO is null in " + this);
         }
     }
 

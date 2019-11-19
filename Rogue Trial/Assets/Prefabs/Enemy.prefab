@@ -184,7 +184,7 @@ MonoBehaviour:
   DiedEvent: {fileID: 0}
   healthComponent: {fileID: 8277920464738141608}
   disableColliderOnDeath: 1
-  onDeathReplaceWith: {fileID: 3217357049256741924, guid: aeb67d0938d32664dba0d6605bff5c3f,
+  onDeathReplaceWith: {fileID: 5857824023691526883, guid: f81e92306d54b0441b8cd853f09b2112,
     type: 3}
   invincibilityTime: 0.5
   timeToFlashOnHit: 0.5
@@ -233,6 +233,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   path: []
+  rigidbody2D: {fileID: 6318486361044167577}
   spriteRenederer: {fileID: 6318486361044167578}
 --- !u!95 &6665508661874112180
 Animator:
@@ -330,10 +331,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e590ff339d5475343b0fb1d47b8114d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _CurrentPlayerHealthSO: {fileID: 0}
   _PreviousHealth: 0
-  _CurrentHealth: 3
   _PreviousMaxHealth: 0
-  _MaxHealth: 3
   EmptyEvent:
     inspectorListHeight: 63
     persistentCalls:
@@ -358,3 +358,5 @@ MonoBehaviour:
     inspectorListHeight: 63
     persistentCalls:
       calls: []
+  _MaxHealth: 3
+  _CurrentHealth: 3

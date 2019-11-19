@@ -3,22 +3,13 @@ using UnityEngine;
 using System;
 using NaughtyAttributes;
 
-public class Health : MonoBehaviour{ 
+public class Health : MonoBehaviour{
+#pragma warning disable CS0649
+    [SerializeField] private CrossSceneIntSO _CurrentPlayerHealthSO;
+#pragma warning restore CS0649
 
     [SerializeField][ReadOnly] private int _PreviousHealth = 0;
-    [SerializeField] private int _CurrentHealth = 10;
-
     [SerializeField][ReadOnly] private int _PreviousMaxHealth = 0;
-    [SerializeField] private int _MaxHealth = 10;
-
-    public int CurrentHealth{ 
-        get => _CurrentHealth; 
-        set => SetCurrentHealth(value);
-    }
-    public int MaxHealth{ 
-        get => _MaxHealth; 
-        set => SetMaxHealth(value); 
-    }
 
     [Space()]
 
@@ -29,7 +20,37 @@ public class Health : MonoBehaviour{
     public IntQuickEvent InflictEvent  = new IntQuickEvent();
     public IntQuickEvent HealEvent     = new IntQuickEvent();
 
+    [SerializeField] private int _MaxHealth = 10;
+    public int MaxHealth
+    {
+        get => _MaxHealth;
+        set => SetMaxHealth(value);
+    }
+
+    [SerializeField] [ShowIf("showCurrentHealthField")] private int _CurrentHealth = 10;
+    bool showCurrentHealthField() => _CurrentPlayerHealthSO==null;
+    [ShowNativeProperty] public int CurrentHealth
+    {
+        get => _CurrentHealth;
+        set => SetCurrentHealth(value);
+    }
+    private void OnValidate()
+    {
+#if UNITY_EDITOR
+        if (Application.isEditor)
+        {
+            if (_CurrentPlayerHealthSO != null)
+            {
+                _CurrentHealth = _CurrentPlayerHealthSO.value;
+                UnityEditor.EditorUtility.SetDirty(this);
+            }
+        }
+#endif
+    }
+
     private void Awake() {
+        if(_CurrentPlayerHealthSO!=null)
+            _CurrentHealth = _CurrentPlayerHealthSO.value;
         CurrentHealth = _CurrentHealth;
         MaxHealth = _MaxHealth;
     }
@@ -58,6 +79,8 @@ public class Health : MonoBehaviour{
         if( _CurrentHealth < _PreviousHealth ) InflictEvent.Invoke( Mathf.Abs(Difference) );
 
         _PreviousHealth = _CurrentHealth;
+        if (_CurrentPlayerHealthSO != null)
+            _CurrentPlayerHealthSO.value = _CurrentHealth;
 
     }
     private void SetMaxHealth(int value) { 
@@ -70,7 +93,8 @@ public class Health : MonoBehaviour{
         _PreviousMaxHealth = _MaxHealth = value;
     }
     public int ModifyHealth( int Difference ) {
-        Console.WriteLine($"Modified {Difference} points of damage! current health is {CurrentHealth}");
+        //Console.WriteLine($"Modified {Difference} points of damage! current health is {CurrentHealth}");
         return CurrentHealth += Difference;
     }
+
 }
