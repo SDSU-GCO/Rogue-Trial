@@ -120,6 +120,7 @@ public class GameOver : MonoBehaviour
             yield return null;
         }
         isOpaque = true;
+        animator.enabled = true;
         scrollCredits.enabled = true;
     }
 }
