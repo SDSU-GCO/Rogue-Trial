@@ -7,8 +7,41 @@ using ByteSheep.Events;
 public class GameStateSO : ScriptableObject
 {
     public CustomGCOTypes.GameState gameState = CustomGCOTypes.GameState.PlayMode;
-    public bool MenuOpen = false;
-    public QuickEvent updatedValue = new QuickEvent();
+    public QuickEvent gameStateChanged = new QuickEvent();
+    public CustomGCOTypes.GameState GameState
+    {
+        get
+        {
+            return gameState;
+        }
+        set
+        {
+            if (gameState != value)
+            {
+                gameState = value;
+                gameStateChanged?.Invoke();
+            }
+        }
+    }
+
+    public bool menuOpen = false;
+    public QuickEvent menuOpenChanged = new QuickEvent();
+    public bool MenuOpen
+    {
+        get
+        {
+            return menuOpen;
+        }
+        set
+        {
+            if(menuOpen!=value)
+            {
+                menuOpen = value;
+                menuOpenChanged?.Invoke();
+            }
+        }
+    }
+
     public OneBoolEvent showPlayer = new OneBoolEvent();
 }
 

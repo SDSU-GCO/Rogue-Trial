@@ -9,11 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c40c31c94334c24595253137a1dabe3, type: 3}
-  m_Name: CurrentPlayerHP
+  m_Script: {fileID: 11500000, guid: 03d01ef7b9d6e9040af08eb40ad2161b, type: 3}
+  m_Name: MusicMessageEventSO
   m_EditorClassIdentifier: 
   Event:
-    inspectorListHeight: 40
+    inspectorListHeight: 63
     persistentCalls:
       calls: []
-  value: 10
+  audioClips:
+  - {fileID: 8300000, guid: ca4eca3aa4d00ed4c9e8a2a165bd1928, type: 3}

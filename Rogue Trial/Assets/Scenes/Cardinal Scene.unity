@@ -158,7 +158,7 @@ MonoBehaviour:
   m_WorldUpOverride: {fileID: 0}
   m_UpdateMethod: 2
   m_DefaultBlend:
-    m_Style: 1
+    m_Style: 0
     m_Time: 1
     m_CustomCurve:
       serializedVersion: 2
@@ -224,9 +224,9 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 1
+  field of view: 40
   orthographic: 1
-  orthographic size: 2
+  orthographic size: 5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -250,7 +250,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 512198233}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 100, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 0.59, z: -20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2005224951}
@@ -268,6 +268,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1114780134}
   - component: {fileID: 1114780135}
+  - component: {fileID: 1114780136}
   m_Layer: 0
   m_Name: Music
   m_TagString: Untagged
@@ -307,6 +308,20 @@ MonoBehaviour:
   tracks:
   - {fileID: 8300000, guid: f3d4fa92c187e284484f3f9ef5a3de46, type: 3}
   nowPlaying: {fileID: 0}
+--- !u!114 &1114780136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1114780133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b188a945cd8034148b9706e6238c8f4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicMessageEventSO: {fileID: 11400000, guid: 30a8345ea6a496745a551bc8be136446,
+    type: 2}
 --- !u!1 &1183846906
 GameObject:
   m_ObjectHideFlags: 0
@@ -604,6 +619,7 @@ MonoBehaviour:
   MaxDelay: 0
   MinDelay: 0
   randomizePitch: 1
+  PlayOnEnable: 0
   defaultFile: {fileID: 8300000, guid: 5492ff8cbab86864f98a0895e575d462, type: 3}
   crossSceneEvent: {fileID: 11400000, guid: aefcafe959fbc4c40b390191c2dd58d4, type: 2}
 --- !u!114 &2005224953
@@ -627,6 +643,7 @@ MonoBehaviour:
   MaxDelay: 0
   MinDelay: 0
   randomizePitch: 1
+  PlayOnEnable: 0
   defaultFile: {fileID: 8300000, guid: ec9d2e9fab479524f806372c6667666c, type: 3}
   crossSceneEvent: {fileID: 11400000, guid: 3174651360015db40a55616ddef72737, type: 2}
 --- !u!1 &2114659539

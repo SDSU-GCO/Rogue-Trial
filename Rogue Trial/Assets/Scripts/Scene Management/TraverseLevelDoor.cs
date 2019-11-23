@@ -31,13 +31,13 @@ public class TraverseLevelDoor : TriggerPrompt
     public void LoadSceneAndUnloadThisOne()
     {
         if (crossSceneCinemachineBrainSO != null)
-            crossSceneCinemachineBrainSO.value.m_DefaultBlend.m_Style = Cinemachine.CinemachineBlendDefinition.Style.Cut;
+            crossSceneCinemachineBrainSO.Value.m_DefaultBlend.m_Style = Cinemachine.CinemachineBlendDefinition.Style.Cut;
 
 
         if (loadStarted != true)
         {
             loadStarted = true;
-            crossSceneSceneDataSO.previousScene = gameObject.scene;
+            crossSceneSceneDataSO.PreviousScene = gameObject.scene;
             SceneManager.LoadScene(sceneToLoad, LoadSceneMode.Additive);
             SceneManager.UnloadSceneAsync(gameObject.scene);
         }

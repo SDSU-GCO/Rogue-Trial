@@ -34,7 +34,7 @@ public class StartGame : MonoBehaviour
     {
         foreach(CrossSceneBoolSO csb in roomClearData)
         {
-            csb.value = false;
+            csb.Value = false;
         }
         if(CurrentPlayerHealthSO!=null)
         {

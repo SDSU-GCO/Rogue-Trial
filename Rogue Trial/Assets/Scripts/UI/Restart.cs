@@ -30,18 +30,17 @@ public class Restart : MonoBehaviour
     public void RestartLevel()
     {
         if (crossSceneCinemachineBrainSO != null)
-            crossSceneCinemachineBrainSO.value.m_DefaultBlend.m_Style = Cinemachine.CinemachineBlendDefinition.Style.Cut;
+            crossSceneCinemachineBrainSO.Value.m_DefaultBlend.m_Style = Cinemachine.CinemachineBlendDefinition.Style.Cut;
 
 
-        if (gameStateSO.gameState != CustomGCOTypes.GameState.PlayMode)
+        if (gameStateSO.GameState != CustomGCOTypes.GameState.PlayMode)
         {
-            gameStateSO.gameState = CustomGCOTypes.GameState.PlayMode;
-            gameStateSO.updatedValue.Invoke();
+            gameStateSO.GameState = CustomGCOTypes.GameState.PlayMode;
         }
         playerRevived.Event.Invoke();
-        if (crossSceneSceneDataSO.activeScene != new Scene())
+        if (crossSceneSceneDataSO.ActiveScene != new Scene())
         {
-            SceneManager.LoadScene(crossSceneSceneDataSO.activeScene.name, LoadSceneMode.Additive);
+            SceneManager.LoadScene(crossSceneSceneDataSO.ActiveScene.name, LoadSceneMode.Additive);
             SceneManager.UnloadSceneAsync(gameObject.scene);
         }
         else
@@ -53,13 +52,12 @@ public class Restart : MonoBehaviour
     public void RestartGame()
     {
         if (crossSceneCinemachineBrainSO != null)
-            crossSceneCinemachineBrainSO.value.m_DefaultBlend.m_Style = Cinemachine.CinemachineBlendDefinition.Style.Cut;
+            crossSceneCinemachineBrainSO.Value.m_DefaultBlend.m_Style = Cinemachine.CinemachineBlendDefinition.Style.Cut;
 
 
-        if (gameStateSO.gameState != CustomGCOTypes.GameState.PlayMode)
+        if (gameStateSO.GameState != CustomGCOTypes.GameState.PlayMode)
         {
-            gameStateSO.gameState = CustomGCOTypes.GameState.PlayMode;
-            gameStateSO.updatedValue.Invoke();
+            gameStateSO.GameState = CustomGCOTypes.GameState.PlayMode;
         }
         playerRevived.Event.Invoke();
         SceneManager.LoadScene(0, LoadSceneMode.Additive);

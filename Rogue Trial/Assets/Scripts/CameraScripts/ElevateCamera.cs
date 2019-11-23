@@ -13,7 +13,7 @@ public class ElevateCamera : MonoBehaviour
     public void Activate()
     {
         if (crossSceneCinemachineBrainSO != null)
-            crossSceneCinemachineBrainSO.value.m_DefaultBlend.m_Style = Cinemachine.CinemachineBlendDefinition.Style.EaseInOut;
+            crossSceneCinemachineBrainSO.Value.m_DefaultBlend.m_Style = Cinemachine.CinemachineBlendDefinition.Style.EaseInOut;
         else
             Debug.LogError("crossSceneCinemachineBrainSO is null in "+this);
         cinemachineVirtualCamera.Priority = activePriority;
@@ -21,7 +21,7 @@ public class ElevateCamera : MonoBehaviour
     public void Deactivate()
     {
         if (crossSceneCinemachineBrainSO != null)
-            crossSceneCinemachineBrainSO.value.m_DefaultBlend.m_Style = Cinemachine.CinemachineBlendDefinition.Style.EaseInOut;
+            crossSceneCinemachineBrainSO.Value.m_DefaultBlend.m_Style = Cinemachine.CinemachineBlendDefinition.Style.EaseInOut;
         else
             Debug.LogError("crossSceneCinemachineBrainSO is null in " + this);
         cinemachineVirtualCamera.Priority = inactivePriority;

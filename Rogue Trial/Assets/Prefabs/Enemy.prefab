@@ -19,7 +19,6 @@ GameObject:
   - component: {fileID: 5832676581953719602}
   - component: {fileID: 8277920464738141608}
   - component: {fileID: 8605185141877484564}
-  - component: {fileID: 4591069296796055234}
   m_Layer: 11
   m_Name: Enemy
   m_TagString: Untagged
@@ -190,7 +189,7 @@ MonoBehaviour:
       calls:
       - genericMenuData:
           selectedComponent: 11
-          selectedMember: 15
+          selectedMember: 16
           isDynamic: 0
         target: {fileID: 8605185141877484564}
         memberName: playClip
@@ -212,28 +211,7 @@ MonoBehaviour:
   DiedEvent:
     inspectorListHeight: 63
     persistentCalls:
-      calls:
-      - genericMenuData:
-          selectedComponent: 12
-          selectedMember: 15
-          isDynamic: 0
-        target: {fileID: 4591069296796055234}
-        memberName: playClip
-        memberType: 8
-        argument:
-          supportedType: 0
-          stringArgument: 
-          intArgument: 0
-          floatArgument: 0
-          boolArgument: 0
-          colorArgument: {r: 0, g: 0, b: 0, a: 0}
-          vector2Argument: {x: 0, y: 0}
-          vector3Argument: {x: 0, y: 0, z: 0}
-          objectArgument: {fileID: 0}
-          gameObjectArgument: {fileID: 0}
-          transformArgument: {fileID: 0}
-        isDynamic: 0
-        isCallEnabled: 1
+      calls: []
   healthComponent: {fileID: 8277920464738141608}
   disableColliderOnDeath: 1
   onDeathReplaceWith: {fileID: 5857824023691526883, guid: f81e92306d54b0441b8cd853f09b2112,
@@ -435,28 +413,4 @@ MonoBehaviour:
   randomizePitch: 1
   PlayOnEnable: 0
   defaultFile: {fileID: 8300000, guid: ec9d2e9fab479524f806372c6667666c, type: 3}
-  crossSceneEvent: {fileID: 0}
---- !u!114 &4591069296796055234
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6318486361044167583}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2dee036ffc313e8429effec29e014166, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioMixerGroup: {fileID: -5055102301708549317, guid: 93ed9eda70f37cb48b5165cf87fae8bf,
-    type: 2}
-  loop: 0
-  UseDelay: 0
-  UseRandomDelay: 0
-  Delay: 0
-  MaxDelay: 0
-  MinDelay: 0
-  randomizePitch: 1
-  PlayOnEnable: 0
-  defaultFile: {fileID: 8300000, guid: 5492ff8cbab86864f98a0895e575d462, type: 3}
   crossSceneEvent: {fileID: 0}

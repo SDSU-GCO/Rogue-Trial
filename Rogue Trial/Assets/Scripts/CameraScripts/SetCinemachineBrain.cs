@@ -8,6 +8,6 @@ public class SetCinemachineBrain : MonoBehaviour
     private void Awake()
     {
         if (crossSceneCinemachineBrainSO != null)
-            crossSceneCinemachineBrainSO.value = GetComponent<Cinemachine.CinemachineBrain>();
+            crossSceneCinemachineBrainSO.Value = GetComponent<Cinemachine.CinemachineBrain>();
     }
 }

@@ -81,7 +81,7 @@ public class SpawnPlayer : MonoBehaviour
         target = transform;
         foreach(Transform t in childTransforms.TakeWhile( t => { return loop; }))
         {
-            if (crossSceneSceneDataSO.previousScene.name == t.name)
+            if (crossSceneSceneDataSO.PreviousScene.name == t.name)
             {
                 loop = false;
                 target = t;

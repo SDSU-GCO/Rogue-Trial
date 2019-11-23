@@ -46,7 +46,7 @@ public class ManageCrossSceneData : MonoBehaviour
     {
         foreach (CrossSceneBoolSO csb in roomClearData)
         {
-            csb.value = false;
+            csb.Value = false;
         }
 
         if (CurrentPlayerHP != null)
