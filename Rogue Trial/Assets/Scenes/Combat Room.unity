@@ -1252,10 +1252,10 @@ PlatformEffector2D:
   m_RotationalOffset: 0
   m_UseOneWay: 1
   m_UseOneWayGrouping: 0
-  m_SurfaceArc: 90
+  m_SurfaceArc: 135
   m_UseSideFriction: 0
   m_UseSideBounce: 0
-  m_SideArc: 90
+  m_SideArc: 45
 --- !u!66 &121701418
 CompositeCollider2D:
   m_ObjectHideFlags: 0
@@ -8724,6 +8724,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cardinal Subsystem
       objectReference: {fileID: 0}
+    - target: {fileID: 4397968901224061282, guid: 5158ff79fb6a9ed45838d86ad6459e2d,
+        type: 3}
+      propertyPath: playerTransform
+      value: 
+      objectReference: {fileID: 1606134311}
     - target: {fileID: 771853442641193304, guid: 5158ff79fb6a9ed45838d86ad6459e2d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8779,11 +8784,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4397968901224061282, guid: 5158ff79fb6a9ed45838d86ad6459e2d,
-        type: 3}
-      propertyPath: playerTransform
-      value: 
-      objectReference: {fileID: 1606134311}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5158ff79fb6a9ed45838d86ad6459e2d, type: 3}
 --- !u!114 &445336904 stripped
@@ -9929,10 +9929,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7758839803176447444, guid: 8da49b9ee162a544891c5c2cd25d565c,
+    - target: {fileID: 823911482339405376, guid: 8da49b9ee162a544891c5c2cd25d565c,
         type: 3}
-      propertyPath: enableDebugging
-      value: 1
+      propertyPath: m_LocalPosition.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8da49b9ee162a544891c5c2cd25d565c, type: 3}
@@ -10426,6 +10426,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1283494548}
     m_Modifications:
+    - target: {fileID: 4065100760009943, guid: 47d127fe5b17ea74cb40d060de9a7b16, type: 3}
+      propertyPath: m_Name
+      value: Prompt
+      objectReference: {fileID: 0}
     - target: {fileID: 4065100760009944, guid: 47d127fe5b17ea74cb40d060de9a7b16, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -10510,10 +10514,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 4065100760009943, guid: 47d127fe5b17ea74cb40d060de9a7b16, type: 3}
-      propertyPath: m_Name
-      value: Prompt
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47d127fe5b17ea74cb40d060de9a7b16, type: 3}
 --- !u!1001 &158226045466855951
@@ -10523,6 +10523,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1283494548}
     m_Modifications:
+    - target: {fileID: 158226047436450906, guid: 75b34decd95232f4781ba11f059d231b,
+        type: 3}
+      propertyPath: m_Name
+      value: Menu Controller
+      objectReference: {fileID: 0}
     - target: {fileID: 158226047436450905, guid: 75b34decd95232f4781ba11f059d231b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10627,11 +10632,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 158226047436450906, guid: 75b34decd95232f4781ba11f059d231b,
-        type: 3}
-      propertyPath: m_Name
-      value: Menu Controller
       objectReference: {fileID: 0}
     - target: {fileID: 1495793014395666767, guid: 75b34decd95232f4781ba11f059d231b,
         type: 3}
