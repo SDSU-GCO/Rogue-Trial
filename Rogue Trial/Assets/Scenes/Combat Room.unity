@@ -1252,10 +1252,10 @@ PlatformEffector2D:
   m_RotationalOffset: 0
   m_UseOneWay: 1
   m_UseOneWayGrouping: 0
-  m_SurfaceArc: 90
+  m_SurfaceArc: 135
   m_UseSideFriction: 0
   m_UseSideBounce: 0
-  m_SideArc: 90
+  m_SideArc: 45
 --- !u!66 &121701418
 CompositeCollider2D:
   m_ObjectHideFlags: 0
@@ -8724,6 +8724,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cardinal Subsystem
       objectReference: {fileID: 0}
+    - target: {fileID: 4397968901224061282, guid: 5158ff79fb6a9ed45838d86ad6459e2d,
+        type: 3}
+      propertyPath: playerTransform
+      value: 
+      objectReference: {fileID: 1606134311}
     - target: {fileID: 771853442641193304, guid: 5158ff79fb6a9ed45838d86ad6459e2d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8779,11 +8784,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4397968901224061282, guid: 5158ff79fb6a9ed45838d86ad6459e2d,
-        type: 3}
-      propertyPath: playerTransform
-      value: 
-      objectReference: {fileID: 1606134311}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5158ff79fb6a9ed45838d86ad6459e2d, type: 3}
 --- !u!114 &445336904 stripped
@@ -9927,6 +9927,11 @@ PrefabInstance:
     - target: {fileID: 7758839803176447445, guid: 8da49b9ee162a544891c5c2cd25d565c,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 823911482339405376, guid: 8da49b9ee162a544891c5c2cd25d565c,
+        type: 3}
+      propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

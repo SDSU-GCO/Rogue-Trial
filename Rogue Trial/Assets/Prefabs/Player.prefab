@@ -594,7 +594,7 @@ MonoBehaviour:
     inspectorListHeight: 63
     persistentCalls:
       calls: []
-  enableInputs: 1
+  enableInputs: 0
   movementState: 0
   isGrounded: 0
   isDashing: 0
