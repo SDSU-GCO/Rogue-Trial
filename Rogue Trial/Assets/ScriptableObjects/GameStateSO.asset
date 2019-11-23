@@ -13,8 +13,12 @@ MonoBehaviour:
   m_Name: GameStateSO
   m_EditorClassIdentifier: 
   gameState: 0
-  MenuOpen: 0
-  updatedValue:
+  gameStateChanged:
+    inspectorListHeight: 63
+    persistentCalls:
+      calls: []
+  menuOpen: 0
+  menuOpenChanged:
     inspectorListHeight: 63
     persistentCalls:
       calls: []

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CurrentPlayerHP
   m_EditorClassIdentifier: 
   Event:
-    inspectorListHeight: 40
+    inspectorListHeight: 63
     persistentCalls:
       calls: []
-  value: 10
+  value: 7
