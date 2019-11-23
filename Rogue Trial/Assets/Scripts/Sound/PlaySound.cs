@@ -26,6 +26,7 @@ public class PlaySound : MonoBehaviour
     [ShowIf("ShowDelayRangeField"), BoxGroup("Loops")]
     public float MinDelay;
     public bool randomizePitch;
+    public bool PlayOnEnable=false;
     public AudioClip defaultFile;
 
     bool ShowDelayField() => loop && UseDelay && !UseRandomDelay;
@@ -41,13 +42,16 @@ public class PlaySound : MonoBehaviour
     {
         if (crossSceneEvent != null)
             crossSceneEvent.Event.AddListener(playClip);
-        else
-            playClip();
     }
     private void OnDisable()
     {
         if (crossSceneEvent != null)
             crossSceneEvent.Event.RemoveListener(playClip);
+    }
+    private void OnEnable()
+    {
+        if(PlayOnEnable)
+            playClip();
     }
     public void playClip()
     {
@@ -104,6 +108,7 @@ public class PlaySound : MonoBehaviour
             rtnVal = gameObject.AddComponent<AudioSource>();
 
         rtnVal.loop = loop;
+        rtnVal.playOnAwake = false;
         return rtnVal;
     }
 

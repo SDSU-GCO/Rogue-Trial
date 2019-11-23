@@ -72,27 +72,30 @@ public class PlayerMovement : MonoBehaviour, IMovable, IUsesInput
         }
         set
         {
-            if (value == CustomGCOTypes.MovementState.Disabled)
+            if(movementState!=value)
             {
-                //cache momentum
-                cachedVelocity = rigidbody2D.velocity;
-                rigidbody2D.constraints = RigidbodyConstraints2D.FreezeAll;
+                if (value == CustomGCOTypes.MovementState.Disabled)
+                {
+                    //cache momentum
+                    cachedVelocity = rigidbody2D.velocity;
+                    rigidbody2D.constraints = RigidbodyConstraints2D.FreezeAll;
+                }
+                else if (value == CustomGCOTypes.MovementState.DisabledKillMomentum)
+                {
+                    rigidbody2D.constraints = RigidbodyConstraints2D.FreezeAll;
+                    cachedVelocity = Vector2.zero;
+                }
+                else if (value == CustomGCOTypes.MovementState.Enabled)
+                {
+                    rigidbody2D.constraints = RigidbodyConstraints2D.FreezeRotation;
+                    rigidbody2D.velocity = cachedVelocity;
+                }
+                else
+                {
+                    Debug.LogError(value + " is not implemented yet!");
+                }
+                movementState = value;
             }
-            else if (value == CustomGCOTypes.MovementState.DisabledKillMomentum)
-            {
-                rigidbody2D.constraints = RigidbodyConstraints2D.FreezeAll;
-                cachedVelocity = Vector2.zero;
-            }
-            else if (value == CustomGCOTypes.MovementState.Enabled)
-            {
-                rigidbody2D.constraints = RigidbodyConstraints2D.FreezeRotation;
-                rigidbody2D.velocity = cachedVelocity;
-            }
-            else
-            {
-                Debug.LogError(value + " is not implemented yet!");
-            }
-            movementState = value;
         }
     }
     Vector2 cachedVelocity = Vector2.zero;
@@ -167,6 +170,15 @@ public class PlayerMovement : MonoBehaviour, IMovable, IUsesInput
 
         if (circleCastOrigin != null)
             circleCastOrigin.GetComponent<SpriteRenderer>().enabled = enableDebugging;
+
+
+        int test = 9;
+        foo(test);
+    }
+
+    void foo(in int test)
+    {
+
     }
 
     //update loop

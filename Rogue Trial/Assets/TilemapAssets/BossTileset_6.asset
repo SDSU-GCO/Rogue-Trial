@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: Hub_Room_19
+  m_Name: BossTileset_6
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 5931120847733430785, guid: d44e8cf5c68bfdd4ebb6a2eb7fd06710,
+  m_Sprite: {fileID: -6386440874671420867, guid: 7cb11a947fbf4ab4da22e884cdd79a33,
     type: 3}
-  m_Color: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
     e01: 0
