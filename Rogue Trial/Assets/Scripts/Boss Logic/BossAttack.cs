@@ -58,7 +58,7 @@ public class BossAttack : MonoBehaviour
     void SpawnPunch()
     {
 
-        childInstance = Instantiate(rangedAttack.gameObject, mouseposition + (Vector2)transform.position, transform.rotation);
+        childInstance = Instantiate(rangedAttack.gameObject, rigidbody2D.transform.position, transform.rotation);
     }
 
 }
