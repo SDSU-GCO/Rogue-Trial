@@ -7,20 +7,10 @@ using ByteSheep.Events;
 public class CrossSceneIntSO : ScriptableObject
 {
     public QuickEvent Event = new QuickEvent();
-    public int value;
+    int _value;
     public int Value
     {
-        get
-        {
-            return value;
-        }
-        set
-        {
-            if (this.value != value)
-            {
-                this.value = value;
-                Event?.Invoke();
-            }
-        }
+        get => _value;
+        set { if (_value != value) /*then*/ { _value = value; /*and*/ Event?.Invoke(); } }
     }
 }

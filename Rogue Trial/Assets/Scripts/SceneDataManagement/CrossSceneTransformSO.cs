@@ -6,22 +6,12 @@ using ByteSheep.Events;
 [CreateAssetMenu(fileName = "new CrossSceneTransformSO", menuName = "ScriptableObjects/CrossSceneTransformSO")]
 public class CrossSceneTransformSO : ScriptableObject
 {
-    public Transform value;
-    public QuickEvent previousSceneChanged = new QuickEvent();
+    Transform _value;
+    public QuickEvent Event = new QuickEvent();
 
     public Transform Value
     {
-        get
-        {
-            return value;
-        }
-        set
-        {
-            if (this.value != value)
-            {
-                this.value = value;
-                previousSceneChanged?.Invoke();
-            }
-        }
+        get => _value;
+        set { if (_value != value) /*then*/ { _value = value; /*and*/ Event?.Invoke(); } }
     }
 }

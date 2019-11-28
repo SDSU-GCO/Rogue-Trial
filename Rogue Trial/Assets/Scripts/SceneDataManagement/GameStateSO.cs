@@ -10,36 +10,16 @@ public class GameStateSO : ScriptableObject
     public QuickEvent gameStateChanged = new QuickEvent();
     public CustomGCOTypes.GameState GameState
     {
-        get
-        {
-            return gameState;
-        }
-        set
-        {
-            if (gameState != value)
-            {
-                gameState = value;
-                gameStateChanged?.Invoke();
-            }
-        }
+        get => gameState;
+        set { if (gameState != value) /*then*/ { gameState = value; /*and*/ gameStateChanged?.Invoke(); } }
     }
 
-    public bool menuOpen = false;
+    bool menuOpen = false;
     public QuickEvent menuOpenChanged = new QuickEvent();
     public bool MenuOpen
     {
-        get
-        {
-            return menuOpen;
-        }
-        set
-        {
-            if(menuOpen!=value)
-            {
-                menuOpen = value;
-                menuOpenChanged?.Invoke();
-            }
-        }
+        get => menuOpen;
+        set { if (menuOpen != value) /*then*/ { menuOpen = value; /*and*/ menuOpenChanged?.Invoke(); } }
     }
 
     public OneBoolEvent showPlayer = new OneBoolEvent();

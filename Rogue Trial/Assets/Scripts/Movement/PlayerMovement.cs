@@ -56,11 +56,7 @@ public class PlayerMovement : MonoBehaviour, IMovable, IUsesInput
 
     [SerializeField, BoxGroup("Constraints")]
     bool enableInputs = true;
-    public bool EnableInputs
-    {
-        get => enableInputs;
-        set => enableInputs = value;
-    }
+    public bool EnableInputs { get; set;}
 
     [SerializeField, BoxGroup("Constraints")]
     CustomGCOTypes.MovementState movementState = CustomGCOTypes.MovementState.Enabled;
