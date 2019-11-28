@@ -18,7 +18,8 @@ public class TraverseLevelDoor : TriggerPrompt
     {
         if (Application.isEditor)
         {
-            promptMessage = "Press 'f' to enter \"" + sceneToLoad + "\"";
+            if(promptMessage=="")
+                promptMessage = "Press 'f' to enter \"" + sceneToLoad + "\"";
 #if UNITY_EDITOR
             UnityEditor.EditorUtility.SetDirty(this);
 #endif
