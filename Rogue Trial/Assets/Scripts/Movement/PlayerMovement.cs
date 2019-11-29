@@ -30,8 +30,8 @@ public class PlayerMovement : MonoBehaviour, IMovable, IUsesInput
     [MinValue(0), BoxGroup("Jump vars")]
     public float allowedAirbornTime = .5f;
 
-    [ProgressBar("Jump", 0.5f, ProgressBarColor.Blue), ShowIf("ShowJumpBar")]
-    public float airbornTime = 0;
+    [SerializeField, ProgressBar("Jump", 0.5f, ProgressBarColor.Blue), ShowIf("ShowJumpBar")]
+    float airbornTime = 0;
 
     private bool ShowJumpBar() => !isGrounded;
 
@@ -109,56 +109,6 @@ public class PlayerMovement : MonoBehaviour, IMovable, IUsesInput
     [SerializeField, HideInInspector]
     PlayerTransformMBDO playerTransformMBDO;
 
-    //private void OnValidate()
-    //{
-    //    if (rigidbody2D == null)
-    //    {
-    //        rigidbody2D = GetComponent<Rigidbody2D>();
-    //    }
-
-    //    if (capsuleCollider2D == null)
-    //    {
-    //        capsuleCollider2D = GetComponent<CapsuleCollider2D>();
-    //    }
-
-    //    if (spriteRenderer == null)
-    //    {
-    //        spriteRenderer = GetComponent<SpriteRenderer>();
-    //    }
-
-    //    Debug.Log("OnValidate: " + this + " scene: " + gameObject.scene.name);
-    //    if (playerTransformMBDO == null)
-    //    {
-    //        MBDOInitializationHelper mBDOInitializationHelper = default;
-
-    //        //IMPORTNANT STEP!!!
-    //        mBDOInitializationHelper.SetupCardinalSubSystem(this);
-    //        mBDOInitializationHelper.SetupMBDO(ref playerTransformMBDO);
-    //        if(playerTransformMBDO!=null && playerTransformMBDO.playerTransform==null)
-    //        {
-    //            Debug.LogWarning("Assignment to playerTransformMBDO.playerTransform in: " + this);
-    //            playerTransformMBDO.playerTransform = transform;
-    //        }
-    //    }
-    //}
-    //private void Reset()
-    //{
-    //    Debug.Log("OnReset: " + this);
-    //    if (playerTransformMBDO == null)
-    //    {
-    //        MBDOInitializationHelper mBDOInitializationHelper = default;
-
-    //        //IMPORTNANT STEP!!!
-    //        mBDOInitializationHelper.SetupCardinalSubSystem(this);
-    //        mBDOInitializationHelper.SetupMBDO(ref playerTransformMBDO);
-    //        if (playerTransformMBDO != null && playerTransformMBDO.playerTransform == null)
-    //        {
-    //            Debug.LogWarning("Assignment to playerTransformMBDO.playerTransform in: " + this);
-    //            playerTransformMBDO.playerTransform = transform;
-    //        }
-    //    }
-    //}
-
     private void Awake()
     {
         if (circleCastEdge != null)
@@ -166,15 +116,6 @@ public class PlayerMovement : MonoBehaviour, IMovable, IUsesInput
 
         if (circleCastOrigin != null)
             circleCastOrigin.GetComponent<SpriteRenderer>().enabled = enableDebugging;
-
-
-        int test = 9;
-        foo(test);
-    }
-
-    void foo(in int test)
-    {
-
     }
 
     //update loop
@@ -245,31 +186,12 @@ public class PlayerMovement : MonoBehaviour, IMovable, IUsesInput
         }
     }
 
-    [ReorderableList]
-    public List<CustomGCOTypes.CollisionLayerKey> targetCollisionLayers = new List<CustomGCOTypes.CollisionLayerKey>();
-#pragma warning disable CS0649
-    [SerializeField,HideInInspector]
-    int groundLayers;
-#pragma warning restore CS0649
-    private void OnValidate()
-    {
-#if UNITY_EDITOR
-        if (Application.isEditor)
-        {
-            groundLayers = 0;
-            foreach (CustomGCOTypes.CollisionLayerKey collisionLayerKey in targetCollisionLayers)
-            {
-                groundLayers |= 1 << ((int)collisionLayerKey);
-            }
-
-            UnityEditor.EditorUtility.SetDirty(this);
-        }
-#endif
-    }
+    [ReorderableList]//use layer mask
+    public LayerMask targetCollisionLayers = default;
     private bool CheckGrounded()
     {
         bool result = false;
-        LayerMask layerMask = groundLayers;
+        LayerMask layerMask = targetCollisionLayers;
         ContactFilter2D contactFilter2D = new ContactFilter2D();
         contactFilter2D.SetLayerMask(layerMask);
 

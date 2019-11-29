@@ -13,6 +13,8 @@ public class FlipSpriteOnVelocity : MonoBehaviour
     [SerializeField, Required, BoxGroup("Component Refs")]
     SpriteRenderer spriteRenderer = null;
 
+    //enum
+    //enum
     public bool? forceLookRight=null;
 
     private void OnValidate()

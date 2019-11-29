@@ -41,7 +41,7 @@ public class Health : MonoBehaviour{
         {
             if (_CurrentPlayerHealthSO != null)
             {
-                _CurrentHealth = _CurrentPlayerHealthSO.value;
+                _CurrentHealth = _CurrentPlayerHealthSO.Value;
                 UnityEditor.EditorUtility.SetDirty(this);
             }
         }
@@ -50,7 +50,7 @@ public class Health : MonoBehaviour{
 
     private void Awake() {
         if(_CurrentPlayerHealthSO!=null)
-            _CurrentHealth = _CurrentPlayerHealthSO.value;
+            _CurrentHealth = _CurrentPlayerHealthSO.Value;
         CurrentHealth = _CurrentHealth;
         MaxHealth = _MaxHealth;
     }
@@ -80,7 +80,7 @@ public class Health : MonoBehaviour{
 
         _PreviousHealth = _CurrentHealth;
         if (_CurrentPlayerHealthSO != null)
-            _CurrentPlayerHealthSO.value = _CurrentHealth;
+            _CurrentPlayerHealthSO.Value = _CurrentHealth;
 
     }
     private void SetMaxHealth(int value) { 

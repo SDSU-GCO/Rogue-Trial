@@ -95,9 +95,9 @@ public class Entity_Logic : MonoBehaviour
         if (invincibility >= invincibilityTime)
         {
             if (DamagedEventSO != null)
-                DamagedEventSO.Event.Invoke();
+                DamagedEventSO.Event?.Invoke();
 
-            DamagedEvent.Invoke();
+            DamagedEvent?.Invoke();
 
             health -= amount;
 
@@ -121,9 +121,9 @@ public class Entity_Logic : MonoBehaviour
 public void CommitSuduku()
     {
         if (DiedEventSO != null)
-            DiedEventSO.Event.Invoke();
+            DiedEventSO.Event?.Invoke();
 
-        DiedEvent.Invoke();
+        DiedEvent?.Invoke();
 
         if (gameObject.layer == 11 && onDeathReplaceWith == null)
         {

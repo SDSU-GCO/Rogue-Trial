@@ -38,7 +38,7 @@ public class StartGame : MonoBehaviour
         }
         if(CurrentPlayerHealthSO!=null)
         {
-            CurrentPlayerHealthSO.value = defaultHP;
+            CurrentPlayerHealthSO.Value = defaultHP;
         }
         else
         {
