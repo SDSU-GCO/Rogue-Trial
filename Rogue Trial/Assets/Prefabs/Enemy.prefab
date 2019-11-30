@@ -452,6 +452,6 @@ MonoBehaviour:
   spread: 0
   VolumeRolloff: 0
   minDistance: 2
-  maxDistance: 25
+  maxDistance: 10
   defaultFile: {fileID: 8300000, guid: e60025ede16d8554885063af74c1fb35, type: 3}
   crossSceneEvent: {fileID: 0}

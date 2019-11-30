@@ -12,6 +12,8 @@ public class TraverseLevelDoor : TriggerPrompt
     string sceneToLoad;
     [SerializeField, Required]
     CrossSceneSceneDataSO crossSceneSceneDataSO;
+    [SerializeField, Required]
+    SceneTransitionListenerSO sceneTransitionListenerSO;
 #pragma warning restore CS0649 // varriable is never assigned to and will always have it's default value
 
     private void OnValidate()
@@ -39,8 +41,7 @@ public class TraverseLevelDoor : TriggerPrompt
         {
             loadStarted = true;
             crossSceneSceneDataSO.PreviousScene = gameObject.scene;
-            SceneManager.LoadScene(sceneToLoad, LoadSceneMode.Additive);
-            SceneManager.UnloadSceneAsync(gameObject.scene);
+            sceneTransitionListenerSO.changeScenes.Invoke(sceneToLoad, this);
         }
     }
 

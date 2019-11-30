@@ -2502,6 +2502,16 @@ PrefabInstance:
       propertyPath: playerTransformMBDO
       value: 
       objectReference: {fileID: 1780439535}
+    - target: {fileID: 6034520407156970605, guid: 0cf4bebde878d43479b10667a24022d6,
+        type: 3}
+      propertyPath: UseDelay
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6034520407156970605, guid: 0cf4bebde878d43479b10667a24022d6,
+        type: 3}
+      propertyPath: UseRandomDelay
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0cf4bebde878d43479b10667a24022d6, type: 3}
 --- !u!1 &504416560

@@ -177,6 +177,8 @@ MonoBehaviour:
   sceneToLoad: Title Screen
   crossSceneSceneDataSO: {fileID: 11400000, guid: 7a03934cafd96ff469522aa883a1d3aa,
     type: 2}
+  sceneTransitionListenerSO: {fileID: 11400000, guid: 44fddebcc3168804e8824bc326cbf661,
+    type: 2}
   crossSceneCinemachineBrainSO: {fileID: 0}
 --- !u!114 &8801559228322586560
 MonoBehaviour:
