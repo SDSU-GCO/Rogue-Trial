@@ -41,7 +41,12 @@ public class TraverseLevelDoor : TriggerPrompt
         {
             loadStarted = true;
             crossSceneSceneDataSO.PreviousScene = gameObject.scene;
-            sceneTransitionListenerSO.changeScenes.Invoke(sceneToLoad, this);
+            if(sceneTransitionListenerSO!=null)
+            {
+                if (sceneTransitionListenerSO.changeScenes == null)
+                    sceneTransitionListenerSO.changeScenes = new SceneTransitionListenerSO.SceneChangeEvent();
+                sceneTransitionListenerSO.changeScenes.Invoke(sceneToLoad, this);
+            }
         }
     }
 

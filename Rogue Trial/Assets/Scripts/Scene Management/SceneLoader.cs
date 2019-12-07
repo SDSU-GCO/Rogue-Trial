@@ -11,64 +11,73 @@ public class SceneLoader : MonoBehaviour
     GameStateSO gameStateSO;
     [SerializeField, Required]
     SceneTransitionListenerSO sceneTransitionListenerSO;
+
     public bool AutomaticallyHandleLoadingSymbol = true;
-    bool isLoaded, isUnloaded = false;
+    bool transitioning;
+    private void Awake()
+    {
+        if(sceneTransitionListenerSO!=null)
+        {
+            if (sceneTransitionListenerSO.changeScenes == null)
+                sceneTransitionListenerSO.changeScenes = new SceneTransitionListenerSO.SceneChangeEvent();
+            sceneTransitionListenerSO.changeScenes.AddListener(SwitchToScene);
+        }
+    }
+    private void OnDestroy()
+    {
+        if (sceneTransitionListenerSO != null)
+        {
+            if (sceneTransitionListenerSO.changeScenes == null)
+                sceneTransitionListenerSO.changeScenes = new SceneTransitionListenerSO.SceneChangeEvent();
+            sceneTransitionListenerSO.changeScenes.RemoveListener(SwitchToScene);
+        }
+    }
     public bool IsTransitioning
     {
         get
         {
-            return !(isLoaded && isUnloaded);
+            return transitioning;
         }
     }
-    private void Awake()
-    {
-        SceneManager.sceneLoaded += loaded;
-        SceneManager.sceneUnloaded += unloaded;
-        sceneTransitionListenerSO.changeScenes.AddListener(SwitchToScene);
-    }
-    private void OnDestroy()
-    {
-        SceneManager.sceneLoaded -= loaded;
-        SceneManager.sceneUnloaded -= unloaded;
-        sceneTransitionListenerSO.changeScenes.RemoveListener(SwitchToScene);
-    }
     string sceneToLoad = "";
+    AsyncOperation async;
     void SwitchToScene(string sceneToLoad, MonoBehaviour caller)
     {
-        if (!(isLoaded && isUnloaded))
+        if (IsTransitioning)
             Debug.LogError("Can not load a new scene until the previous transition has finished");
         else
         {
             //gameStateSO.gameState = CustomGCOTypes.GameState.Paused;
-            if (LoadingScreen != null)
+            if (LoadingScreen != null && AutomaticallyHandleLoadingSymbol)
                 LoadingScreen.SetActive(true);
-            isLoaded = isUnloaded = false;
+
+
+            transitioning = true;
             this.sceneToLoad = sceneToLoad;
-            SceneManager.LoadSceneAsync(sceneToLoad, LoadSceneMode.Additive);
-            SceneManager.UnloadSceneAsync(caller.gameObject.scene);
+
+            async = SceneManager.UnloadSceneAsync(caller.gameObject.scene);
+            StartCoroutine(waitForLoaded());
         }
-    }
-    void loaded(Scene scene, LoadSceneMode loadSceneMode)
-    {
-        if (scene != gameObject.scene && scene.name==sceneToLoad)
-        {
-            sceneToLoad = "";
-            SceneManager.SetActiveScene(scene);
-        }
-        isLoaded = true;
-        checkAllLoaded();
-    }
-    void unloaded(Scene scene)
-    {
-        isUnloaded = true;
-        checkAllLoaded();
     }
 
-    void checkAllLoaded()
+    IEnumerator waitForLoaded()
     {
-        //gameStateSO.gameState = CustomGCOTypes.GameState.PlayMode;
-        if (LoadingScreen != null && isLoaded && isUnloaded)
+        while (!(async.isDone))
+        {
+            yield return null;
+        }
+
+        async = SceneManager.LoadSceneAsync(sceneToLoad, LoadSceneMode.Additive);
+
+        while (!(async.isDone))
+        {
+            yield return null;
+        }
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneToLoad));
+
+        if (LoadingScreen != null && AutomaticallyHandleLoadingSymbol)
             LoadingScreen.SetActive(false);
+        transitioning = false;
     }
 
 }
