@@ -29,7 +29,9 @@ public class StartGame : MonoBehaviour
         }
     }
 
+#pragma warning disable CS0649 // varriable is never assigned to and will always have it's default value
     [SerializeField] int defaultHP;
+#pragma warning restore CS0649 // varriable is never assigned to and will always have it's default value
     private void Start()
     {
         foreach(CrossSceneBoolSO csb in roomClearData)

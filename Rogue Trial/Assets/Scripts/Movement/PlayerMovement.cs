@@ -54,9 +54,11 @@ public class PlayerMovement : MonoBehaviour, IMovable, IUsesInput
     public QuickEvent Dashed;
 
 
+#pragma warning disable CS0649 // varriable is never assigned to and will always have it's default value
     [SerializeField, BoxGroup("Constraints")]
     bool enableInputs = true;
-    public bool EnableInputs { get; set;}
+#pragma warning restore CS0649 // varriable is never assigned to and will always have it's default value
+    public bool EnableInputs { get { return enableInputs; } set { enableInputs = value; } }
 
     [SerializeField, BoxGroup("Constraints")]
     CustomGCOTypes.MovementState movementState = CustomGCOTypes.MovementState.Enabled;

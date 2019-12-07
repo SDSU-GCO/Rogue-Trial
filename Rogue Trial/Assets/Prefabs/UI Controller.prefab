@@ -1089,10 +1089,13 @@ MonoBehaviour:
   playerRevived: {fileID: 11400000, guid: d4e997a5cfabfd841af546bbffc22037, type: 2}
   crossSceneSceneDataSO: {fileID: 11400000, guid: 7a03934cafd96ff469522aa883a1d3aa,
     type: 2}
+  sceneTransitionListenerSO: {fileID: 11400000, guid: 798f525453af89f48b9d250e0d137c4e,
+    type: 2}
   gameStateSO: {fileID: 11400000, guid: c958049ac6246424db109b1e303a10ea, type: 2}
   defaultScene:
     m_Handle: 0
-  crossSceneCinemachineBrainSO: {fileID: 0}
+  crossSceneCinemachineBrainSO: {fileID: 11400000, guid: a3131a156c94ac74e913b5ef6313dc66,
+    type: 2}
 --- !u!1 &158226047062453063
 GameObject:
   m_ObjectHideFlags: 0
@@ -2786,10 +2789,13 @@ MonoBehaviour:
   playerRevived: {fileID: 11400000, guid: d4e997a5cfabfd841af546bbffc22037, type: 2}
   crossSceneSceneDataSO: {fileID: 11400000, guid: 7a03934cafd96ff469522aa883a1d3aa,
     type: 2}
+  sceneTransitionListenerSO: {fileID: 11400000, guid: 798f525453af89f48b9d250e0d137c4e,
+    type: 2}
   gameStateSO: {fileID: 11400000, guid: c958049ac6246424db109b1e303a10ea, type: 2}
   defaultScene:
     m_Handle: 0
-  crossSceneCinemachineBrainSO: {fileID: 0}
+  crossSceneCinemachineBrainSO: {fileID: 11400000, guid: a3131a156c94ac74e913b5ef6313dc66,
+    type: 2}
 --- !u!1 &6105105449140471223
 GameObject:
   m_ObjectHideFlags: 0

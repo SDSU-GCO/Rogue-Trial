@@ -9,8 +9,10 @@ public class SceneLoader : MonoBehaviour
     public GameObject LoadingScreen;
     [SerializeField, Required]
     GameStateSO gameStateSO;
+#pragma warning disable CS0649 // varriable is never assigned to and will always have it's default value
     [SerializeField, Required]
     SceneTransitionListenerSO sceneTransitionListenerSO;
+#pragma warning restore CS0649 // varriable is never assigned to and will always have it's default value
 
     public bool AutomaticallyHandleLoadingSymbol = true;
     bool transitioning;
@@ -32,7 +34,7 @@ public class SceneLoader : MonoBehaviour
             sceneTransitionListenerSO.changeScenes.RemoveListener(SwitchToScene);
         }
     }
-    public bool IsTransitioning
+    public bool IsTransitioning 
     {
         get
         {

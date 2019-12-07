@@ -9,6 +9,8 @@ public class Restart : MonoBehaviour
     CrossSceneEventSO playerRevived;
     [SerializeField, Required]
     CrossSceneSceneDataSO crossSceneSceneDataSO;
+    [SerializeField, Required]
+    SceneTransitionListenerSO sceneTransitionListenerSO;
     [SerializeField, HideInInspector, Required]
     GameStateSO gameStateSO;
 #pragma warning restore CS0649 // varriable is never assigned to and will always have it's default value
@@ -26,7 +28,9 @@ public class Restart : MonoBehaviour
 #endif
         }
     }
+#pragma warning disable CS0649 // varriable is never assigned to and will always have it's default value
     [SerializeField] CrossSceneCinemachineBrainSO crossSceneCinemachineBrainSO;
+#pragma warning restore CS0649 // varriable is never assigned to and will always have it's default value
     public void RestartLevel()
     {
         if (crossSceneCinemachineBrainSO != null)
@@ -40,8 +44,12 @@ public class Restart : MonoBehaviour
         playerRevived.Event.Invoke();
         if (crossSceneSceneDataSO.ActiveScene != new Scene())
         {
-            SceneManager.LoadScene(crossSceneSceneDataSO.ActiveScene.name, LoadSceneMode.Additive);
-            SceneManager.UnloadSceneAsync(gameObject.scene);
+            if (sceneTransitionListenerSO != null)
+            {
+                if (sceneTransitionListenerSO.changeScenes == null)
+                    sceneTransitionListenerSO.changeScenes = new SceneTransitionListenerSO.SceneChangeEvent();
+                sceneTransitionListenerSO.changeScenes.Invoke(gameObject.scene.name, this);
+            }
         }
         else
         {
@@ -60,7 +68,11 @@ public class Restart : MonoBehaviour
             gameStateSO.GameState = CustomGCOTypes.GameState.PlayMode;
         }
         playerRevived.Event.Invoke();
-        SceneManager.LoadScene(0, LoadSceneMode.Additive);
-        SceneManager.UnloadSceneAsync(gameObject.scene.name);
+        if (sceneTransitionListenerSO != null)
+        {
+            if (sceneTransitionListenerSO.changeScenes == null)
+                sceneTransitionListenerSO.changeScenes = new SceneTransitionListenerSO.SceneChangeEvent();
+            sceneTransitionListenerSO.changeScenes.Invoke(gameObject.scene.name, this);
+        }
     }
 }

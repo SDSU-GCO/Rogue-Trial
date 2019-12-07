@@ -6,9 +6,12 @@ using UnityEngine.Audio;
 
 public class DestroyOnAudioDone : MonoBehaviour
 {
+#pragma warning disable CS0649 // varriable is never assigned to and will always have it's default value
     [SerializeField]
     AudioClip audioClip;
+    [SerializeField]
     AudioMixerGroup audioMixerGroup;
+#pragma warning restore CS0649 // varriable is never assigned to and will always have it's default value
 
     AudioSource audioSource;
     private void Start()

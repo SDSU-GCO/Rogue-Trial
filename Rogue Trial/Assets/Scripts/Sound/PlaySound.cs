@@ -10,7 +10,6 @@ public class PlaySound : MonoBehaviour
 #pragma warning disable CS0649 // varriable is never assigned to and will always have it's default value
     [SerializeField, Required]
     AudioMixerGroup audioMixerGroup;
-#pragma warning restore CS0649 // varriable is never assigned to and will always have it's default value
 
     [BoxGroup("Loops")]
     public bool loop;
@@ -40,7 +39,7 @@ public class PlaySound : MonoBehaviour
     float minDistance=0;
     [SerializeField, ShowIf("SpatializeIn3D"), BoxGroup("Spatialize"), Min(0)]
     float maxDistance=500;
-
+#pragma warning restore CS0649 // varriable is never assigned to and will always have it's default value
 
     public AudioClip defaultFile;
 

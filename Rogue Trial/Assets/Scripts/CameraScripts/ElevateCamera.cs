@@ -5,11 +5,13 @@ using TMPro;
 
 public class ElevateCamera : MonoBehaviour
 {
+#pragma warning disable CS0649 // varriable is never assigned to and will always have it's default value
     [SerializeField] Cinemachine.CinemachineVirtualCamera cinemachineVirtualCamera;
     [SerializeField] int inactivePriority = 80;
     [SerializeField] int activePriority = 100;
     [SerializeField] CrossSceneCinemachineBrainSO crossSceneCinemachineBrainSO;
-
+#pragma warning restore CS0649 // varriable is never assigned to and will always have it's default value
+     
     public void Activate()
     {
         if (crossSceneCinemachineBrainSO != null)
