@@ -77,6 +77,7 @@ public class BossBrain : MonoBehaviour
             yield return null;
         }
 
+        animator.SetInteger("HP", animator.GetInteger("HP")-1);
         animator.SetBool("Attack", false);
     }
 }
