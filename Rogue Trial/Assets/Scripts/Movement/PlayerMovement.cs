@@ -30,8 +30,8 @@ public class PlayerMovement : MonoBehaviour, IMovable, IUsesInput
     [MinValue(0), BoxGroup("Jump vars")]
     public float allowedAirbornTime = .5f;
 
-    [ProgressBar("Jump", 0.5f, ProgressBarColor.Blue), ShowIf("ShowJumpBar")]
-    public float airbornTime = 0;
+    [SerializeField, ProgressBar("Jump", 0.5f, ProgressBarColor.Blue), ShowIf("ShowJumpBar")]
+    float airbornTime = 0;
 
     private bool ShowJumpBar() => !isGrounded;
 
@@ -54,13 +54,11 @@ public class PlayerMovement : MonoBehaviour, IMovable, IUsesInput
     public QuickEvent Dashed;
 
 
+#pragma warning disable CS0649 // varriable is never assigned to and will always have it's default value
     [SerializeField, BoxGroup("Constraints")]
     bool enableInputs = true;
-    public bool EnableInputs
-    {
-        get => enableInputs;
-        set => enableInputs = value;
-    }
+#pragma warning restore CS0649 // varriable is never assigned to and will always have it's default value
+    public bool EnableInputs { get { return enableInputs; } set { enableInputs = value; } }
 
     [SerializeField, BoxGroup("Constraints")]
     CustomGCOTypes.MovementState movementState = CustomGCOTypes.MovementState.Enabled;
@@ -72,27 +70,30 @@ public class PlayerMovement : MonoBehaviour, IMovable, IUsesInput
         }
         set
         {
-            if (value == CustomGCOTypes.MovementState.Disabled)
+            if(movementState!=value)
             {
-                //cache momentum
-                cachedVelocity = rigidbody2D.velocity;
-                rigidbody2D.constraints = RigidbodyConstraints2D.FreezeAll;
+                if (value == CustomGCOTypes.MovementState.Disabled)
+                {
+                    //cache momentum
+                    cachedVelocity = rigidbody2D.velocity;
+                    rigidbody2D.constraints = RigidbodyConstraints2D.FreezeAll;
+                }
+                else if (value == CustomGCOTypes.MovementState.DisabledKillMomentum)
+                {
+                    rigidbody2D.constraints = RigidbodyConstraints2D.FreezeAll;
+                    cachedVelocity = Vector2.zero;
+                }
+                else if (value == CustomGCOTypes.MovementState.Enabled)
+                {
+                    rigidbody2D.constraints = RigidbodyConstraints2D.FreezeRotation;
+                    rigidbody2D.velocity = cachedVelocity;
+                }
+                else
+                {
+                    Debug.LogError(value + " is not implemented yet!");
+                }
+                movementState = value;
             }
-            else if (value == CustomGCOTypes.MovementState.DisabledKillMomentum)
-            {
-                rigidbody2D.constraints = RigidbodyConstraints2D.FreezeAll;
-                cachedVelocity = Vector2.zero;
-            }
-            else if (value == CustomGCOTypes.MovementState.Enabled)
-            {
-                rigidbody2D.constraints = RigidbodyConstraints2D.FreezeRotation;
-                rigidbody2D.velocity = cachedVelocity;
-            }
-            else
-            {
-                Debug.LogError(value + " is not implemented yet!");
-            }
-            movementState = value;
         }
     }
     Vector2 cachedVelocity = Vector2.zero;
@@ -109,56 +110,6 @@ public class PlayerMovement : MonoBehaviour, IMovable, IUsesInput
 
     [SerializeField, HideInInspector]
     PlayerTransformMBDO playerTransformMBDO;
-
-    //private void OnValidate()
-    //{
-    //    if (rigidbody2D == null)
-    //    {
-    //        rigidbody2D = GetComponent<Rigidbody2D>();
-    //    }
-
-    //    if (capsuleCollider2D == null)
-    //    {
-    //        capsuleCollider2D = GetComponent<CapsuleCollider2D>();
-    //    }
-
-    //    if (spriteRenderer == null)
-    //    {
-    //        spriteRenderer = GetComponent<SpriteRenderer>();
-    //    }
-
-    //    Debug.Log("OnValidate: " + this + " scene: " + gameObject.scene.name);
-    //    if (playerTransformMBDO == null)
-    //    {
-    //        MBDOInitializationHelper mBDOInitializationHelper = default;
-
-    //        //IMPORTNANT STEP!!!
-    //        mBDOInitializationHelper.SetupCardinalSubSystem(this);
-    //        mBDOInitializationHelper.SetupMBDO(ref playerTransformMBDO);
-    //        if(playerTransformMBDO!=null && playerTransformMBDO.playerTransform==null)
-    //        {
-    //            Debug.LogWarning("Assignment to playerTransformMBDO.playerTransform in: " + this);
-    //            playerTransformMBDO.playerTransform = transform;
-    //        }
-    //    }
-    //}
-    //private void Reset()
-    //{
-    //    Debug.Log("OnReset: " + this);
-    //    if (playerTransformMBDO == null)
-    //    {
-    //        MBDOInitializationHelper mBDOInitializationHelper = default;
-
-    //        //IMPORTNANT STEP!!!
-    //        mBDOInitializationHelper.SetupCardinalSubSystem(this);
-    //        mBDOInitializationHelper.SetupMBDO(ref playerTransformMBDO);
-    //        if (playerTransformMBDO != null && playerTransformMBDO.playerTransform == null)
-    //        {
-    //            Debug.LogWarning("Assignment to playerTransformMBDO.playerTransform in: " + this);
-    //            playerTransformMBDO.playerTransform = transform;
-    //        }
-    //    }
-    //}
 
     private void Awake()
     {
@@ -237,31 +188,12 @@ public class PlayerMovement : MonoBehaviour, IMovable, IUsesInput
         }
     }
 
-    [ReorderableList]
-    public List<CustomGCOTypes.CollisionLayerKey> targetCollisionLayers = new List<CustomGCOTypes.CollisionLayerKey>();
-#pragma warning disable CS0649
-    [SerializeField,HideInInspector]
-    int groundLayers;
-#pragma warning restore CS0649
-    private void OnValidate()
-    {
-#if UNITY_EDITOR
-        if (Application.isEditor)
-        {
-            groundLayers = 0;
-            foreach (CustomGCOTypes.CollisionLayerKey collisionLayerKey in targetCollisionLayers)
-            {
-                groundLayers |= 1 << ((int)collisionLayerKey);
-            }
-
-            UnityEditor.EditorUtility.SetDirty(this);
-        }
-#endif
-    }
+    [ReorderableList]//use layer mask
+    public LayerMask targetCollisionLayers = default;
     private bool CheckGrounded()
     {
         bool result = false;
-        LayerMask layerMask = groundLayers;
+        LayerMask layerMask = targetCollisionLayers;
         ContactFilter2D contactFilter2D = new ContactFilter2D();
         contactFilter2D.SetLayerMask(layerMask);
 

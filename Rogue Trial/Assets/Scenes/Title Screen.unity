@@ -133,6 +133,7 @@ GameObject:
   - component: {fileID: 615106029}
   - component: {fileID: 615106031}
   - component: {fileID: 615106032}
+  - component: {fileID: 615106033}
   m_Layer: 5
   m_Name: Title Screen
   m_TagString: Untagged
@@ -234,7 +235,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   crossSceneSceneData: {fileID: 11400000, guid: 7a03934cafd96ff469522aa883a1d3aa,
     type: 2}
+  crossSceneCinemachineBrainSO: {fileID: 0}
   cardinalSceneName: Cardinal Scene
+--- !u!114 &615106033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 615106027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d90494704cc59cf4da70694c69aa2fd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicMessageEventSO: {fileID: 11400000, guid: 94bd9c8e9d8e8da499e075703caf3d05,
+    type: 2}
+  audioClips:
+  - {fileID: 8300000, guid: 06bb76eac369a274c8538c80e7cc332e, type: 3}
 --- !u!1001 &1218792338
 PrefabInstance:
   m_ObjectHideFlags: 0

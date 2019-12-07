@@ -18,7 +18,7 @@ public class HubRoomDoorCondition : ConditionalComponent
 
         foreach(CrossSceneBoolSO csb in roomClearData)
         {
-            rtnVal = rtnVal && csb.value;
+            rtnVal = rtnVal && csb.Value;
         }
         rtnVal = requireKeys == true ? rtnVal : rtnVal!=true;
         return rtnVal;

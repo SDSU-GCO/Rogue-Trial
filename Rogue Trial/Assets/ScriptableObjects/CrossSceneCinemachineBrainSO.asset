@@ -12,4 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 699d167c055116c4fb028d1067f0bcac, type: 3}
   m_Name: CrossSceneCinemachineBrainSO
   m_EditorClassIdentifier: 
+  Event:
+    inspectorListHeight: 63
+    persistentCalls:
+      calls: []
   value: {fileID: 0}

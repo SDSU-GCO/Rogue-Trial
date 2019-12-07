@@ -108,7 +108,30 @@ public class Player_Attack_Logic : MonoBehaviour
             //childInstance = Instantiate(rangedAttack.gameObject, mouseposition + (Vector2)transform.position, transform.rotation);
 
 
-            //proposed attack pos code ver 2
+            ////proposed attack pos code ver 2
+            //GameObject childInstance = null;
+            //Vector3 mouseScreenPosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
+            //Vector2 mouseposition = Camera.main.ScreenToWorldPoint(mouseScreenPosition);
+            //Vector2 normalPos = (mouseposition - (Vector2)transform.position).normalized;
+
+            //if (spriteRenderer != null && flipSpriteOnVelocity != null)
+            //{
+            //    if (normalPos.x < 0)
+            //    {
+            //        spriteRenderer.flipX = true;
+            //        flipSpriteOnVelocity.forceLookRight = false;
+            //    }
+            //    else
+            //    {
+            //        spriteRenderer.flipX = false;
+            //        flipSpriteOnVelocity.forceLookRight = true;
+            //    }
+            //}
+
+            //mouseposition = normalPos * offset;
+            //childInstance = Instantiate(rangedAttack.gameObject, mouseposition + (Vector2)transform.position, transform.rotation);
+
+            //proposed attack pos code ver 3
             GameObject childInstance = null;
             Vector3 mouseScreenPosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
             Vector2 mouseposition = Camera.main.ScreenToWorldPoint(mouseScreenPosition);
@@ -127,9 +150,10 @@ public class Player_Attack_Logic : MonoBehaviour
                     flipSpriteOnVelocity.forceLookRight = true;
                 }
             }
-
-            mouseposition = normalPos * offset;
-            childInstance = Instantiate(rangedAttack.gameObject, mouseposition + (Vector2)transform.position, transform.rotation);
+            if (spriteRenderer.flipX != true)
+                childInstance = Instantiate(rangedAttack.gameObject, Vector2.right * offset + (Vector2)transform.position, transform.rotation);
+            else
+                childInstance = Instantiate(rangedAttack.gameObject, Vector2.left * offset + (Vector2)transform.position, transform.rotation);
 
 
             Vector3 temp = childInstance.transform.position;

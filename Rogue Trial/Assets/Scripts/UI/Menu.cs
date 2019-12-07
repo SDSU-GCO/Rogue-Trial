@@ -26,7 +26,6 @@ public class Menu : MonoBehaviour
         if (gameStateSO.MenuOpen != true)
         {
             gameStateSO.MenuOpen = true;
-            gameStateSO.updatedValue.Invoke();
         }
     }
     private void OnDisable()
@@ -34,7 +33,6 @@ public class Menu : MonoBehaviour
         if (gameStateSO.MenuOpen == true)
         {
             gameStateSO.MenuOpen = false;
-            gameStateSO.updatedValue.Invoke();
         }
     }
 }

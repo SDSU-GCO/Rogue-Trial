@@ -95,11 +95,11 @@ public class GameOver : MonoBehaviour
         image.sprite = spriteRenderer.sprite;
         if (Input.anyKeyDown && !Input.GetKeyDown(KeyCode.Escape) && isOpaque == true  && gameStateSO.MenuOpen!=true)
         {
-            if (crossSceneSceneDataSO.activeScene != new Scene())
+            if (crossSceneSceneDataSO.ActiveScene != new Scene())
             {
                 PlayerRevivedSO.Event.Invoke();
-                SceneManager.LoadScene(crossSceneSceneDataSO.activeScene.name, LoadSceneMode.Additive);
-                SceneManager.UnloadSceneAsync(crossSceneSceneDataSO.activeScene.name);
+                SceneManager.LoadScene(crossSceneSceneDataSO.ActiveScene.name, LoadSceneMode.Additive);
+                SceneManager.UnloadSceneAsync(crossSceneSceneDataSO.ActiveScene.name);
             }
             else
             {

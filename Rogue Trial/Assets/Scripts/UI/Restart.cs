@@ -9,6 +9,8 @@ public class Restart : MonoBehaviour
     CrossSceneEventSO playerRevived;
     [SerializeField, Required]
     CrossSceneSceneDataSO crossSceneSceneDataSO;
+    [SerializeField, Required]
+    SceneTransitionListenerSO sceneTransitionListenerSO;
     [SerializeField, HideInInspector, Required]
     GameStateSO gameStateSO;
 #pragma warning restore CS0649 // varriable is never assigned to and will always have it's default value
@@ -26,23 +28,28 @@ public class Restart : MonoBehaviour
 #endif
         }
     }
+#pragma warning disable CS0649 // varriable is never assigned to and will always have it's default value
     [SerializeField] CrossSceneCinemachineBrainSO crossSceneCinemachineBrainSO;
+#pragma warning restore CS0649 // varriable is never assigned to and will always have it's default value
     public void RestartLevel()
     {
         if (crossSceneCinemachineBrainSO != null)
-            crossSceneCinemachineBrainSO.value.m_DefaultBlend.m_Style = Cinemachine.CinemachineBlendDefinition.Style.Cut;
+            crossSceneCinemachineBrainSO.Value.m_DefaultBlend.m_Style = Cinemachine.CinemachineBlendDefinition.Style.Cut;
 
 
-        if (gameStateSO.gameState != CustomGCOTypes.GameState.PlayMode)
+        if (gameStateSO.GameState != CustomGCOTypes.GameState.PlayMode)
         {
-            gameStateSO.gameState = CustomGCOTypes.GameState.PlayMode;
-            gameStateSO.updatedValue.Invoke();
+            gameStateSO.GameState = CustomGCOTypes.GameState.PlayMode;
         }
         playerRevived.Event.Invoke();
-        if (crossSceneSceneDataSO.activeScene != new Scene())
+        if (crossSceneSceneDataSO.ActiveScene != new Scene())
         {
-            SceneManager.LoadScene(crossSceneSceneDataSO.activeScene.name, LoadSceneMode.Additive);
-            SceneManager.UnloadSceneAsync(gameObject.scene);
+            if (sceneTransitionListenerSO != null)
+            {
+                if (sceneTransitionListenerSO.changeScenes == null)
+                    sceneTransitionListenerSO.changeScenes = new SceneTransitionListenerSO.SceneChangeEvent();
+                sceneTransitionListenerSO.changeScenes.Invoke(gameObject.scene.name, this);
+            }
         }
         else
         {
@@ -53,16 +60,19 @@ public class Restart : MonoBehaviour
     public void RestartGame()
     {
         if (crossSceneCinemachineBrainSO != null)
-            crossSceneCinemachineBrainSO.value.m_DefaultBlend.m_Style = Cinemachine.CinemachineBlendDefinition.Style.Cut;
+            crossSceneCinemachineBrainSO.Value.m_DefaultBlend.m_Style = Cinemachine.CinemachineBlendDefinition.Style.Cut;
 
 
-        if (gameStateSO.gameState != CustomGCOTypes.GameState.PlayMode)
+        if (gameStateSO.GameState != CustomGCOTypes.GameState.PlayMode)
         {
-            gameStateSO.gameState = CustomGCOTypes.GameState.PlayMode;
-            gameStateSO.updatedValue.Invoke();
+            gameStateSO.GameState = CustomGCOTypes.GameState.PlayMode;
         }
         playerRevived.Event.Invoke();
-        SceneManager.LoadScene(0, LoadSceneMode.Additive);
-        SceneManager.UnloadSceneAsync(gameObject.scene.name);
+        if (sceneTransitionListenerSO != null)
+        {
+            if (sceneTransitionListenerSO.changeScenes == null)
+                sceneTransitionListenerSO.changeScenes = new SceneTransitionListenerSO.SceneChangeEvent();
+            sceneTransitionListenerSO.changeScenes.Invoke(gameObject.scene.name, this);
+        }
     }
 }

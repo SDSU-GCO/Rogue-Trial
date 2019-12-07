@@ -87,13 +87,13 @@ public class StateController : MonoBehaviour
             switch (kvp.IfConditions.ifCheck)
             {
                 case Key.IfCheck.GameState:
-                    applyThisRule = kvp.IfConditions.gameState == gameStateSO.gameState;
+                    applyThisRule = kvp.IfConditions.gameState == gameStateSO.GameState;
                     break;
                 case Key.IfCheck.Menu:
                     applyThisRule = kvp.IfConditions.Menu == gameStateSO.MenuOpen;
                     break;
                 case Key.IfCheck.GameState_And_Menu:
-                    applyThisRule = kvp.IfConditions.Menu == gameStateSO.MenuOpen && kvp.IfConditions.gameState == gameStateSO.gameState;
+                    applyThisRule = kvp.IfConditions.Menu == gameStateSO.MenuOpen && kvp.IfConditions.gameState == gameStateSO.GameState;
                     break;
             }
             if (applyThisRule)
@@ -130,11 +130,13 @@ public class StateController : MonoBehaviour
     {
         if (gameStateSO == null)
             Debug.LogError(this);
-        gameStateSO.updatedValue.AddListener(ApplyRules);
+        gameStateSO.gameStateChanged.AddListener(ApplyRules);
+        gameStateSO.menuOpenChanged.AddListener(ApplyRules);
     }
     private void OnDisable()
     {
-        gameStateSO.updatedValue.RemoveListener(ApplyRules);
+        gameStateSO.menuOpenChanged.RemoveListener(ApplyRules);
+        gameStateSO.gameStateChanged.RemoveListener(ApplyRules);
     }
 }
 

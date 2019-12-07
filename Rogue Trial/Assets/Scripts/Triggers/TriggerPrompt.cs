@@ -22,11 +22,7 @@ public class TriggerPrompt : MonoBehaviour, IUsesInput
 
 #pragma warning restore CS0649 // varriable is never assigned to and will always have it's default value
     bool enableInput=true;
-    public bool EnableInputs
-    {
-        get => enableInput;
-        set => enableInput = value;
-    }
+    public bool EnableInputs{get; set;}
 
     bool doPrompt = false;
     public void DispPrompt()

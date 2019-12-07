@@ -17,32 +17,18 @@ public class LoadCardinal : MonoBehaviour
 #pragma warning restore CS0649 // varriable is never assigned to and will always have it's default value
     private void Awake()
     {
-        crossSceneSceneData.activeScene = gameObject.scene;
+        crossSceneSceneData.ActiveScene = gameObject.scene;
         LoadCardinalScene();        
     }
     private void Start()
     {
         if (crossSceneCinemachineBrainSO != null)
-            crossSceneCinemachineBrainSO.value.m_DefaultBlend.m_Style = Cinemachine.CinemachineBlendDefinition.Style.Cut;
+            crossSceneCinemachineBrainSO.Value.m_DefaultBlend.m_Style = Cinemachine.CinemachineBlendDefinition.Style.Cut;
     }
     private void OnEnable()
     {
         LoadCardinalScene();
-        SceneManager.activeSceneChanged+= OnSceneChanged;
     }
-
-    bool enforcingScene = false;
-    void OnSceneChanged(Scene oldS, Scene newS)
-    {
-        bool old = enforcingScene;
-        enforcingScene = true;
-        if(old!=true)
-        {
-            SceneManager.SetActiveScene(crossSceneSceneData.activeScene);
-        }
-        enforcingScene = false;
-    }
-
 
     void LoadCardinalScene()
     {

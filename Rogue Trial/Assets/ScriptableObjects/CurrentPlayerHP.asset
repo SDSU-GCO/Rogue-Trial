@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c40c31c94334c24595253137a1dabe3, type: 3}
   m_Name: CurrentPlayerHP
   m_EditorClassIdentifier: 
-  value: 10
+  Event:
+    inspectorListHeight: 63
+    persistentCalls:
+      calls: []

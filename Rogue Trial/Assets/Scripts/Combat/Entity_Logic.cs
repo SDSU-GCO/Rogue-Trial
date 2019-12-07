@@ -10,9 +10,13 @@ public class Entity_Logic : MonoBehaviour
     public Event_One_Float hpUpdated = new Event_One_Float();
 #pragma warning disable CS0649 // varriable is never assigned to and will always have it's default value
     [SerializeField]
-    CrossSceneEventSO DamagedEvent;
+    CrossSceneEventSO DamagedEventSO;
     [SerializeField]
-    CrossSceneEventSO DiedEvent;
+    CrossSceneEventSO DiedEventSO;
+    [SerializeField]
+    QuickEvent DamagedEvent = new QuickEvent();
+    [SerializeField]
+    QuickEvent DiedEvent = new QuickEvent();
     [SerializeField]
     Health healthComponent;
 #pragma warning restore CS0649 // varriable is never assigned to and will always have it's default value
@@ -90,8 +94,10 @@ public class Entity_Logic : MonoBehaviour
     {
         if (invincibility >= invincibilityTime)
         {
-            if (DamagedEvent != null)
-                DamagedEvent.Event.Invoke();
+            if (DamagedEventSO != null)
+                DamagedEventSO.Event?.Invoke();
+
+            DamagedEvent?.Invoke();
 
             health -= amount;
 
@@ -114,8 +120,10 @@ public class Entity_Logic : MonoBehaviour
 
 public void CommitSuduku()
     {
-        if (DiedEvent != null)
-            DiedEvent.Event.Invoke();
+        if (DiedEventSO != null)
+            DiedEventSO.Event?.Invoke();
+
+        DiedEvent?.Invoke();
 
         if (gameObject.layer == 11 && onDeathReplaceWith == null)
         {

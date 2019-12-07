@@ -30,7 +30,7 @@ public class ManageCrossSceneData : MonoBehaviour
         {
             if(CurrentPlayerHP!=null)
             {
-                CurrentPlayerHP.value = CurrentPlayerHPDefault;
+                CurrentPlayerHP.Value = CurrentPlayerHPDefault;
                 UnityEditor.EditorUtility.SetDirty(this);
                 UnityEditor.EditorUtility.SetDirty(CurrentPlayerHP);
             }
@@ -46,12 +46,12 @@ public class ManageCrossSceneData : MonoBehaviour
     {
         foreach (CrossSceneBoolSO csb in roomClearData)
         {
-            csb.value = false;
+            csb.Value = false;
         }
 
         if (CurrentPlayerHP != null)
         {
-            CurrentPlayerHP.value = CurrentPlayerHPDefault;
+            CurrentPlayerHP.Value = CurrentPlayerHPDefault; 
         }
         else
         {
