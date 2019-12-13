@@ -798,4 +798,4 @@ MonoBehaviour:
     persistentCalls:
       calls: []
   _MaxHealth: 12
-  _CurrentHealth: 7
+  _CurrentHealth: 9
