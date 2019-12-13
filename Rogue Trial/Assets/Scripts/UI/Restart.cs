@@ -62,7 +62,6 @@ public class Restart : MonoBehaviour
         if (crossSceneCinemachineBrainSO != null)
             crossSceneCinemachineBrainSO.Value.m_DefaultBlend.m_Style = Cinemachine.CinemachineBlendDefinition.Style.Cut;
 
-
         if (gameStateSO.GameState != CustomGCOTypes.GameState.PlayMode)
         {
             gameStateSO.GameState = CustomGCOTypes.GameState.PlayMode;
@@ -72,7 +71,7 @@ public class Restart : MonoBehaviour
         {
             if (sceneTransitionListenerSO.changeScenes == null)
                 sceneTransitionListenerSO.changeScenes = new SceneTransitionListenerSO.SceneChangeEvent();
-            sceneTransitionListenerSO.changeScenes.Invoke(gameObject.scene.name, this);
+            sceneTransitionListenerSO.changeScenes.Invoke("Title Screen", this);
         }
     }
 }
