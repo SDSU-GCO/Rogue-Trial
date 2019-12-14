@@ -121,9 +121,9 @@ public class Entity_Logic : MonoBehaviour
 public void CommitSuduku()
     {
         if (DiedEventSO != null)
-            DiedEventSO.Event?.Invoke();
+            DiedEventSO.Event.Invoke();
 
-        DiedEvent?.Invoke();
+        DiedEvent.Invoke();
 
         if (gameObject.layer == 11 && onDeathReplaceWith == null)
         {

@@ -5,12 +5,14 @@ using ByteSheep.Events;
 
 public class BossBrain : MonoBehaviour
 {
+#pragma warning disable CS0649
     [SerializeField]
     QuickEvent weakAttack = new QuickEvent();
     [SerializeField]
     QuickEvent strongAttack = new QuickEvent();
     [SerializeField, NaughtyAttributes.Required]
     Animator animator;
+#pragma warning restore CS0649
 
     [SerializeField]
     int weakAttackCount = 5;
