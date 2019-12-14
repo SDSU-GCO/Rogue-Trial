@@ -22,10 +22,14 @@ public class EscapeMenu : MonoBehaviour
         {
             if (menu.activeInHierarchy == true)
             {
+                Time.timeScale = 1;
+                Time.fixedDeltaTime = 0.02f;
                 menu.SetActive(false);
             }
             else
             {
+                Time.timeScale = 0;
+                Time.fixedDeltaTime = 0;
                 menu.SetActive(true);
             }
         }

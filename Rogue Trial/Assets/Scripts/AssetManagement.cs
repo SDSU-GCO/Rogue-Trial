@@ -8,7 +8,6 @@ public class AssetManagement : MonoBehaviour
     public static List<T> FindAssetsByType<T>() where T : UnityEngine.Object
     {
         List<T> assets = new List<T>();
-#if UNITY_EDITOR
         string[] guids = AssetDatabase.FindAssets(string.Format("t:{0}", typeof(T)));
         for (int i = 0; i < guids.Length; i++)
         {
@@ -19,13 +18,11 @@ public class AssetManagement : MonoBehaviour
                 assets.Add(asset);
             }
         }
-#endif
         return assets;
     }
-    public static List<GameObject> FindAssetsByPrefab()
+    public static List<GameObject> FindAssetsByPrefab() 
     {
         List<GameObject> assets = new List<GameObject>();
-#if UNITY_EDITOR
         string[] guids = AssetDatabase.FindAssets("t:GameObject");
         for (int i = 0; i < guids.Length; i++)
         {
@@ -36,14 +33,12 @@ public class AssetManagement : MonoBehaviour
                 assets.Add(asset);
             }
         }
-#endif
         return assets;
     }
 
     public static List<T> FindAssetsByComponent<T>() where T : UnityEngine.Object
     {
         List<T> componentList = new List<T>();
-#if UNITY_EDITOR
         List<GameObject> gameObjects = FindAssetsByPrefab();
         foreach(GameObject gameObject in gameObjects)
         {
@@ -53,13 +48,11 @@ public class AssetManagement : MonoBehaviour
                 componentList.Add(component);
             }
         }
-#endif
         return componentList;
     }
 
     public static T FindAssetByType<T>() where T : UnityEngine.Object
     {
-#if UNITY_EDITOR
         List<T> assets = new List<T>();
         string[] guids = AssetDatabase.FindAssets(string.Format("t:{0}", typeof(T)));
         if (guids.Length>0)
@@ -71,13 +64,11 @@ public class AssetManagement : MonoBehaviour
                 return asset;
             }
         }
-#endif
         return null;
     }
 
     public static T FindAssetByComponent<T>() where T : UnityEngine.Object
     {
-#if UNITY_EDITOR
         List<T> component = new List<T>();
         List<GameObject> gameObjects = FindAssetsByType<GameObject>();
         foreach(GameObject gameObject in gameObjects)
@@ -86,7 +77,6 @@ public class AssetManagement : MonoBehaviour
             if (rtnVal != null)
                 return rtnVal;
         }
-#endif
 
         return null;
     }

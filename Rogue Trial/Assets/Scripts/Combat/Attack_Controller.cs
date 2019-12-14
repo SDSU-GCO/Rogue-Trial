@@ -4,31 +4,27 @@ using UnityEngine;
 
 public class Attack_Controller : MonoBehaviour
 {
-//    [SerializeField]
-//    private float timeToLive = 0.5f;//in seconds
-//    [SerializeField]
-//#pragma warning disable IDE0044 // Add readonly modifier
-//    private bool LiveForever = false;
-//#pragma warning restore IDE0044 // Add readonly modifier
-//    private float originalTimeToLive;//in seconds
+    [SerializeField]
+    private float timeToLive = 0.5f;//in seconds
+    [SerializeField]
+#pragma warning disable IDE0044 // Add readonly modifier
+    private bool LiveForever = false;
+#pragma warning restore IDE0044 // Add readonly modifier
+    private float originalTimeToLive;//in seconds
     public float AttackDelay = 0.75f;
     public int damage;
     public float speed = 7;
     [ReorderableList]
     public List<CustomGCOTypes.CollisionLayerKey> targetLayer = new List<CustomGCOTypes.CollisionLayerKey>();
-#pragma warning disable CS0109
     private new Collider collider = null;
-#pragma warning restore CS0109
-    public delegate void Callback();
-    public Callback whenDestroyed;
 
     public GameObject onDestroySpawnPrefab;
 
     private void Awake()
     {
-        //originalTimeToLive = timeToLive;
+        originalTimeToLive = timeToLive;
         collider = GetComponent<Collider>();
-        if (collider != null && collider.isTrigger == false/* && LiveForever == false*/)
+        if (collider != null && collider.isTrigger == false && LiveForever == false)
         {
             collider.enabled = false;
         }
@@ -37,19 +33,19 @@ public class Attack_Controller : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        //if (LiveForever != true)
-        //{
-        //    timeToLive -= Time.deltaTime;
-        //}
+        if (LiveForever != true)
+        {
+            timeToLive -= Time.deltaTime;
+        }
 
-        if (collider != null /*&& timeToLive < originalTimeToLive / 2.0f*/)
+        if (collider != null && timeToLive < originalTimeToLive / 2.0f)
         {
             collider.enabled = true;
         }
-        //if (timeToLive <= 0)
-        //{
-        //    PoofObject();
-        //}
+        if (timeToLive <= 0)
+        {
+            PoofObject();
+        }
     }
 
     //enemy/ally check
@@ -65,9 +61,8 @@ public class Attack_Controller : MonoBehaviour
         }
     }
 
-    public void PoofObject()
+    private void PoofObject()
     {
-        whenDestroyed.Invoke();
         if (onDestroySpawnPrefab != null)
         {
             Instantiate(onDestroySpawnPrefab, transform.position, transform.rotation);

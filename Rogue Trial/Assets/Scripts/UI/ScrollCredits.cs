@@ -10,10 +10,8 @@ public class ScrollCredits : MonoBehaviour
 {
     [SerializeField, HideInInspector]
     RectTransform rectTransform = null;
-#if UNITY_EDITOR
     [SerializeField, HideInInspector]
     TextMeshProUGUI textMeshProUGUI = null;
-#endif
     [SerializeField, HideInInspector]
     Canvas canvas = null;
 #pragma warning disable CS0649 // varriable is never assigned to and will always have it's default value
@@ -24,50 +22,26 @@ public class ScrollCredits : MonoBehaviour
 #pragma warning restore CS0649 // varriable is never assigned to and will always have it's default value
     private void OnValidate()
     {
-        if (Application.isEditor)
+        if (textMeshProUGUI == null)
         {
-
-#if UNITY_EDITOR
-
-
-            if (textMeshProUGUI == null)
+            textMeshProUGUI = GetComponent<TextMeshProUGUI>();
+        }
+        if (textMeshProUGUI != null)
+        {
+            textMeshProUGUI.text = textAsset.text;
+        }
+        if (rectTransform == null)
+        {
+            rectTransform = GetComponent<RectTransform>();
+        }
+        if (canvas==null)
+        {
+            RectTransform tmp = rectTransform;
+            while (canvas == null && tmp != null)
             {
-                textMeshProUGUI = GetComponent<TextMeshProUGUI>();
-#if UNITY_EDITOR
-                UnityEditor.EditorUtility.SetDirty(this);
-#endif
+                canvas = tmp.GetComponent<Canvas>();
+                tmp = (RectTransform)tmp.parent;
             }
-            if (textMeshProUGUI != null)
-            {
-                textMeshProUGUI.text = textAsset.text;
-#if UNITY_EDITOR
-                UnityEditor.EditorUtility.SetDirty(this);
-                UnityEditor.EditorUtility.SetDirty(textMeshProUGUI);
-#endif
-            }
-            if (rectTransform == null)
-            {
-                rectTransform = GetComponent<RectTransform>();
-#if UNITY_EDITOR
-                UnityEditor.EditorUtility.SetDirty(this);
-#endif
-            }
-            if (canvas == null)
-            {
-                RectTransform tmp = rectTransform;
-                while (canvas == null && tmp != null)
-                {
-                    canvas = tmp.GetComponent<Canvas>();
-                    tmp = (RectTransform)tmp.parent;
-#if UNITY_EDITOR
-                    UnityEditor.EditorUtility.SetDirty(this);
-#endif
-                }
-            }
-
-            UnityEditor.EditorUtility.SetDirty(this);
-#endif
-
         }
     }
 

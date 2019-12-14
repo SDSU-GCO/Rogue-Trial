@@ -16,29 +16,19 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField, HideInInspector]
     public PlayerMovement movement;
 
-#pragma warning disable CS0109
     [SerializeField, HideInInspector]
     private new Rigidbody2D rigidbody2D;
-#pragma warning restore CS0109
 
     private void OnValidate()
     {
-        if(Application.isEditor)
-        
         if (rigidbody2D == null)
         {
             rigidbody2D = GetComponent<Rigidbody2D>();
-#if UNITY_EDITOR
-            UnityEditor.EditorUtility.SetDirty(this);
-#endif
         }
 
         if (animator == null)
         {
             animator = GetComponent<Animator>();
-#if UNITY_EDITOR
-            UnityEditor.EditorUtility.SetDirty(this);
-#endif
         }
     }
     public void SetToAttack() => SetAnimationState(AnimationState.ATTACKING);
