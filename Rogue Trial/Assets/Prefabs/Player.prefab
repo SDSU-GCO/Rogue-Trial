@@ -644,7 +644,7 @@ MonoBehaviour:
     persistentCalls:
       calls: []
   DamagedEventSO: {fileID: 11400000, guid: 3174651360015db40a55616ddef72737, type: 2}
-  DiedEventSO: {fileID: 11400000, guid: 3174651360015db40a55616ddef72737, type: 2}
+  DiedEventSO: {fileID: 11400000, guid: 5e027eba6205b804199e1b0db7969067, type: 2}
   DamagedEvent:
     inspectorListHeight: 63
     persistentCalls:
@@ -798,4 +798,4 @@ MonoBehaviour:
     persistentCalls:
       calls: []
   _MaxHealth: 16
-  _CurrentHealth: 10
+  _CurrentHealth: 16
