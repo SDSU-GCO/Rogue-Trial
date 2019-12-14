@@ -7266,7 +7266,7 @@ PrefabInstance:
     - target: {fileID: 1617818259274187875, guid: fd01eef741626eb4aa914622492d129d,
         type: 3}
       propertyPath: sceneToLoad
-      value: Boss Room
+      value: Boss Fight
       objectReference: {fileID: 0}
     - target: {fileID: 1617818259274187875, guid: fd01eef741626eb4aa914622492d129d,
         type: 3}
