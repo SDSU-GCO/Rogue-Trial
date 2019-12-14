@@ -797,5 +797,5 @@ MonoBehaviour:
     inspectorListHeight: 63
     persistentCalls:
       calls: []
-  _MaxHealth: 12
-  _CurrentHealth: 7
+  _MaxHealth: 16
+  _CurrentHealth: 10

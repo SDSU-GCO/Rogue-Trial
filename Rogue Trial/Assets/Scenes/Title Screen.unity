@@ -260,6 +260,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 615106028}
     m_Modifications:
+    - target: {fileID: 4065100760009943, guid: 47d127fe5b17ea74cb40d060de9a7b16, type: 3}
+      propertyPath: m_Name
+      value: Prompt
+      objectReference: {fileID: 0}
     - target: {fileID: 4065100760009944, guid: 47d127fe5b17ea74cb40d060de9a7b16, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -343,10 +347,6 @@ PrefabInstance:
     - target: {fileID: 4065100760009944, guid: 47d127fe5b17ea74cb40d060de9a7b16, type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4065100760009943, guid: 47d127fe5b17ea74cb40d060de9a7b16, type: 3}
-      propertyPath: m_Name
-      value: Prompt
       objectReference: {fileID: 0}
     - target: {fileID: 4065100760009945, guid: 47d127fe5b17ea74cb40d060de9a7b16, type: 3}
       propertyPath: m_textInfo.characterCount
@@ -463,6 +463,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2076676809}
     m_Modifications:
+    - target: {fileID: 158226047436450906, guid: 75b34decd95232f4781ba11f059d231b,
+        type: 3}
+      propertyPath: m_Name
+      value: UI Controller
+      objectReference: {fileID: 0}
     - target: {fileID: 158226047436450905, guid: 75b34decd95232f4781ba11f059d231b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -567,11 +572,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 158226047436450906, guid: 75b34decd95232f4781ba11f059d231b,
-        type: 3}
-      propertyPath: m_Name
-      value: UI Controller
       objectReference: {fileID: 0}
     - target: {fileID: 1495793014395666767, guid: 75b34decd95232f4781ba11f059d231b,
         type: 3}

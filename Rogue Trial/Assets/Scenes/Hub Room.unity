@@ -2502,16 +2502,6 @@ PrefabInstance:
       propertyPath: playerTransformMBDO
       value: 
       objectReference: {fileID: 1780439535}
-    - target: {fileID: 6034520407156970605, guid: 0cf4bebde878d43479b10667a24022d6,
-        type: 3}
-      propertyPath: UseDelay
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6034520407156970605, guid: 0cf4bebde878d43479b10667a24022d6,
-        type: 3}
-      propertyPath: UseRandomDelay
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0cf4bebde878d43479b10667a24022d6, type: 3}
 --- !u!1 &504416560
@@ -7341,21 +7331,6 @@ MonoBehaviour:
   requireKeys: 1
   roomClearData:
   - {fileID: 11400000, guid: 65a144b3840d5c248b2d1dc2deba619d, type: 2}
---- !u!114 &1617355672
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1617355670}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72ab9b622599ff24f8dca9c8c357d752, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  requireKeys: 0
-  roomClearData:
-  - {fileID: 11400000, guid: 65a144b3840d5c248b2d1dc2deba619d, type: 2}
   - {fileID: 11400000, guid: ecfd46c448bca4f4a8de3ad50cc595c6, type: 2}
 --- !u!114 &1617355673
 MonoBehaviour:
@@ -7372,7 +7347,7 @@ MonoBehaviour:
   triggerCondition: 2
   conditionalMixing: 1
   conditionalComponents:
-  - {fileID: 1617355672}
+  - {fileID: 0}
   - {fileID: 1617355675}
   actionsOnTrigger: []
   triggered:
@@ -7380,7 +7355,7 @@ MonoBehaviour:
     persistentCalls:
       calls:
       - genericMenuData:
-          selectedComponent: 11
+          selectedComponent: 10
           selectedMember: 9
           isDynamic: 0
         target: {fileID: 1617355680}
@@ -7451,16 +7426,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cardinal Subsystem
       objectReference: {fileID: 0}
-    - target: {fileID: 3207918341509956385, guid: 5158ff79fb6a9ed45838d86ad6459e2d,
-        type: 3}
-      propertyPath: audioClips.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3207918341509956385, guid: 5158ff79fb6a9ed45838d86ad6459e2d,
-        type: 3}
-      propertyPath: audioClips.Array.data[0]
-      value: 
-      objectReference: {fileID: 8300000, guid: 06bb76eac369a274c8538c80e7cc332e, type: 3}
     - target: {fileID: 4397968901224061282, guid: 5158ff79fb6a9ed45838d86ad6459e2d,
         type: 3}
       propertyPath: playerTransform
@@ -7521,6 +7486,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3207918341509956385, guid: 5158ff79fb6a9ed45838d86ad6459e2d,
+        type: 3}
+      propertyPath: audioClips.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3207918341509956385, guid: 5158ff79fb6a9ed45838d86ad6459e2d,
+        type: 3}
+      propertyPath: audioClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 06bb76eac369a274c8538c80e7cc332e, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5158ff79fb6a9ed45838d86ad6459e2d, type: 3}
 --- !u!114 &1780439535 stripped
