@@ -18,10 +18,6 @@ public class Enemy_Logic : MonoBehaviour
         {
             rangedCoolDownInSeconds = 0;
             rangedCoolDownInSecondsDefault = rangedAttack.AttackDelay;
-
-#if UNITY_EDITOR
-            UnityEditor.EditorUtility.SetDirty(this);
-#endif
         }
     }
 
@@ -41,7 +37,7 @@ public class Enemy_Logic : MonoBehaviour
     [SerializeField]
     private EnemyListMBDO enemyListMBDO = null;
     [SerializeField, Required]
-    PlayerTransformMBDO playerTransformMBDO;
+    CrossSceneTransformSO crossSceneTarget;
     //private CrossSceneDataSO crossSceneDataSO = null;
 
     [SerializeField, HideInInspector]
@@ -57,49 +53,33 @@ public class Enemy_Logic : MonoBehaviour
 
     private void OnValidate()
     {
-        if (Application.isEditor)
+        InitializeFromRangedAttack();
+
+        if (enemyListMBDO == null)
         {
-            InitializeFromRangedAttack();
+            MBDOInitializationHelper mBDOInitializationHelper = default;
 
-            if (enemyListMBDO == null)
-            {
-                MBDOInitializationHelper mBDOInitializationHelper = default;
+            //IMPORTNANT STEP!!!
+            mBDOInitializationHelper.SetupCardinalSubSystem(this);
+            mBDOInitializationHelper.SetupMBDO(ref enemyListMBDO);
+        }
 
-                //IMPORTNANT STEP!!!
-                mBDOInitializationHelper.SetupCardinalSubSystem(this);
-                mBDOInitializationHelper.SetupMBDO(ref enemyListMBDO);
-            }
-
-            if (playerTransformMBDO == null)
-            {
-                MBDOInitializationHelper mBDOInitializationHelper = default;
-
-                //IMPORTNANT STEP!!!
-                mBDOInitializationHelper.SetupCardinalSubSystem(this);
-                mBDOInitializationHelper.SetupMBDO(ref playerTransformMBDO);
-            }
-
-            if (entityLogic == null)
-            {
-                entityLogic = GetComponent<Entity_Logic>();
-
-#if UNITY_EDITOR
-                UnityEditor.EditorUtility.SetDirty(this);
-#endif
-            }
+        if (entityLogic == null)
+        {
+            entityLogic = GetComponent<Entity_Logic>();
         }
     }
 
 #pragma warning disable IDE0022 // Use expression body for methods
     private void Start()
     {
-        if (playerTransformMBDO == null)
+        if (crossSceneTarget == null)
         {
             Debug.Log(gameObject.ToString() + " " + this + gameObject.name + " has no playerTransformSO");
             target = null;
         }
         else
-            target = playerTransformMBDO.playerTransform;
+            target = crossSceneTarget.value;
     }
 #pragma warning restore IDE0022 // Use expression body for methods
 
@@ -115,8 +95,7 @@ public class Enemy_Logic : MonoBehaviour
             enemyListMBDO.update.Invoke();
         }
 
-        target = playerTransformMBDO == null ? null : playerTransformMBDO.playerTransform;
-        
+        target = crossSceneTarget == null ? null : crossSceneTarget.value;
     }
 
     private void OnDisable()

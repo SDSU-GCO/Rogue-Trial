@@ -12,22 +12,20 @@ public class UITabController : MonoBehaviour
 
     private void OnValidate()
     {
-        if (Application.isEditor)
+        Transform transformRef = transform;
+        bool panelNotFount = true;
+        while (panelNotFount == true && transform.parent != null)
         {
-            Transform transformRef = transform;
-            bool panelNotFount = true;
-            while (panelNotFount == true && transform.parent != null)
+            transformRef = transformRef.parent;
+            PanelController panelController = transformRef.GetComponent<PanelController>();
+            if (panelController != null)
             {
-                transformRef = transformRef.parent;
-                PanelController panelController = transformRef.GetComponent<PanelController>();
-                if (panelController != null)
-                {
-                    panelNotFount = false;
-                    panelController.OnValidate();
-                }
+                panelNotFount = false;
+                panelController.OnValidate();
             }
         }
     }
+
     private void Awake()
     {
         if (panelController == null)

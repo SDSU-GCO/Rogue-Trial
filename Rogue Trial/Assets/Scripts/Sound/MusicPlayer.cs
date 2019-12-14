@@ -46,11 +46,11 @@ public class MusicPlayer : MonoBehaviour
         {
             if(aud == current)
             {
-                aud.volume = Mathf.Min(1, aud.volume + Time.unscaledDeltaTime / fadeSpeed);
+                aud.volume = Mathf.Max(1, aud.volume + Time.unscaledDeltaTime / fadeSpeed);
             }
             else
             {
-                aud.volume = Mathf.Max(0, aud.volume - Time.unscaledDeltaTime / fadeSpeed);
+                aud.volume = Mathf.Min(0, aud.volume - Time.unscaledDeltaTime / fadeSpeed);
                 if (aud.volume == 0)
                     aud.Stop();
             }

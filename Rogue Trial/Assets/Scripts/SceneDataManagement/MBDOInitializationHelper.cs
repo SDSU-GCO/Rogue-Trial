@@ -71,16 +71,10 @@ internal struct MBDOInitializationHelper
             {
                 if (mbdo == null && CardinalObj.scene != new Scene())
                 {
-                    //Debug.Log("SetupMBDO caller: " + caller + " scene: " + caller.gameObject.scene.name);
-                    //Debug.Log("SetupMBDO system: " + CardinalObj + " scene: " + CardinalObj.scene.name);
-                    if (isCardinal == true)
+                    if(isCardinal == true)
                         mbDatabaseObjectReferences.TryPopulate(out mbdo);
                     else if(CardinalObj.scene == caller.gameObject.scene)
                         mbDatabaseObjectReferences.TryPopulate(out mbdo);
-
-#if UNITY_EDITOR
-                    UnityEditor.EditorUtility.SetDirty(caller);
-#endif
                 }
             }
         }

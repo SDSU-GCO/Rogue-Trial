@@ -15,31 +15,16 @@ public class PlayerAliveController : MonoBehaviour
     [SerializeField, Required]
     CrossSceneEventSO Revived;
 #pragma warning restore CS0649 // varriable is never assigned to and will always have it's default value
-    int oldHP;
+    float oldHP;
     private void OnValidate()
     {
-        if (Application.isEditor)
-        {
-            if (entity_Logic == null)
-            {
-                Debug.LogWarning("entity_Logic is not assigned in " + this + " in " + gameObject.scene.name);
-                entity_Logic = GetComponent<Entity_Logic>();
-#if UNITY_EDITOR
-                UnityEditor.EditorUtility.SetDirty(this);
-#endif
-            }
-        }
+        if (entity_Logic == null)
+            entity_Logic = GetComponent<Entity_Logic>();
     }
-    private void OnEnable()
+    private void Awake()
     {
         Died.Event.AddListener(die);
         Revived.Event.AddListener(res);
-        oldHP = entity_Logic.health;
-    }
-    private void OnDisable()
-    {
-        Died.Event.RemoveListener(die);
-        Revived.Event.RemoveListener(res);
         oldHP = entity_Logic.health;
     }
     public void die()

@@ -2,36 +2,15 @@
 
 public class MBDataObject : MonoBehaviour
 {
-    public virtual void OnValidate()
+    private void OnValidate()
     {
-        if (Application.isEditor)
+        MBDataObjectReferences mbdoRefs = GetComponent<MBDataObjectReferences>();
+        if (mbdoRefs != null && mbdoRefs.mbDataObjects.Contains(this) != true)
         {
-            MBDataObjectReferences mbdoRefs = GetComponent<MBDataObjectReferences>();
-            if (mbdoRefs != null && mbdoRefs.mbDataObjects.Contains(this) != true)
-            {
-                Debug.LogWarning($"Warning: {this} has not been added to {mbdoRefs}, adding now...");
-                mbdoRefs.mbDataObjects.Add(this);
-#if UNITY_EDITOR
-                UnityEditor.EditorUtility.SetDirty(this);
-                UnityEditor.EditorUtility.SetDirty(mbdoRefs);
-#endif
-            }
+            Debug.LogWarning($"Warning: {this} has not been added to {mbdoRefs}, adding now...");
+            mbdoRefs.mbDataObjects.Add(this);
         }
     }
-    public virtual void Reset()
-    {
-        if (Application.isEditor)
-        {
-            MBDataObjectReferences mbdoRefs = GetComponent<MBDataObjectReferences>();
-            if (mbdoRefs != null && mbdoRefs.mbDataObjects.Contains(this) != true)
-            {
-                Debug.LogWarning($"Warning: {this} has not been added to {mbdoRefs}, adding now...");
-                mbdoRefs.mbDataObjects.Add(this);
-#if UNITY_EDITOR
-                UnityEditor.EditorUtility.SetDirty(this);
-                UnityEditor.EditorUtility.SetDirty(mbdoRefs);
-#endif
-            }
-        }
-    }
+    
+
 }
