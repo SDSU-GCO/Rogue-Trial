@@ -8,32 +8,43 @@ using UnityEngine.UI;
 [RequireComponent(typeof(TextMeshProUGUI))]
 public class TextScaler : MonoBehaviour
 {
-    [HideInInspector]
+    [SerializeField, HideInInspector]
     TextMeshProUGUI textMeshPro = null;
     [SerializeField, HideInInspector]
     CanvasScaler canvasScaler = null;
     public float fontSize = 0;
     private void Reset()
     {
-        OnValidate();
+        if (Application.isEditor)
+        {
+            OnValidate();
+        }
     }
     private void OnValidate()
     {
-        if(textMeshPro==null)
-        { 
-            textMeshPro = GetComponent<TextMeshProUGUI>();
-        }
-        
-        RectTransform tmp = GetComponent<RectTransform>();
-        while (canvasScaler == null && tmp != null)
+        if (Application.isEditor)
         {
-            canvasScaler = tmp.GetComponent<CanvasScaler>();
-            tmp = (RectTransform)tmp.parent;
+            if (textMeshPro == null)
+            {
+                textMeshPro = GetComponent<TextMeshProUGUI>();
+#if UNITY_EDITOR
+                UnityEditor.EditorUtility.SetDirty(this);
+#endif
+            }
+
+            RectTransform tmp = GetComponent<RectTransform>();
+            while (canvasScaler == null && tmp != null)
+            {
+                canvasScaler = tmp.GetComponent<CanvasScaler>();
+                tmp = (RectTransform)tmp.parent;
+#if UNITY_EDITOR
+                UnityEditor.EditorUtility.SetDirty(this);
+#endif
+            }
         }
     }
     private void Awake()
     {
-        OnValidate();
         fontSize = textMeshPro.fontSize;
     }
     private void Update()

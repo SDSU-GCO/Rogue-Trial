@@ -5,13 +5,11 @@ using UnityEngine.Audio;
 using NaughtyAttributes;
 using System.Linq;
 
-
 public class PlaySound : MonoBehaviour
 {
 #pragma warning disable CS0649 // varriable is never assigned to and will always have it's default value
     [SerializeField, Required]
     AudioMixerGroup audioMixerGroup;
-#pragma warning restore CS0649 // varriable is never assigned to and will always have it's default value
 
     [BoxGroup("Loops")]
     public bool loop;
@@ -25,7 +23,24 @@ public class PlaySound : MonoBehaviour
     public float MaxDelay;
     [ShowIf("ShowDelayRangeField"), BoxGroup("Loops")]
     public float MinDelay;
-    public bool randomizePitch;
+    public bool randomizePitch=false;
+    public bool randomizeClipPosition=false;
+    public bool PlayOnEnable=false;
+    public float Volume=1;
+    [BoxGroup("Spatialize")]
+    public bool SpatializeIn3D;
+    [SerializeField, ShowIf("SpatializeIn3D"), BoxGroup("Spatialize"), Range(0, 5)]
+    float dopplerLevel=1;
+    [SerializeField, ShowIf("SpatializeIn3D"), BoxGroup("Spatialize"), Range(0, 360)]
+    float spread;
+    [SerializeField, ShowIf("SpatializeIn3D"), BoxGroup("Spatialize")]
+    AudioRolloffMode VolumeRolloff;
+    [SerializeField, ShowIf("SpatializeIn3D"), BoxGroup("Spatialize"), Min(0)]
+    float minDistance=0;
+    [SerializeField, ShowIf("SpatializeIn3D"), BoxGroup("Spatialize"), Min(0)]
+    float maxDistance=500;
+#pragma warning restore CS0649 // varriable is never assigned to and will always have it's default value
+
     public AudioClip defaultFile;
 
     bool ShowDelayField() => loop && UseDelay && !UseRandomDelay;
@@ -37,17 +52,17 @@ public class PlaySound : MonoBehaviour
     CrossSceneEventSO crossSceneEvent;
 #pragma warning restore CS0649 // varriable is never assigned to and will always have it's default value
 
-    private void Start()
-    {
-        if (crossSceneEvent != null)
-            crossSceneEvent.Event.AddListener(playClip);
-        else
-            playClip();
-    }
     private void OnDisable()
     {
         if (crossSceneEvent != null)
             crossSceneEvent.Event.RemoveListener(playClip);
+    }
+    private void OnEnable()
+    {
+        if (crossSceneEvent != null)
+            crossSceneEvent.Event.AddListener(playClip);
+        if (PlayOnEnable)
+            playClip();
     }
     public void playClip()
     {
@@ -59,26 +74,25 @@ public class PlaySound : MonoBehaviour
         {
             AudioSource audioSource = GetAudioSource();
             audioSource.clip = defaultFile;
-            audioSource.outputAudioMixerGroup = audioMixerGroup;
-            audioSource.pitch = randomizePitch == true ? Random.Range(0.85f, 1.15f) : 1;
-            audioSource.Play();
+            setupAudioSourceAndPlay(ref audioSource);
         }
         return;
     }
 
     private void OnValidate()
     {
-        if (audioMixerGroup == null)
-            Debug.LogError(this);
+        if (Application.isEditor)
+        {
+            if (audioMixerGroup == null)
+                Debug.LogError(this);
+        }
     }
 
     public void PlayFile(string filePath)
     {
         AudioSource audioSource = GetAudioSource();
         audioSource.clip = Resources.Load(filePath) as AudioClip;
-        audioSource.outputAudioMixerGroup = audioMixerGroup;
-        audioSource.pitch = randomizePitch == true ? Random.Range(0.85f, 1.15f) : 1;
-        audioSource.Play();
+        setupAudioSourceAndPlay(ref audioSource);
         return;
     }
 
@@ -101,6 +115,7 @@ public class PlaySound : MonoBehaviour
             rtnVal = gameObject.AddComponent<AudioSource>();
 
         rtnVal.loop = loop;
+        rtnVal.playOnAwake = false;
         return rtnVal;
     }
 
@@ -116,11 +131,37 @@ public class PlaySound : MonoBehaviour
                 currentTimer = UseRandomDelay ? Random.Range(MinDelay, MaxDelay) : Delay;
                 AudioSource audioSource = GetAudioSource();
                 audioSource.clip = defaultFile;
-                audioSource.outputAudioMixerGroup = audioMixerGroup;
-                audioSource.pitch = randomizePitch == true ? Random.Range(0.85f, 1.15f) : 1;
-                audioSource.Play();
+                setupAudioSourceAndPlay(ref audioSource);
             }
             yield return null;
         }
+    }
+
+    void setupAudioSourceAndPlay(ref AudioSource audioSource)
+    {
+        audioSource.outputAudioMixerGroup = audioMixerGroup;
+        audioSource.pitch = randomizePitch == true ? Random.Range(0.85f, 1.15f) : 1;
+        audioSource.volume = Volume;
+
+        if(SpatializeIn3D)
+        {
+            audioSource.spatialBlend = 1;
+            audioSource.rolloffMode = VolumeRolloff;
+            audioSource.dopplerLevel = dopplerLevel;
+            audioSource.spread = spread;
+            audioSource.minDistance = minDistance;
+            audioSource.maxDistance = maxDistance;
+        }
+        else
+        {
+            audioSource.spatialBlend = 0;
+        }
+
+        if (randomizeClipPosition)
+        {
+            audioSource.time = Random.Range(0, audioSource.clip.length);
+        }
+
+        audioSource.Play();
     }
 }

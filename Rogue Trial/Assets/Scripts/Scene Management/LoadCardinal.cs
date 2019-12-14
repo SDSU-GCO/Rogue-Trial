@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEditor;
-using UnityEditor.SceneManagement;
 using NaughtyAttributes;
 
 public class LoadCardinal : MonoBehaviour
@@ -13,31 +11,24 @@ public class LoadCardinal : MonoBehaviour
     [SerializeField, Required]
     CrossSceneSceneDataSO crossSceneSceneData;
     [SerializeField] 
+    CrossSceneCinemachineBrainSO crossSceneCinemachineBrainSO;
+    [SerializeField] 
     string cardinalSceneName = "Cardinal Scene";
 #pragma warning restore CS0649 // varriable is never assigned to and will always have it's default value
     private void Awake()
     {
-        crossSceneSceneData.activeScene = gameObject.scene;
+        crossSceneSceneData.ActiveScene = gameObject.scene;
         LoadCardinalScene();        
+    }
+    private void Start()
+    {
+        if (crossSceneCinemachineBrainSO != null)
+            crossSceneCinemachineBrainSO.Value.m_DefaultBlend.m_Style = Cinemachine.CinemachineBlendDefinition.Style.Cut;
     }
     private void OnEnable()
     {
         LoadCardinalScene();
-        SceneManager.activeSceneChanged+= OnSceneChanged;
     }
-
-    bool enforcingScene = false;
-    void OnSceneChanged(Scene oldS, Scene newS)
-    {
-        bool old = enforcingScene;
-        enforcingScene = true;
-        if(old!=true)
-        {
-            SceneManager.SetActiveScene(crossSceneSceneData.activeScene);
-        }
-        enforcingScene = false;
-    }
-
 
     void LoadCardinalScene()
     {

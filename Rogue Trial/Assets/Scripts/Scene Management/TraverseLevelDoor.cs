@@ -12,22 +12,43 @@ public class TraverseLevelDoor : TriggerPrompt
     string sceneToLoad;
     [SerializeField, Required]
     CrossSceneSceneDataSO crossSceneSceneDataSO;
+    [SerializeField, Required]
+    SceneTransitionListenerSO sceneTransitionListenerSO;
 #pragma warning restore CS0649 // varriable is never assigned to and will always have it's default value
 
     private void OnValidate()
     {
-        promptMessage = "Press 'f' to enter \""+sceneToLoad+"\"";
+        if (Application.isEditor)
+        {
+            if(promptMessage=="")
+                promptMessage = "Press 'f' to enter \"" + sceneToLoad + "\"";
+#if UNITY_EDITOR
+            UnityEditor.EditorUtility.SetDirty(this);
+#endif
+        }
     }
 
     bool loadStarted = false;
+
+#pragma warning disable CS0649 // varriable is never assigned to and will always have it's default value
+    [SerializeField] CrossSceneCinemachineBrainSO crossSceneCinemachineBrainSO;
+#pragma warning restore CS0649 // varriable is never assigned to and will always have it's default value
     public void LoadSceneAndUnloadThisOne()
     {
+        if (crossSceneCinemachineBrainSO != null)
+            crossSceneCinemachineBrainSO.Value.m_DefaultBlend.m_Style = Cinemachine.CinemachineBlendDefinition.Style.Cut;
+
+
         if (loadStarted != true)
         {
             loadStarted = true;
-            crossSceneSceneDataSO.previousScene = gameObject.scene;
-            SceneManager.LoadScene(sceneToLoad, LoadSceneMode.Additive);
-            SceneManager.UnloadSceneAsync(gameObject.scene);
+            crossSceneSceneDataSO.PreviousScene = gameObject.scene;
+            if(sceneTransitionListenerSO!=null)
+            {
+                if (sceneTransitionListenerSO.changeScenes == null)
+                    sceneTransitionListenerSO.changeScenes = new SceneTransitionListenerSO.SceneChangeEvent();
+                sceneTransitionListenerSO.changeScenes.Invoke(sceneToLoad, this);
+            }
         }
     }
 

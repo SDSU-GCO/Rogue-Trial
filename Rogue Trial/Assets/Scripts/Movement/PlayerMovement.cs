@@ -8,13 +8,12 @@ using ByteSheep.Events;
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(CapsuleCollider2D))]
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour, IMovable, IUsesInput
 {
-
-    public CustomGCOTypes.MovementState movementState = CustomGCOTypes.MovementState.Enabled;
-
+#pragma warning disable CS0109
     [SerializeField, Required, BoxGroup("Component Refs")]
     private new Rigidbody2D rigidbody2D = null;
+#pragma warning restore CS0109
     [SerializeField, Required, BoxGroup("Component Refs")]
     private CapsuleCollider2D capsuleCollider2D = null;
     [SerializeField, Required, BoxGroup("Component Refs")]
@@ -31,8 +30,8 @@ public class PlayerMovement : MonoBehaviour
     [MinValue(0), BoxGroup("Jump vars")]
     public float allowedAirbornTime = .5f;
 
-    [ProgressBar("Jump", 0.5f, ProgressBarColor.Blue), ShowIf("ShowJumpBar")]
-    public float airbornTime = 0;
+    [SerializeField, ProgressBar("Jump", 0.5f, ProgressBarColor.Blue), ShowIf("ShowJumpBar")]
+    float airbornTime = 0;
 
     private bool ShowJumpBar() => !isGrounded;
 
@@ -55,9 +54,49 @@ public class PlayerMovement : MonoBehaviour
     public QuickEvent Dashed;
 
 
-    bool jumpButtonPressed;
+#pragma warning disable CS0649 // varriable is never assigned to and will always have it's default value
+    [SerializeField, BoxGroup("Constraints")]
+    bool enableInputs = true;
+#pragma warning restore CS0649 // varriable is never assigned to and will always have it's default value
+    public bool EnableInputs { get { return enableInputs; } set { enableInputs = value; } }
 
-
+    [SerializeField, BoxGroup("Constraints")]
+    CustomGCOTypes.MovementState movementState = CustomGCOTypes.MovementState.Enabled;
+    public CustomGCOTypes.MovementState MovementState
+    {
+        get
+        {
+            return movementState;
+        }
+        set
+        {
+            if(movementState!=value)
+            {
+                if (value == CustomGCOTypes.MovementState.Disabled)
+                {
+                    //cache momentum
+                    cachedVelocity = rigidbody2D.velocity;
+                    rigidbody2D.constraints = RigidbodyConstraints2D.FreezeAll;
+                }
+                else if (value == CustomGCOTypes.MovementState.DisabledKillMomentum)
+                {
+                    rigidbody2D.constraints = RigidbodyConstraints2D.FreezeAll;
+                    cachedVelocity = Vector2.zero;
+                }
+                else if (value == CustomGCOTypes.MovementState.Enabled)
+                {
+                    rigidbody2D.constraints = RigidbodyConstraints2D.FreezeRotation;
+                    rigidbody2D.velocity = cachedVelocity;
+                }
+                else
+                {
+                    Debug.LogError(value + " is not implemented yet!");
+                }
+                movementState = value;
+            }
+        }
+    }
+    Vector2 cachedVelocity = Vector2.zero;
 
     [SerializeField, ReadOnly]
     private bool isGrounded = true;
@@ -67,125 +106,94 @@ public class PlayerMovement : MonoBehaviour
     public bool IsGrounded => isGrounded;
     public bool IsDashing => isDashing;
 
-    public RigidbodyConstraints2D rigidbodyConstraints2D = RigidbodyConstraints2D.FreezeRotation;
+    bool jumpButtonPressed;
 
-    private void OnValidate()
-    {
-        if (rigidbody2D == null)
-        {
-            rigidbody2D = GetComponent<Rigidbody2D>();
-        }
-
-        if (capsuleCollider2D == null)
-        {
-            capsuleCollider2D = GetComponent<CapsuleCollider2D>();
-        }
-
-        if (spriteRenderer == null)
-        {
-            spriteRenderer = GetComponent<SpriteRenderer>();
-        }
-    }
-
-    private Vector2 velocity = new Vector2();
+    [SerializeField, HideInInspector]
+    PlayerTransformMBDO playerTransformMBDO;
 
     private void Awake()
     {
-        if(enableDebugging)
-        {
-            circleCastEdge.GetComponent<SpriteRenderer>().enabled = true;
-            circleCastOrigin.GetComponent<SpriteRenderer>().enabled = true;
-        }
-        else
-        {
-            circleCastEdge.GetComponent<SpriteRenderer>().enabled = false;
-            circleCastOrigin.GetComponent<SpriteRenderer>().enabled = false;
-        }
+        if (circleCastEdge != null)
+            circleCastEdge.GetComponent<SpriteRenderer>().enabled = enableDebugging;
+
+        if (circleCastOrigin != null)
+            circleCastOrigin.GetComponent<SpriteRenderer>().enabled = enableDebugging;
     }
 
     //update loop
     private void Update()
     {
-        if(movementState!=CustomGCOTypes.MovementState.Disabled)
+        if(movementState == CustomGCOTypes.MovementState.Enabled)
         {
-            airbornTime = Mathf.Min(airbornTime + Time.deltaTime, allowedAirbornTime + 1);
+            {//handle inputs
+                jumpButtonPressed = Input.GetAxis("Vertical") > float.Epsilon;
+
+                //run
+                Vector2 velocity = rigidbody2D.velocity;
+                velocity.x = Input.GetAxis("Horizontal") * runSpeed;
+                rigidbody2D.velocity = velocity;
+
+                //dash
+                if (Input.GetAxis("Dash") > float.Epsilon && dash == 0 && dashUsed != true && isDashing == false)
+                {
+                    isDashing = true;
+                    StartCoroutine(Dash());
+                    Dashed.Invoke();
+                }
+
+                //jump
+                if (jumpButtonPressed && airbornTime < allowedAirbornTime)
+                {
+                    velocity = rigidbody2D.velocity;
+                    velocity.y = jumpVelocity;
+                    rigidbody2D.velocity = velocity;
+                    ////non linear jump
+                    //rigidbody2D.AddForce(Vector2.up * jumpVelocity);
+                    Jumped.Invoke();
+                }
+            }
+
+            {//update physics
+                isGrounded = CheckGrounded();
+                //smart gravity
+                if (isGrounded != true)
+                {
+                    if (rigidbody2D.velocity.y < 0)
+                    {
+                        rigidbody2D.velocity += Vector2.up * (-9.8f) * (fallMultiplier) * Time.deltaTime;
+                    }
+                    else if (rigidbody2D.velocity.y > 0 && jumpButtonPressed != true)
+                    {
+                        rigidbody2D.velocity += Vector2.up * (-9.8f) * (lowJumpMultiplier) * Time.deltaTime;
+                    }
+                }
+
+                //update dash timer
+                dash = Mathf.Max(dash - Time.deltaTime, 0);
+                dashUsed = isGrounded ? false : dashUsed;
+
+                //update airborn timer
+                airbornTime = Mathf.Min(airbornTime + Time.deltaTime, allowedAirbornTime);
+
+                //update jump constraints
+                if (isGrounded)//reset the jump on the ground
+                    airbornTime = 0;
+                else if (jumpButtonPressed != true)//if we release the jump button off the ground, don't allow a resume jump
+                    airbornTime = allowedAirbornTime;
+            }
         }
-
-        jumpButtonPressed = Input.GetAxis("Vertical") > float.Epsilon && (movementState== CustomGCOTypes.MovementState.Enabled);
-        isGrounded = CheckGrounded();
-
-        if(enableDebugging==true)
+        if (enableDebugging == true)//change the color while on the ground
         {
             spriteRenderer.color = isGrounded ? Color.green : Color.white;
         }
-
-        if (isGrounded)
-        {
-            airbornTime = 0;
-        }
-        if (!isGrounded && jumpButtonPressed!=true)
-        {
-            airbornTime = allowedAirbornTime;
-        }
-
-        //Debug.Log(Input.GetAxis("Vertical"));
-        //run
-        if (movementState == CustomGCOTypes.MovementState.Enabled)
-        {
-            velocity = rigidbody2D.velocity;
-            velocity.x = Input.GetAxis("Horizontal") * runSpeed;
-            rigidbody2D.velocity = velocity;
-        }
-
-        //jump
-        if (jumpButtonPressed && airbornTime <= allowedAirbornTime)
-        {
-            velocity = rigidbody2D.velocity;
-            velocity.y = jumpVelocity;
-            rigidbody2D.velocity = velocity;
-            ////non linear jump
-            //rigidbody2D.AddForce(Vector2.up * jumpVelocity);
-            Jumped.Invoke();
-        }
-
-        if(movementState != CustomGCOTypes.MovementState.Disabled && movementState!= CustomGCOTypes.MovementState.DisabledKillMomentum)
-        {        
-            //smart gravity
-            if (isGrounded != true)
-            {
-                if (rigidbody2D.velocity.y < 0)
-                {
-                    rigidbody2D.velocity += Vector2.up * (-9.8f) * (fallMultiplier) * Time.deltaTime;
-                }
-                else if (rigidbody2D.velocity.y > 0 && jumpButtonPressed != true)
-                {
-                    rigidbody2D.velocity += Vector2.up * (-9.8f) * (lowJumpMultiplier) * Time.deltaTime;
-                }
-            }
-        } 
-
-
-        
-        //dash
-        if(Input.GetAxis("Dash") > float.Epsilon && dash == 0 && dashUsed!=true && isDashing==false && movementState== CustomGCOTypes.MovementState.Enabled && movementState != CustomGCOTypes.MovementState.DisabledKillMomentum)
-        {
-            isDashing = true;
-            StartCoroutine(Dash());
-            Dashed.Invoke();
-        }
-
-        if(movementState!= CustomGCOTypes.MovementState.Disabled && movementState != CustomGCOTypes.MovementState.DisabledKillMomentum)
-        {
-            dash = Mathf.Max(dash - Time.deltaTime, 0);
-            dashUsed = isGrounded ? false : dashUsed;
-        }
     }
 
-    readonly int groundLayers = (1 << (int)CustomGCOTypes.CollisionLayerKey.Ground) | (1 << (int)CustomGCOTypes.CollisionLayerKey.Platform);
+    [ReorderableList]//use layer mask
+    public LayerMask targetCollisionLayers = default;
     private bool CheckGrounded()
     {
         bool result = false;
-        LayerMask layerMask = groundLayers;
+        LayerMask layerMask = targetCollisionLayers;
         ContactFilter2D contactFilter2D = new ContactFilter2D();
         contactFilter2D.SetLayerMask(layerMask);
 
@@ -202,7 +210,7 @@ public class PlayerMovement : MonoBehaviour
             circleCastEdge.position = new Vector3(circleRadius.x, circleRadius.y, circleCastOrigin.position.z);
         raycastHit2D = Physics2D.CircleCast(circleOrigin, capsuleCollider2D.size.x*0.5f, Vector2.down, Mathf.Infinity, layerMask);
 
-        if (raycastHit2D.collider != null && raycastHit2D.distance > 0 && raycastHit2D.distance < 0.1)
+        if (raycastHit2D.collider != null && raycastHit2D.distance > 0 && raycastHit2D.distance < 0.2)
         {
             result = true;
         }
@@ -218,7 +226,7 @@ public class PlayerMovement : MonoBehaviour
         float forceDirection = (spriteRenderer.flipX ? (-1) : 1);
         while (dashProgress < dashTime)
         {
-            if (movementState != CustomGCOTypes.MovementState.Disabled && movementState != CustomGCOTypes.MovementState.DisabledKillMomentum)
+            if (movementState==CustomGCOTypes.MovementState.Enabled)
             {
                 rigidbody2D.AddForce(Vector2.right * forceDirection * dashForce);
                 dashProgress += Time.deltaTime;

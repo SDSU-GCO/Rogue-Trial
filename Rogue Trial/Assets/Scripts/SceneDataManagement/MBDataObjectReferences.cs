@@ -13,6 +13,7 @@ public class MBDataObjectReferences : MonoBehaviour
         {
             if (mbDataObject is T)
             {
+                //Debug.Log("TryPopulate" + " scene: " + gameObject.scene.name);
                 mbdo = (T)mbDataObject;
             }
         }
@@ -24,6 +25,7 @@ public class MBDataObjectReferences : MonoBehaviour
         {
             if (mbDataObject is T)
             {
+                //Debug.Log("GetMBDataObjectOfType" + " scene: " + gameObject.scene.name);
                 return (T)mbDataObject;
             }
         }
@@ -37,6 +39,7 @@ public class MBDataObjectReferences : MonoBehaviour
         {
             if (mbDataObject is T)
             {
+                //Debug.Log("GetMBDataObjectsOfType" + " scene: " + gameObject.scene.name);
                 tempList.Add(mbDataObject);
             }
         }

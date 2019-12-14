@@ -16,52 +16,62 @@ public class PanelController : MonoBehaviour
 
     public void OnValidate()
     {
-        //get content frames
-        uIContentFrameControllers.Clear();
-        if (contentFrames != null)
+        if (Application.isEditor)
         {
-            int childCount = contentFrames.transform.childCount;
-            for (int i = 0; i < childCount; i++)
+            //get content frames
+            uIContentFrameControllers.Clear();
+            if (contentFrames != null)
             {
-                UIContentFrameController uIContentFrameController = contentFrames.transform.GetChild(i).GetComponent<UIContentFrameController>();
-                if (uIContentFrameController != null)
+                int childCount = contentFrames.transform.childCount;
+                for (int i = 0; i < childCount; i++)
                 {
-                    uIContentFrameControllers.Add(uIContentFrameController);
+                    UIContentFrameController uIContentFrameController = contentFrames.transform.GetChild(i).GetComponent<UIContentFrameController>();
+                    if (uIContentFrameController != null)
+                    {
+                        uIContentFrameControllers.Add(uIContentFrameController);
+                    }
+                }
+
+                foreach (UIContentFrameController uIContentFrameController in uIContentFrameControllers)
+                {
+                    uIContentFrameController.panelController = this;
                 }
             }
-
-            foreach (UIContentFrameController uIContentFrameController in uIContentFrameControllers)
+            else
             {
-                uIContentFrameController.panelController = this;
+                Debug.LogError("Content Frames is null in " + this);
             }
-        }
-        else
-        {
-            Debug.LogError("Content Frames is null in " + this);
-        }
 
-        //get tabs
-        uITabControllers.Clear();
-        if (tabs != null)
-        {
-            int childCount = tabs.transform.childCount;
-            for (int i = 0; i < childCount; i++)
+            //get tabs
+            uITabControllers.Clear();
+            if (tabs != null)
             {
-                UITabController uITabController = tabs.transform.GetChild(i).GetComponent<UITabController>();
-                if (uITabController != null)
+                int childCount = tabs.transform.childCount;
+                for (int i = 0; i < childCount; i++)
                 {
-                    uITabControllers.Add(uITabController);
+                    UITabController uITabController = tabs.transform.GetChild(i).GetComponent<UITabController>();
+                    if (uITabController != null)
+                    {
+                        uITabControllers.Add(uITabController);
+                    }
+                }
+
+                foreach (UITabController uITabController in uITabControllers)
+                {
+                    uITabController.panelController = this;
+#if UNITY_EDITOR
+                    UnityEditor.EditorUtility.SetDirty(uITabController);
+#endif
                 }
             }
-
-            foreach (UITabController uITabController in uITabControllers)
+            else
             {
-                uITabController.panelController = this;
+                Debug.LogError("Tabs is null in " + this);
             }
-        }
-        else
-        {
-            Debug.LogError("Tabs is null in " + this);
+
+#if UNITY_EDITOR
+            UnityEditor.EditorUtility.SetDirty(this);
+#endif
         }
     }
 

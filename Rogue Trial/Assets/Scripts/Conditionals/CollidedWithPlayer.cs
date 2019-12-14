@@ -7,9 +7,37 @@ public class CollidedWithPlayer : ConditionalComponent
 {
 #pragma warning disable CS0649 // varriable is never assigned to and will always have it's default value
     [SerializeField, Required]
-    CrossSceneTransformSO playerTransformSO;
+    PlayerTransformMBDO playerTransformMBDO;
 #pragma warning restore CS0649 // varriable is never assigned to and will always have it's default value
-    public override bool Result(Collider2D otherCollider) => 
-        playerTransformSO.value != null ? otherCollider.gameObject == playerTransformSO.value.gameObject : false;
+    private void OnValidate()
+    {
+        if (Application.isEditor)
+        {
+            if (playerTransformMBDO == null)
+            {
+                MBDOInitializationHelper mBDOInitializationHelper = default;
+
+                //IMPORTNANT STEP!!!
+                mBDOInitializationHelper.SetupCardinalSubSystem(this);
+                mBDOInitializationHelper.SetupMBDO(ref playerTransformMBDO);
+            }
+        }
+    }
+    private void Reset()
+    {
+        if (Application.isEditor)
+        {
+            if (playerTransformMBDO == null)
+            {
+                MBDOInitializationHelper mBDOInitializationHelper = default;
+
+                //IMPORTNANT STEP!!!
+                mBDOInitializationHelper.SetupCardinalSubSystem(this);
+                mBDOInitializationHelper.SetupMBDO(ref playerTransformMBDO);
+            }
+        }
+    }
+    public override bool Result(Collider2D otherCollider) =>
+        playerTransformMBDO.playerTransform != null ? otherCollider.gameObject == playerTransformMBDO.playerTransform.gameObject : false;
 
 }

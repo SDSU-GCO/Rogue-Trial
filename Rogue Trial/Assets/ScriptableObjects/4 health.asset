@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc2eef917a5856547bb731d75c4a0fde, type: 3}
+  m_Name: 4 health
+  m_EditorClassIdentifier: 
+  Sprites:
+  - {fileID: 21300000, guid: 419d5ae572ecb6f40a3953eeb497f25e, type: 3}
+  - {fileID: 21300000, guid: 7fcce0b1695dba9408813994b20dee03, type: 3}
+  - {fileID: 21300000, guid: 7d7506d297f80394bb619503a9622900, type: 3}
+  - {fileID: 21300000, guid: 0bd2a8d6a78714f4d9486a1f05c156fe, type: 3}
+  - {fileID: 21300000, guid: b8309612a32ab8b4cb6807914c31c0d4, type: 3}
+  ContainsEmptySprite: 1

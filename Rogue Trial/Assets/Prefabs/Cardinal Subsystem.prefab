@@ -10,8 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 771853442641193304}
   - component: {fileID: 771853442641193306}
+  - component: {fileID: 4397968901224061282}
   - component: {fileID: 771853442641193305}
   - component: {fileID: 614941562654599463}
+  - component: {fileID: 3207918341509956385}
   m_Layer: 0
   m_Name: Cardinal Subsystem
   m_TagString: Cardinal Subsystem
@@ -47,6 +49,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mbDataObjects:
   - {fileID: 771853442641193305}
+  - {fileID: 4397968901224061282}
+--- !u!114 &4397968901224061282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 771853442641193311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a670f6613192be947ab8f336c1c296d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerTransform: {fileID: 0}
+  update:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!114 &771853442641193305
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79,4 +100,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   crossSceneSceneData: {fileID: 11400000, guid: 7a03934cafd96ff469522aa883a1d3aa,
     type: 2}
+  crossSceneCinemachineBrainSO: {fileID: 11400000, guid: a3131a156c94ac74e913b5ef6313dc66,
+    type: 2}
   cardinalSceneName: Cardinal Scene
+--- !u!114 &3207918341509956385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 771853442641193311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d90494704cc59cf4da70694c69aa2fd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicMessageEventSO: {fileID: 11400000, guid: 94bd9c8e9d8e8da499e075703caf3d05,
+    type: 2}
+  audioClips: []

@@ -16,6 +16,10 @@ GameObject:
   - component: {fileID: 6318486361044167572}
   - component: {fileID: 3891534012402402601}
   - component: {fileID: 6665508661874112180}
+  - component: {fileID: 5832676581953719602}
+  - component: {fileID: 8277920464738141608}
+  - component: {fileID: 8605185141877484564}
+  - component: {fileID: 7839754312172264484}
   m_Layer: 11
   m_Name: Enemy
   m_TagString: Untagged
@@ -157,7 +161,7 @@ MonoBehaviour:
   range: 4
   offset: 1.5
   enemyListMBDO: {fileID: 0}
-  crossSceneTarget: {fileID: 11400000, guid: d539cd8740f2ba3479c6697c9afd74d1, type: 2}
+  playerTransformMBDO: {fileID: 0}
   target: {fileID: 0}
   entityLogic: {fileID: 6318486361044167572}
   rangedCoolDownInSeconds: 0
@@ -178,17 +182,49 @@ MonoBehaviour:
     inspectorListHeight: 63
     persistentCalls:
       calls: []
-  DamagedEvent: {fileID: 0}
-  DiedEvent: {fileID: 0}
+  DamagedEventSO: {fileID: 0}
+  DiedEventSO: {fileID: 0}
+  DamagedEvent:
+    inspectorListHeight: 63
+    persistentCalls:
+      calls:
+      - genericMenuData:
+          selectedComponent: 11
+          selectedMember: 19
+          isDynamic: 0
+        target: {fileID: 8605185141877484564}
+        memberName: playClip
+        memberType: 8
+        argument:
+          supportedType: 0
+          stringArgument: 
+          intArgument: 0
+          floatArgument: 0
+          boolArgument: 0
+          colorArgument: {r: 0, g: 0, b: 0, a: 0}
+          vector2Argument: {x: 0, y: 0}
+          vector3Argument: {x: 0, y: 0, z: 0}
+          objectArgument: {fileID: 0}
+          gameObjectArgument: {fileID: 0}
+          transformArgument: {fileID: 0}
+        isDynamic: 0
+        isCallEnabled: 1
+  DiedEvent:
+    inspectorListHeight: 63
+    persistentCalls:
+      calls: []
+  healthComponent: {fileID: 8277920464738141608}
   disableColliderOnDeath: 1
-  health: 3
-  onDeathReplaceWith: {fileID: 3217357049256741924, guid: aeb67d0938d32664dba0d6605bff5c3f,
+  onDeathReplaceWith: {fileID: 5857824023691526883, guid: f81e92306d54b0441b8cd853f09b2112,
     type: 3}
-  spriteRenderer: {fileID: 6318486361044167578}
   invincibilityTime: 0.5
   timeToFlashOnHit: 0.5
   flashSpeed: 20
-  flashCustomColor: 0
+  flashCustomColor: 1
+  flashingColors:
+    normalColor: {r: 1, g: 1, b: 1, a: 1}
+    hurtColor: {r: 1, g: 0.39215687, b: 0.39215687, a: 1}
+  spriteRenderer: {fileID: 6318486361044167578}
 --- !u!114 &3891534012402402601
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -201,6 +237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c67d6b0894429b8428261bb3f20668f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movementState: 0
   interpolationRate: 0.5
   animationCurve:
     serializedVersion: 2
@@ -227,6 +264,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   path: []
+  rigidbody2D: {fileID: 6318486361044167577}
   spriteRenederer: {fileID: 6318486361044167578}
 --- !u!95 &6665508661874112180
 Animator:
@@ -247,3 +285,173 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &5832676581953719602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6318486361044167583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 810271a1d95bc6c40aebeb6896e2677c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RulesTemplate:
+  - IfConditions:
+      ifCheck: 0
+      gameState: 0
+      Menu: 0
+    SetStates:
+      thenSet: 0
+      movementState: 0
+      EnableInputs: 0
+  - IfConditions:
+      ifCheck: 0
+      gameState: 1
+      Menu: 0
+    SetStates:
+      thenSet: 0
+      movementState: 0
+      EnableInputs: 0
+  - IfConditions:
+      ifCheck: 1
+      gameState: 0
+      Menu: 0
+    SetStates:
+      thenSet: 0
+      movementState: 0
+      EnableInputs: 0
+  - IfConditions:
+      ifCheck: 1
+      gameState: 3
+      Menu: 1
+    SetStates:
+      thenSet: 0
+      movementState: 1
+      EnableInputs: 0
+  - IfConditions:
+      ifCheck: 0
+      gameState: 2
+      Menu: 0
+    SetStates:
+      thenSet: 0
+      movementState: 1
+      EnableInputs: 0
+  - IfConditions:
+      ifCheck: 0
+      gameState: 3
+      Menu: 0
+    SetStates:
+      thenSet: 0
+      movementState: 1
+      EnableInputs: 0
+  movables:
+  - {fileID: 3891534012402402601}
+  usesInputs: []
+  gameStateSO: {fileID: 11400000, guid: c958049ac6246424db109b1e303a10ea, type: 2}
+--- !u!114 &8277920464738141608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6318486361044167583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e590ff339d5475343b0fb1d47b8114d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _CurrentPlayerHealthSO: {fileID: 0}
+  _PreviousHealth: 0
+  _PreviousMaxHealth: 0
+  EmptyEvent:
+    inspectorListHeight: 63
+    persistentCalls:
+      calls: []
+  MaxEvent:
+    inspectorListHeight: 63
+    persistentCalls:
+      calls: []
+  DecreaseEvent:
+    inspectorListHeight: 63
+    persistentCalls:
+      calls: []
+  IncreaseEvent:
+    inspectorListHeight: 63
+    persistentCalls:
+      calls: []
+  InflictEvent:
+    inspectorListHeight: 63
+    persistentCalls:
+      calls: []
+  HealEvent:
+    inspectorListHeight: 63
+    persistentCalls:
+      calls: []
+  _MaxHealth: 3
+  _CurrentHealth: 3
+--- !u!114 &8605185141877484564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6318486361044167583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dee036ffc313e8429effec29e014166, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioMixerGroup: {fileID: -5055102301708549317, guid: 93ed9eda70f37cb48b5165cf87fae8bf,
+    type: 2}
+  loop: 0
+  UseDelay: 0
+  UseRandomDelay: 0
+  Delay: 0
+  MaxDelay: 0
+  MinDelay: 0
+  randomizePitch: 1
+  randomizeClipPosition: 0
+  PlayOnEnable: 0
+  Volume: 1
+  SpatializeIn3D: 0
+  dopplerLevel: 1
+  spread: 0
+  VolumeRolloff: 0
+  minDistance: 0
+  maxDistance: 500
+  defaultFile: {fileID: 8300000, guid: ec9d2e9fab479524f806372c6667666c, type: 3}
+  crossSceneEvent: {fileID: 0}
+--- !u!114 &7839754312172264484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6318486361044167583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dee036ffc313e8429effec29e014166, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioMixerGroup: {fileID: -5055102301708549317, guid: 93ed9eda70f37cb48b5165cf87fae8bf,
+    type: 2}
+  loop: 1
+  UseDelay: 0
+  UseRandomDelay: 0
+  Delay: 0
+  MaxDelay: 0
+  MinDelay: 0
+  randomizePitch: 1
+  randomizeClipPosition: 1
+  PlayOnEnable: 1
+  Volume: 1
+  SpatializeIn3D: 1
+  dopplerLevel: 1
+  spread: 0
+  VolumeRolloff: 0
+  minDistance: 2
+  maxDistance: 10
+  defaultFile: {fileID: 8300000, guid: e60025ede16d8554885063af74c1fb35, type: 3}
+  crossSceneEvent: {fileID: 0}

@@ -10,28 +10,72 @@ public class Entity_Logic : MonoBehaviour
     public Event_One_Float hpUpdated = new Event_One_Float();
 #pragma warning disable CS0649 // varriable is never assigned to and will always have it's default value
     [SerializeField]
-    CrossSceneEventSO DamagedEvent;
+    CrossSceneEventSO DamagedEventSO;
     [SerializeField]
-    CrossSceneEventSO DiedEvent;
+    CrossSceneEventSO DiedEventSO;
+    [SerializeField]
+    QuickEvent DamagedEvent = new QuickEvent();
+    [SerializeField]
+    QuickEvent DiedEvent = new QuickEvent();
+    [SerializeField]
+    Health healthComponent;
 #pragma warning restore CS0649 // varriable is never assigned to and will always have it's default value
 
     //entity parameters
     public bool disableColliderOnDeath = true;
 
-    public float health = 3f;
+    public int health
+    {
+        get
+        {
+            if(healthComponent!=null)
+            {
+                return healthComponent.CurrentHealth;
+            }
+            else
+            {
+                Debug.LogError("Attach a health component to " + this + "you dum dum");
+                return 1;
+            }
+        }
+        set
+        {
+
+            if (healthComponent != null)
+            {
+                healthComponent.CurrentHealth = value;
+            }
+            else
+            {
+                Debug.LogError("Attach a health component to " + this + "you dum dum");
+            }
+        }
+    }
 
     private void OnValidate()
     {
-        if (spriteRenderer == null)
+        if (Application.isEditor)
         {
-            spriteRenderer = GetComponent<SpriteRenderer>();
+            if (spriteRenderer == null)
+            {
+                spriteRenderer = GetComponent<SpriteRenderer>();
+#if UNITY_EDITOR
+                UnityEditor.EditorUtility.SetDirty(this);
+#endif
+            }
+            if (healthComponent == null)
+            {
+                healthComponent = GetComponent<Health>();
+#if UNITY_EDITOR
+                UnityEditor.EditorUtility.SetDirty(this);
+#endif
+            }
         }
     }
 
     public GameObject onDeathReplaceWith;
 
     //initialize ambiguous parameters
-    public void Awake() => OnValidate();
     private void Start() => hpUpdated.Invoke(health);
     private void OnEnable() => hpUpdated.Invoke(health);
 
@@ -46,13 +90,17 @@ public class Entity_Logic : MonoBehaviour
     public float timeToFlashOnHit = 0.5f;
 
     //take damage function
-    public void TakeDamage(float amount)
+    public void TakeDamage(int amount)
     {
         if (invincibility >= invincibilityTime)
         {
-            if(DamagedEvent!=null)
-                DamagedEvent.Event.Invoke();
+            if (DamagedEventSO != null)
+                DamagedEventSO.Event?.Invoke();
+
+            DamagedEvent?.Invoke();
+
             health -= amount;
+
             invincibility = 0;
 
             hpUpdated.Invoke(health);
@@ -62,16 +110,20 @@ public class Entity_Logic : MonoBehaviour
             }
             else
             {
-                if(flashCustomColor)
+                if (flashCustomColor)
                     StartCoroutine(ChangeColor());
             }
         }
     }
 
-    public void CommitSuduku()
+    
+
+public void CommitSuduku()
     {
-        if (DiedEvent != null)
-            DiedEvent.Event.Invoke();
+        if (DiedEventSO != null)
+            DiedEventSO.Event?.Invoke();
+
+        DiedEvent?.Invoke();
 
         if (gameObject.layer == 11 && onDeathReplaceWith == null)
         {
@@ -170,6 +222,7 @@ public class Entity_Logic : MonoBehaviour
         spriteRenderer.color = flashingColors.normalColor;
     }
 }
+
 
 [System.Serializable]
 public class Event_One_Float : QuickEvent<float>

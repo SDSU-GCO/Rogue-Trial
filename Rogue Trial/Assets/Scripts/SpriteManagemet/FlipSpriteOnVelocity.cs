@@ -5,28 +5,41 @@ using NaughtyAttributes;
 
 public class FlipSpriteOnVelocity : MonoBehaviour
 {
+#pragma warning disable CS0109
     [SerializeField, Required, BoxGroup("Component Refs")]
     new Rigidbody2D rigidbody2D = null;
+#pragma warning restore CS0109
 
     [SerializeField, Required, BoxGroup("Component Refs")]
     SpriteRenderer spriteRenderer = null;
 
+    //enum
+    //enum
     public bool? forceLookRight=null;
 
     private void OnValidate()
     {
-        Transform tmp = transform;
-        do
+        if (Application.isEditor)
         {
-            rigidbody2D = tmp.GetComponent<Rigidbody2D>();
-            tmp = tmp.parent;
-        } while (rigidbody2D == null && tmp != null);
-        tmp = transform;
-        do
-        {
-            spriteRenderer = tmp.GetComponent<SpriteRenderer>();
-            tmp = tmp.parent;
-        } while (spriteRenderer == null && tmp != null);
+            Transform tmp = transform;
+            while (rigidbody2D == null && tmp != null)
+            {
+                rigidbody2D = tmp.GetComponent<Rigidbody2D>();
+                tmp = tmp.parent;
+#if UNITY_EDITOR
+                UnityEditor.EditorUtility.SetDirty(this);
+#endif
+            }
+            tmp = transform;
+            while (spriteRenderer == null && tmp != null)
+            {
+                spriteRenderer = tmp.GetComponent<SpriteRenderer>();
+                tmp = tmp.parent;
+#if UNITY_EDITOR
+                UnityEditor.EditorUtility.SetDirty(this);
+#endif
+            }
+        }
     }
 
     public float deadZone = 0.001f;

@@ -15,9 +15,15 @@ public class volumeLogic : MonoBehaviour
 #pragma warning restore CS0649 // varriable is never assigned to and will always have it's default value
     private void OnValidate()
     {
-        if(scrollBar==null)
+        if (Application.isEditor)
         {
-            scrollBar = GetComponent<Scrollbar>();
+            if (scrollBar == null)
+            {
+                scrollBar = GetComponent<Scrollbar>();
+#if UNITY_EDITOR
+                UnityEditor.EditorUtility.SetDirty(this);
+#endif
+            }
         }
     }
     private void OnEnable()

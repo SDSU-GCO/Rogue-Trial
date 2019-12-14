@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
-public class FollowPath : MonoBehaviour
+public class FollowPath : MonoBehaviour, IMovable
 {
     public CustomGCOTypes.MovementState movementState = CustomGCOTypes.MovementState.Enabled;
 
@@ -12,7 +12,10 @@ public class FollowPath : MonoBehaviour
     [ReorderableList]
     public List<Transform> path;
 
+#pragma warning disable CS0109
+    [SerializeField,HideInInspector]
     private new Rigidbody2D rigidbody2D;
+#pragma warning restore CS0109
     private float pathProgress;
 #pragma warning disable IDE0044 // Add readonly modifier
     private Transform nextTarget;
@@ -23,21 +26,30 @@ public class FollowPath : MonoBehaviour
     [SerializeField, HideInInspector]
     private SpriteRenderer spriteRenederer;
 
-    private void OnValidate()
-    {
-        if (spriteRenederer == null)
-        {
-            spriteRenederer = GetComponent<SpriteRenderer>();
-        }
+    public CustomGCOTypes.MovementState MovementState 
+    { 
+        get => movementState; 
+        set => movementState=value; 
     }
 
-    private void Awake()
+    private void OnValidate()
     {
-        rigidbody2D = GetComponent<Rigidbody2D>();
-        if (spriteRenederer == null)
+        if (Application.isEditor)
         {
-            Debug.Log("Bootstrapping");
-            spriteRenederer = GetComponent<SpriteRenderer>();
+            if (spriteRenederer == null)
+            {
+                spriteRenederer = GetComponent<SpriteRenderer>();
+#if UNITY_EDITOR
+                UnityEditor.EditorUtility.SetDirty(this);
+#endif
+            }
+            if (rigidbody2D == null)
+            {
+                rigidbody2D = GetComponent<Rigidbody2D>();
+#if UNITY_EDITOR
+                UnityEditor.EditorUtility.SetDirty(this);
+#endif
+            }
         }
     }
     private void OnEnable()
