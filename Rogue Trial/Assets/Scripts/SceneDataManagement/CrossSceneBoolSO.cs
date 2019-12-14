@@ -7,6 +7,7 @@ using ByteSheep.Events;
 public class CrossSceneBoolSO : ScriptableObject
 {
     public QuickEvent Event = new QuickEvent();
+    [SerializeField]
     bool _value;
     public bool Value
     {

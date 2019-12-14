@@ -12,4 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24f4da41924946d4b8b467c73f687fd5, type: 3}
   m_Name: CombatCleared
   m_EditorClassIdentifier: 
-  value: 0
+  Event:
+    inspectorListHeight: 63
+    persistentCalls:
+      calls: []
+  _value: 1
