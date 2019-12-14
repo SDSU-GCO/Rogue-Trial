@@ -27,4 +27,9 @@ public class PlayerTransformMBDO : MBDataObject
 #endif
         }
     }
+    public override void Reset()
+    {
+        base.Reset();
+        OnValidate();
+    }
 }
