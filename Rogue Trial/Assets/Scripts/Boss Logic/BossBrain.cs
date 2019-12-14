@@ -22,11 +22,29 @@ public class BossBrain : MonoBehaviour
     float attackDelay = 2;
     [SerializeField]
     float attackDelayDecrementAmount = 0.5f;
+    [SerializeField]
+    float idleTime = 4f;
 
     void NextPhase()
     {
         weakAttackCount += weakAttackCountIncremeantAmount;
         attackDelay -= attackDelayDecrementAmount;
+    }
+
+    float timer3 = 0;
+
+    bool isIdle = false;
+    public void SetIdle() => isIdle = true;
+    public void ClearIdle() => isIdle = false;
+    private void Update()
+    {
+        
+        timer3 = Mathf.Min(idleTime, timer3 + Time.deltaTime);
+        if (isIdle && (timer3 == idleTime))
+        {
+            StartAttackSequence();
+            timer3 = 0;
+        }
     }
 
     public void StartAttackSequence()
@@ -37,6 +55,7 @@ public class BossBrain : MonoBehaviour
     float aditionalWindupDelay = 0;
     public void WindupAnimationComplete()
     {
+        Debug.Log("LEL");
         StartCoroutine(AttackSequence());
     }
 
@@ -48,16 +67,17 @@ public class BossBrain : MonoBehaviour
 
         while (attacking)
         {
-            timer = Mathf.Min(attackDelay, timer + Time.deltaTime);
+            timer = Mathf.Min(aditionalWindupDelay, timer + Time.deltaTime);
             if (timer == aditionalWindupDelay)
                 attacking = false;
+            yield return null;
         }
-
 
         attacking = true;
         timer = 0;
         while (attacking)
         {
+            Debug.Log("HEY");
             timer = Mathf.Min(attackDelay, timer + Time.deltaTime);
             if (timer == attackDelay && attacking)
             {
@@ -65,11 +85,13 @@ public class BossBrain : MonoBehaviour
 
                 if (attacksInCurrentSequence < weakAttackCount)
                 {
+                    Debug.Log("WEAK");
                     weakAttack.Invoke();
                     attacksInCurrentSequence++;
                 }
                 else
                 {
+                    Debug.Log("So much strength");
                     strongAttack.Invoke();
                     attacksInCurrentSequence = 0;
                     NextPhase();
