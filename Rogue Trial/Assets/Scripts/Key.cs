@@ -8,18 +8,20 @@ public class Key : MonoBehaviour
 
     private void OnValidate()
     {
-        if(Application.isEditor)
+#if UNITY_EDITOR
+        if (Application.isEditor)
         {
             if(keyListMBDO==null)
             {
                 MBDOInitializationHelper mBDOInitializationHelper = default;
+
+
                 mBDOInitializationHelper.SetupCardinalSubSystem(this);
                 mBDOInitializationHelper.SetupMBDO(ref keyListMBDO);
-#if UNITY_EDITOR
                 UnityEditor.EditorUtility.SetDirty(this);
-#endif
             }
         }
+#endif
     }
 
     private void OnEnable()
@@ -28,10 +30,11 @@ public class Key : MonoBehaviour
             keyListMBDO.keys.Add(this);
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (keyListMBDO.keys.Contains(this))
             keyListMBDO.keys.Remove(this);
+        gameObject.SetActive(false);
     }
 
     private void OnDisable()

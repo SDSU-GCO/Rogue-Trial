@@ -1,12 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using NaughtyAttributes;
 
 public class CheckEnemyList : ConditionalComponent
 {
 #pragma warning disable CS0649
     [SerializeField, HideInInspector]
     EnemyListMBDO enemyListMBDO;
+    [SerializeField, Required]
+    CrossSceneBoolSO crossSceneBoolSO;
 #pragma warning restore CS0649
 
     private void OnValidate()
@@ -14,7 +17,6 @@ public class CheckEnemyList : ConditionalComponent
 #if UNITY_EDITOR
         if (Application.isEditor)
         {
-
             if (enemyListMBDO == null)
             {
                 MBDOInitializationHelper mBDOInitializationHelper = default;
@@ -40,11 +42,17 @@ public class CheckEnemyList : ConditionalComponent
         
         bool unlockDoor = false;
         if (enemyListMBDO.enemies.Count == 0)
+        {
             unlockDoor = true;
+        }
         else
         {
             unlockDoor = false;
         }
+
+        if (crossSceneBoolSO != null)
+            crossSceneBoolSO.Value = unlockDoor;
+
         return unlockDoor;
     }
 }

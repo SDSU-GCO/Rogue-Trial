@@ -20,6 +20,10 @@ public class CollidedWithPlayer : ConditionalComponent
                 //IMPORTNANT STEP!!!
                 mBDOInitializationHelper.SetupCardinalSubSystem(this);
                 mBDOInitializationHelper.SetupMBDO(ref playerTransformMBDO);
+
+#if UNITY_EDITOR
+                UnityEditor.EditorUtility.SetDirty(this);
+#endif
             }
         }
     }
