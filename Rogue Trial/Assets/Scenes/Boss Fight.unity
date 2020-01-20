@@ -447,6 +447,7 @@ MonoBehaviour:
   attackDelay: 4
   attackDelayDecrementAmount: 0.5
   idleTime: 4
+  timer3: 0
   aditionalWindupDelay: 1
 --- !u!114 &651681459
 MonoBehaviour:

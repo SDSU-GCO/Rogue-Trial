@@ -31,16 +31,16 @@ public class BossBrain : MonoBehaviour
         attackDelay -= attackDelayDecrementAmount;
     }
 
-    float timer3 = 0;
+    public float timer3 = 0;
 
-    bool isIdle = false;
-    public void SetIdle() => isIdle = true;
-    public void ClearIdle() => isIdle = false;
+    public void SetIdle()
+    {
+        timer3 = 0;
+    }
     private void Update()
     {
-        
         timer3 = Mathf.Min(idleTime, timer3 + Time.deltaTime);
-        if (isIdle && (timer3 == idleTime))
+        if (timer3 == idleTime)
         {
             StartAttackSequence();
             timer3 = 0;
@@ -78,6 +78,7 @@ public class BossBrain : MonoBehaviour
         while (attacking)
         {
             Debug.Log("HEY");
+            yield return null;
             timer = Mathf.Min(attackDelay, timer + Time.deltaTime);
             if (timer == attackDelay && attacking)
             {
@@ -98,10 +99,9 @@ public class BossBrain : MonoBehaviour
                     attacking = false;
                 }
             }
-            yield return null;
         }
 
-        animator.SetInteger("HP", animator.GetInteger("HP")-1);
         animator.SetBool("Attack", false);
+        animator.SetInteger("HP", animator.GetInteger("HP")-1);
     }
 }
