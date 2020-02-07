@@ -11694,6 +11694,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8638195889323544826, guid: 726dc8ede12908346922a68fdd12f62f,
+        type: 3}
+      propertyPath: keyListMBDO
+      value: 
+      objectReference: {fileID: 2005076607}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 726dc8ede12908346922a68fdd12f62f, type: 3}
 --- !u!1001 &1903369753
@@ -11839,6 +11844,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29bf58dcbea7a6a4482bb27fb3412f30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  keyListMBDO: {fileID: 2005076607}
   crossSceneBoolSO: {fileID: 11400000, guid: ecfd46c448bca4f4a8de3ad50cc595c6, type: 2}
 --- !u!1001 &1935379058
 PrefabInstance:
@@ -12298,6 +12304,16 @@ PrefabInstance:
       propertyPath: playerTransform
       value: 
       objectReference: {fileID: 853320553}
+    - target: {fileID: 3207918341509956385, guid: 5158ff79fb6a9ed45838d86ad6459e2d,
+        type: 3}
+      propertyPath: audioClips.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3207918341509956385, guid: 5158ff79fb6a9ed45838d86ad6459e2d,
+        type: 3}
+      propertyPath: audioClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: ca4eca3aa4d00ed4c9e8a2a165bd1928, type: 3}
     - target: {fileID: 771853442641193306, guid: 5158ff79fb6a9ed45838d86ad6459e2d,
         type: 3}
       propertyPath: mbDataObjects.Array.size
@@ -12396,6 +12412,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8638195889323544826, guid: 726dc8ede12908346922a68fdd12f62f,
+        type: 3}
+      propertyPath: keyListMBDO
+      value: 
+      objectReference: {fileID: 2005076607}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 726dc8ede12908346922a68fdd12f62f, type: 3}
 --- !u!1001 &8638195888823051048
@@ -12465,5 +12486,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8638195889323544826, guid: 726dc8ede12908346922a68fdd12f62f,
+        type: 3}
+      propertyPath: keyListMBDO
+      value: 
+      objectReference: {fileID: 2005076607}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 726dc8ede12908346922a68fdd12f62f, type: 3}

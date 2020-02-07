@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Key : MonoBehaviour
 {
-    KeyListMBDO keyListMBDO;
+    [SerializeField] [HideInInspector] KeyListMBDO keyListMBDO;
 
     private void OnValidate()
     {
@@ -20,6 +20,7 @@ public class Key : MonoBehaviour
                 mBDOInitializationHelper.SetupMBDO(ref keyListMBDO);
                 UnityEditor.EditorUtility.SetDirty(this);
             }
+            UnityEditor.EditorUtility.SetDirty(this);
         }
 #endif
     }

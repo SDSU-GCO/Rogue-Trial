@@ -6,7 +6,7 @@ using NaughtyAttributes;
 public class KeysConditional : ConditionalComponent
 {
 #pragma warning disable CS0649
-    KeyListMBDO keyListMBDO;
+    [SerializeField] [HideInInspector] KeyListMBDO keyListMBDO;
     [SerializeField, Required]
     CrossSceneBoolSO crossSceneBoolSO;
 #pragma warning restore CS0649

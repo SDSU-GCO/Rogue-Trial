@@ -287,6 +287,7 @@ GameObject:
   - component: {fileID: 651681455}
   - component: {fileID: 651681458}
   - component: {fileID: 651681459}
+  - component: {fileID: 651681460}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Untagged
@@ -493,6 +494,18 @@ MonoBehaviour:
           transformArgument: {fileID: 0}
         isDynamic: 0
         isCallEnabled: 1
+--- !u!114 &651681460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 651681454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abab24d12d6dae247a8275bdb5658c37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &694357181 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7758839803176447451, guid: 8da49b9ee162a544891c5c2cd25d565c,
@@ -695,6 +708,16 @@ PrefabInstance:
       propertyPath: playerTransform
       value: 
       objectReference: {fileID: 1314414464}
+    - target: {fileID: 3207918341509956385, guid: 5158ff79fb6a9ed45838d86ad6459e2d,
+        type: 3}
+      propertyPath: audioClips.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3207918341509956385, guid: 5158ff79fb6a9ed45838d86ad6459e2d,
+        type: 3}
+      propertyPath: audioClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 06bb76eac369a274c8538c80e7cc332e, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5158ff79fb6a9ed45838d86ad6459e2d, type: 3}
 --- !u!114 &766938357 stripped

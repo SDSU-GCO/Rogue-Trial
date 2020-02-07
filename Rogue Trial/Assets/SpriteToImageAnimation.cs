@@ -7,8 +7,8 @@ using UnityEngine.UI;
 [RequireComponent(typeof(SpriteRenderer))]
 public class SpriteToImageAnimation : MonoBehaviour
 {
-    Image image;
-    SpriteRenderer spriteRenderer;
+    [SerializeField][HideInInspector] Image image;
+    [SerializeField][HideInInspector] SpriteRenderer spriteRenderer;
 
     private void OnValidate()
     {
