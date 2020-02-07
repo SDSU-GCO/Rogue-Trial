@@ -23,8 +23,6 @@ public class GameOver : MonoBehaviour
     CrossSceneEventSO gameoverCrossSceneEvent;
     [SerializeField, Required, BoxGroup("SO refs")]
     CrossSceneEventSO PlayerRevivedSO;
-    [SerializeField, Required, BoxGroup("SO refs")]
-    CrossSceneSceneDataSO crossSceneSceneDataSO;
     [SerializeField, Required, BoxGroup("MB refs")]
     ScrollCredits scrollCredits = null;
 #pragma warning restore CS0649 // varriable is never assigned to and will always have it's default value
@@ -95,16 +93,9 @@ public class GameOver : MonoBehaviour
         image.sprite = spriteRenderer.sprite;
         if (Input.anyKeyDown && !Input.GetKeyDown(KeyCode.Escape) && isOpaque == true  && gameStateSO.MenuOpen!=true)
         {
-            if (crossSceneSceneDataSO.ActiveScene != new Scene())
-            {
-                PlayerRevivedSO.Event.Invoke();
-                SceneManager.LoadScene(crossSceneSceneDataSO.ActiveScene.name, LoadSceneMode.Additive);
-                SceneManager.UnloadSceneAsync(crossSceneSceneDataSO.ActiveScene.name);
-            }
-            else
-            {
-                Debug.LogError("no current level scene detected!");
-            }
+            PlayerRevivedSO.Event.Invoke();
+            SceneManager.LoadScene(gameObject.scene.name, LoadSceneMode.Additive);
+            SceneManager.UnloadSceneAsync(gameObject.scene);
         }
     }
     IEnumerator FadeIn()
