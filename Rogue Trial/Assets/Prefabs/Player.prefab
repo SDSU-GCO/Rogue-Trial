@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 823911482339405376}
   - component: {fileID: 8292333129032588385}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: CM vcam1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -164,7 +164,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1749159719007511993}
   - component: {fileID: 3989383183107892772}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: CircleOrigin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -246,7 +246,7 @@ GameObject:
   - component: {fileID: 3222318933843911601}
   - component: {fileID: 4239498098057373765}
   - component: {fileID: 5279654558936316378}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: Character Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -361,7 +361,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7758839802554142439}
   - component: {fileID: 7758839802554142436}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: CircleRadius
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -798,4 +798,4 @@ MonoBehaviour:
     persistentCalls:
       calls: []
   _MaxHealth: 16
-  _CurrentHealth: 10
+  _CurrentHealth: 16

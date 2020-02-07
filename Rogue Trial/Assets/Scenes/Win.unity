@@ -181,7 +181,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: a7ff6b4f88f363446b28244e35b4a555, type: 3}
+  m_Sprite: {fileID: 21300000, guid: de30eb86cf93e4d4985ef29d5d5ed974, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -351,7 +351,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4065100760009945, guid: 47d127fe5b17ea74cb40d060de9a7b16, type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 25
+      value: 26
       objectReference: {fileID: 0}
     - target: {fileID: 4065100760009945, guid: 47d127fe5b17ea74cb40d060de9a7b16, type: 3}
       propertyPath: m_textInfo.spaceCount
@@ -363,7 +363,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4065100760009945, guid: 47d127fe5b17ea74cb40d060de9a7b16, type: 3}
       propertyPath: m_textInfo.lineCount
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4065100760009945, guid: 47d127fe5b17ea74cb40d060de9a7b16, type: 3}
       propertyPath: m_textInfo.pageCount
@@ -376,6 +376,10 @@ PrefabInstance:
     - target: {fileID: 4065100760009945, guid: 47d127fe5b17ea74cb40d060de9a7b16, type: 3}
       propertyPath: m_fontSizeBase
       value: 108
+      objectReference: {fileID: 0}
+    - target: {fileID: 4065100760009945, guid: 47d127fe5b17ea74cb40d060de9a7b16, type: 3}
+      propertyPath: m_text
+      value: Press any key to Replay...
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47d127fe5b17ea74cb40d060de9a7b16, type: 3}
@@ -589,6 +593,11 @@ PrefabInstance:
       propertyPath: canvas
       value: 
       objectReference: {fileID: 2076676808}
+    - target: {fileID: 875976227558564602, guid: 75b34decd95232f4781ba11f059d231b,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 771384359259923228, guid: 75b34decd95232f4781ba11f059d231b,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -613,14 +622,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_textInfo.pageCount
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 771384359259923228, guid: 75b34decd95232f4781ba11f059d231b,
-        type: 3}
-      propertyPath: m_text
-      value: "-CLUB OFFICERS-\r\nPresident\r\nWoo Jin\r\n-\r\nVice President\r\nDevon
-        Evans\r\n-\r\nDirector of Design\r\nJoe\r\n-\r\nDirector of Communications\r\nJenny\r\n-\r\nDirector
-        of Public Relations\r\nJenny\r\n-\r\nDirector of Development\r\nAlex Evans\r\n\r\n-MUSIC-\r\nTitle:Subterranians\r\nSource:
-        gamesounds.xyz - Indie"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 75b34decd95232f4781ba11f059d231b, type: 3}

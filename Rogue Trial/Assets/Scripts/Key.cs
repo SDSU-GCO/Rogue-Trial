@@ -30,11 +30,17 @@ public class Key : MonoBehaviour
             keyListMBDO.keys.Add(this);
     }
 
+    public LayerMask Collectors;
+
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (keyListMBDO.keys.Contains(this))
-            keyListMBDO.keys.Remove(this);
-        gameObject.SetActive(false);
+        Debug.Log((int)Collectors);
+        if((1<<other.gameObject.layer & Collectors)!=0)
+        {
+            if (keyListMBDO.keys.Contains(this))
+                keyListMBDO.keys.Remove(this);
+            gameObject.SetActive(false);
+        }
     }
 
     private void OnDisable()

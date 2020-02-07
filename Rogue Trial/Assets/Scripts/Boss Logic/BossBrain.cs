@@ -55,7 +55,6 @@ public class BossBrain : MonoBehaviour
     float aditionalWindupDelay = 0;
     public void WindupAnimationComplete()
     {
-        Debug.Log("LEL");
         StartCoroutine(AttackSequence());
     }
 
@@ -77,7 +76,6 @@ public class BossBrain : MonoBehaviour
         timer = 0;
         while (attacking)
         {
-            Debug.Log("HEY");
             yield return null;
             timer = Mathf.Min(attackDelay, timer + Time.deltaTime);
             if (timer == attackDelay && attacking)
@@ -86,13 +84,11 @@ public class BossBrain : MonoBehaviour
 
                 if (attacksInCurrentSequence < weakAttackCount)
                 {
-                    Debug.Log("WEAK");
                     weakAttack.Invoke();
                     attacksInCurrentSequence++;
                 }
                 else
                 {
-                    Debug.Log("So much strength");
                     strongAttack.Invoke();
                     attacksInCurrentSequence = 0;
                     NextPhase();
@@ -102,6 +98,16 @@ public class BossBrain : MonoBehaviour
         }
 
         animator.SetBool("Attack", false);
-        animator.SetInteger("HP", animator.GetInteger("HP")-1);
+        if(willTakeHit)
+            animator.SetInteger("HP", animator.GetInteger("HP") - 1);
+        willTakeHit = false;
+    }
+
+    bool willTakeHit = false;
+
+    public void TakeDamage()
+    {
+        Debug.Log("Boss hit");
+        willTakeHit = true;
     }
 }

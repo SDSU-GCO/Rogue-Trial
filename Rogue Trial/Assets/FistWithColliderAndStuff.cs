@@ -30,15 +30,16 @@ public class FistWithColliderAndStuff : MonoBehaviour
         {
             myFunc.Invoke();
         }
-
-        Debug.Log("Dest");
+        collidedWithPlayer = false;
 
         Destroy(gameObject);
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.name=="Player" && collidedWithPlayer==false)
+
+        Debug.Log(collision.gameObject.name);
+        if (collision.gameObject.name=="Player")
         {
             Entity_Logic playerE = collision.gameObject.GetComponent<Entity_Logic>();
             playerE.TakeDamage(4);

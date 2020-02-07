@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using ByteSheep.Events;
 
 public class BossAttackSpawner : MonoBehaviour
 {
@@ -26,7 +27,14 @@ public class BossAttackSpawner : MonoBehaviour
     [SerializeField]
     Health health;
 
-   
+
+#pragma warning disable CS0649
+    [SerializeField]
+    QuickEvent TakeDamage = new QuickEvent();
+    UnityAction myact;
+#pragma warning restore CS0649
+
+
     Vector2 GetPosition()
     {
         float horizontal = 0;
@@ -62,14 +70,13 @@ public class BossAttackSpawner : MonoBehaviour
         fist.transform.localPosition = position;
 
         FistWithColliderAndStuff fistWithColliderAndStuff = fist.GetComponent<FistWithColliderAndStuff>();
-        fistWithColliderAndStuff.myFunc = TakeDamage;
+        myact = Ouch;
+        fistWithColliderAndStuff.myFunc = myact;
     }
 
-    void TakeDamage()
+    void Ouch()
     {
-        health.CurrentHealth -= 1;
-        if (health.CurrentHealth <= 0)
-            Die();
+        TakeDamage.Invoke();
     }
 
     void Die()

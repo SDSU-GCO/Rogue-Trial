@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8638195889323544825}
   - component: {fileID: 8638195889323544824}
   - component: {fileID: 6572496215105032846}
-  m_Layer: 15
+  m_Layer: 19
   m_Name: Key
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,6 +96,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9de383a94559c4428858aa738d4f0a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Collectors:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!60 &8638195889323544825
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -135,7 +138,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8638195889323544805}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
