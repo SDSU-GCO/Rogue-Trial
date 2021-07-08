@@ -68,7 +68,8 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: -2872028447076600116, guid: 7af6527d3a776c44392f9c4d9f8fdb93,
+    type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -86,7 +87,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1768318760}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: b165c0fa01123c94f966f2ba50e5b486, type: 2}
   m_CullingMode: 0
@@ -135,15 +136,16 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: -2872028447076600116, guid: 7af6527d3a776c44392f9c4d9f8fdb93,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 7.68, y: 4.32}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &1768318762
@@ -165,8 +167,6 @@ MonoBehaviour:
   gameoverCrossSceneEvent: {fileID: 11400000, guid: 5e027eba6205b804199e1b0db7969067,
     type: 2}
   PlayerRevivedSO: {fileID: 11400000, guid: d4e997a5cfabfd841af546bbffc22037, type: 2}
-  crossSceneSceneDataSO: {fileID: 11400000, guid: 7a03934cafd96ff469522aa883a1d3aa,
-    type: 2}
   scrollCredits: {fileID: 875976227558564602}
   secondsToFadeIn: 0.2
 --- !u!1 &158226045580369472
@@ -1087,10 +1087,13 @@ MonoBehaviour:
   playerRevived: {fileID: 11400000, guid: d4e997a5cfabfd841af546bbffc22037, type: 2}
   crossSceneSceneDataSO: {fileID: 11400000, guid: 7a03934cafd96ff469522aa883a1d3aa,
     type: 2}
+  sceneTransitionListenerSO: {fileID: 11400000, guid: 798f525453af89f48b9d250e0d137c4e,
+    type: 2}
   gameStateSO: {fileID: 11400000, guid: c958049ac6246424db109b1e303a10ea, type: 2}
   defaultScene:
     m_Handle: 0
-  crossSceneCinemachineBrainSO: {fileID: 0}
+  crossSceneCinemachineBrainSO: {fileID: 11400000, guid: a3131a156c94ac74e913b5ef6313dc66,
+    type: 2}
 --- !u!1 &158226047062453063
 GameObject:
   m_ObjectHideFlags: 0
@@ -2581,12 +2584,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 771384359259923228}
-    characterCount: 277
+    characterCount: 297
     spriteCount: 0
-    spaceCount: 38
-    wordCount: 40
+    spaceCount: 42
+    wordCount: 43
     linkCount: 0
-    lineCount: 22
+    lineCount: 26
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -2784,10 +2787,13 @@ MonoBehaviour:
   playerRevived: {fileID: 11400000, guid: d4e997a5cfabfd841af546bbffc22037, type: 2}
   crossSceneSceneDataSO: {fileID: 11400000, guid: 7a03934cafd96ff469522aa883a1d3aa,
     type: 2}
+  sceneTransitionListenerSO: {fileID: 11400000, guid: 798f525453af89f48b9d250e0d137c4e,
+    type: 2}
   gameStateSO: {fileID: 11400000, guid: c958049ac6246424db109b1e303a10ea, type: 2}
   defaultScene:
     m_Handle: 0
-  crossSceneCinemachineBrainSO: {fileID: 0}
+  crossSceneCinemachineBrainSO: {fileID: 11400000, guid: a3131a156c94ac74e913b5ef6313dc66,
+    type: 2}
 --- !u!1 &6105105449140471223
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,6 +13,14 @@ MonoBehaviour:
   m_Name: CrossSceneSceneDataSO
   m_EditorClassIdentifier: 
   activeScene:
-    m_Handle: 0
+    m_Handle: -17302
+  activeSceneChanged:
+    inspectorListHeight: 63
+    persistentCalls:
+      calls: []
   previousScene:
-    m_Handle: 0
+    m_Handle: -16750
+  previousSceneChanged:
+    inspectorListHeight: 63
+    persistentCalls:
+      calls: []
